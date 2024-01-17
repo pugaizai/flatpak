@@ -1,0 +1,193 @@
+app-id: com.xiaoyaocz.simplelive
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+command: simple_live_app
+finish-args:
+  - --share=ipc
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --socket=pulseaudio
+  - --share=network
+  - --device=dri
+  - --talk-name=org.freedesktop.ScreenSaver
+  - --system-talk-name=org.freedesktop.NetworkManager
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/doc
+  - /share/gtk-doc
+
+modules:
+  - name: libmpv
+    buildsystem: meson
+    config-opts:
+      - -Dlibmpv=true
+      - -Dlua=disabled
+      - -Ddebug=false
+      - -Dbuild-date=false
+      - -Dcplayer=false
+      - -Dmanpage-build=disabled
+      - -Dvulkan=enabled
+      - -Dsdl2=enabled
+    sources:
+      - type: git
+        url: https://github.com/mpv-player/mpv.git
+        tag: v0.39.0
+        commit: a0fba7be57f3822d967b04f0f6b6d6341e7516e7
+        x-checker-data:
+          type: git
+          tag-pattern: ^v([\d.]+)$
+
+    modules:
+      - name: libXpresent
+        buildsystem: autotools
+        sources:
+          - type: git
+            url: https://gitlab.freedesktop.org/xorg/lib/libxpresent.git
+            tag: libXpresent-1.0.1
+            commit: 37507b5f44332accfb1064ee69a4f6a833994747
+            x-checker-data:
+              type: git
+              tag-pattern: ^libXpresent-([\d.]+)$
+
+      - name: nv-codec-headers
+        cleanup:
+          - '*'
+        no-autogen: true
+        make-install-args:
+          - PREFIX=/app
+        sources:
+          - type: git
+            url: https://github.com/FFmpeg/nv-codec-headers.git
+            tag: n13.0.19.0
+            commit: e844e5b26f46bb77479f063029595293aa8f812d
+            x-checker-data:
+              type: git
+              tag-pattern: ^n([\d.]+)$
+
+      - name: libass
+        config-opts:
+          - --disable-static
+        sources:
+          - type: git
+            url: https://github.com/libass/libass.git
+            tag: 0.17.3
+            commit: e46aedea0a0d17da4c4ef49d84b94a7994664ab5
+            x-checker-data:
+              type: git
+              tag-pattern: ^([\d.]+)$
+
+      - name: uchardet
+        buildsystem: cmake-ninja
+        config-opts:
+          - -DCMAKE_BUILD_TYPE=Release
+          - -DBUILD_STATIC=0
+        sources:
+          - type: git
+            url: https://gitlab.freedesktop.org/uchardet/uchardet.git
+            tag: v0.0.8
+            commit: ae6302a016088ad07177f86d417b20010053632b
+            x-checker-data:
+              type: git
+              tag-pattern: ^v([\d.]+)$
+
+      - name: libplacebo
+        buildsystem: meson
+        config-opts:
+          - -Dvulkan=enabled
+          - -Dshaderc=enabled
+          - -Dd3d11=disabled
+          - -Ddemos=false
+        sources:
+          - type: git
+            url: https://code.videolan.org/videolan/libplacebo.git
+            tag: v7.349.0
+            commit: 1fd3c7bde7b943fe8985c893310b5269a09b46c5
+            x-checker-data:
+              type: git
+              tag-pattern: ^v([\d.]+)$
+
+      - name: ffmpeg
+        cleanup:
+          - /share/ffmpeg/examples
+        config-opts:
+          - --disable-debug
+          - --disable-doc
+          - --disable-static
+          - --disable-programs
+          - --disable-encoders
+          - --disable-muxers
+          - --enable-shared
+          - --enable-gnutls
+          - --enable-gpl
+          - --enable-version3
+          - --enable-encoder=png,libwebp,libjxl
+          - --enable-libv4l2
+          - --enable-libdav1d
+          - --enable-libfontconfig
+          - --enable-libfreetype
+          - --enable-libopus
+          - --enable-librsvg
+          - --enable-libvpx
+          - --enable-libmp3lame
+          - --enable-libwebp
+          - --enable-libjxl
+          - --enable-libxml2
+          - --enable-libplacebo
+          - --enable-vulkan
+        sources:
+          - type: git
+            url: https://git.ffmpeg.org/ffmpeg.git
+            commit: db69d06eeeab4f46da15030a80d539efb4503ca8
+            tag: n7.1.1
+            x-checker-data:
+              type: git
+              tag-pattern: ^n([\d.]+)$
+
+  - name: simplelive
+    buildsystem: simple
+    build-options:
+      build-args:
+        - --share=network
+      arch:
+        x86_64:
+          env:
+            BUNDLE_PATH: simple_live_app/build/linux/x64/release/bundle
+        aarch64:
+          env:
+            BUNDLE_PATH: simple_live_app/build/linux/arm64/release/bundle
+      append-path: /usr/lib/sdk/llvm19/bin:/run/build/simplelive/flutter/bin
+      prepend-ld-library-path: /usr/lib/sdk/llvm19/lib
+      env:
+        PUB_CACHE: /run/build/simplelive/.pub-cache
+    build-commands:
+      - cd simple_live_app && flutter build linux --release --verbose
+      - mkdir -p ${FLATPAK_DEST}/bin
+      - cp -r ${BUNDLE_PATH}/* ${FLATPAK_DEST}/bin
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+      - install -Dm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications
+      - install -Dm644 simple_live_app/assets/images/logo.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
+    sources:
+      - type: git
+        url: https://github.com/xiaoyaocz/dart_simple_live.git
+        tag: v1.7.6
+        commit: 51a3d0d49b2ed80081f3d7924f4d4b5f88cfa66c
+        x-checker-data:
+          type: git
+          tag-pattern: ^v([\d.]+)$
+      - type: file
+        path: com.xiaoyaocz.simplelive.metainfo.xml
+      - type: file
+        path: com.xiaoyaocz.simplelive.desktop
+      - type: git
+        url: https://github.com/flutter/flutter.git
+        tag: 3.22.3
+        commit: b0850beeb25f6d5b10426284f506557f66181b36
+        dest: flutter

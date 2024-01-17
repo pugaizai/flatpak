@@ -1,0 +1,90 @@
+app-id: com.cherry_ai.cherrystudio
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+base: org.electronjs.Electron2.BaseApp
+base-version: '24.08'
+command: cherrystudio
+finish-args:
+  - --share=ipc
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --share=network
+  - --device=dri
+  - --talk-name=org.kde.StatusNotifierWatcher
+  - --system-talk-name=org.freedesktop.login1
+  - --system-talk-name=org.chromium.bluetooth.Manager
+  # required to fix cursor scaling on wayland
+  - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
+
+add-extensions:
+  org.freedesktop.Platform.electron:
+    version: '24.08'
+    directory: electron
+
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/doc
+  - /share/gtk-doc
+
+modules:
+  - name: cherrystudio
+    buildsystem: simple
+    build-options:
+      no-debuginfo: true
+    build-commands:
+      - mkdir -p ${FLATPAK_DEST}/electron
+      - chmod +x Cherry-Studio.AppImage
+      - ./Cherry-Studio.AppImage --appimage-extract
+      - mv squashfs-root/resources ${FLATPAK_DEST}/cherrystudio
+      - desktop-file-edit --set-key="Icon" --set-value="com.cherry_ai.cherrystudio"
+        --set-key="Categories" --set-value="Utility;Network;" --set-key="Exec" --set-value="cherrystudio
+        %U" --remove-key="X-AppImage-Version" squashfs-root/cherrystudio.desktop
+      - install -Dm644 squashfs-root/cherrystudio.desktop ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+      - install -Dm644 ${FLATPAK_ID}.png -t ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps
+      - install -Dm755 cherrystudio.sh ${FLATPAK_DEST}/bin/cherrystudio
+    sources:
+      - type: file
+        only-arches: [x86_64]
+        url: https://github.com/CherryHQ/cherry-studio/releases/download/v1.1.10/Cherry-Studio-1.1.10-x86_64.AppImage
+        sha256: 55253aef3d6a6c78f63420d154e4aad49c649ff50f5d70ce37d1229ac8264b81
+        dest-filename: Cherry-Studio.AppImage
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/CherryHQ/cherry-studio/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: .assets[] | select(.name | endswith("x86_64.AppImage")) | .browser_download_url
+      - type: file
+        only-arches: [aarch64]
+        url: https://github.com/CherryHQ/cherry-studio/releases/download/v1.1.10/Cherry-Studio-1.1.10-arm64.AppImage
+        sha256: 9d6d7910a3c873aedc79dc8931fcfb3561b9fc31518fdafaf5311b142cc466eb
+        dest-filename: Cherry-Studio.AppImage
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/CherryHQ/cherry-studio/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: .assets[] | select(.name | endswith("arm64.AppImage")) | .browser_download_url
+      - type: file
+        path: com.cherry_ai.cherrystudio.metainfo.xml
+      - type: file
+        path: com.cherry_ai.cherrystudio.png
+      - type: script
+        dest-filename: cherrystudio.sh
+        commands:
+          - export TMPDIR=${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}
+          - WAYLAND_SOCKET=${WAYLAND_DISPLAY:-"wayland-0"}
+          - |
+            if [[ -e "${XDG_RUNTIME_DIR}/${WAYLAND_SOCKET}" || -e "${WAYLAND_DISPLAY}" ]]
+            then
+                FLAGS="--enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime --wayland-text-input-version=3"
+            fi
+          - exec zypak-wrapper "/app/electron/electron" "/app/cherrystudio/app.asar"
+            $FLAGS "$@"

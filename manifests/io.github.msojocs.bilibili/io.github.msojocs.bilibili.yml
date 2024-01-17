@@ -1,0 +1,92 @@
+app-id: io.github.msojocs.bilibili
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+base: org.electronjs.Electron2.BaseApp
+base-version: '24.08'
+command: bilibili
+
+finish-args:
+  - --share=ipc
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --socket=pulseaudio
+  - --device=dri
+  - --share=network
+  - --filesystem=xdg-videos
+  - --filesystem=xdg-download
+  - --talk-name=org.kde.StatusNotifierWatcher
+  - --talk-name=org.freedesktop.ScreenSaver
+  - --system-talk-name=org.freedesktop.login1
+  - --system-talk-name=org.chromium.bluetooth.Manager
+  # required to fix cursor scaling on wayland
+  - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
+
+add-extensions:
+  org.freedesktop.Platform.electron:
+    version: '24.08'
+    directory: electron
+
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/doc
+  - /share/gtk-doc
+
+modules:
+  - name: bilibili
+    buildsystem: simple
+    build-options:
+      no-debuginfo: true
+    build-commands:
+      - mkdir -p ${FLATPAK_DEST}/electron
+      - bsdtar -xvf bilibili.tar.gz
+      - install -Dm644 app/app.asar -t ${FLATPAK_DEST}/bilibili/
+      - mv app/extensions ${FLATPAK_DEST}/bilibili/
+      - desktop-file-edit --set-key="Icon" --set-value="io.github.msojocs.bilibili"
+        ${FLATPAK_ID}.desktop
+      - install -Dm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications/
+      - install -Dm644 ${FLATPAK_ID}.svg -t ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo/
+      - install -Dm755 bilibili.sh ${FLATPAK_DEST}/bin/bilibili
+    sources:
+      - type: file
+        url: https://github.com/msojocs/bilibili-linux/releases/download/v1.16.3-2/bilibili-asar-v1.16.3-2.tar.gz
+        sha256: 900a6575a54bec9311a8a0c36f5da6eb28024db20a9a0c339fe76f9dd263262f
+        dest-filename: bilibili.tar.gz
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/msojocs/bilibili-linux/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: >-
+            .assets[] | select(.name=="bilibili-asar-v" + $version + ".tar.gz")
+            |
+            .browser_download_url
+      - type: file
+        path: io.github.msojocs.bilibili.metainfo.xml
+      - type: file
+        url: https://raw.githubusercontent.com/msojocs/bilibili-linux/refs/heads/master/res/bilibili.desktop
+        sha256: 2e7065c4255edcf39a9d07c83ae81e7c8a9b650c7a570c56e255e5647fd535d4
+        dest-filename: io.github.msojocs.bilibili.desktop
+      - type: file
+        url: https://raw.githubusercontent.com/msojocs/bilibili-linux/refs/heads/master/res/icons/bilibili.svg
+        sha256: 7cf1a17b2a0932927396d5fd6a5c7c5b418222a405cc99322d0a730741f41b89
+        dest-filename: io.github.msojocs.bilibili.svg
+      - type: script
+        dest-filename: bilibili.sh
+        commands:
+          - export TMPDIR=${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}
+          - WAYLAND_SOCKET=${WAYLAND_DISPLAY:-"wayland-0"}
+          - |
+            if [[ -e "${XDG_RUNTIME_DIR}/${WAYLAND_SOCKET}" || -e "${WAYLAND_DISPLAY}" ]]
+            then
+                FLAGS="--enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime --wayland-text-input-version=3"
+            fi
+          - exec zypak-wrapper "/app/electron/electron" "/app/bilibili/app.asar" $FLAGS
+            "$@"

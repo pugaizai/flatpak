@@ -1,0 +1,78 @@
+id: io.github.pbh_btn.peerbanhelper
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.openjdk21
+command: peerbanhelper
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --share=network
+  - --env=PATH=/app/jre/bin:/app/bin:/usr/bin
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/doc
+  - /share/gtk-doc
+modules:
+  - name: openjdk
+    buildsystem: simple
+    build-commands:
+      - /usr/lib/sdk/openjdk21/install.sh
+
+  - name: PeerBanHelper
+    buildsystem: simple
+    build-options:
+      no-debuginfo: true
+    build-commands:
+      - install -Dm755 peerbanhelper -t ${FLATPAK_DEST}/bin/
+      - install -Dm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications/
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo/
+      - install -Dm644 ${FLATPAK_ID}.png -t ${FLATPAK_DEST}/share/icons/hicolor/256x256/apps/
+      - install -Dm755 apply_extra -t ${FLATPAK_DEST}/bin/
+    sources:
+      - type: extra-data
+        url: https://github.com/PBH-BTN/PeerBanHelper/releases/download/v7.4.4/peerbanhelper_7.4.4_all.deb
+        filename: peerbanhelper.deb
+        sha256: 77dea65e2e2dbd6ee94d574e433767a0f8844b91eff96ec663c58018e30f9dba
+        size: 58795544
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/PBH-BTN/PeerBanHelper/releases/latest
+          is-main-source: true
+          version-query: .tag_name | sub("^v"; "")
+          url-query: .assets[] | select(.name=="peerbanhelper_" + $version + "_all.deb")
+            | .browser_download_url
+
+      - type: file
+        path: io.github.pbh_btn.peerbanhelper.metainfo.xml
+
+      - type: file
+        url: https://raw.githubusercontent.com/PBH-BTN/PeerBanHelper/refs/heads/master/install4j/icon.png
+        dest-filename: io.github.pbh_btn.peerbanhelper.png
+        sha256: c53e1606f11060cc84eb02edc075c4cb0699377a2a2bcb3edb35a81c3806ccc5
+
+      - type: file
+        path: io.github.pbh_btn.peerbanhelper.desktop
+
+      - type: script
+        commands:
+          - java -Dpbh.release=debian -Dpbh.configdir=${XDG_CONFIG_HOME}/peerbanhelper
+            -Dpbh.datadir=${XDG_DATA_HOME}/peerbanhelper -Dpbh.logsdir=${XDG_CACHE_HOME}/peerbanhelper
+            -Dpbh.log.level=WARN -Xmx512M -XX:+UseG1GC -XX:+UseStringDeduplication
+            -XX:+ShrinkHeapInSteps -jar /app/extra/peerbanhelper/PeerBanHelper.jar
+        dest-filename: peerbanhelper
+
+      - type: script
+        commands:
+          - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
+          - mv usr/lib/peerbanhelper .
+          - rm -rf etc usr
+        dest-filename: apply_extra

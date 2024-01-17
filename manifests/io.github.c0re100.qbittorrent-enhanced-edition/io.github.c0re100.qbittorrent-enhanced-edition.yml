@@ -1,0 +1,84 @@
+app-id: io.github.c0re100.qbittorrent-enhanced-edition
+runtime: org.kde.Platform
+sdk: org.kde.Sdk
+runtime-version: '6.8'
+command: qbittorrent
+rename-icon: qbittorrent
+rename-desktop-file: org.qbittorrent.qBittorrent.desktop
+rename-appdata-file: org.qbittorrent.qBittorrent.metainfo.xml
+copy-icon: true
+finish-args:
+  - --device=dri
+  - --filesystem=host
+  - --share=ipc
+  - --share=network
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --system-talk-name=org.freedesktop.login1
+  - --system-talk-name=org.freedesktop.UPower
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=org.freedesktop.ScreenSaver
+  - --talk-name=org.freedesktop.PowerManagement
+  - --talk-name=org.gnome.SessionManager
+  - --talk-name=org.kde.StatusNotifierWatcher
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/doc
+  - /share/gtk-doc
+
+modules:
+  - name: boost
+    buildsystem: simple
+    build-commands:
+      - ./bootstrap.sh --prefix=${FLATPAK_DEST}/ --with-libraries=headers
+      - ./b2 install variant=release link=shared runtime-link=shared cxxflags="${CXXFLAGS}"
+        linkflags="${LDFLAGS}" -j ${FLATPAK_BUILDER_N_JOBS}
+    sources:
+      - type: git
+        url: https://github.com/boostorg/boost.git
+        tag: boost-1.87.0
+        commit: c89e6267665516192015a9e40955e154466f4f68
+        x-checker-data:
+          type: git
+          tag-pattern: ^boost-([\d.]+)$
+
+  - name: libtorrent
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DBUILD_SHARED_LIBS=OFF
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DCMAKE_CXX_STANDARD=20
+      - -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON
+      - -Ddeprecated-functions=OFF
+    sources:
+      - type: git
+        url: https://github.com/arvidn/libtorrent.git
+        tag: v2.0.11
+        commit: 9d7443f467147d1784fb7516d2a882db1abb5a8b
+        x-checker-data:
+          type: git
+          tag-pattern: ^v([\d.]+)$
+  - name: qbittorrent
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON
+      - -DQT6=ON
+      - -DGUI=ON
+    sources:
+      - type: git
+        url: https://github.com/c0re100/qBittorrent-Enhanced-Edition.git
+        tag: release-5.0.4.10
+        commit: aa50357fa833f968406988d2f9c5bf0829d16566
+        x-checker-data:
+          type: git
+          tag-pattern: ^release-([\d.]+)$

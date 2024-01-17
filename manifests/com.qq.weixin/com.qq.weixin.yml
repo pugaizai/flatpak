@@ -1,0 +1,102 @@
+id: com.qq.weixin
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+command: wechat
+separate-locales: false
+
+finish-args:
+  - --share=ipc
+  - --share=network
+  - --socket=x11
+  - --socket=pulseaudio
+  - --device=all
+  - --talk-name=org.a11y.Bus
+  # File Manager
+  - --talk-name=org.freedesktop.FileManager1
+  # System tray icon
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=org.kde.StatusNotifierWatcher
+  # Uses legacy StatusNotifier implementation
+  - --own-name=org.kde.*
+  # Files
+  - --filesystem=xdg-download:ro
+  - --persist=.xwechat
+  - --persist=xwechat_files
+  # Hidpi scale
+  - --env=QT_AUTO_SCREEN_SCALE_FACTOR=1
+  # Only supports xcb
+  - --env=QT_QPA_PLATFORM=xcb
+
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/doc
+  - /share/gtk-doc
+
+modules:
+  # Need libtiff.so.5
+  - name: tiff
+    only-arches: [aarch64]
+    buildsystem: cmake-ninja
+    sources:
+      - type: git
+        url: https://gitlab.com/libtiff/libtiff.git
+        tag: v4.4.0
+        commit: b6a17e567f143fab49734a9e09e5bafeb6f97354
+
+  - name: wechat
+    buildsystem: simple
+    build-options:
+      no-debuginfo: true
+    build-commands:
+      - install -Dm755 apply_extra -t ${FLATPAK_DEST}/bin
+      - install -Dm755 wechat -t ${FLATPAK_DEST}/bin
+      - install -Dm755 dde-file-manager -t ${FLATPAK_DEST}/bin
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+      - install -Dm644 ${FLATPAK_ID}.png -t ${FLATPAK_DEST}/share/icons/hicolor/256x256/apps
+      - install -Dm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications
+    sources:
+      - type: script
+        commands:
+          - bsdtar -O -xf wechat.deb data.* | bsdtar --no-same-owner -xf -
+          - mv opt/wechat wechat
+          - rm -rf wechat.deb usr opt
+        dest-filename: apply_extra
+
+      - type: script
+        commands:
+          - exec /app/extra/wechat/wechat
+        dest-filename: wechat
+
+      - type: file
+        path: dde-file-manager
+
+      - type: file
+        path: com.qq.weixin.metainfo.xml
+
+      - type: file
+        path: com.qq.weixin.png
+
+      - type: file
+        path: com.qq.weixin.desktop
+
+      - type: extra-data
+        filename: wechat.deb
+        only-arches: [x86_64]
+        url: https://dldir1v6.qq.com/weixin/Universal/Linux/WeChatLinux_x86_64.deb
+        sha256: 16410e0ca7895e5aa375282de5e48b2d5fcb958b063de6b2dcfd02bed190cc01
+        size: 208373096
+
+      - type: extra-data
+        filename: wechat.deb
+        only-arches: [aarch64]
+        url: https://dldir1v6.qq.com/weixin/Universal/Linux/WeChatLinux_arm64.deb
+        sha256: 59805ad7335de5ebb1fd5748d19b2f39761a085a45be30906810756d066277bc
+        size: 182288252

@@ -1,0 +1,68 @@
+app-id: io.github.wgh136.pixes
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.llvm19
+command: pixes
+finish-args:
+  - --share=ipc
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --share=network
+  - --device=dri
+  - --own-name=com.github.wgh136.pixes
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/doc
+  - /share/gtk-doc
+modules:
+  - name: pixes
+    buildsystem: simple
+    build-options:
+      build-args:
+        - --share=network
+      arch:
+        x86_64:
+          env:
+            BUNDLE_PATH: build/linux/x64/release/bundle
+        aarch64:
+          env:
+            BUNDLE_PATH: build/linux/arm64/release/bundle
+      append-path: /usr/lib/sdk/llvm19/bin:/run/build/pixes/flutter/bin
+      prepend-ld-library-path: /usr/lib/sdk/llvm19/lib
+      env:
+        PUB_CACHE: /run/build/pixes/.pub-cache
+    build-commands:
+      - flutter build linux --release --verbose
+      - mkdir -p ${FLATPAK_DEST}/bin
+      - cp -r ${BUNDLE_PATH}/* ${FLATPAK_DEST}/bin
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+      - install -Dm644 debian/gui/pixes.desktop ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
+      - install -Dm644 debian/gui/pixes.png ${FLATPAK_DEST}/share/icons/hicolor/128x128/apps/${FLATPAK_ID}.png
+      - desktop-file-edit --set-key="Categories" --set-value="Graphics;Network;" --set-key="Exec" --set-value="pixes %u" --set-key="Icon" --set-value="io.github.wgh136.pixes" ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
+    sources:
+      - type: git
+        url: https://github.com/wgh136/pixes.git
+        tag: v1.1.1
+        commit: cbc69b4707b068a5cc6ec3df87741a9658288b33
+        x-checker-data:
+          type: git
+          tag-pattern: ^v([\d.]+)$
+      - type: file
+        path: io.github.wgh136.pixes.metainfo.xml
+      - type: git
+        url: https://github.com/flutter/flutter.git
+        tag: 3.29.2
+        commit: c23637390482d4cf9598c3ce3f2be31aa7332daf
+        dest: flutter
+        x-checker-data:
+          type: git
+          tag-pattern: ^([\d.]+)$

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Simple Live
+Icon=com.xiaoyaocz.simplelive
+Exec=simple_live_app %U
+Categories=AudioVideo;Audio;Video;Network;
+Keywords=SimpleLive;
+StartupNotify=true

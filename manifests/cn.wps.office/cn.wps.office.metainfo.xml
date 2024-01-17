@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>cn.wps.office</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LicenseRef-proprietary=https://privacy.wps.cn/policies/eula/personal-wps-office</project_license>
+  <name>WPS Office (Chinese Edition)</name>
+  <summary>WPS Office Suite (Chinese Edition)</summary>
+  <description>
+    <p>WPS Office including Writer, Presentation
+    and Spreadsheets, is a powerful office suite, which is able to process
+    word file, produce wonderful slides, and analyze data as well. It is
+    deeply compatible with all of the latest Microsoft Office file formats.
+    It can easily open and read the documents created with Microsoft Office.</p>
+    <p>NOTE: This wrapper is not verified by, affiliated with, or
+    supported by Kingsoft Office Corporation</p>
+  </description>
+  <url type="homepage">https://www.wps.cn/product/wpslinux</url>
+  <url type="faq">https://helpdesk.wps.cn/</url>
+  <url type="help">https://helpdesk.wps.cn/</url>
+  <developer id="cn.wps">
+    <name>Kingsoft Office Corporation</name>
+  </developer>
+  <update_contact>i@pugai.life</update_contact>
+  <launchable type="desktop-id">cn.wps.office.desktop</launchable>
+  <categories>
+    <category>Office</category>
+  </categories>
+  <releases>
+    <release version="12.1.0.17900" date="2024-11-07">
+      <description>
+        <ul>
+          <li>Support users' online feedback</li>
+          <li>Support Chinese and English language switching</li>
+          <li>WPS Writer and WPS Presentation, supporting editing of 15 SmartArt types</li>
+          <li>Support custom quick access toolbar</li>
+          <li>Support Manual directory function, which can be inserted without setting outline level</li>
+          <li>Support "text sort" and "table sort"</li>
+          <li>Support printing background color, pictures and setting Web format background</li>
+          <li>Support automatic text collection</li>
+          <li>Support artistic page borders</li>
+          <li>Support to accept/reject format revisions</li>
+          <li>Support to keep source format paste within process</li>
+          <li>The new pivot table kernel supports grouping, calculation items, calculation fields, table style, slicer and other functions</li>
+          <li>Support pivot chart</li>
+          <li>Support automatic filtering - color sorting</li>
+          <li>Monochrome printing is supported in page Settings</li>
+          <li>Support sharing workbook</li>
+          <li>Print the entire workbook under the print preview TAB</li>
+          <li>The digital format supports the locale</li>
+          <li>Support custom views</li>
+          <li>Support to read and play the animation of smartart child nodes</li>
+          <li>Support "font preview" function</li>
+          <li>Combine audio and background music entry, add audio tools TAB, and adjust media object toolbar synchronously</li>
+          <li>Support batch delete remarks function</li>
+          <li>In the comments pane of the speaker view, add the zoom button and adjust the text size</li>
+          <li>Support to insert media embedded into documents through the interface entrance</li>
+        </ul>
+      </description>
+    </release>
+  </releases>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://website-prod.cache.wpscdn.com/img/slider_3.c233a64.png</image>
+  </screenshot>
+    <screenshot>
+      <image>https://website-prod.cache.wpscdn.com/img/slider_1.3a423d4.png</image>
+  </screenshot>
+    <screenshot>
+      <image>https://website-prod.cache.wpscdn.com/img/slider_4.c704a50.png</image>
+    </screenshot>
+  </screenshots>
+  <content_rating type="oars-1.1"/>
+</component>

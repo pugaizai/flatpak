@@ -1,0 +1,93 @@
+app-id: com.larksuite.lark
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+base: org.electronjs.Electron2.BaseApp
+base-version: '24.08'
+command: lark
+finish-args:
+  - --share=network
+  - --share=ipc
+  - --socket=x11
+  - --socket=pulseaudio
+  # For camera
+  - --device=all
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=org.freedesktop.secrets
+  - --talk-name=org.gnome.keyring
+  - --talk-name=org.gnome.ScreenSaver
+  - --talk-name=org.kde.StatusNotifierWatcher
+  - --talk-name=org.kde.kwin.Screenshot
+  - --talk-name=org.kde.KWin.ScreenShot2
+  - --own-name=org.kde.*
+  - --system-talk-name=org.freedesktop.login1
+  - --system-talk-name=org.freedesktop.UPower
+  # Share files
+  - --filesystem=xdg-documents
+  - --filesystem=xdg-download
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/doc
+  - /share/gtk-doc
+modules:
+  - name: lark
+    buildsystem: simple
+    build-options:
+      no-debuginfo: true
+    build-commands:
+      - install -Dm755 lark -t ${FLATPAK_DEST}/bin
+      - install -Dm755 apply_extra -t ${FLATPAK_DEST}/bin
+      - install -Dm644 ${FLATPAK_ID}.svg -t ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps
+      - install -Dm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+    sources:
+      - type: script
+        commands:
+          - export TMPDIR="${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}"
+          - source /app/extra/lark/bytedance-lark.sh
+          - exec zypak-wrapper /app/extra/lark/lark "$@"
+        dest-filename: lark
+      - type: script
+        commands:
+          - bsdtar --to-stdout -xf Lark-linux.deb data.tar.xz | bsdtar -xf -
+          - mv opt/bytedance/lark .
+          - sed '/^exec -a/d' lark/bytedance-lark > lark/bytedance-lark.sh
+          - rm -rf opt usr *.deb
+        dest-filename: apply_extra
+      - type: extra-data
+        filename: Lark-linux.deb
+        url: https://sf16-sg.larksuitecdn.com/obj/lark-artifact-storage/932c7f7e/Lark-linux_x64-7.36.11.deb
+        sha256: 4d13f48cb205225a4b0050893ad623bd2cf091837b86b8af66d3c0665679317e
+        size: 388737436
+        only-arches: [x86_64]
+        x-checker-data:
+          type: json
+          url: https://www.larksuite.com/api/downloads
+          version-query: .versions.Linux_deb_x64.version_number | sub("^Linux-x64-deb@V";
+            "")
+          url-query: .versions.Linux_deb_x64.download_link
+      - type: extra-data
+        filename: Lark-linux.deb
+        url: https://sf16-sg.larksuitecdn.com/obj/lark-artifact-storage/dbee26ba/Lark-linux_arm64-7.36.11.deb
+        sha256: 60e61221d573f8965128ef3c27b02a069f442001614900846064afe7de2d449b
+        size: 355422604
+        only-arches: [aarch64]
+        x-checker-data:
+          type: json
+          url: https://www.larksuite.com/api/downloads
+          version-query: .versions.Linux_deb_arm.version_number | sub("^Linux-arm64-deb@V";
+            "")
+          url-query: .versions.Linux_deb_arm.download_link
+      - type: file
+        path: com.larksuite.lark.desktop
+      - type: file
+        path: com.larksuite.lark.metainfo.xml
+      - type: file
+        path: com.larksuite.lark.svg

@@ -1,0 +1,7 @@
+.flatpak-builder/
+build-dir/
+repo/
+manifests/**/build/
+manifests/**/pub-cache/
+manifests/**/pub-git-cache.tar.gz
+manifests/**/.flatpak-builder/

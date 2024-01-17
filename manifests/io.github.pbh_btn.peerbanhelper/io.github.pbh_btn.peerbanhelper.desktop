@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Peer Ban Helper
+GenericName=Peer Ban Helper.
+Comment=Auto ban unwanted bittorrent client.
+Exec=peerbanhelper
+Icon=io.github.pbh_btn.peerbanhelper
+Categories=Network;
+Terminal=false

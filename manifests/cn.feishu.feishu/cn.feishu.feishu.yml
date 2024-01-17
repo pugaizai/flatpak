@@ -1,0 +1,93 @@
+app-id: cn.feishu.feishu
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+base: org.electronjs.Electron2.BaseApp
+base-version: '24.08'
+command: feishu
+finish-args:
+  - --share=network
+  - --share=ipc
+  - --socket=x11
+  - --socket=pulseaudio
+  # For camera
+  - --device=all
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=org.freedesktop.secrets
+  - --talk-name=org.gnome.keyring
+  - --talk-name=org.gnome.ScreenSaver
+  - --talk-name=org.kde.StatusNotifierWatcher
+  - --talk-name=org.kde.kwin.Screenshot
+  - --talk-name=org.kde.KWin.ScreenShot2
+  - --own-name=org.kde.*
+  - --system-talk-name=org.freedesktop.login1
+  - --system-talk-name=org.freedesktop.UPower
+  # Share files
+  - --filesystem=xdg-documents
+  - --filesystem=xdg-download
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/doc
+  - /share/gtk-doc
+modules:
+  - name: feishu
+    buildsystem: simple
+    build-options:
+      no-debuginfo: true
+    build-commands:
+      - install -Dm755 feishu -t ${FLATPAK_DEST}/bin
+      - install -Dm755 apply_extra -t ${FLATPAK_DEST}/bin
+      - install -Dm644 ${FLATPAK_ID}.svg -t ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps
+      - install -Dm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+    sources:
+      - type: script
+        commands:
+          - export TMPDIR="${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}"
+          - source /app/extra/feishu/bytedance-feishu.sh
+          - exec zypak-wrapper /app/extra/feishu/feishu "$@"
+        dest-filename: feishu
+      - type: script
+        commands:
+          - bsdtar --to-stdout -xf feishu-linux.deb data.tar.xz | bsdtar -xf -
+          - mv opt/bytedance/feishu .
+          - sed '/^exec -a/d' feishu/bytedance-feishu > feishu/bytedance-feishu.sh
+          - rm -rf opt usr *.deb
+        dest-filename: apply_extra
+      - type: extra-data
+        filename: feishu-linux.deb
+        url: https://sf3-cn.feishucdn.com/obj/ee-appcenter/9bcfe8ba/Feishu-linux_x64-7.36.11.deb
+        sha256: 8aa11cc1f17acf68c9d13985cc3bb681fe9e6a91dc24f68b49511282d0bd5948
+        size: 388475888
+        only-arches: [x86_64]
+        x-checker-data:
+          type: json
+          url: https://www.feishu.cn/api/downloads
+          version-query: .versions.Linux_deb_x64.version_number | capture("@V(?<v>.*)")
+            | .v
+          url-query: .versions.Linux_deb_x64.download_link
+      - type: extra-data
+        filename: feishu-linux.deb
+        url: https://sf3-cn.feishucdn.com/obj/ee-appcenter/484fc204/Feishu-linux_arm64-7.36.11.deb
+        sha256: 5d36b918e301b225c8e480e10d092d4b17547eebc6edcd95587b92efa705b2a1
+        size: 355243804
+        only-arches: [aarch64]
+        x-checker-data:
+          type: json
+          url: https://www.feishu.cn/api/downloads
+          version-query: .versions.Linux_deb_arm.version_number | capture("@V(?<v>.*)")
+            | .v
+          url-query: .versions.Linux_deb_arm.download_link
+      - type: file
+        path: cn.feishu.feishu.desktop
+      - type: file
+        path: cn.feishu.feishu.metainfo.xml
+      - type: file
+        path: cn.feishu.feishu.svg

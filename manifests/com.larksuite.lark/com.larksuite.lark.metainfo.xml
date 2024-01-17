@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.larksuite.lark</id>
+  <name>Lark</name>
+  <summary>Lark</summary>
+  <developer id="com.larksuite">
+    <name>Lark Linux Team</name>
+  </developer>
+  <metadata_license>CC0-1.0</metadata_license>
+  <update_contact>me@cocoabrew.cc</update_contact>
+  <description>
+    <p>Lark is a comprehensive enterprise collaboration and management platform developed by ByteDance. As an all-in-one workplace solution, Lark seamlessly integrates a wide range of essential business tools to enhance team productivity and streamline workplace communication.</p>
+  </description>
+  <url type="homepage">https://larksuite.com/</url>
+  <recommends>
+    <control>pointing</control>
+    <control>keyboard</control>
+  </recommends>
+  <releases>
+    <release version="7.36.11" date="2025-03-07">
+      <description></description>
+    </release>
+    <release version="7.32.11" date="2025-01-03">
+      <description/>
+    </release>
+    <release version="7.32.11" date="2025-01-03">
+      <description/>
+    </release>
+  </releases>
+  <content_rating type="oars-1.1"/>
+  <launchable type="desktop-id">com.larksuite.lark.desktop</launchable>
+</component>

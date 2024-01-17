@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>io.github.msojocs.bilibili</id>
+  <launchable type="desktop-id">io.github.msojocs.bilibili.desktop</launchable>
+  <name>Bilibili</name>
+  <developer id="com.bilibili">
+    <name>Bilibili</name>
+  </developer>
+  <summary>HD Anime, Videos</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  <url type="homepage">https://github.com/msojocs/bilibili-linux</url>
+  <url type="bugtracker">https://github.com/msojocs/bilibili-linux/issues</url>
+  <description>
+    <p>Bilibili Linux is a feature-rich desktop client for the popular Chinese video platform, offering seamless video playback, community interaction, and support for all Bilibili features on Linux systems.</p>
+    <p xml:lang="zh_CN">Bilibili Linux 是一款功能丰富的桌面客户端，支持在Linux系统上流畅播放视频、参与社区互动，并支持Bilibili的所有功能。</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <caption>Homepage</caption>
+      <image type="source">https://raw.githubusercontent.com/msojocs/bilibili-linux/refs/heads/master/res/screenshots/1.png</image>
+    </screenshot>
+  </screenshots>
+  <releases>
+    <release version="1.16.2-4" date="2025-02-08">
+      <description></description>
+    </release>
+  </releases>
+  <content_rating type="oars-1.1"/>
+  <update_contact>i@pugai.life</update_contact>
+</component>

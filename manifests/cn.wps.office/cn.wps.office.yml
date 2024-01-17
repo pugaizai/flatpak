@@ -1,0 +1,77 @@
+id: cn.wps.office
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+command: wps
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --socket=pulseaudio
+  - --share=network
+  - --device=dri
+  - --persist=.kingsoft
+  - --env=TMPDIR=/var/tmp
+  - --filesystem=xdg-documents
+  - --filesystem=xdg-download
+  - --filesystem=xdg-pictures
+  - --filesystem=xdg-videos
+  - --filesystem=/run/media
+  - --filesystem=/media
+  - --env=QT_PLUGIN_PATH=/app/lib/qt/plugins:/app/extra/wps-office/office6/qt/plugins
+
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/doc
+  - /share/gtk-doc
+modules:
+  - shared-modules/glu/glu-9.json
+
+  - name: wps
+    buildsystem: simple
+    build-options:
+      no-debuginfo: true
+    build-commands:
+      - install -Dm755 apply_extra.sh ${FLATPAK_DEST}/bin/apply_extra
+      - install -Dm755 wps.sh ${FLATPAK_DEST}/bin/wps
+      - ln -s wps ${FLATPAK_DEST}/bin/et
+      - ln -s wps ${FLATPAK_DEST}/bin/wpp
+      - ln -s wps ${FLATPAK_DEST}/bin/wpspdf
+      - install -Dm755 /usr/bin/desktop-file-edit -t ${FLATPAK_DEST}/bin/
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo/
+      - install -Dm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications/
+      - install -Dm644 ${FLATPAK_ID}.svg -t ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/
+    sources:
+      - type: file
+        path: apply_extra.sh
+
+      - type: file
+        path: cn.wps.office.metainfo.xml
+
+      - type: file
+        path: cn.wps.office.desktop
+
+      - type: file
+        path: cn.wps.office.svg
+
+      - type: file
+        path: wps.sh
+
+      - type: extra-data
+        filename: wps-office.deb
+        only-arches: [x86_64]
+        url: https://mirrors.nju.edu.cn/ubuntukylin/pool/partner/wps-office_12.1.0.17900_amd64.deb
+        sha256: 46726fbb727437dcf656dd70dabcc198b4d4ce2cddd3a8f9deb04e499cb1c298
+        size: 464153436
+        x-checker-data:
+          type: debian-repo
+          package-name: wps-office
+          root: https://mirrors.nju.edu.cn/ubuntukylin/
+          dist: jammy-partner
+          component: main

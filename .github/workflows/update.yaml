@@ -1,0 +1,49 @@
+name: Update
+
+on:
+  push:
+    paths: 
+      - .github/workflows/update.yaml
+  schedule: # 为了调度正常工作，此文件必须在默认分支中
+     - cron: "0 12 * * *" # 每天中午12点运行一次
+       paths:  # 仅当清单文件变更时才触发
+         - 'manifests/**/*.yml'
+  workflow_dispatch:
+
+jobs:
+  check-update:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        appid: # 列出所有要检查的 Flatpak 应用 ID
+          - io.github.pieterdd.RcloneShuttle
+          - cn.feishu.feishu
+          - com.cherry_ai.cherrystudio
+          - io.github.venera_app.venera
+          - io.github.wgh136.pixes
+          - top.jtmonster.jhentai
+          - com.xiaoyaocz.simplelive
+          - cn.wps.office
+          - com.qq.docs
+          - com.qq.weixin
+          - com.qq.qqmusic
+          - io.github.c0re100.qbittorrent-enhanced-edition
+          - io.github.msojocs.bilibili
+          - io.github.pbh_btn.peerbanhelper
+          - org.freedesktop.xorg.xeyes
+          - co.anysphere.cursor
+          - com.larksuite.lark
+          - com.qq.qq
+          - org.freedesktop.Platform.electron
+    steps:
+      - uses: actions/checkout@v4 
+      - uses: docker://ghcr.io/flathub/flatpak-external-data-checker:latest
+        env:
+          GIT_AUTHOR_NAME: Flatpak External Data Checker
+          GIT_COMMITTER_NAME: Flatpak External Data Checker
+          # 邮箱设置为 "github-actions[bot]" 作为提交作者，参见 https://github.community/t/github-actions-bot-email-address/17204/6
+          GIT_AUTHOR_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+          GIT_COMMITTER_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          args: --update --never-fork manifests/${{ matrix.appid }}/${{ matrix.appid }}.yml # 例如 com.organization.myapp.json

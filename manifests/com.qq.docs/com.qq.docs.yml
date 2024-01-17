@@ -1,0 +1,88 @@
+app-id: com.qq.docs
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+base: org.electronjs.Electron2.BaseApp
+base-version: '24.08'
+command: tdappdesktop
+
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --device=dri
+  - --share=network
+  - --filesystem=xdg-download
+  - --talk-name=org.kde.StatusNotifierWatcher
+  - --system-talk-name=org.freedesktop.login1
+  # required to fix cursor scaling on wayland
+  - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
+
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/doc
+  - /share/gtk-doc
+
+modules:
+  - name: docs
+    buildsystem: simple
+    build-options:
+      no-debuginfo: true
+    build-commands:
+      - install -Dm755 apply_extra -t ${FLATPAK_DEST}/bin
+      - install -Dm644 ${FLATPAK_ID}.svg -t ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps
+      - install -Dm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+      - install -Dm755 tdappdesktop.sh ${FLATPAK_DEST}/bin/tdappdesktop
+    sources:
+      - type: extra-data
+        only-arches: [aarch64]
+        filename: docs.deb
+        url: https://desktop.docs.qq.com/Installer/30001/3.9.10/TencentDocs-arm64.deb
+        sha256: 6a1c828d1cbf16a32c47d01fc511e1ee8c54008bae1e48e339688236458db8ba
+        size: 160627248
+        x-checker-data:
+          type: json
+          url: https://docs.qq.com/api/package/update
+          version-query: .result.update_info | fromjson | .version
+          url-query: '"https://desktop.docs.qq.com/Installer/30001/\($version)/TencentDocs-arm64.deb"'
+      - type: extra-data
+        only-arches: [x86_64]
+        filename: docs.deb
+        url: https://desktop.docs.qq.com/Installer/30001/3.9.10/TencentDocs-x64.deb
+        sha256: fae88586b34544bf1244611ee0608cba62647296c3838b33097a18c864d768bf
+        x-checker-data:
+          type: json
+          url: https://docs.qq.com/api/package/update
+          version-query: .result.update_info | fromjson | .version
+          url-query: '"https://desktop.docs.qq.com/Installer/30001/\($version)/TencentDocs-x64.deb"'
+        size: 164376254
+      - type: file
+        path: com.qq.docs.metainfo.xml
+      - type: file
+        path: com.qq.docs.svg
+      - type: file
+        path: com.qq.docs.desktop
+      - type: script
+        dest-filename: tdappdesktop.sh
+        commands:
+          - export TMPDIR=${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}
+          - WAYLAND_SOCKET=${WAYLAND_DISPLAY:-"wayland-0"}
+          - |
+            if [[ -e "${XDG_RUNTIME_DIR}/${WAYLAND_SOCKET}" || -e "${WAYLAND_DISPLAY}" ]]
+            then
+                FLAGS="--enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime --wayland-text-input-version=3"
+            fi
+          - exec zypak-wrapper.sh /app/extra/docs/tdappdesktop $FLAGS "$@"
+      - type: script
+        commands:
+          - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
+          - mv opt/腾讯文档 ./docs
+          - rm -rf *.deb usr opt
+        dest-filename: apply_extra

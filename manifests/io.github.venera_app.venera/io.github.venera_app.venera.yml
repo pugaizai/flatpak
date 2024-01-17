@@ -1,0 +1,94 @@
+app-id: io.github.venera_app.venera
+runtime: org.gnome.Platform
+runtime-version: '48'
+sdk: org.gnome.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.llvm19
+command: venera
+finish-args:
+  - --share=ipc
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --share=network
+  - --device=dri
+  - --talk-name=org.freedesktop.ScreenSaver
+  - --system-talk-name=org.freedesktop.NetworkManager
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/doc
+  - /share/gtk-doc
+modules:
+
+  - name: rustup
+    buildsystem: simple
+    build-options:
+      build-args:
+        - --share=network
+      env:
+        CARGO_HOME: /var/lib/rustup
+        RUSTUP_HOME: /var/lib/rustup
+    build-commands:
+      - chmod +x rustup-init && ./rustup-init -y --profile minimal --no-modify-path
+    sources:
+      - type: file
+        only-arches: [x86_64]
+        url: https://static.rust-lang.org/rustup/dist/x86_64-unknown-linux-gnu/rustup-init
+        sha256: a3339fb004c3d0bb9862ba0bce001861fe5cbde9c10d16591eb3f39ee6cd3e7f
+      - type: file
+        only-arches: [aarch64]
+        url: https://static.rust-lang.org/rustup/dist/aarch64-unknown-linux-gnu/rustup-init
+        sha256: c64b33db2c6b9385817ec0e49a84bcfe018ed6e328fe755c3c809580cc70ce7a
+
+  - name: venera
+    buildsystem: simple
+    build-options:
+      build-args:
+        - --share=network
+      arch:
+        x86_64:
+          env:
+            BUNDLE_PATH: build/linux/x64/release/bundle
+        aarch64:
+          env:
+            BUNDLE_PATH: build/linux/arm64/release/bundle
+      append-path: /var/lib/rustup/bin:/usr/lib/sdk/llvm19/bin:/run/build/venera/flutter/bin
+      prepend-ld-library-path: /usr/lib/sdk/llvm19/lib
+      env:
+        RUSTUP_HOME: /var/lib/rustup
+        CARGO_HOME: /run/build/venera/cargo
+        PUB_CACHE: /run/build/venera/.pub-cache
+    build-commands:
+      - flutter build linux --release --verbose
+      - mkdir -p ${FLATPAK_DEST}/bin
+      - cp -r ${BUNDLE_PATH}/* ${FLATPAK_DEST}/bin
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+      - install -Dm644 debian/gui/venera.desktop ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
+      - install -Dm644 debian/gui/venera.png ${FLATPAK_DEST}/share/icons/hicolor/64x64/apps/${FLATPAK_ID}.png
+      - desktop-file-edit --set-key="Categories" --set-value="Graphics;Network;" --set-key="Exec"
+        --set-value="venera" --set-key="Icon" --set-value="io.github.venera_app.venera"
+        ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
+    sources:
+      - type: git
+        url: https://github.com/venera-app/venera.git
+        tag: v1.3.3
+        commit: 169676fd9eb4c63fa6d24e07ad474f100ff87f9e
+        x-checker-data:
+          type: git
+          tag-pattern: ^v([\d.]+)$
+      - type: file
+        path: io.github.venera_app.venera.metainfo.xml
+      - type: git
+        url: https://github.com/flutter/flutter.git
+        tag: 3.29.2
+        commit: c23637390482d4cf9598c3ce3f2be31aa7332daf
+        dest: flutter
+        x-checker-data:
+          type: git
+          tag-pattern: ^([\d.]+)$

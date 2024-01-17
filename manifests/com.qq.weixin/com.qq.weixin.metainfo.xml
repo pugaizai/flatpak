@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.qq.weixin</id>
+  <name>WeChat</name>
+  <name xml:lang="zh-Hans">微信</name>
+  <project_license>LicenseRef-proprietary=https://www.wechat.com/en/service_terms.html</project_license>
+  <developer id="com.qq">
+    <name>Tencent</name>
+  </developer>
+  <summary>Free messaging and calling app</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <launchable type="desktop-id">com.qq.weixin.desktop</launchable>
+  <url type="homepage">https://linux.weixin.qq.com</url>
+  <url type="help">https://help.wechat.com</url>
+  <description>
+    <p>WeChat (Chinese: 微信), is a messaging and calling app developed by the Chinese technology company Tencent.</p>
+    <p>NOTE: This wrapper is not verified by, affiliated with, or supported by Tencent.</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <caption>text messaging</caption>
+      <image>https://res.wx.qq.com/t/wx_fed/base/weixin_portal/res/static/img/1jGi1IH.jpg</image>
+    </screenshot>
+    <screenshot>
+      <caption>video calling</caption>
+      <image>https://res.wx.qq.com/t/wx_fed/base/weixin_portal/res/static/img/bLyYj3G.jpg</image>
+    </screenshot>
+  </screenshots>
+  <categories>
+    <category>InstantMessaging</category>
+    <category>Network</category>
+  </categories>
+  <releases>
+    <release version="4.0.1.11" date="2024-12-24">
+      <description></description>
+    </release>
+  </releases>
+  <content_rating type="oars-1.1">
+    <content_attribute id="social-chat">intense</content_attribute>
+    <content_attribute id="social-info">intense</content_attribute>
+    <content_attribute id="social-audio">intense</content_attribute>
+    <content_attribute id="social-contacts">intense</content_attribute>
+  </content_rating>
+</component>

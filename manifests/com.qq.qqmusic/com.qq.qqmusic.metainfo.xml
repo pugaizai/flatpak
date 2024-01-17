@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>com.qq.qqmusic</id>
+  <provides><id>com.qq.qqmusic.desktop</id></provides>
+  <launchable type="desktop-id">com.qq.qqmusic.desktop</launchable>
+  <name>QQMusic</name>
+  <name xml:lang="zh_CN">QQ音乐</name>
+  <developer id="com.qq">
+    <name>Tencent</name>
+  </developer>
+  <summary>Online music streaming service</summary>
+  <summary xml:lang="zh_CN">QQ音乐</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LicenseRef-proprietary=http://y.qq.com/y/static/tips/service_tips.html</project_license>
+  <url type="homepage">https://y.qq.com/</url>
+  <url type="help">https://y.qq.com/download/welcome_pc_v15/index.html?ADTAG=YQQ</url>
+  <description>
+    <p>QQMusic is a leading Chinese music streaming platform offering access to millions of songs, high-fidelity audio quality, and personalized recommendations across all devices.</p>
+    <p xml:lang="zh_CN">QQ音乐是中国领先的在线音乐平台，提供数千万正版音乐资源，支持无损音质、智能推荐及多设备同步，为您带来卓越的听觉体验。</p>
+    <p>NOTE: This wrapper is not verified by, affiliated with, or supported by Tencent.</p>
+    <p xml:lang="zh_CN">注意：本封装程序未经Tencent验证，与Tencent无任何关联，也不受Tencent官方支持。</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <caption>Main Window</caption>
+      <caption xml:lang="zh_CN">主界面</caption>
+      <image>https://raw.githubusercontent.com/flathub/com.qq.QQmusic/master/screenshots/1.png</image>
+    </screenshot>
+  </screenshots>
+  <releases>
+    <release version="1.1.7" date="2024-12-04">
+      <description></description>
+    </release>
+  </releases>
+  <content_rating type="oars-1.1"/>
+  <update_contact>wsgalaxy@qq.com</update_contact>
+</component>
