@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>top.jtmonster.jhentai</id>
+  <launchable type="desktop-id">top.jtmonster.jhentai.desktop</launchable>
+  <name>JHenTai</name>
+  <developer>jiangtian616</developer>
+  <summary>A cross-platform app made for e-hentai and exhentai</summary>
+  <summary xml:lang="zh-cn">为 e-hentai 和 exhentai 打造的跨平台客户端</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>Apache-2.0</project_license>
+  <url type="homepage">https://github.com/jiangtian616/JHenTai</url>
+  <url type="bugtracker">https://github.com/jiangtian616/JHenTai/issues</url>
+  <url type="faq">https://github.com/jiangtian616/JHenTai/wiki/Common-Questions</url>
+  <description>
+    <p>An E-Hentai app for Android and iOS and Windows and MacOS and Linux.</p>
+    <p xml:lang="zh-cn">E-hentai 的一个多端 app ，现支持 Android 、 iOS 、 Windows 、 MacOS 和 Linux 系统。</p>
+    <p>Still in development stage, welcome to submit issues or feature requests.</p>
+    <p xml:lnag="zh-cn">仍在发展阶段，十分欢迎提交各种 bug 反馈或 Feature Request。</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <caption>Desktop Layout</caption>
+      <image type="source">https://raw.githubusercontent.com/jiangtian616/JHenTai/master/screenshot/desktop.png</image>
+    </screenshot>
+  </screenshots>
+  <releases>
+    <release version="7.5.5" date="2024-05-21"/>
+  </releases>
+  <content_rating type="oars-1.1">
+    <content_attribute id="violence-cartoon">intense</content_attribute>
+    <content_attribute id="violence-fantasy">intense</content_attribute>
+    <content_attribute id="violence-realistic">intense</content_attribute>
+    <content_attribute id="violence-bloodshed">intense</content_attribute>
+    <content_attribute id="violence-sexual">intense</content_attribute>
+    <content_attribute id="violence-desecration">intense</content_attribute>
+    <content_attribute id="violence-slavery">intense</content_attribute>
+    <content_attribute id="drugs-alcohol">moderate</content_attribute>
+    <content_attribute id="drugs-narcotics">moderate</content_attribute>
+    <content_attribute id="drugs-tobacco">moderate</content_attribute>
+    <content_attribute id="sex-nudity">intense</content_attribute>
+    <content_attribute id="sex-themes">intense</content_attribute>
+    <content_attribute id="language-profanity">intense</content_attribute>
+    <content_attribute id="language-humor">intense</content_attribute>
+    <content_attribute id="language-discrimination">intense</content_attribute>
+    <content_attribute id="social-chat">intense</content_attribute>
+  </content_rating>
+
+  <update_contact>valigarmanda55@gmail.com</update_contact>
+</component>

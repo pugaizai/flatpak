@@ -1,0 +1,75 @@
+app-id: io.github.msojocs.bilibili
+runtime: org.freedesktop.Platform
+runtime-version: '23.08'
+sdk: org.freedesktop.Sdk
+base: org.electronjs.Electron2.BaseApp
+base-version: '23.08'
+separate-locales: false
+command: bilibili
+
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --socket=pulseaudio
+  - --device=dri
+  - --share=network
+  - --filesystem=xdg-videos
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=org.kde.StatusNotifierWatcher
+  - --talk-name=org.freedesktop.ScreenSaver
+
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/gtk-doc
+
+add-extensions:
+  org.freedesktop.Platform.ffmpeg-full:
+    directory: lib/ffmpeg
+    version: '23.08'
+    add-ld-path: .
+
+modules:
+  - name: bilibili
+    buildsystem: simple
+    build-options:
+      no-debuginfo: true
+    build-commands:
+      - bsdtar --to-stdout -xf bilibili.deb data.* | bsdtar -xf -
+      - rm -r usr/share/doc
+      - mv opt/apps/io.github.msojocs.bilibili/files/bin $FLATPAK_DEST/bilibili
+      - cp -a usr/share $FLATPAK_DEST/
+      - desktop-file-edit --set-key="Exec" --set-value="bilibili %U" $FLATPAK_DEST/share/applications/io.github.msojocs.bilibili.desktop
+      - install -Dm644 io.github.msojocs.bilibili.metainfo.xml -t /app/share/metainfo
+      - install -Dm755 bilibili.sh /app/bin/bilibili
+      - ln -svf /usr/bin/ffmpeg /app/bin/
+      - mkdir -p /app/lib/ffmpeg
+    sources:
+      - type: file
+        dest-filename: bilibili.deb
+        only-arches:
+          - aarch64
+        url: https://github.com/msojocs/bilibili-linux/releases/download/v1.14.0-1/io.github.msojocs.bilibili_1.14.0-1_arm64.deb
+        sha256: 4b99ffca26ece2117934b900a97ce70ace3defb936d1dcfe0a6856aaebcb2827
+      - type: file
+        dest-filename: bilibili.deb
+        only-arches:
+          - x86_64
+        url: https://github.com/msojocs/bilibili-linux/releases/download/v1.14.0-1/io.github.msojocs.bilibili_1.14.0-1_amd64.deb
+        sha256: e3e0c62ff0cd477c0b1547dfd7b3aab8033a74e91cb1714d782a80ec84ed09a2
+      - type: file
+        path: io.github.msojocs.bilibili.metainfo.xml
+      - type: script
+        dest-filename: bilibili.sh
+        commands:
+          - export TMPDIR=$XDG_RUNTIME_DIR/app/$FLATPAK_ID
+          - export ELECTRON_IS_DEV=0
+          - export ELECTRON_FORCE_IS_PACKAGED=true
+          - export NODE_ENV=production
+          - exec "/app/bilibili/electron/electron" "/app/bilibili/app/app.asar" --no-sandbox "$@"

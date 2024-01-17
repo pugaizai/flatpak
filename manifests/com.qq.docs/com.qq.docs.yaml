@@ -1,0 +1,64 @@
+app-id: com.qq.docs
+runtime: org.freedesktop.Platform
+runtime-version: '23.08'
+sdk: org.freedesktop.Sdk
+base: org.electronjs.Electron2.BaseApp
+base-version: '23.08'
+separate-locales: false
+rename-icon: tdappdesktop
+rename-desktop-file: tdappdesktop.desktop
+command: tdappdesktop
+
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --device=dri
+  - --share=network
+  - --filesystem=xdg-download
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=org.kde.StatusNotifierWatcher
+
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/gtk-doc
+
+modules:
+  - name: docs
+    buildsystem: simple
+    build-options:
+      no-debuginfo: true
+    build-commands:
+      - bsdtar --to-stdout -xf docs.deb data.* | bsdtar -xf -
+      - rm -r usr/share/doc
+      - mv opt/腾讯文档 $FLATPAK_DEST/docs
+      - cp -a usr/share $FLATPAK_DEST/
+      - desktop-file-edit --set-key="Exec" --set-value="tdappdesktop %U" $FLATPAK_DEST/share/applications/tdappdesktop.desktop
+      - install -Dm644 com.qq.docs.metainfo.xml -t /app/share/metainfo
+      - install -Dm755 tdappdesktop.sh /app/bin/tdappdesktop
+    sources:
+      - type: file
+        dest-filename: docs.deb
+        only-arches:
+          - aarch64
+        url: https://desktop.docs.qq.com/Installer/30001/3.5.5/TencentDocs-arm64.deb
+        sha256: fb14789c3192de2462fe80d6690b7e16d287416ec080399fceb64b89dfbaf8c1
+      - type: file
+        dest-filename: docs.deb
+        only-arches:
+          - x86_64
+        url: https://desktop.docs.qq.com/Installer/30001/3.5.5/TencentDocs-x64.deb
+        sha256: 91bee42b268a5dcffc031f8df58a70b6894d0c2b09ae668f5beb405a69d1f7ed
+      - type: file
+        path: com.qq.docs.metainfo.xml
+      - type: script
+        dest-filename: tdappdesktop.sh
+        commands:
+          - export TMPDIR=$XDG_RUNTIME_DIR/app/$FLATPAK_ID
+          - exec zypak-wrapper.sh /app/docs/tdappdesktop "$@"

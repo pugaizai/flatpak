@@ -1,0 +1,112 @@
+id: cn.wps.office
+runtime: org.freedesktop.Platform
+runtime-version: '23.08'
+sdk: org.freedesktop.Sdk
+tags:
+  - proprietary
+command: wps
+separate-locales: false
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --socket=pulseaudio
+  - --share=network
+  - --device=dri
+  - --persist=.kingsoft
+  - --env=TMPDIR=/var/tmp
+  - --filesystem=xdg-documents
+  - --filesystem=xdg-download
+  - --filesystem=xdg-pictures
+  - --filesystem=xdg-videos
+  - --filesystem=/run/media
+  - --filesystem=/media
+  - --env=QT_PLUGIN_PATH=/app/lib/qt/plugins:/app/extra/wps-office/office6/qt/plugins
+add-extensions:
+  cn.wps.office.spellcheck:
+    directory: extra/wps-office/office6/dicts/spellcheck
+    subdirectories: true
+    no-autodownload: true
+    autodelete: true
+
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/gtk-doc
+modules:
+  - shared-modules/gtk2/gtk2.json
+
+  - shared-modules/glu/glu-9.json
+
+  - modules/fcitx-im-module.yml
+
+  # Needed by wpspdf as of 11.1.0.11720
+  - name: libtiff5
+    buildsystem: cmake
+    sources:
+      - type: archive
+        url: https://download.osgeo.org/libtiff/tiff-4.4.0.tar.gz
+        sha256: 917223b37538959aca3b790d2d73aa6e626b688e02dcda272aec24c2f498abed
+
+  # https://github.com/flathub/cn.wps.office/issues/150
+  - name: freetype
+    buildsystem: meson
+    sources:
+      - type: archive
+        url: https://download-mirror.savannah.gnu.org/releases/freetype/freetype-2.13.0.tar.xz
+        sha256: 5ee23abd047636c24b2d43c6625dcafc66661d1aca64dec9e0d05df29592624c
+
+  - name: wps
+    buildsystem: simple
+    build-commands:
+      - install -Dm755 apply_extra.sh /app/bin/apply_extra
+      - install -Dm755 wps.sh /app/bin/wps
+      - ln -s wps /app/bin/et
+      - ln -s wps /app/bin/wpp
+      - ln -s wps /app/bin/wpspdf
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo/
+      - install -Dm755 /usr/bin/desktop-file-edit -t /app/bin/
+      - install -Dm755 /usr/bin/ar -t /app/bin/
+      - install -Dm755 /usr/lib/x86_64-linux-gnu/libsframe.so* -t /app/lib/
+      - install -Dm755 /usr/lib/$(gcc -print-multiarch)/libbfd-*.so -t /app/lib/
+      - install -Dm644 cn.wps.office.desktop -t /app/share/applications
+      - for icon_size in 64 128 256 512; do install -Dm644 wps_office_${icon_size}.png
+        /app/share/icons/hicolor/${icon_size}x${icon_size}/apps/cn.wps.office.png;
+        done
+    sources:
+      - type: file
+        path: apply_extra.sh
+
+      - type: file
+        path: cn.wps.office.metainfo.xml
+
+      - type: file
+        path: wps.sh
+
+      - type: file
+        path: icons/wps_office_64.png
+
+      - type: file
+        path: icons/wps_office_128.png
+
+      - type: file
+        path: icons/wps_office_256.png
+
+      - type: file
+        path: icons/wps_office_512.png
+
+      - type: file
+        path: cn.wps.office.desktop
+
+      - type: extra-data
+        filename: wps-office.deb
+        only-arches:
+          - x86_64
+        url: https://mirrors.nju.edu.cn/ubuntukylin/pool/partner/wps-office_11.1.0.11720_amd64.deb
+        sha256: ba207386cdeae315ec62cc9d3c6813ff63ede94fbe115fc0609d41bca78aecb7
+        size: 381485080

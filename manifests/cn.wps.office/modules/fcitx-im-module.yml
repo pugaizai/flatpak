@@ -1,0 +1,28 @@
+name: fcitx-im-module
+buildsystem: simple
+sources:
+  - type: git
+    url: https://github.com/qt/qtbase.git
+    dest: qt
+    tag: v5.15.10-lts-lgpl
+    commit: 29400a683f96867133b28299c0d0bd6bcf40df35
+  - type: git
+    url: https://github.com/wengxt/fcitx5-wps
+    dest: fcitx5-wps
+    commit: ffd18d2a800d03482f263c0fe4170ee5b79de93a
+  - type: file
+    path: build_fcitx5.sh
+build-commands:
+  - ./build_fcitx5.sh
+modules:
+  - name: extra-cmake-modules
+    cleanup:
+      - "*"
+    buildsystem: cmake-ninja
+    config-opts:
+      - "-DENABLE_TESTING=OFF"
+    sources:
+      - type: git
+        url: https://invent.kde.org/frameworks/extra-cmake-modules.git
+        tag: "v5.78.0"
+        commit: 59d4958740a09d43aa5025a1cfe3d7b7d4d725b3
