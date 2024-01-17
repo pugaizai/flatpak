@@ -1,0 +1,67 @@
+app-id: com.qq.qqmusic
+runtime: org.freedesktop.Platform
+runtime-version: '23.08'
+sdk: org.freedesktop.Sdk
+base: org.electronjs.Electron2.BaseApp
+base-version: '23.08'
+separate-locales: false
+command: qqmusic
+
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --socket=pulseaudio
+  - --device=dri
+  - --share=network
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=org.kde.StatusNotifierWatcher
+
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/gtk-doc
+
+modules:
+  - name: qqmusic
+    buildsystem: simple
+    build-options:
+      no-debuginfo: true
+    build-commands:
+      - unzip electron28.zip -d /app/qqmusic
+      - install -Dm644 app.asar -t /app/qqmusic
+      - install -Dm644 com.qq.qqmusic.metainfo.xml -t /app/share/metainfo
+      - install -Dm644 com.qq.qqmusic.desktop -t /app/share/applications
+      - install -Dm644 com.qq.qqmusic.png -t /app/share/icons/hicolor/256x256/apps/
+      - install -Dm755 qqmusic.sh /app/bin/qqmusic
+    sources:
+      - type: file
+        dest-filename: electron28.zip
+        only-arches: [aarch64]
+        url: https://github.com/electron/electron/releases/download/v28.3.3/electron-v28.3.3-linux-arm64.zip
+        sha256: f77107266581a6b9880757876518df1c4bf6eeff5c193bb5de0a8f6c9902bd1f
+      - type: file
+        dest-filename: electron28.zip
+        only-arches: [x86_64]
+        url: https://github.com/electron/electron/releases/download/v28.3.3/electron-v28.3.3-linux-x64.zip
+        sha256: 20f6be493cbd6c9924206e744b1c490af1f97f4735451b9dc19f0d305366d546
+      - type: file
+        path: com.qq.qqmusic.metainfo.xml
+      - type: file
+        path: com.qq.qqmusic.desktop
+      - type: file
+        path: com.qq.qqmusic.png
+      - type: file
+        dest-filename: app.asar
+        url: https://q.askk.cc/qqmusic_1.1.5-8.asar
+        sha256: cea6eca5c8df91d9e3276769558290f91b25885ba3a4bdad469e3187b09da3bd
+      - type: script
+        dest-filename: qqmusic.sh
+        commands:
+          - export TMPDIR=$XDG_RUNTIME_DIR/app/$FLATPAK_ID
+          - exec zypak-wrapper "/app/qqmusic/electron" "/app/qqmusic/app.asar" "$@"

@@ -1,0 +1,52 @@
+app-id: top.jtmonster.jhentai
+runtime: org.gnome.Platform
+runtime-version: '46'
+sdk: org.gnome.Sdk
+command: jhentai
+finish-args:
+  - --share=ipc
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --share=network
+  - --device=dri
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/gtk-doc
+modules:
+  - name: jhentai
+    buildsystem: simple
+    build-options:
+      no-debuginfo: true
+    build-commands:
+      - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
+      - cp -a usr/share /app/
+      - mv opt/jhentai /app/
+      - install -Dm755 jhentai.sh /app/bin/jhentai
+      - install -Dm644 top.jtmonster.jhentai.metainfo.xml -t /app/share/metainfo
+    sources:
+      - type: file
+        only-arches: [x86_64]
+        url: https://github.com/jiangtian616/JHenTai/releases/download/v8.0.0%2B254/JHenTai-8.0.0%2B254-Linux-amd64.deb
+        sha256: 3bca7ae824ad8bc7d1c8098d77a06780cd2bebd0d865a7270341d150ed48b23b
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/jiangtian616/JHenTai/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: >-
+            .assets[] | select(.name | test("^JHenTai-.*-Linux-amd64\\.deb$"))
+            |
+            .browser_download_url
+      - type: file
+        path: top.jtmonster.jhentai.metainfo.xml
+      - type: script
+        commands:
+          - export TMPDIR="$XDG_RUNTIME_DIR/app/$FLATPAK_ID"
+          - exec /app/jhentai/jhentai "$@"
+        dest-filename: jhentai.sh

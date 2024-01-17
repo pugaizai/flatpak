@@ -1,0 +1,37 @@
+name: Update
+on:
+  schedule: # for scheduling to work this file must be in the default branch
+  - cron: "0 12 * * *" # 每天中午12点运行一次
+  workflow_dispatch: # can be manually dispatched under GitHub's "Actions" tab 
+
+jobs:
+  flatpak-external-data-checker:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        appid: # list all flatpak application id to check
+          - cn.wps.office
+          - com.qq.docs
+          - com.qq.qqmusic
+          - com.xiaoyaocz.dmzjx
+          - com.xiaoyaocz.simplelive
+          - io.github.c0re100.qBittorrent-Enhanced-Edition
+          - io.github.MCDFsteve.FnipaPlay
+          - io.github.msojocs.bilibili
+          - io.github.predidit.kazumi
+          - org.freedesktop.xorg.xeyes
+          - top.jtmonster.jhentai
+    
+    steps:
+      - uses: actions/checkout@v4 
+      - uses: docker://ghcr.io/flathub/flatpak-external-data-checker:latest
+        env:
+          GIT_AUTHOR_NAME: Flatpak External Data Checker
+          GIT_COMMITTER_NAME: Flatpak External Data Checker
+          # email sets "github-actions[bot]" as commit author, see https://github.community/t/github-actions-bot-email-address/17204/6
+          GIT_AUTHOR_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+          GIT_COMMITTER_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          args: --update --never-fork manifests/${{ matrix.appid }}/${{ matrix.appid }}.yaml # e.g. com.organization.myapp.json

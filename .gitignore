@@ -1,0 +1,5 @@
+.flatpak-builder/
+build-dir/
+repo/
+manifests/cn.wps.Office/locales/cn.wps.Office.spellcheck.*.yml
+manifests/cn.wps.Office/locales/cn.wps.Office.spellcheck.*.metainfo.xml

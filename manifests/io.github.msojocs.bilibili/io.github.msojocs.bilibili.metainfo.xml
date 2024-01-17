@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>io.github.msojocs.bilibili</id>
+  <launchable type="desktop-id">io.github.msojocs.bilibili.desktop</launchable>
+  <name>Bilibili</name>
+  <developer>Bilibili</developer>
+  <summary>HD Anime, Videos</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  <url type="homepage">https://github.com/msojocs/bilibili-linux</url>
+  <url type="bugtracker">https://github.com/msojocs/bilibili-linux/issues</url>
+  <description>
+    <p>Linux version ported based on Bilibili official client</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <caption>Homepage</caption>
+      <image type="source">https://raw.githubusercontent.com/msojocs/bilibili-linux/v1.14.0-1/res/screenshots/1.png</image>
+    </screenshot>
+  </screenshots>
+  <releases>
+    <release version="1.14.0-2" date="2024-07-27">
+      <description></description>
+    </release>
+    <release version="1.14.0-1" date="2024-06-30"/>
+  </releases>
+  <content_rating type="oars-1.1"/>
+  <update_contact>valigarmanda55@gmail.com</update_contact>
+</component>

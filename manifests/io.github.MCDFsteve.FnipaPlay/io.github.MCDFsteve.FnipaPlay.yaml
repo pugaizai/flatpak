@@ -1,0 +1,76 @@
+app-id: io.github.MCDFsteve.FnipaPlay
+runtime: org.freedesktop.Platform
+runtime-version: '23.08'
+sdk: org.freedesktop.Sdk
+command: fnipaplay
+finish-args:
+  - --share=ipc
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --socket=pulseaudio
+  - --share=network
+  - --device=dri
+  - --talk-name=org.kde.StatusNotifierWatcher
+  - --talk-name=org.freedesktop.Notifications
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/gtk-doc
+
+add-extensions:
+  org.freedesktop.Platform.ffmpeg-full:
+    directory: lib/ffmpeg
+    version: '23.08'
+    add-ld-path: .
+
+modules:
+  - name: libass
+    config-opts:
+      - --disable-static
+    sources:
+      - type: git
+        url: https://github.com/libass/libass.git
+        tag: 0.17.3
+        commit: e46aedea0a0d17da4c4ef49d84b94a7994664ab5
+        x-checker-data:
+          type: anitya
+          project-id: 1560
+          stable-only: true
+          tag-template: $version
+
+  - name: fnipaplay
+    buildsystem: simple
+    build-commands:
+      - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
+      - mv opt/fnipaplay /app/
+      - cp -a usr/share /app/
+      - chmod +x /app/fnipaplay/fnipaplay
+      - install -Dm755 fnipaplay.sh /app/bin/fnipaplay
+      - install -Dm644 io.github.MCDFsteve.FnipaPlay.metainfo.xml -t /app/share/metainfo
+      - ln -svf /usr/bin/ffmpeg /app/bin/
+      - mkdir -p /app/lib/ffmpeg
+    sources:
+      - type: file
+        url: https://github.com/MCDFsteve/FnipaPlay/releases/download/0.0.5.1/FnipaPlay-0.0.6%2B1-Linux-amd64.deb
+        only-arches: [x86_64]
+        sha256: c5d80e6c07a54495a931b9072c68d8c4d6c4465ae20f8446e1e56e62a2c3bf7e
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/MCDFsteve/FnipaPlay/releases/latest
+          version-query: .tag_name
+          url-query: >-
+            .assets[] | select(.name | test("^FnipaPlay-.*-Linux-amd64\\.deb$")) |
+            .browser_download_url
+      - type: file
+        path: io.github.MCDFsteve.FnipaPlay.metainfo.xml
+      - type: script
+        commands:
+          - export TMPDIR="$XDG_RUNTIME_DIR/app/$FLATPAK_ID"
+          - /app/fnipaplay/fnipaplay
+        dest-filename: fnipaplay.sh

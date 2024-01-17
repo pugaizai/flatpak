@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>io.github.MCDFsteve.FnipaPlay</id>
+  <launchable type="desktop-id">io.github.MCDFsteve.FnipaPlay.desktop</launchable>
+  <name>FnipaPlay</name>
+  <developer_name>MCDFsteve</developer_name>
+  <summary>A cross platform danmaku video player.</summary>
+  <summary xml:lang="zh_CN">一款跨平台本地弹幕视频播放器。</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0</project_license>
+  <url type="homepage">https://github.com/MCDFsteve/FnipaPlay</url>
+  <url type="bugtracker">https://github.com/MCDFsteve/FnipaPlay/issues</url>
+  <description>
+    <p>A cross platform danmaku video player.</p>
+    <p xml:lang="zh_CN">一款跨平台本地弹幕视频播放器。</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <caption>ui</caption>
+      <image type="source">https://raw.githubusercontent.com/MCDFsteve/FnipaPlay/master/logo.png</image>
+    </screenshot>
+  </screenshots>
+  <releases>
+    <release version="0.0.5.1" date="2024-07-27">
+      <description></description>
+    </release>
+    <release version="0.0.4" date="2024-07-24"/>
+  </releases>
+  <content_rating type="oars-1.1"/>
+  <update_contact>valigarmanda55@gmail.com</update_contact>
+</component>
