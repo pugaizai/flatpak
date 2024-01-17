@@ -1,0 +1,6 @@
+[submodule "manifests/cn.wps.office/shared-modules"]
+	path = manifests/cn.wps.office/shared-modules
+	url = https://github.com/flathub/shared-modules.git
+[submodule "manifests/io.github.predidit.kazumi/shared-modules"]
+	path = manifests/io.github.predidit.kazumi/shared-modules
+	url = https://github.com/flathub/shared-modules.git

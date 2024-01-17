@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>io.github.predidit.kazumi</id>
+  <launchable type="desktop-id">io.github.predidit.kazumi.desktop</launchable>
+  <name>Kazumi</name>
+  <developer_name>Predidit</developer_name>
+  <summary>Watch Animes online with danmaku support.</summary>
+  <summary xml:lang="zh_CN">一款好用的追番软件</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0</project_license>
+  <url type="homepage">https://github.com/Predidit/Kazumi</url>
+  <url type="bugtracker">https://github.com/Predidit/Kazumi/issues</url>
+  <description>
+    <p>A anime collection APP based on custom rules that supports online viewing of streaming media and danmaku.</p>
+    <p xml:lang="zh_CN">基于自定义规则的番剧采集APP，支持流媒体在线观看，支持弹幕。</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <caption>ui</caption>
+      <image type="source">https://raw.githubusercontent.com/Predidit/Kazumi/main/static/screenshot/img_1.png</image>
+    </screenshot>
+  </screenshots>
+  <releases>
+    <release version="1.2.9" date="2024-08-28">
+      <description></description>
+    </release>
+    <release version="1.2.8" date="2024-08-23">
+      <description/>
+    </release>
+    <release version="1.2.7" date="2024-08-19">
+      <description/>
+    </release>
+    <release version="1.2.6" date="2024-08-11">
+      <description/>
+    </release>
+    <release version="1.2.5" date="2024-08-01">
+      <description/>
+    </release>
+    <release version="1.2.4" date="2024-07-24"/>
+  </releases>
+  <content_rating type="oars-1.1"/>
+  <update_contact>valigarmanda55@gmail.com</update_contact>
+</component>

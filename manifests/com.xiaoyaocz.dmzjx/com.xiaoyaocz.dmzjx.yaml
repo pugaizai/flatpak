@@ -1,0 +1,57 @@
+app-id: com.xiaoyaocz.dmzjx
+runtime: org.freedesktop.Platform
+runtime-version: '23.08'
+sdk: org.freedesktop.Sdk
+rename-icon: flutter_dmzj
+rename-desktop-file: flutter_dmzj.desktop
+command: flutter_dmzj
+finish-args:
+  - '--share=ipc'
+  - '--socket=fallback-x11'
+  - '--socket=wayland'
+  - '--share=network'
+  - '--device=dri'
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/gtk-doc
+modules:
+  - name: flutter_dmzj
+    buildsystem: simple
+    build-options:
+      no-debuginfo: true
+    build-commands:
+      - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
+      - mv usr/share/flutter_dmzj /app/
+      - mv usr/share /app/
+      - desktop-file-edit --set-key="Categories" --set-value="Graphics;Network;" --remove-key="Version" /app/share/applications/flutter_dmzj.desktop
+      - chmod +x /app/flutter_dmzj/flutter_dmzj
+      - install -Dm755 flutter_dmzj.sh /app/bin/flutter_dmzj
+      - install -Dm644 com.xiaoyaocz.dmzjx.metainfo.xml -t /app/share/metainfo
+    sources:
+      - type: file
+        url: https://github.com/xiaoyaocz/flutter_dmzj/releases/download/v2.1.1/flutter_dmzj-2.1.1%2B20101-linux.deb
+        only-arches: [x86_64]
+        sha256: 8a0aae64bfc5fc415da919c74c612a863a963f75ce8da7e4be8c355294c5f23b
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/xiaoyaocz/flutter_dmzj/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: >-
+            .assets[] | select(.name | test("^flutter_dmzj-" + $version + "\\+\\d+-linux\\.deb$")) |
+            .browser_download_url
+
+      - type: file
+        path: com.xiaoyaocz.dmzjx.metainfo.xml
+
+      - type: script
+        commands:
+          - export TMPDIR="$XDG_RUNTIME_DIR/app/$FLATPAK_ID"
+          - /app/flutter_dmzj/flutter_dmzj "$@"
+        dest-filename: flutter_dmzj.sh

@@ -1,0 +1,87 @@
+app-id: org.qbittorrent.qBittorrent
+default-branch: stable
+runtime: org.kde.Platform
+sdk: org.kde.Sdk
+runtime-version: '6.7'
+command: qbittorrent
+rename-icon: qbittorrent
+copy-icon: true
+finish-args:
+  - --device=dri
+  - --filesystem=host
+  - --share=ipc
+  - --share=network
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --system-talk-name=org.freedesktop.login1
+  - --system-talk-name=org.freedesktop.UPower
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=org.freedesktop.PowerManagement
+  - --talk-name=org.gnome.SessionManager
+  - --talk-name=org.kde.StatusNotifierWatcher
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/gtk-doc
+
+modules:
+  - name: boost
+    buildsystem: simple
+    build-commands:
+      - ./bootstrap.sh --prefix=/app --with-libraries=headers
+      - ./b2 install variant=release link=shared runtime-link=shared cxxflags="$CXXFLAGS"
+        linkflags="$LDFLAGS" -j $FLATPAK_BUILDER_N_JOBS
+    sources:
+      - type: git
+        url: https://github.com/boostorg/boost.git
+        tag: boost-1.86.0
+        commit: 65c1319bb92fe7a9a4abd588eff5818d9c2bccf9
+        x-checker-data:
+          type: anitya
+          project-id: 6845
+          stable-only: true
+          tag-template: boost-$version
+
+  - name: libtorrent
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DBUILD_SHARED_LIBS=OFF
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DCMAKE_CXX_STANDARD=20
+      - -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON
+      - -Ddeprecated-functions=OFF
+    sources:
+      - type: git
+        url: https://github.com/arvidn/libtorrent.git
+        tag: v2.0.10
+        commit: 74bc93a37a5e31c78f0aa02037a68fb9ac5deb41
+        x-checker-data:
+          type: anitya
+          project-id: 269917
+          stable-only: true
+          tag-template: v$version
+  - name: qbittorrent
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON
+      - -DQT6=ON
+      - -DGUI=ON
+    sources:
+      - type: git
+        url: https://github.com/c0re100/qBittorrent-Enhanced-Edition.git
+        tag: release-4.6.6.10
+        commit: 64ad41127a3848c1bf4419fbb0078d7ef2fee8d5
+        x-checker-data:
+          type: anitya
+          project-id: 199749
+          stable-only: true
+          tag-template: release-$version

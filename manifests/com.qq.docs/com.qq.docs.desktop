@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=腾讯文档
+Exec=tdappdesktop %U
+Terminal=false
+Type=Application
+Icon=com.qq.docs
+StartupWMClass=腾讯文档
+Comment=腾讯文档
+MimeType=application/vnd.openxmlformats-officedocument.presentationml.presentation;application/vnd.openxmlformats-officedocument.wordprocessingml.document;application/msword;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;application/vnd.ms-excel;application/pdf;application/x-xmind;text/csv;
+Categories=Office;

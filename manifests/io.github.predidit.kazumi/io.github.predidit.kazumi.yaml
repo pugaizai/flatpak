@@ -1,0 +1,129 @@
+app-id: io.github.predidit.kazumi
+runtime: org.gnome.Platform
+runtime-version: '46'
+sdk: org.gnome.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.vala
+command: kazumi
+finish-args:
+  - --share=ipc
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --socket=pulseaudio
+  - --share=network
+  - --device=dri
+  - --talk-name=org.kde.StatusNotifierWatcher
+  - --talk-name=org.freedesktop.Notifications
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/gtk-doc
+build-options:
+  append-path: /usr/lib/sdk/vala/bin
+  prepend-ld-library-path: /usr/lib/sdk/vala/lib
+
+add-extensions:
+  org.freedesktop.Platform.ffmpeg-full:
+    directory: lib/ffmpeg
+    version: '23.08'
+    add-ld-path: .
+
+modules:
+  - name: libayatana-appindicator
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DENABLE_BINDINGS_MONO=NO
+      - -DENABLE_BINDINGS_VALA=NO
+      - -DENABLE_GTKDOC=NO
+    sources:
+      - type: git
+        url: https://github.com/AyatanaIndicators/libayatana-appindicator.git
+        tag: 0.5.93
+        commit: 238c8b02718fa5b4af95ede72beeed762094f4cc
+        x-checker-data:
+          type: anitya
+          project-id: 18446
+          tag-template: $version
+
+    modules:
+      - shared-modules/intltool/intltool-0.51.json
+
+      - name: ayatana-ido
+        buildsystem: cmake-ninja
+        sources:
+          - type: git
+            url: https://github.com/AyatanaIndicators/ayatana-ido.git
+            tag: 0.10.4
+            commit: f968079b09e2310fefc3fc307359025f1c74b3eb
+            x-checker-data:
+              type: anitya
+              project-id: 18445
+              tag-template: $version
+
+      - name: libayatana-indicator
+        buildsystem: cmake-ninja
+        sources:
+          - type: git
+            url: https://github.com/AyatanaIndicators/libayatana-indicator.git
+            tag: 0.9.4
+            commit: 611bb384b73fa6311777ba4c41381a06f5b99dad
+            x-checker-data:
+              type: anitya
+              project-id: 18447
+              tag-template: $version
+
+      - name: libdbusmenu-gtk3
+        buildsystem: autotools
+        build-options:
+          cflags: -Wno-error
+        config-opts:
+          - --with-gtk=3
+          - --disable-dumper
+          - --disable-static
+          - --enable-tests
+          - --disable-gtk-doc
+          - --enable-introspection=no
+          - --disable-vala
+        cleanup:
+          - /share/gtk-doc
+          - /share/libdbusmenu
+        sources:
+          - type: archive
+            url: https://launchpad.net/libdbusmenu/16.04/16.04.0/+download/libdbusmenu-16.04.0.tar.gz
+            sha256: b9cc4a2acd74509435892823607d966d424bd9ad5d0b00938f27240a1bfa878a
+
+  - name: kazumi
+    buildsystem: simple
+    build-commands:
+      - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
+      - mv opt/Kazumi /app/
+      - cp -a usr/share /app/
+      - chmod +x /app/Kazumi/kazumi
+      - install -Dm755 kazumi.sh /app/bin/kazumi
+      - install -Dm644 io.github.predidit.kazumi.metainfo.xml -t /app/share/metainfo
+      - mkdir -p /app/lib/ffmpeg
+    sources:
+      - type: file
+        only-arches: [x86_64]
+        url: https://github.com/Predidit/Kazumi/releases/download/1.2.9/Kazumi_linux_1.2.9_amd64.deb
+        sha256: 1814aa80569ad660e3f54e4e1f1d2fd1c2baf2a939ce277c5d15162bd63b8930
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/Predidit/Kazumi/releases/latest
+          version-query: .tag_name
+          url-query: >-
+            .assets[] | select(.name=="Kazumi_linux_" + $version + "_amd64.deb") |
+            .browser_download_url
+      - type: file
+        path: io.github.predidit.kazumi.metainfo.xml
+      - type: script
+        commands:
+          - export TMPDIR="$XDG_RUNTIME_DIR/app/$FLATPAK_ID"
+          - /app/Kazumi/kazumi
+        dest-filename: kazumi.sh
