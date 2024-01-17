@@ -1,0 +1,53 @@
+id: org.freedesktop.xorg.xeyes
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+command: xeyes
+finish-args:
+  - --socket=x11
+  - --device=dri
+  - --share=ipc
+
+cleanup:
+  - /lib/pkgconfig
+  - /share/man
+  - /share/doc
+  - /include
+  - /lib/*.a
+
+modules:
+  - name: libXmu
+    buildsystem: autotools
+    sources:
+      - type: git
+        url: https://gitlab.freedesktop.org/xorg/lib/libxmu.git
+        tag: libXmu-1.2.1
+        commit: 792f80402ee06ce69bca3a8f2a84295999c3a170
+        x-checker-data:
+          type: anitya
+          project-id: 1785
+          stable-only: true
+          tag-template: libXmu-$version
+
+  - name: xeyes
+    buildsystem: autotools
+    post-install:
+      - install -Dm644 $FLATPAK_ID.png -t $FLATPAK_DEST/share/icons/hicolor/512x512/apps
+      - install -Dm644 $FLATPAK_ID.desktop -t $FLATPAK_DEST/share/applications
+      - install -Dm644 $FLATPAK_ID.metainfo.xml -t $FLATPAK_DEST/share/metainfo
+    sources:
+      - type: git
+        url: https://gitlab.freedesktop.org/xorg/app/xeyes.git
+        tag: xeyes-1.3.0
+        commit: 637b948ec83fd61a8ee59a9d8ea9f363f74af0df
+        x-checker-data:
+          type: anitya
+          project-id: 15025
+          stable-only: true
+          tag-template: xeyes-$version
+      - type: file
+        path: org.freedesktop.xorg.xeyes.png
+      - type: file
+        path: org.freedesktop.xorg.xeyes.desktop
+      - type: file
+        path: org.freedesktop.xorg.xeyes.metainfo.xml

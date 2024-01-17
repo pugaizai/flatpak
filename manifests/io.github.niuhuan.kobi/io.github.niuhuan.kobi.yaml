@@ -1,0 +1,65 @@
+app-id: io.github.niuhuan.kobi
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+command: kobi
+finish-args:
+  - '--share=ipc'
+  - '--socket=fallback-x11'
+  - '--socket=wayland'
+  - '--share=network'
+  - '--device=dri'
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/gtk-doc
+modules:
+  - name: kobi
+    buildsystem: simple
+    build-options:
+      no-debuginfo: true
+    build-commands:
+      - chmod +x kobi.AppImage
+      - ./kobi.AppImage --appimage-extract
+      - mkdir kobi
+      - mv squashfs-root/{data,lib,AppRun} kobi/
+      - mv kobi /app/
+      - install -Dm755 kobi.sh /app/bin/kobi
+      - install -Dm644 io.github.niuhuan.kobi.metainfo.xml -t /app/share/metainfo/
+      - install -Dm644 io.github.niuhuan.kobi.png -t /app/share/icons/hicolor/256x256/apps/
+      - install -Dm644 io.github.niuhuan.kobi.desktop -t /app/share/applications/
+    sources:
+      - type: file
+        url: https://github.com/niuhuan/kobi/releases/download/v0.0.12/kobi-v0.0.12-linux-x86_64.AppImage
+        only-arches: [x86_64]
+        sha256: 6c950884a95c4e7441c7dd788e59715140f694713d5812f3ebf13634d128e8c5
+        dest-filename: kobi.AppImage
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/niuhuan/kobi/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: >-
+            .assets[] | select(.name=="kobi-v" + $version + "-linux-x86_64.AppImage")
+            |
+            .browser_download_url
+
+      - type: file
+        path: io.github.niuhuan.kobi.metainfo.xml
+
+      - type: file
+        path: io.github.niuhuan.kobi.desktop
+
+      - type: file
+        path: io.github.niuhuan.kobi.png
+
+      - type: script
+        commands:
+          - export TMPDIR="$XDG_RUNTIME_DIR/app/$FLATPAK_ID"
+          - /app/kobi/AppRun "$@"
+        dest-filename: kobi.sh

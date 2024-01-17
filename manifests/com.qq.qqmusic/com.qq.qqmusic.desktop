@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=QQMusic
+Name[zh_CN]=QQ音乐
+Exec=qqmusic %U
+Terminal=false
+Type=Application
+Icon=com.qq.qqmusic
+StartupWMClass=QQMusic
+Comment=QQMusic
+Comment[zh_CN]=QQ音乐
+Categories=AudioVideo;

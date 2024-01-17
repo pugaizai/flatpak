@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>com.cloudchewie.cloudotp</id>
+  <launchable type="desktop-id">com.cloudchewie.cloudotp.desktop</launchable>
+  <name>CloudOTP</name>
+  <developer_name>Robert-Stackflow</developer_name>
+  <summary>Two-Factor Authenticator</summary>
+  <summary xml:lang="zh_CN">双因素验证器</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0</project_license>
+  <url type="homepage">https://github.com/Robert-Stackflow/CloudOTP</url>
+  <url type="bugtracker">https://github.com/Robert-Stackflow/CloudOTP/issues</url>
+  <description>
+    <p>An awesome two-factor authenticator which supports cloud backup.</p>
+    <p xml:lang="zh_CN">支持云备份的双因素验证器。 </p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <caption>ui</caption>
+      <image type="source">https://raw.githubusercontent.com/Robert-Stackflow/CloudOTP/main/tools/art/desktop_2.png</image>
+    </screenshot>
+  </screenshots>
+  <releases>
+    <release version="2.4.2" date="2024-09-09">
+      <description></description>
+    </release>
+  </releases>
+  <content_rating type="oars-1.1"/>
+  <update_contact>valigarmanda55@gmail.com</update_contact>
+</component>

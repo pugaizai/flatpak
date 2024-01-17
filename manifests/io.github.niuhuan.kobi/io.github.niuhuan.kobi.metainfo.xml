@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>io.github.niuhuan.kobi</id>
+  <launchable type="desktop-id">io.github.niuhuan.kobi.desktop</launchable>
+  <name>Kobi</name>
+  <developer>niuhuan</developer>
+  <summary>Copymanga Client.</summary>
+  <summary xml:lang="zh-cn">拷贝漫画客户端</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MPL-2.0</project_license>
+  <url type="homepage">https://github.com/niuhuan/kobi</url>
+  <url type="bugtracker">https://github.com/niuhuan/kobi/issues</url>
+  <description>
+    <p>Copymanga Client.</p>
+    <p xml:lang="zh-cn">拷贝漫画客户端</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <caption>Ranking</caption>
+      <image type="source">https://raw.githubusercontent.com/niuhuan/kobi/main/images/G01.png</image>
+    </screenshot>
+    <screenshot type="default">
+      <caption>Details</caption>
+      <image type="source">https://raw.githubusercontent.com/niuhuan/kobi/main/images/G02.png</image>
+    </screenshot>
+  </screenshots>
+  <releases>
+    <release version="0.0.12" date="2024-09-05"/>
+  </releases>
+  <content_rating type="oars-1.1"/>
+  <update_contact>i@pugai.life</update_contact>
+</component>
+

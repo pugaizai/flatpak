@@ -1,0 +1,77 @@
+id: cn.wps.office
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+command: wps
+separate-locales: false
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --socket=pulseaudio
+  - --share=network
+  - --device=dri
+  - --persist=.kingsoft
+  - --env=TMPDIR=/var/tmp
+  - --filesystem=xdg-documents
+  - --filesystem=xdg-download
+  - --filesystem=xdg-pictures
+  - --filesystem=xdg-videos
+  - --filesystem=/run/media
+  - --filesystem=/media
+  - --env=QT_PLUGIN_PATH=/app/lib/qt/plugins:/app/extra/wps-office/office6/qt/plugins
+
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/gtk-doc
+modules:
+  - shared-modules/SDL2/SDL2-with-libdecor.json
+
+  - shared-modules/glu/glu-9.json
+
+  - name: wps
+    buildsystem: simple
+    build-commands:
+      - install -Dm755 apply_extra.sh /app/bin/apply_extra
+      - install -Dm755 wps.sh /app/bin/wps
+      - ln -s wps /app/bin/et
+      - ln -s wps /app/bin/wpp
+      - ln -s wps /app/bin/wpspdf
+      - install -Dm755 /usr/bin/desktop-file-edit -t /app/bin/
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo/
+      - install -Dm644 cn.wps.office.desktop -t /app/share/applications/
+      - install -Dm644 cn.wps.office.svg -t /app/share/icons/hicolor/scalable/apps/
+    sources:
+      - type: file
+        path: apply_extra.sh
+
+      - type: file
+        path: cn.wps.office.metainfo.xml
+
+      - type: file
+        path: cn.wps.office.desktop
+
+      - type: file
+        path: cn.wps.office.svg
+
+      - type: file
+        path: wps.sh
+
+      - type: extra-data
+        filename: wps-office.deb
+        only-arches: [x86_64]
+        url: https://mirrors.nju.edu.cn/openkylin/pool/partner/wps-office_12.1.0.17881_amd64.deb
+        sha256: dfb22d81f6e078dce3b7ddaa2e7644de747392d2fcbc58426da2a0cad0b6090c
+        size: 462903404
+        x-checker-data:
+          type: debian-repo
+          package-name: wps-office
+          root: https://mirrors.nju.edu.cn/openkylin/
+          dist: jammy-partner
+          component: main

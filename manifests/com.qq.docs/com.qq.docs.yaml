@@ -1,0 +1,80 @@
+app-id: com.qq.docs
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+base: org.electronjs.Electron2.BaseApp
+base-version: '24.08'
+separate-locales: false
+command: tdappdesktop
+
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --device=dri
+  - --share=network
+  - --filesystem=xdg-download
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=org.kde.StatusNotifierWatcher
+
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/gtk-doc
+
+modules:
+  - name: docs
+    buildsystem: simple
+    build-options:
+      no-debuginfo: true
+    build-commands:
+      - install -Dm755 apply_extra -t /app/bin
+      - install -Dm644 com.qq.docs.svg -t /app/share/icons/hicolor/scalable/apps
+      - install -Dm644 com.qq.docs.desktop -t /app/share/applications
+      - install -Dm644 com.qq.docs.metainfo.xml -t /app/share/metainfo
+      - install -Dm755 tdappdesktop.sh /app/bin/tdappdesktop
+    sources:
+      - type: extra-data
+        only-arches: [aarch64]
+        filename: docs.deb
+        url: https://desktop.docs.qq.com/Installer/30001/3.8.1/TencentDocs-arm64.deb
+        sha256: 7ab7a0fc74aca6b750acb1439478b3477a7121eadd6a66a001cd4b81d2144793
+        size: 148147898
+        x-checker-data:
+          type: json
+          url: https://docs.qq.com/api/package/update
+          version-query: .result.update_info | fromjson | .version
+          url-query: '"https://desktop.docs.qq.com/Installer/30001/\($version)/TencentDocs-arm64.deb"'
+      - type: extra-data
+        only-arches: [x86_64]
+        filename: docs.deb
+        url: https://desktop.docs.qq.com/Installer/30001/3.8.1/TencentDocs-x64.deb
+        sha256: 6d08eea5b2938bc6d07be1f6aa0ec618ebed2ce6e7e240f8bb22ed1b4a1f7237
+        x-checker-data:
+          type: json
+          url: https://docs.qq.com/api/package/update
+          version-query: .result.update_info | fromjson | .version
+          url-query: '"https://desktop.docs.qq.com/Installer/30001/\($version)/TencentDocs-x64.deb"'
+        size: 153426216
+      - type: file
+        path: com.qq.docs.metainfo.xml
+      - type: file
+        path: com.qq.docs.svg
+      - type: file
+        path: com.qq.docs.desktop
+      - type: script
+        dest-filename: tdappdesktop.sh
+        commands:
+          - export TMPDIR=$XDG_RUNTIME_DIR/app/$FLATPAK_ID
+          - exec zypak-wrapper.sh /app/extra/docs/tdappdesktop "$@"
+      - type: script
+        commands:
+          - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
+          - mv opt/腾讯文档 ./docs
+          - rm -rf *.deb usr opt
+        dest-filename: apply_extra
