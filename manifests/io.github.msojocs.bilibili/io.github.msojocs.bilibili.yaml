@@ -72,4 +72,4 @@ modules:
           - export ELECTRON_IS_DEV=0
           - export ELECTRON_FORCE_IS_PACKAGED=true
           - export NODE_ENV=production
-          - exec "/app/bilibili/electron/electron" "/app/bilibili/app/app.asar" --no-sandbox "$@"
+          - exec zypak-wrapper "/app/bilibili/electron/electron" "/app/bilibili/app/app.asar" "$@"
