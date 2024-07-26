@@ -128,7 +128,7 @@ modules:
       - mkdir -p /app/lib/ffmpeg
     sources:
       - type: file
-        url: https://github.com/madoka773/Kazumi/releases/tag/1.2.4/Kazumi_linux_1.2.4_amd64.deb
+        url: https://github.com/Predidit/Kazumi/releases/tag/1.2.4/Kazumi_linux_1.2.4_amd64.deb
         dest-filename: kazumi.deb
         sha256: 5484719fe8879094b3957fd10780ec087801e3ea46337ac9d921396402701b01
       - type: file
