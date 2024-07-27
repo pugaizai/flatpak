@@ -30,6 +30,19 @@ add-extensions:
     add-ld-path: .
 
 modules:
+  - name: libass
+    config-opts:
+      - --disable-static
+    sources:
+      - type: archive
+        url: https://github.com/libass/libass/releases/download/0.17.3/libass-0.17.3.tar.gz
+        sha256: da7c348deb6fa6c24507afab2dee7545ba5dd5bbf90a137bfe9e738f7df68537
+        x-checker-data:
+          type: anitya
+          project-id: 1560
+          stable-only: true
+          url-template: https://github.com/libass/libass/releases/download/$version/libass-$version.tar.gz
+
   - name: fnipaplay
     buildsystem: simple
     build-commands:
@@ -43,7 +56,7 @@ modules:
       - mkdir -p /app/lib/ffmpeg
     sources:
       - type: file
-        url: https://github.com/MCDFsteve/FnipaPlay/releases/download/0.0.6/FnipaPlay-0.0.6+1-Linux-amd64.deb
+        url: https://github.com/MCDFsteve/FnipaPlay/releases/download/0.0.5.1/FnipaPlay-0.0.6+1-Linux-amd64.deb
         dest-filename: fnipaplay.deb
         sha256: c5d80e6c07a54495a931b9072c68d8c4d6c4465ae20f8446e1e56e62a2c3bf7e
       - type: file
