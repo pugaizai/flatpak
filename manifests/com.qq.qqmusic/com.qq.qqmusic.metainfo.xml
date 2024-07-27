@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>com.qq.qqmusic</id>
+  <provides><id>com.qq.qqmusic.desktop</id></provides>
+  <launchable type="desktop-id">com.qq.qqmusic.desktop</launchable>
+  <name>QQMusic</name>
+  <name xml:lang="zh-cn">QQ音乐</name>
+  <developer_name>Tencent</developer_name>
+  <summary>Online music streaming service</summary>
+  <summary xml:lang="zh-cn">QQ音乐</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LicenseRef-proprietary=http://y.qq.com/y/static/tips/service_tips.html</project_license>
+  <url type="homepage">https://y.qq.com/</url>
+  <url type="help">https://y.qq.com/download/welcome_pc_v15/index.html?ADTAG=YQQ</url>
+  <description>
+    <p>QQMusic is an online music streaming service operating in China.</p>
+    <p>NOTE: This wrapper is not verified by, affiliated with, or supported by Tencent.</p>
+    <p xml:lang="zh-cn">尽享海量高品质曲库。</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <caption>The main QQmusic window</caption>
+      <image>https://raw.githubusercontent.com/flathub/com.qq.QQmusic/master/screenshots/1.png</image>
+    </screenshot>
+  </screenshots>
+  <releases>
+    <release version="1.1.5" date="2022-10-14"/>
+  </releases>
+  <content_rating type="oars-1.1"/>
+  <update_contact>wsgalaxy@qq.com</update_contact>
+</component>
