@@ -127,14 +127,10 @@ modules:
       - ln -svf /usr/bin/ffmpeg /app/bin/
       - mkdir -p /app/lib/ffmpeg
     sources:
-      # - type: file
-      #   url: https://github.com/Predidit/Kazumi/releases/tag/1.2.4/Kazumi_linux_1.2.4_amd64.deb
-      #   dest-filename: kazumi.deb
-      #   sha256: 5484719fe8879094b3957fd10780ec087801e3ea46337ac9d921396402701b01
-      - type: archive
-        url: https://nightly.link/Predidit/Kazumi/actions/runs/10114852522/linux_outputs.zip
-        dest-filename: kazumi.zip
-        sha256: bad811cb07d6e3054a7ea0e8dabc9b476ed6cf1dff908c4682bd0c4e2119f908
+      - type: file
+        url: https://github.com/Predidit/Kazumi/releases/tag/1.2.4/Kazumi_linux_1.2.4_amd64.deb
+        dest-filename: kazumi.deb
+        sha256: 5484719fe8879094b3957fd10780ec087801e3ea46337ac9d921396402701b01
       - type: file
         path: io.github.predidit.kazumi.metainfo.xml
       - type: script
