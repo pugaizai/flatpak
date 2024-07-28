@@ -24,7 +24,10 @@ jobs:
           - top.jtmonster.jhentai
     
     steps:
-      - uses: docker://ghcr.io/flathub/flatpak-external-data-checker:latest
+      - name: List files in windows_outputs directory
+        run: ls -la  
+      - name: Check for updates
+        uses: docker://ghcr.io/flathub/flatpak-external-data-checker:latest
         env:
           GIT_AUTHOR_NAME: Flatpak External Data Checker
           GIT_COMMITTER_NAME: Flatpak External Data Checker
