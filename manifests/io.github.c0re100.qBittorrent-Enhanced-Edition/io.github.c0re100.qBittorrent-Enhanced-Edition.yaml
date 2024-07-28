@@ -63,7 +63,7 @@ modules:
         commit: 74bc93a37a5e31c78f0aa02037a68fb9ac5deb41
         x-checker-data:
           type: git
-          tag-pattern: ^([\d.]+)$
+          tag-pattern: ^v([\d.]+)$
   - name: qbittorrent
     buildsystem: cmake-ninja
     builddir: true

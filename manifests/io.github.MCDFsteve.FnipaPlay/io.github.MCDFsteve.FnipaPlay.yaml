@@ -57,8 +57,15 @@ modules:
     sources:
       - type: file
         url: https://github.com/MCDFsteve/FnipaPlay/releases/download/0.0.5.1/FnipaPlay-0.0.6+1-Linux-amd64.deb
-        dest-filename: fnipaplay.deb
+        only-arches: [x86_64]
         sha256: c5d80e6c07a54495a931b9072c68d8c4d6c4465ae20f8446e1e56e62a2c3bf7e
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/MCDFsteve/FnipaPlay/releases/latest
+          version-query: .tag_name
+          url-query: >-
+            .assets[] | select(.name | test("^FnipaPlay-" + $version + "\\+\\d+-Linux-amd64\\.deb$")) |
+            .browser_download_url
       - type: file
         path: io.github.MCDFsteve.FnipaPlay.metainfo.xml
       - type: script

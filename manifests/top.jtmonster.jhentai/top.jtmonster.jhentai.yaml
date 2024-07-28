@@ -20,7 +20,6 @@ cleanup:
   - /share/man
   - /share/gtk-doc
 modules:
-  - webkit2gtk4.0.yaml
   - name: jhentai
     buildsystem: simple
     build-options:
@@ -33,10 +32,17 @@ modules:
       - install -Dm755 jhentai.sh /app/bin/jhentai
       - install -Dm644 top.jtmonster.jhentai.metainfo.xml -t /app/share/metainfo
     sources:
-      - type: archive
-        url: https://nightly.link/jiangtian616/JHenTai/workflows/build_publish/3.19.x-linux/release-Linux.zip
-        dest-filename: jhentai.zip
+      - type: file
+        only-arches: [x86_64]
+        url: https://github.com/jiangtian616/JHenTai/releases/download/v7.5.5/JHenTai-7.5.5+223-Linux-amd64.deb
         sha256: 2cbe6f2a94a373c591e51d3c5244b85b7323b794a5e4109c797f8588f3ed74be
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/jiangtian616/JHenTai/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: >-
+            .assets[] | select(.name | test("^JHenTai-" + $version + "\\+\\d+-Linux-amd64\\.deb$")) |
+            .browser_download_url
       - type: file
         path: top.jtmonster.jhentai.metainfo.xml
       - type: script

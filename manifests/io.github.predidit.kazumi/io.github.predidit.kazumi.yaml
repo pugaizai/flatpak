@@ -109,10 +109,17 @@ modules:
       - install -Dm644 io.github.predidit.kazumi.metainfo.xml -t /app/share/metainfo
       - mkdir -p /app/lib/ffmpeg
     sources:
-      - type: archive
-        url: https://nightly.link/madoka773/Kazumi/actions/runs/10129896211/linux_outputs.zip
-        dest-filename: kazumi.zip
+      - type: file
+        only-arches: [x86_64]
+        url: https://github.com/Predidit/Kazumi/releases/download/1.2.4/Kazumi_linux_1.2.4_amd64.deb
         sha256: 67cae534c3f532e57de2376dce28ce90fbeadbf6197036aa6fa6a26d72f7a1d3
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/Predidit/Kazumi/releases/latest
+          version-query: .tag_name
+          url-query: >-
+            .assets[] | select(.name=="Kazumi_linux_" + $version + "_amd64.deb") |
+            .browser_download_url
       - type: file
         path: io.github.predidit.kazumi.metainfo.xml
       - type: script

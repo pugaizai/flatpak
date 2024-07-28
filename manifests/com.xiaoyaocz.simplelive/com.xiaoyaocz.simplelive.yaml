@@ -127,7 +127,7 @@ modules:
     build-options:
       no-debuginfo: true
     build-commands:
-      - bsdtar --to-stdout -xf simple_live_app.deb data.* | bsdtar -xf -
+      - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
       - rm -r usr/share/icons
       - mv usr/share/simple_live_app /app/
       - cp -a usr/share /app/
@@ -141,8 +141,15 @@ modules:
     sources:
       - type: file
         url: https://github.com/xiaoyaocz/dart_simple_live/releases/download/v1.6.5/simple_live_app-1.6.5%2B10605-linux.deb
-        dest-filename: simple_live_app.deb
+        only-arches: [x86_64]
         sha256: 05007294d960a00ff425c8345328c21a04c4499e3d1d89b2d82eac1fa76307c9
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/xiaoyaocz/dart_simple_live/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: >-
+            .assets[] | select(.name | test("^simple_live_app-" + $version + "\\+\\d+-linux\\.deb$")) |
+            .browser_download_url
 
       - type: file
         url: https://raw.githubusercontent.com/xiaoyaocz/dart_simple_live/desktop/simple_live_app/assets/images/logo.png

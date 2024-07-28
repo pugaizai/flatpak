@@ -41,7 +41,7 @@ modules:
     build-options:
       no-debuginfo: true
     build-commands:
-      - bsdtar --to-stdout -xf bilibili.deb data.* | bsdtar -xf -
+      - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
       - rm -r usr/share/doc
       - mv opt/apps/io.github.msojocs.bilibili/files/bin $FLATPAK_DEST/bilibili
       - cp -a usr/share $FLATPAK_DEST/
@@ -52,17 +52,27 @@ modules:
       - mkdir -p /app/lib/ffmpeg
     sources:
       - type: file
-        dest-filename: bilibili.deb
-        only-arches:
-          - aarch64
+        only-arches: [aarch64]
         url: https://github.com/msojocs/bilibili-linux/releases/download/v1.14.0-1/io.github.msojocs.bilibili_1.14.0-1_arm64.deb
         sha256: 4b99ffca26ece2117934b900a97ce70ace3defb936d1dcfe0a6856aaebcb2827
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/msojocs/bilibili-linux/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: >-
+            .assets[] | select(.name=="io.github.msojocs.bilibili_" + $version + "_arm64.deb") |
+            .browser_download_url
       - type: file
-        dest-filename: bilibili.deb
-        only-arches:
-          - x86_64
+        only-arches: [x86_64]
         url: https://github.com/msojocs/bilibili-linux/releases/download/v1.14.0-1/io.github.msojocs.bilibili_1.14.0-1_amd64.deb
         sha256: e3e0c62ff0cd477c0b1547dfd7b3aab8033a74e91cb1714d782a80ec84ed09a2
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/msojocs/bilibili-linux/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: >-
+            .assets[] | select(.name=="io.github.msojocs.bilibili_" + $version + "_amd64.deb") |
+            .browser_download_url
       - type: file
         path: io.github.msojocs.bilibili.metainfo.xml
       - type: script
