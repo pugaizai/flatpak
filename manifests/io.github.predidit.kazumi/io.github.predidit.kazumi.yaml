@@ -107,7 +107,6 @@ modules:
       - chmod +x /app/Kazumi/kazumi
       - install -Dm755 kazumi.sh /app/bin/kazumi
       - install -Dm644 io.github.predidit.kazumi.metainfo.xml -t /app/share/metainfo
-      - ln -svf /usr/bin/ffmpeg /app/bin/
       - mkdir -p /app/lib/ffmpeg
     sources:
       - type: archive
