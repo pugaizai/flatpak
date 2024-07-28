@@ -53,25 +53,27 @@ modules:
     sources:
       - type: file
         only-arches: [aarch64]
-        url: https://github.com/msojocs/bilibili-linux/releases/download/v1.14.0-1/io.github.msojocs.bilibili_1.14.0-1_arm64.deb
-        sha256: 4b99ffca26ece2117934b900a97ce70ace3defb936d1dcfe0a6856aaebcb2827
+        url: https://github.com/msojocs/bilibili-linux/releases/download/v1.14.0-2/io.github.msojocs.bilibili_1.14.0-2_arm64.deb
+        sha256: 51a188e012e17e8625b99a4046c8fe2348849855d860d7e5e095a105638e8a9d
         x-checker-data:
           type: json
           url: https://api.github.com/repos/msojocs/bilibili-linux/releases/latest
           version-query: .tag_name | sub("^v"; "")
           url-query: >-
-            .assets[] | select(.name=="io.github.msojocs.bilibili_" + $version + "_arm64.deb") |
+            .assets[] | select(.name=="io.github.msojocs.bilibili_" + $version + "_arm64.deb")
+            |
             .browser_download_url
       - type: file
         only-arches: [x86_64]
-        url: https://github.com/msojocs/bilibili-linux/releases/download/v1.14.0-1/io.github.msojocs.bilibili_1.14.0-1_amd64.deb
-        sha256: e3e0c62ff0cd477c0b1547dfd7b3aab8033a74e91cb1714d782a80ec84ed09a2
+        url: https://github.com/msojocs/bilibili-linux/releases/download/v1.14.0-2/io.github.msojocs.bilibili_1.14.0-2_amd64.deb
+        sha256: 41031d129284eebfdf3cc697ff212869aeca8e296188f3182d1bc63e4bf58ddb
         x-checker-data:
           type: json
           url: https://api.github.com/repos/msojocs/bilibili-linux/releases/latest
           version-query: .tag_name | sub("^v"; "")
           url-query: >-
-            .assets[] | select(.name=="io.github.msojocs.bilibili_" + $version + "_amd64.deb") |
+            .assets[] | select(.name=="io.github.msojocs.bilibili_" + $version + "_amd64.deb")
+            |
             .browser_download_url
       - type: file
         path: io.github.msojocs.bilibili.metainfo.xml
@@ -82,4 +84,5 @@ modules:
           - export ELECTRON_IS_DEV=0
           - export ELECTRON_FORCE_IS_PACKAGED=true
           - export NODE_ENV=production
-          - exec zypak-wrapper "/app/bilibili/electron/electron" "/app/bilibili/app/app.asar" "$@"
+          - exec zypak-wrapper "/app/bilibili/electron/electron" "/app/bilibili/app/app.asar"
+            "$@"
