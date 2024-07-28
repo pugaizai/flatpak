@@ -1,0 +1,85 @@
+app-id: org.qbittorrent.qBittorrent
+default-branch: stable
+runtime: org.kde.Platform
+sdk: org.kde.Sdk
+runtime-version: '6.7'
+command: qbittorrent
+rename-icon: qbittorrent
+copy-icon: true
+finish-args:
+  - --device=dri
+  - --filesystem=host
+  - --share=ipc
+  - --share=network
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --system-talk-name=org.freedesktop.login1
+  - --system-talk-name=org.freedesktop.UPower
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=org.freedesktop.PowerManagement
+  - --talk-name=org.gnome.SessionManager
+  - --talk-name=org.kde.StatusNotifierWatcher
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/gtk-doc
+
+modules:
+  - name: boost
+    buildsystem: simple
+    build-commands:
+      - ./bootstrap.sh --prefix=/app --with-libraries=headers
+      - ./b2 install variant=release link=shared runtime-link=shared cxxflags="$CXXFLAGS"
+        linkflags="$LDFLAGS" -j $FLATPAK_BUILDER_N_JOBS
+    sources:
+      - type: archive
+        url: https://archives.boost.io/release/1.85.0/source/boost_1_85_0.tar.gz
+        sha256: be0d91732d5b0cc6fbb275c7939974457e79b54d6f07ce2e3dfdd68bef883b0b
+        x-checker-data:
+          type: html
+          url: https://www.boost.org/feed/downloads.rss
+          version-pattern: <item><title>Version ([\d\.]+)<\/title>
+          url-template: https://archives.boost.io/release/${version}/source/boost_${major}_${minor}_${patch}.tar.gz
+
+  - name: libtorrent
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DBUILD_SHARED_LIBS=OFF
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DCMAKE_CXX_STANDARD=20
+      - -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON
+      - -Ddeprecated-functions=OFF
+    sources:
+      - type: git
+        url: https://github.com/arvidn/libtorrent.git
+        tag: v2.0.10
+        commit: 74bc93a37a5e31c78f0aa02037a68fb9ac5deb41
+        x-checker-data:
+          type: git
+          tag-pattern: ^([\d.]+)$
+  - name: qbittorrent
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON
+      - -DQT6=ON
+      - -DGUI=ON
+    sources:
+      - type: archive
+        url: https://github.com/c0re100/qBittorrent-Enhanced-Edition/archive/refs/tags/release-4.6.5.10.tar.gz
+        sha256: 9330b6c331975c53ef17f106c430c70e4853e44d523a0c0d3d2fd60f7c112019
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/c0re100/qBittorrent-Enhanced-Edition/tags
+          version-query: map(.name | select(test("^release-[\\d\\.]+$"))) | first
+            | sub("^release-"; "")
+          url-query: '"https://github.com/c0re100/qBittorrent-Enhanced-Edition/archive/refs/tags/release-"
+            + $version + ".tar.gz"'
