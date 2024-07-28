@@ -4,11 +4,11 @@ runtime-version: '23.08'
 sdk: org.freedesktop.Sdk
 command: jhentai
 finish-args:
-  - '--share=ipc'
-  - '--socket=fallback-x11'
-  - '--socket=wayland'
-  - '--share=network'
-  - '--device=dri'
+  - --share=ipc
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --share=network
+  - --device=dri
 cleanup:
   - '*.a'
   - '*.la'
@@ -34,14 +34,15 @@ modules:
     sources:
       - type: file
         only-arches: [x86_64]
-        url: https://github.com/jiangtian616/JHenTai/releases/download/v7.5.5/JHenTai-7.5.5+223-Linux-amd64.deb
-        sha256: 2cbe6f2a94a373c591e51d3c5244b85b7323b794a5e4109c797f8588f3ed74be
+        url: https://github.com/jiangtian616/JHenTai/releases/download/v7.5.5/JHenTai-7.5.5%2B223-Linux-amd64.deb
+        sha256: 4b2bc47592a7edb8f9684d280c1efc038bc692c6f685a866a2d958062a7f20b8
         x-checker-data:
           type: json
           url: https://api.github.com/repos/jiangtian616/JHenTai/releases/latest
           version-query: .tag_name | sub("^v"; "")
           url-query: >-
-            .assets[] | select(.name | test("^JHenTai-" + $version + "\\+\\d+-Linux-amd64\\.deb$")) |
+            .assets[] | select(.name | test("^JHenTai-" + $version + "\\+\\d+-Linux-amd64\\.deb$"))
+            |
             .browser_download_url
       - type: file
         path: top.jtmonster.jhentai.metainfo.xml
