@@ -43,8 +43,6 @@ modules:
 
   - shared-modules/glu/glu-9.json
 
-  - modules/fcitx-im-module.yml
-
   # Needed by wpspdf as of 11.1.0.11720
   - name: libtiff5
     buildsystem: cmake
