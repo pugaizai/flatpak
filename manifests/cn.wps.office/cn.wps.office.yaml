@@ -2,8 +2,6 @@ id: cn.wps.office
 runtime: org.freedesktop.Platform
 runtime-version: '23.08'
 sdk: org.freedesktop.Sdk
-tags:
-  - proprietary
 command: wps
 separate-locales: false
 finish-args:
@@ -21,12 +19,6 @@ finish-args:
   - --filesystem=/run/media
   - --filesystem=/media
   - --env=QT_PLUGIN_PATH=/app/lib/qt/plugins:/app/extra/wps-office/office6/qt/plugins
-add-extensions:
-  cn.wps.office.spellcheck:
-    directory: extra/wps-office/office6/dicts/spellcheck
-    subdirectories: true
-    no-autodownload: true
-    autodelete: true
 
 cleanup:
   - '*.a'
@@ -39,7 +31,7 @@ cleanup:
   - /share/man
   - /share/gtk-doc
 modules:
-  - shared-modules/gtk2/gtk2.json
+  - shared-modules/SDL2/SDL2-with-libdecor.json
 
   - shared-modules/glu/glu-9.json
 
@@ -104,6 +96,23 @@ modules:
       - type: extra-data
         filename: wps-office.deb
         only-arches: [x86_64]
-        url: https://mirrors.nju.edu.cn/ubuntukylin/pool/partner/wps-office_11.1.0.11720_amd64.deb
+        url: https://archive.openkylin.top/openkylin/pool/pty/w/wps-office/wps-office_11.1.0.11720_amd64.deb
         sha256: ba207386cdeae315ec62cc9d3c6813ff63ede94fbe115fc0609d41bca78aecb7
         size: 381485080
+        x-checker-data:
+          type: html
+          url: https://archive.openkylin.top/openkylin/pool/pty/w/wps-office
+          version-pattern: "wps-office_([\\d\\.-]*)_amd64.deb"
+          url-template: https://archive.openkylin.top/openkylin/pool/pty/w/wps-office/wps-office_${version}_amd64.deb
+
+      - type: extra-data
+        filename: wps-office.deb
+        only-arches: [aarch64]
+        url: https://archive.openkylin.top/openkylin/pool/pty/w/wps-office/wps-office_11.1.0.11720_arm64.deb
+        sha256: 172d8bcf3e3bc756994ae5adf66f63f22691e1ab0d18986c50bb6b6ab7f62948
+        size: 367187922
+        x-checker-data:
+          type: html
+          url: https://archive.openkylin.top/openkylin/pool/pty/w/wps-office
+          version-pattern: "wps-office_([\\d\\.-]*)_amd64.deb"
+          url-template: https://archive.openkylin.top/openkylin/pool/pty/w/wps-office/wps-office_${version}_arm64.deb
