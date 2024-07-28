@@ -98,23 +98,6 @@ modules:
             url: https://launchpad.net/libdbusmenu/16.04/16.04.0/+download/libdbusmenu-16.04.0.tar.gz
             sha256: b9cc4a2acd74509435892823607d966d424bd9ad5d0b00938f27240a1bfa878a
 
-  - name: libnotify
-    buildsystem: meson
-    config-opts:
-      - -Dtests=false
-      - -Dintrospection=disabled
-      - -Dman=false
-      - -Dgtk_doc=false
-      - -Ddocbook_docs=disabled
-    sources:
-      - type: archive
-        url: https://download.gnome.org/sources/libnotify/0.8/libnotify-0.8.3.tar.xz
-        sha256: ee8f3ef946156ad3406fdf45feedbdcd932dbd211ab4f16f75eba4f36fb2f6c0
-        x-checker-data:
-          type: gnome
-          name: libnotify
-          stable-only: true
-
   - name: kazumi
     buildsystem: simple
     build-commands:
@@ -127,10 +110,10 @@ modules:
       - ln -svf /usr/bin/ffmpeg /app/bin/
       - mkdir -p /app/lib/ffmpeg
     sources:
-      - type: file
-        url: https://github.com/Predidit/Kazumi/releases/download/1.2.4/Kazumi_linux_1.2.4_amd64.deb
-        dest-filename: kazumi.deb
-        sha256: e0c50c4086f8395548831585ba1457df57645f1521a647cfaa987a8081af46be
+      - type: archive
+        url: https://nightly.link/madoka773/Kazumi/actions/runs/10129896211/linux_outputs.zip
+        dest-filename: kazumi.zip
+        sha256: 67cae534c3f532e57de2376dce28ce90fbeadbf6197036aa6fa6a26d72f7a1d3
       - type: file
         path: io.github.predidit.kazumi.metainfo.xml
       - type: script
