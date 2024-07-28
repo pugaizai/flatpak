@@ -1,6 +1,6 @@
 id: org.freedesktop.xorg.xeyes
 runtime: org.freedesktop.Platform
-runtime-version: "23.08"
+runtime-version: '23.08'
 sdk: org.freedesktop.Sdk
 command: xeyes
 finish-args:
@@ -20,8 +20,8 @@ modules:
     buildsystem: autotools
     sources:
       - type: archive
-        url: https://xorg.freedesktop.org/releases/individual/lib/libXmu-1.1.4.tar.gz
-        sha256: 3091d711cdc1d8ea0f545a13b90d1464c3c3ab64778fd121f0d789b277a80289
+        url: https://xorg.freedesktop.org/releases/individual/lib/libXmu-1.2.1.tar.gz
+        sha256: bf0902583dd1123856c11e0a5085bd3c6e9886fbbd44954464975fd7d52eb599
         x-checker-data:
           type: anitya
           project-id: 1785
