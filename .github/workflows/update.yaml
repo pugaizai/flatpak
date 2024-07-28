@@ -33,4 +33,4 @@ jobs:
           GIT_COMMITTER_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          args: --update --never-fork manifests/${{ matrix.branch }}/${{ matrix.branch }}.yaml # e.g. com.organization.myapp.json
+          args: --update --never-fork manifests/${{ matrix.appid }}/${{ matrix.appid }}.yaml # e.g. com.organization.myapp.json
