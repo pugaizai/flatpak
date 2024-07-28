@@ -24,8 +24,8 @@ jobs:
           - top.jtmonster.jhentai
     
     steps:
-      - name: List files in windows_outputs directory
-        run: ls -la  
+      - name: Clone repository
+        uses: actions/checkout@v4 
       - name: Check for updates
         uses: docker://ghcr.io/flathub/flatpak-external-data-checker:latest
         env:
