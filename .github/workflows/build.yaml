@@ -153,7 +153,7 @@ jobs:
   #         arch: x86_64
   Publish:
     name: Publish
-    needs: freedesktop-x86_64
+    needs: [freedesktop-x86_64, freedesktop-aarch64]
     # needs: [freedesktop-x86_64, freedesktop-aarch64, kde-x86_64, kde-aarch64, gnome-x86_64]
     runs-on: ubuntu-latest
     steps:
