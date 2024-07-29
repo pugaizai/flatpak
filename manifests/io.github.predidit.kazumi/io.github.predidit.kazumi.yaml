@@ -112,7 +112,7 @@ modules:
       - type: file
         only-arches: [x86_64]
         url: https://github.com/Predidit/Kazumi/releases/download/1.2.4/Kazumi_linux_1.2.4_amd64.deb
-        sha256: 67cae534c3f532e57de2376dce28ce90fbeadbf6197036aa6fa6a26d72f7a1d3
+        sha256: e0c50c4086f8395548831585ba1457df57645f1521a647cfaa987a8081af46be
         x-checker-data:
           type: json
           url: https://api.github.com/repos/Predidit/Kazumi/releases/latest
