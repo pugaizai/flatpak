@@ -56,7 +56,7 @@ modules:
       - mkdir -p /app/lib/ffmpeg
     sources:
       - type: file
-        url: https://github.com/MCDFsteve/FnipaPlay/releases/download/0.0.5.1/FnipaPlay-0.0.6+1-Linux-amd64.deb
+        url: https://github.com/MCDFsteve/FnipaPlay/releases/download/0.0.5.1/FnipaPlay-0.0.6%2B1-Linux-amd64.deb
         only-arches: [x86_64]
         sha256: c5d80e6c07a54495a931b9072c68d8c4d6c4465ae20f8446e1e56e62a2c3bf7e
         x-checker-data:
