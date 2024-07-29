@@ -45,12 +45,12 @@ modules:
     sources:
       - type: file
         only-arches: [aarch64]
-        url: https://desktop.docs.qq.com/Installer/30001/3.5.5/TencentDocs-arm64.deb
-        sha256: fb14789c3192de2462fe80d6690b7e16d287416ec080399fceb64b89dfbaf8c1
+        url: https://desktop.docs.qq.com/Installer/30001/3.6.3/TencentDocs-arm64.deb
+        sha256: 76707eb3794278d0d532ee93dc1c8dee46233c36c50d41043941b93899930952
       - type: file
         only-arches: [x86_64]
-        url: https://desktop.docs.qq.com/Installer/30001/3.5.5/TencentDocs-x64.deb
-        sha256: 91bee42b268a5dcffc031f8df58a70b6894d0c2b09ae668f5beb405a69d1f7ed
+        url: https://desktop.docs.qq.com/Installer/30001/3.6.3/TencentDocs-x64.deb
+        sha256: c109c3bbb91fc78d74a446def0cb7a17da3d6d2fbbf21921e986ab13d09616e4
       - type: file
         path: com.qq.docs.metainfo.xml
       - type: script
