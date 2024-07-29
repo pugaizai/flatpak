@@ -34,6 +34,12 @@ jobs:
           manifest-path: manifests/${{ matrix.appid }}/${{ matrix.appid }}.yaml
           cache-key: flatpak-builder-${{ github.sha }}
           arch: x86_64
+          upload-artifact: 'false'
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: freedesktop-x86_64
+          path: ${{ matrix.appid }}-x86_64.flatpak
 
   # freedesktop-aarch64:
   #   name: freedesktop-aarch64
@@ -173,6 +179,6 @@ jobs:
         with:
           tag: ContinuousBuild
           allowUpdates: true
-          artifacts: ${{ matrix.appid }}-x86_64/*.flatpak, ${{ matrix.appid }}-aarch64/*.flatpak
+          artifacts: freedesktop-x86_64/*.flatpak
           artifactErrorsFailBuild: true
           replacesArtifacts: true
