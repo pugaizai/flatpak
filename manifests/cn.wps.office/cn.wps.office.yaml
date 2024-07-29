@@ -96,12 +96,13 @@ modules:
       - type: extra-data
         filename: wps-office.deb
         only-arches: [x86_64]
-        url: https://archive.openkylin.top/openkylin/pool/pty/w/wps-office/wps-office_11.1.0.11720_amd64.deb
+        url: https://mirrors.nju.edu.cn/ubuntukylin/pool/partner/wps-office_11.1.0.11720_amd64.deb
         sha256: ba207386cdeae315ec62cc9d3c6813ff63ede94fbe115fc0609d41bca78aecb7
         size: 381485080
         x-checker-data:
-          type: html
-          url: https://archive.openkylin.top/openkylin/pool/pty/w/wps-office
-          version-pattern: "wps-office_([\\d\\.-]*)_amd64.deb"
-          url-template: https://archive.openkylin.top/openkylin/pool/pty/w/wps-office/wps-office_${version}_amd64.deb
+          type: debian-repo
+          package-name: wps-office
+          root: https://mirrors.nju.edu.cn/ubuntukylin
+          dist: jammy-partner
+          component: main
 

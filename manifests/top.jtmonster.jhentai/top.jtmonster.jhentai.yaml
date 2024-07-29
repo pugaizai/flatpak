@@ -26,8 +26,7 @@ modules:
       no-debuginfo: true
     build-commands:
       - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
-      - mv usr/share/applications /app/share/
-      - mv usr/share/icons /app/share/
+      - cp -a usr/share /app/
       - mv opt/jhentai /app/
       - install -Dm755 jhentai.sh /app/bin/jhentai
       - install -Dm644 top.jtmonster.jhentai.metainfo.xml -t /app/share/metainfo
