@@ -18,7 +18,7 @@ jobs:
           - com.qq.qqmusic
           - com.xiaoyaocz.dmzjx
           - com.xiaoyaocz.simplelive
-          # - io.github.MCDFsteve.FnipaPlay
+          - io.github.MCDFsteve.FnipaPlay
           - io.github.msojocs.bilibili
           - org.freedesktop.xorg.xeyes
       # Don't fail the whole workflow if one architecture fails
@@ -135,7 +135,7 @@ jobs:
       matrix:
         appid:
           - top.jtmonster.jhentai
-          # - io.github.predidit.kazumi
+          - io.github.predidit.kazumi
       fail-fast: false
     steps:
       - uses: actions/checkout@v4
