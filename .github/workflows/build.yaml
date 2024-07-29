@@ -5,7 +5,7 @@ on:
 name: Build
 jobs:
   flatpak-freedesktop-x86_64:
-    name: Build flatpak with org.freedesktop.Sdk(x86_64)
+    name: freedesktop-x86_64
     runs-on: ubuntu-latest
     container: 
       image: bilelmoussaoui/flatpak-github-actions:freedesktop-23.08
@@ -34,7 +34,7 @@ jobs:
           arch: x86_64
 
   flatpak-freedesktop-aarch64:
-    name: Build flatpak with org.freedesktop.Sdk(aarch64)
+    name: freedesktop-aarch64
     runs-on: ubuntu-latest
     container: 
       image: bilelmoussaoui/flatpak-github-actions:freedesktop-23.08
@@ -68,7 +68,7 @@ jobs:
           arch: aarch64
 
   flatpak-kde-x86_64:
-    name: Build flatpak with org.kde.Sdk(x86_64)
+    name: kde-x86_64
     runs-on: ubuntu-latest
     container: 
       image: bilelmoussaoui/flatpak-github-actions:kde-6.7
@@ -90,7 +90,7 @@ jobs:
           arch: x86_64
 
   flatpak-kde-aarch64:
-    name: Build flatpak with org.kde.Sdk(aarch64)
+    name: kde-aarch64
     runs-on: ubuntu-latest
     container: 
       image: bilelmoussaoui/flatpak-github-actions:kde-6.7
@@ -121,7 +121,7 @@ jobs:
           arch: aarch64
 
   flatpak-gnome-x86_64:
-    name: Build flatpak with org.gnome.Sdk
+    name: gnome-x86_64
     runs-on: ubuntu-latest
     container: 
       image: bilelmoussaoui/flatpak-github-actions:gnome-46
