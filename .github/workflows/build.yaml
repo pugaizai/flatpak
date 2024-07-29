@@ -1,36 +1,146 @@
-# on:
-#   push:
-#     branches: [main]
-#   pull_request:
-# name: CI
-# jobs:
-#   flatpak:
-#     name: "Flatpak"
-#     runs-on: ubuntu-latest
-#     container:
-#       image: bilelmoussaoui/flatpak-github-actions:gnome-44
-#       options: --privileged
-#     strategy:
-#       matrix:
-#         arch: [x86_64, aarch64]
-#       # Don't fail the whole workflow if one architecture fails
-#       fail-fast: false
-#     steps:
-#     - uses: actions/checkout@v4
-#     # Docker is required by the docker/setup-qemu-action which enables emulation
-#     - name: Install deps
-#       if: ${{ matrix.arch != 'x86_64' }}
-#       run: |
-#         dnf -y install docker
-#     - name: Set up QEMU
-#       if: ${{ matrix.arch != 'x86_64' }}
-#       id: qemu
-#       uses: docker/setup-qemu-action@v2
-#       with:
-#         platforms: arm64
-#     - uses: flatpak/flatpak-github-actions/flatpak-builder@v6
-#       with:
-#         bundle: palette.flatpak
-#         manifest-path: org.gnome.zbrown.Palette.yml
-#         cache-key: flatpak-builder-${{ github.sha }}
-#         arch: ${{ matrix.arch }}
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # can be manually dispatched under GitHub's "Actions" tab 
+name: Build Flatpak
+jobs:
+  flatpak-freedesktop-sdk:
+    name: Build flatpak with org.freedesktop.Sdk
+    runs-on: ubuntu-latest
+    container: 
+      image: bilelmoussaoui/flatpak-github-actions:freedesktop-23.08
+      options: --privileged
+    strategy: 
+      matrix: 
+        arch: [x86_64, aarch64]
+        x86_64: 
+          - cn.wps.office
+          - com.qq.docs
+          - com.qq.qqmusic
+          - com.xiaoyaocz.dmzjx
+          - com.xiaoyaocz.simplelive
+          - io.github.MCDFsteve.FnipaPlay
+          - io.github.msojocs.bilibili
+          - org.freedesktop.xorg.xeyes
+        aarch64:
+          - com.qq.docs
+          - com.qq.qqmusic
+          - io.github.msojocs.bilibili
+          - org.freedesktop.xorg.xeyes
+      # Don't fail the whole workflow if one architecture fails
+      fail-fast: false
+    steps:
+    - uses: actions/checkout@v4
+    # Docker is required by the docker/setup-qemu-action which enables emulation
+    - name: Install deps
+      if: ${{ matrix.arch != 'x86_64' }}
+      run: |
+        dnf -y install docker
+    - name: Set up QEMU
+      if: ${{ matrix.arch != 'x86_64' }}
+      id: qemu
+      uses: docker/setup-qemu-action@v2
+      with:
+        platforms: arm64
+    - name: Build x86_64 flatpak with org.freedesktop.Sdk
+      uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+      with:
+        bundle: ${{ matrix.x86_64 }}-x86_64.flatpak
+        manifest-path: manifests/${{ matrix.x86_64 }}/${{ matrix.x86_64 }}.yaml
+        cache-key: flatpak-builder-${{ github.sha }}
+        arch: x86_64
+    - name: Build aarch64 flatpak with org.freedesktop.Sdk
+      uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+      with:
+        bundle: ${{ matrix.aarch64 }}-aarch64.flatpak
+        manifest-path: manifests/${{ matrix.aarch64 }}/${{ matrix.aarch64 }}.yaml
+        cache-key: flatpak-builder-${{ github.sha }}
+        arch: aarch64
+
+  flatpak-kde-sdk:
+    name: Build flatpak with org.kde.Sdk
+    runs-on: ubuntu-latest
+    container: 
+      image: bilelmoussaoui/flatpak-github-actions:kde-6.7
+      options: --privileged
+    strategy: 
+      matrix: 
+        arch: [x86_64, aarch64]
+        x86_64: 
+          - io.github.c0re100.qBittorrent-Enhanced-Edition
+        aarch64:
+          - io.github.c0re100.qBittorrent-Enhanced-Edition
+      # Don't fail the whole workflow if one architecture fails
+      fail-fast: false
+    steps:
+    - uses: actions/checkout@v4
+    # Docker is required by the docker/setup-qemu-action which enables emulation
+    - name: Install deps
+      if: ${{ matrix.arch != 'x86_64' }}
+      run: |
+        dnf -y install docker
+    - name: Set up QEMU
+      if: ${{ matrix.arch != 'x86_64' }}
+      id: qemu
+      uses: docker/setup-qemu-action@v2
+      with:
+        platforms: arm64
+    - name: Build x86_64 flatpak with org.kde.Sdk
+      uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+      with:
+        bundle: ${{ matrix.x86_64 }}-x86_64.flatpak
+        manifest-path: manifests/${{ matrix.x86_64 }}/${{ matrix.x86_64 }}.yaml
+        cache-key: flatpak-builder-${{ github.sha }}
+        arch: x86_64
+    - name: Build aarch64 flatpak with org.kde.Sdk
+      uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+      with:
+        bundle: ${{ matrix.aarch64 }}-aarch64.flatpak
+        manifest-path: manifests/${{ matrix.aarch64 }}/${{ matrix.aarch64 }}.yaml
+        cache-key: flatpak-builder-${{ github.sha }}
+        arch: aarch64
+
+  flatpak-gnome-sdk:
+    name: Build flatpak with org.gnome.Sdk
+    runs-on: ubuntu-latest
+    container: 
+      image: bilelmoussaoui/flatpak-github-actions:gnome-46
+      options: --privileged
+    strategy: 
+      matrix: 
+        # arch: [x86_64, aarch64]
+        x86_64: 
+          - top.jtmonster.jhentai
+          - io.github.predidit.kazumi
+        # aarch64: 
+        #   - 
+      # Don't fail the whole workflow if one architecture fails
+      fail-fast: false
+    steps:
+    - uses: actions/checkout@v4
+    # # Docker is required by the docker/setup-qemu-action which enables emulation
+    # - name: Install deps
+    #   if: ${{ matrix.arch != 'x86_64' }}
+    #   run: |
+    #     dnf -y install docker
+    # - name: Set up QEMU
+    #   if: ${{ matrix.arch != 'x86_64' }}
+    #   id: qemu
+    #   uses: docker/setup-qemu-action@v2
+    #   with:
+    #     platforms: arm64
+    - name: Build x86_64 flatpak with org.gnome.Sdk
+      uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+      with:
+        bundle: ${{ matrix.x86_64 }}-x86_64.flatpak
+        manifest-path: manifests/${{ matrix.x86_64 }}/${{ matrix.x86_64 }}.yaml
+        cache-key: flatpak-builder-${{ github.sha }}
+        arch: x86_64
+    # - name: Build aarch64 flatpak with org.gnome.Sdk
+    #   uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+    #   with:
+    #     bundle: ${{ matrix.aarch64 }}-aarch64.flatpak
+    #     manifest-path: manifests/${{ matrix.aarch64 }}/${{ matrix.aarch64 }}.yaml
+    #     cache-key: flatpak-builder-${{ github.sha }}
+    #     arch: aarch64
+

@@ -105,14 +105,3 @@ modules:
           version-pattern: "wps-office_([\\d\\.-]*)_amd64.deb"
           url-template: https://archive.openkylin.top/openkylin/pool/pty/w/wps-office/wps-office_${version}_amd64.deb
 
-      - type: extra-data
-        filename: wps-office.deb
-        only-arches: [aarch64]
-        url: https://archive.openkylin.top/openkylin/pool/pty/w/wps-office/wps-office_11.1.0.11720_arm64.deb
-        sha256: 172d8bcf3e3bc756994ae5adf66f63f22691e1ab0d18986c50bb6b6ab7f62948
-        size: 367187922
-        x-checker-data:
-          type: html
-          url: https://archive.openkylin.top/openkylin/pool/pty/w/wps-office
-          version-pattern: "wps-office_([\\d\\.-]*)_amd64.deb"
-          url-template: https://archive.openkylin.top/openkylin/pool/pty/w/wps-office/wps-office_${version}_arm64.deb

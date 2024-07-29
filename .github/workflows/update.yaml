@@ -1,7 +1,7 @@
 name: check for updates
 on:
   schedule: # for scheduling to work this file must be in the default branch
-  - cron: "0 12 * * *" # run 12am daily
+  - cron: "0 12 * * *" # 每天中午12点运行一次
   workflow_dispatch: # can be manually dispatched under GitHub's "Actions" tab 
 
 jobs:

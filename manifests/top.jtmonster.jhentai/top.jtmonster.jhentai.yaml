@@ -1,7 +1,7 @@
 app-id: top.jtmonster.jhentai
-runtime: org.freedesktop.Platform
-runtime-version: '23.08'
-sdk: org.freedesktop.Sdk
+runtime: org.gnome.Platform
+runtime-version: '46'
+sdk: org.gnome.Sdk
 command: jhentai
 finish-args:
   - --share=ipc
