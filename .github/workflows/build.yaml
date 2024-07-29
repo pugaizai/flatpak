@@ -7,12 +7,12 @@ jobs:
   freedesktop-x86_64:
     name: freedesktop-x86_64
     runs-on: ubuntu-latest
-    container: 
+    container:
       image: bilelmoussaoui/flatpak-github-actions:freedesktop-23.08
       options: --privileged
-    strategy: 
-      matrix: 
-        appid: 
+    strategy:
+      matrix:
+        appid:
           - cn.wps.office
           - com.qq.docs
           - com.qq.qqmusic
@@ -38,12 +38,12 @@ jobs:
   freedesktop-aarch64:
     name: freedesktop-aarch64
     runs-on: ubuntu-latest
-    container: 
+    container:
       image: bilelmoussaoui/flatpak-github-actions:freedesktop-23.08
       options: --privileged
-    strategy: 
-      matrix: 
-        appid: 
+    strategy:
+      matrix:
+        appid:
           - com.qq.docs
           - com.qq.qqmusic
           - io.github.msojocs.bilibili
@@ -74,12 +74,12 @@ jobs:
   kde-x86_64:
     name: kde-x86_64
     runs-on: ubuntu-latest
-    container: 
+    container:
       image: bilelmoussaoui/flatpak-github-actions:kde-6.7
       options: --privileged
-    strategy: 
-      matrix: 
-        appid: 
+    strategy:
+      matrix:
+        appid:
           - io.github.c0re100.qBittorrent-Enhanced-Edition
       # Don't fail the whole workflow if one architecture fails
       fail-fast: false
@@ -98,12 +98,12 @@ jobs:
   kde-aarch64:
     name: kde-aarch64
     runs-on: ubuntu-latest
-    container: 
+    container:
       image: bilelmoussaoui/flatpak-github-actions:kde-6.7
       options: --privileged
-    strategy: 
-      matrix: 
-        appid: 
+    strategy:
+      matrix:
+        appid:
           - io.github.c0re100.qBittorrent-Enhanced-Edition
       # Don't fail the whole workflow if one architecture fails
       fail-fast: false
@@ -131,12 +131,12 @@ jobs:
   # gnome-x86_64:
   #   name: gnome-x86_64
   #   runs-on: ubuntu-latest
-  #   container: 
+  #   container:
   #     image: bilelmoussaoui/flatpak-github-actions:gnome-46
   #     options: --privileged
-  #   strategy: 
-  #     matrix: 
-  #       appid: 
+  #   strategy:
+  #     matrix:
+  #       appid:
   #         - top.jtmonster.jhentai
   #         - io.github.predidit.kazumi
   #     # Don't fail the whole workflow if one architecture fails
@@ -155,14 +155,13 @@ jobs:
   # gnome-aarch64:
   #   name: gnome-aarch64
   #   runs-on: ubuntu-latest
-  #   container: 
+  #   container:
   #     image: bilelmoussaoui/flatpak-github-actions:gnome-46
   #     options: --privileged
-  #   strategy: 
-  #     matrix: 
-  #       appid: 
-  #         - top.jtmonster.jhentai
-  #         - io.github.predidit.kazumi
+  #   strategy:
+  #     matrix:
+  #       appid:
+  #         - 
   #     # Don't fail the whole workflow if one architecture fails
   #     fail-fast: false
   #   steps:
