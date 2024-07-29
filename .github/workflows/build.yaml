@@ -1,4 +1,6 @@
 on:
+  schedule: # for scheduling to work this file must be in the default branch
+  - cron: "0 12 * * 0" # 每星期天中午12点运行一次
   workflow_dispatch: # can be manually dispatched under GitHub's "Actions" tab 
 name: Build
 jobs:
