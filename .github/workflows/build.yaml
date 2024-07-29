@@ -13,14 +13,14 @@ jobs:
     strategy: 
       matrix: 
         appid: 
-          # - cn.wps.office
-          # - com.qq.docs
-          # - com.qq.qqmusic
+          - cn.wps.office
+          - com.qq.docs
+          - com.qq.qqmusic
           - com.xiaoyaocz.dmzjx
-          # - com.xiaoyaocz.simplelive
+          - com.xiaoyaocz.simplelive
           # - io.github.MCDFsteve.FnipaPlay
-          # - io.github.msojocs.bilibili
-          # - org.freedesktop.xorg.xeyes
+          - io.github.msojocs.bilibili
+          - org.freedesktop.xorg.xeyes
       # Don't fail the whole workflow if one architecture fails
       fail-fast: false
     steps:
