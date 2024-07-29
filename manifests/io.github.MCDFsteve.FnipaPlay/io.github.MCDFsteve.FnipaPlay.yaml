@@ -64,7 +64,7 @@ modules:
           url: https://api.github.com/repos/MCDFsteve/FnipaPlay/releases/latest
           version-query: .tag_name
           url-query: >-
-            .assets[] | select(.name | test("^FnipaPlay-" + $version + "\\+\\d+-Linux-amd64\\.deb$")) |
+            .assets[] | select(.name | test("^FnipaPlay-.*-Linux-amd64\\.deb$")) |
             .browser_download_url
       - type: file
         path: io.github.MCDFsteve.FnipaPlay.metainfo.xml

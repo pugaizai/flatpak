@@ -41,7 +41,7 @@ modules:
           url: https://api.github.com/repos/jiangtian616/JHenTai/releases/latest
           version-query: .tag_name | sub("^v"; "")
           url-query: >-
-            .assets[] | select(.name | test("^JHenTai-" + $version + "\\+\\d+-Linux-amd64\\.deb$"))
+            .assets[] | select(.name | test("^JHenTai-.*-Linux-amd64\\.deb$"))
             |
             .browser_download_url
       - type: file
