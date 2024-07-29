@@ -34,8 +34,8 @@ modules:
     sources:
       - type: file
         only-arches: [x86_64]
-        url: https://github.com/jiangtian616/JHenTai/releases/download/v7.5.5/JHenTai-7.5.5%2B223-Linux-amd64.deb
-        sha256: 4b2bc47592a7edb8f9684d280c1efc038bc692c6f685a866a2d958062a7f20b8
+        url: https://github.com/jiangtian616/JHenTai/releases/download/v8.0.0%2B245/JHenTai-8.0.0%2B245-Linux-amd64.deb
+        sha256: f8c8b79e014f3877e4fbb735f02aab678452268613a6e731850aace0d53e8ccd
         x-checker-data:
           type: json
           url: https://api.github.com/repos/jiangtian616/JHenTai/releases/latest
