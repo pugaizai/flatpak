@@ -162,6 +162,6 @@ jobs:
         with:
           tag: ContinuousBuild
           allowUpdates: true
-          artifacts: '*/*.flatpak*'
+          artifacts: '*/*.flatpak'
           artifactErrorsFailBuild: true
           replacesArtifacts: true
