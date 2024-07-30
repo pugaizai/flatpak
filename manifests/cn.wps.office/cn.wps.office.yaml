@@ -63,16 +63,14 @@ modules:
       - ln -s wps /app/bin/et
       - ln -s wps /app/bin/wpp
       - ln -s wps /app/bin/wpspdf
-      # Just use libstdc++.so.6 from the runtime; allows working with runtime 22.08+
+      # Just use libstdc++.so.6 from the runtime; allows working with runtime 23.08+
       - rm /app/wps-office/office6/libstdc++.so.6
       # Fix wps deprecated python2 command
       # https://aur.archlinux.org/cgit/aur.git/tree/fix-wps-python-parse.patch?h=wps-office-cn
       - sed -i 's/python -c '\''import sys, urllib; print urllib.unquote(sys.argv\[1\])'\''/python -c '\''import sys, urllib.parse; print(urllib.parse.unquote(sys.argv[1]))'\''/' /app/wps-office/wps
-      # rename
-      - FLATPAK_ID="${FLATPAK_ID:-cn.wps.office}"
-      - YEAR_SUFFIX=2019
+      # Rename
       - rename --no-overwrite "wps-office-" "${FLATPAK_ID}." /app/share/{icons/hicolor/*/*,applications,mime/packages}/wps-office-*.*
-      - rename --no-overwrite "wps-office${YEAR_SUFFIX}-" "${FLATPAK_ID}." /app/share/icons/hicolor/*/*/wps-office${YEAR_SUFFIX}-*.*
+      - rename --no-overwrite "wps-office2019-" "${FLATPAK_ID}." /app/share/icons/hicolor/*/*/wps-office2019-*.*
       - sed -i "s/generic-icon name=\"wps-office-/icon name=\"${FLATPAK_ID}./g" "/app/share/mime/packages/${FLATPAK_ID}".*.xml
       - |
         for a in wps wpp et pdf prometheus; do
