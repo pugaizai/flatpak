@@ -3,15 +3,9 @@ set -e
 shopt -s failglob
 FLATPAK_ID="${FLATPAK_ID:-cn.wps.office}"
 
-mkdir -p deb-package export/share
-
-ar p wps-office.deb data.tar.xz | tar -xJf - -C deb-package
-
-mv deb-package/opt/kingsoft/wps-office .
-mv deb-package/usr/bin/{wps,wpp,et,wpspdf} wps-office/
-mv deb-package/usr/share/{icons,applications,mime} export/share/
-
 YEAR_SUFFIX=2019
+
+mv /app/wps-office/share export
 
 rename --no-overwrite "wps-office-" "${FLATPAK_ID}." export/share/{icons/hicolor/*/*,applications,mime/packages}/wps-office-*.*
 rename --no-overwrite "wps-office${YEAR_SUFFIX}-" "${FLATPAK_ID}." export/share/icons/hicolor/*/*/wps-office${YEAR_SUFFIX}-*.*
@@ -40,14 +34,6 @@ for a in wps wpp et pdf prometheus; do
         "$desktop_file"
 done
 sed -i "s/generic-icon name=\"wps-office-/icon name=\"${FLATPAK_ID}./g" "export/share/mime/packages/${FLATPAK_ID}".*.xml
-
-# Just use libstdc++.so.6 from the runtime; allows working with runtime 22.08+
-rm wps-office/office6/libstdc++.so.6
-
-rm -r wps-office.deb deb-package
-
-# Remove plugin path so we can override the default path with based on QT_PLUGIN_PATH
-sed -i 's|^Plugins=.*||g' wps-office/office6/qt.conf
 
 # Fix wps deprecated python2 command
 # https://aur.archlinux.org/cgit/aur.git/tree/fix-wps-python-parse.patch?h=wps-office-cn

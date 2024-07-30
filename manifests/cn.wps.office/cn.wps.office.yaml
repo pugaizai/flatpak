@@ -54,20 +54,23 @@ modules:
   - name: wps
     buildsystem: simple
     build-commands:
+      - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
+      - mv opt/kingsoft/wps-office /app
+      - mv usr/bin/{wps,wpp,et,wpspdf} /app/wps-office/
+      - mkdir -p /app/wps-office/share
+      - mv usr/share/{icons,applications,mime} /app/wps-office/share/
       - install -Dm755 apply_extra.sh /app/bin/apply_extra
       - install -Dm755 wps.sh /app/bin/wps
       - ln -s wps /app/bin/et
       - ln -s wps /app/bin/wpp
       - ln -s wps /app/bin/wpspdf
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo/
-      - install -Dm755 /usr/bin/desktop-file-edit -t /app/bin/
-      - install -Dm755 /usr/bin/ar -t /app/bin/
-      - install -Dm755 /usr/lib/x86_64-linux-gnu/libsframe.so* -t /app/lib/
-      - install -Dm755 /usr/lib/$(gcc -print-multiarch)/libbfd-*.so -t /app/lib/
       - install -Dm644 cn.wps.office.desktop -t /app/share/applications
       - for icon_size in 64 128 256 512; do install -Dm644 wps_office_${icon_size}.png
         /app/share/icons/hicolor/${icon_size}x${icon_size}/apps/cn.wps.office.png;
         done
+      # Just use libstdc++.so.6 from the runtime; allows working with runtime 22.08+
+      - rm /app/wps-office/office6/libstdc++.so.6
     sources:
       - type: file
         path: apply_extra.sh
@@ -93,12 +96,11 @@ modules:
       - type: file
         path: cn.wps.office.desktop
 
-      - type: extra-data
+      - type: file
         filename: wps-office.deb
         only-arches: [x86_64]
         url: https://mirrors.nju.edu.cn/ubuntukylin/pool/partner/wps-office_11.1.0.11723_amd64.deb
         sha256: 53e0b0f37e7568f6e763aa13f14940e2ed97168e185fcb30095ab80119690623
-        size: 411995048
         x-checker-data:
           type: debian-repo
           package-name: wps-office
