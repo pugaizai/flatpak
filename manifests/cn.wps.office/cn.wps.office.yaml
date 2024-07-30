@@ -1,6 +1,6 @@
 id: cn.wps.office
 runtime: org.freedesktop.Platform
-runtime-version: '23.08'
+runtime-version: "23.08"
 sdk: org.freedesktop.Sdk
 command: wps
 separate-locales: false
@@ -21,8 +21,8 @@ finish-args:
   - --env=QT_PLUGIN_PATH=/app/lib/qt/plugins:/app/extra/wps-office/office6/qt/plugins
 
 cleanup:
-  - '*.a'
-  - '*.la'
+  - "*.a"
+  - "*.la"
   - /include
   - /lib/cmake
   - /lib/debug
@@ -54,47 +54,57 @@ modules:
   - name: wps
     buildsystem: simple
     build-commands:
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo/
       - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
       - mv opt/kingsoft/wps-office /app
       - mv usr/bin/{wps,wpp,et,wpspdf} /app/wps-office/
-      - mkdir -p /app/wps-office/share
-      - mv usr/share/{icons,applications,mime} /app/wps-office/share/
-      - install -Dm755 apply_extra.sh /app/bin/apply_extra
+      - mv usr/share/{icons,applications,mime} /app/share/
       - install -Dm755 wps.sh /app/bin/wps
       - ln -s wps /app/bin/et
       - ln -s wps /app/bin/wpp
       - ln -s wps /app/bin/wpspdf
-      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo/
-      - install -Dm644 cn.wps.office.desktop -t /app/share/applications
-      - for icon_size in 64 128 256 512; do install -Dm644 wps_office_${icon_size}.png
-        /app/share/icons/hicolor/${icon_size}x${icon_size}/apps/cn.wps.office.png;
-        done
       # Just use libstdc++.so.6 from the runtime; allows working with runtime 22.08+
       - rm /app/wps-office/office6/libstdc++.so.6
-    sources:
-      - type: file
-        path: apply_extra.sh
+      # Fix wps deprecated python2 command
+      # https://aur.archlinux.org/cgit/aur.git/tree/fix-wps-python-parse.patch?h=wps-office-cn
+      - sed -i 's/python -c '\''import sys, urllib; print urllib.unquote(sys.argv\[1\])'\''/python -c '\''import sys, urllib.parse; print(urllib.parse.unquote(sys.argv[1]))'\''/' /app/wps-office/wps
+      # rename
+      - FLATPAK_ID="${FLATPAK_ID:-cn.wps.office}"
+      - YEAR_SUFFIX=2019
+      - rename --no-overwrite "wps-office-" "${FLATPAK_ID}." /app/share/{icons/hicolor/*/*,applications,mime/packages}/wps-office-*.*
+      - rename --no-overwrite "wps-office${YEAR_SUFFIX}-" "${FLATPAK_ID}." /app/share/icons/hicolor/*/*/wps-office${YEAR_SUFFIX}-*.*
+      - sed -i "s/generic-icon name=\"wps-office-/icon name=\"${FLATPAK_ID}./g" "/app/share/mime/packages/${FLATPAK_ID}".*.xml
+      - |
+        for a in wps wpp et pdf prometheus; do
+            desktop_file="/app/share/applications/${FLATPAK_ID}.$a.desktop"
+            appbin="$a"
+            appicon="${FLATPAK_ID}.${a}main"
+            case "$a" in
+                pdf)
+                    appbin=wpspdf
+                ;;
+                prometheus)
+                    appbin=wps
+                    appicon="${FLATPAK_ID}.k${a}"
+                    # Use this as the main .desktop file for the Flatpak
+                    new_desktop_file="$(dirname $desktop_file)/${FLATPAK_ID}.desktop"
+                    mv $desktop_file $new_desktop_file
+                    desktop_file=$new_desktop_file
+                ;;
+            esac
+            desktop-file-edit \
+                --set-key="Exec" --set-value="$appbin %f" \
+                --set-key="Icon" --set-value="$appicon" \
+                --set-key="X-Flatpak-RenamedFrom" --set-value="wps-office-$a.desktop;" \
+                "$desktop_file"
+        done
 
+    sources:
       - type: file
         path: cn.wps.office.metainfo.xml
 
       - type: file
         path: wps.sh
-
-      - type: file
-        path: icons/wps_office_64.png
-
-      - type: file
-        path: icons/wps_office_128.png
-
-      - type: file
-        path: icons/wps_office_256.png
-
-      - type: file
-        path: icons/wps_office_512.png
-
-      - type: file
-        path: cn.wps.office.desktop
 
       - type: file
         filename: wps-office.deb
@@ -107,4 +117,3 @@ modules:
           root: https://mirrors.nju.edu.cn/ubuntukylin
           dist: jammy-partner
           component: main
-
