@@ -23,6 +23,9 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="3.6.1" date="2024-07-03">
+      <description></description>
+    </release>
     <release version="3.5.5" date="2024-07-03"/>
   </releases>
   <content_rating type="oars-1.1"/>
