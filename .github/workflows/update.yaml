@@ -14,7 +14,7 @@ jobs:
       matrix:
         appid: # list all flatpak application id to check
           - cn.wps.office
-          # - com.qq.docs
+          - com.qq.docs
           - com.qq.qqmusic
           - com.xiaoyaocz.dmzjx
           - com.xiaoyaocz.simplelive
