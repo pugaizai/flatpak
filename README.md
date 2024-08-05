@@ -1,4 +1,4 @@
-# Madoka773's Flatpaks
+# Pugaizai's Flatpaks
 
 ## Use My Repo (X86_64 Only)
 
@@ -8,7 +8,7 @@
 
 ### Install Something
 
-`flatpak install madoka773 <application-id> -y`
+`flatpak install pugai <application-id> -y`
 
 ### Update
 
@@ -30,7 +30,7 @@
 
 ### Clone
 
-`git clone https://github.com/madoka773/flatpak.git --recursive`
+`git clone https://github.com/pugaizai/flatpak.git --recursive`
 
 ### Build
 
