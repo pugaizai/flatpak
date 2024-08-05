@@ -4,7 +4,7 @@
 
 ### Add Repo
 
-`flatpak remote-add --if-not-exists pugai https://flatpak.pugai.life/pugai.flatpakrepo -y`
+`flatpak remote-add --if-not-exists pugai https://flatpak.pugai.life/pugai.flatpakrepo`
 
 ### Install Something
 
