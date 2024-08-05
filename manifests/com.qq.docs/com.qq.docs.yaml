@@ -43,8 +43,8 @@ modules:
         only-arches: [aarch64]
         filename: docs.deb
         url: https://desktop.docs.qq.com/Installer/30001/3.6.3/TencentDocs-arm64.deb
-        sha256: 0853a1fdd7ae82da331ee49568b9d9f3fc5f5c5cc26e6eeb0261035b5b0b81bb
-        size: 145707978
+        sha256: 76707eb3794278d0d532ee93dc1c8dee46233c36c50d41043941b93899930952
+        size: 145707508
       - type: extra-data
         only-arches: [x86_64]
         filename: docs.deb
