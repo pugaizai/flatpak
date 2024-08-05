@@ -4,7 +4,7 @@
 
 ### Add Repo
 
-`flatpak remote-add --if-not-exists madoka773 https://flatpak.53888888.xyz/madoka773.flatpakrepo -y`
+`flatpak remote-add --if-not-exists pugai https://flatpak.pugai.live/pugai.flatpakrepo -y`
 
 ### Install Something
 
@@ -20,7 +20,7 @@
 
 ### Remove Repo
 
-`flatpak remote-delete madoka773 -y`
+`flatpak remote-delete pugai -y`
 
 ## Or Build Your Own
 
