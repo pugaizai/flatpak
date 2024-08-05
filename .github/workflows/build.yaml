@@ -34,6 +34,8 @@ jobs:
 
           flatpak-builder build-dir manifests/com.qq.qqmusic/com.qq.qqmusic.yaml --repo=repo --arch=x86_64 --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
 
+          flatpak-builder build-dir manifests/com.xiaoyaocz.dmzjx/com.xiaoyaocz.dmzjx.yaml --repo=repo --arch=x86_64 --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
+
           flatpak-builder build-dir manifests/com.xiaoyaocz.simplelive/com.xiaoyaocz.simplelive.yaml --repo=repo --arch=x86_64 --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
 
           flatpak-builder build-dir manifests/io.github.c0re100.qBittorrent-Enhanced-Edition/io.github.c0re100.qBittorrent-Enhanced-Edition.yaml --repo=repo --arch=x86_64 --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse

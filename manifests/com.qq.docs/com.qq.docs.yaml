@@ -61,7 +61,7 @@ modules:
         dest-filename: tdappdesktop.sh
         commands:
           - export TMPDIR=$XDG_RUNTIME_DIR/app/$FLATPAK_ID
-          - exec zypak-wrapper.sh /app/docs/tdappdesktop "$@"
+          - exec zypak-wrapper.sh /app/extra/docs/tdappdesktop "$@"
       - type: script
         commands:
           - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
