@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="addon">
+  <extends>org.freedesktop.Sdk</extends>
+  <id>
+    org.freedesktop.Sdk.Extension.dart
+  </id>
+  <metadata_license>
+    CC0-1.0
+  </metadata_license>
+  <name>
+    Dart Sdk Extension
+  </name>
+  <summary>
+    The dart programming language SDK
+  </summary>
+  <description>
+    <p>
+      An approachable, portable, and productive language for high-quality apps on any platform.
+    </p>
+  </description>
+  <project_license>
+    BSD-3-Clause
+  </project_license>
+  <url type="homepage">
+    https://dart.dev
+  </url>
+  <url type="bugtracker">
+    https://github.com/dart-lang/sdk/issues
+  </url>
+  <translation/>
+  <update_contact>
+    valigarmanda55@gmail.com
+  </update_contact>
+  <releases>
+    <release version="3.5.0" date="2024-08-07"/>
+  </releases>
+</component>
