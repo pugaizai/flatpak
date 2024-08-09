@@ -34,6 +34,26 @@ modules:
           project-id: 14718
           stable-only: true
           url-template: https://storage.googleapis.com/dart-archive/channels/stable/release/$version/sdk/dartsdk-linux-x64-release.zip
+      - type: archive
+        only-arches:
+          - arm
+        url: https://storage.googleapis.com/dart-archive/channels/stable/release/3.5.0/sdk/dartsdk-linux-arm-release.zip
+        sha256: 011a1dd6ff4e0bb4a168f7b4e13063514fbc255dc52d1ad660bf5a28773e9773
+        x-checker-data:
+          type: anitya
+          project-id: 14718
+          stable-only: true
+          url-template: https://storage.googleapis.com/dart-archive/channels/stable/release/$version/sdk/dartsdk-linux-arm-release.zip
+      - type: archive
+        only-arches:
+          - i386
+        url: https://storage.googleapis.com/dart-archive/channels/stable/release/3.5.0/sdk/dartsdk-linux-ia32-release.zip
+        sha256: 011a1dd6ff4e0bb4a168f7b4e13063514fbc255dc52d1ad660bf5a28773e9773
+        x-checker-data:
+          type: anitya
+          project-id: 14718
+          stable-only: true
+          url-template: https://storage.googleapis.com/dart-archive/channels/stable/release/$version/sdk/dartsdk-linux-ia32-release.zip
 
   - name: scripts
     buildsystem: simple
