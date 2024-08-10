@@ -26,7 +26,6 @@ jobs:
           - io.github.predidit.kazumi
           - org.freedesktop.xorg.xeyes
           - top.jtmonster.jhentai
-          - org.freedesktop.Sdk.Extension.dart
     steps:
       - uses: actions/checkout@v4 
       - uses: docker://ghcr.io/flathub/flatpak-external-data-checker:latest

@@ -50,8 +50,6 @@ jobs:
 
           flatpak-builder build-dir manifests/top.jtmonster.jhentai/top.jtmonster.jhentai.yaml --repo=repo --arch=x86_64 --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
 
-          flatpak-builder build-dir manifests/org.freedesktop.Sdk.Extension.dart/org.freedesktop.Sdk.Extension.dart.yaml --repo=repo --arch=x86_64 --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
-
       - name: Sign repo
         run: |
           flatpak build-sign repo --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }}
