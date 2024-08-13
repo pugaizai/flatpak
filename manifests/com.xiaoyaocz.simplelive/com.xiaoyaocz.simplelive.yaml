@@ -6,14 +6,14 @@ rename-icon: simple_live_app
 rename-desktop-file: simple_live_app.desktop
 command: simple_live_app
 finish-args:
-  - '--share=ipc'
-  - '--socket=fallback-x11'
-  - '--socket=wayland'
-  - '--socket=pulseaudio'
-  - '--share=network'
-  - '--device=dri'
-  - '--talk-name=org.freedesktop.ScreenSaver'
-  - '--env=LC_NUMERIC=C'
+  - --share=ipc
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --socket=pulseaudio
+  - --share=network
+  - --device=dri
+  - --talk-name=org.freedesktop.ScreenSaver
+  - --env=LC_NUMERIC=C
 cleanup:
   - '*.a'
   - '*.la'
@@ -30,7 +30,6 @@ add-extensions:
     version: '23.08'
     add-ld-path: .
 modules:
-  
   - name: libmpv
     buildsystem: meson
     config-opts:
@@ -138,7 +137,8 @@ modules:
       - rm -r usr/share/icons
       - mv usr/share/simple_live_app /app/
       - cp -a usr/share /app/
-      - desktop-file-edit --set-name="Simple Live" --set-key="Categories" --set-value="AudioVideo;Audio;Video;Network;" --remove-key="Version" /app/share/applications/simple_live_app.desktop
+      - desktop-file-edit --set-name="Simple Live" --set-key="Categories" --set-value="AudioVideo;Audio;Video;Network;"
+        --remove-key="Version" /app/share/applications/simple_live_app.desktop
       - chmod +x /app/simple_live_app/simple_live_app
       - install -Dm755 simple_live_app.sh /app/bin/simple_live_app
       - install -Dm644 simple_live_app.png -t /app/share/icons/hicolor/512x512/apps
@@ -147,15 +147,16 @@ modules:
       - mkdir -p /app/lib/ffmpeg
     sources:
       - type: file
-        url: https://github.com/xiaoyaocz/dart_simple_live/releases/download/v1.6.5/simple_live_app-1.6.5%2B10605-linux.deb
+        url: https://github.com/xiaoyaocz/dart_simple_live/releases/download/v1.7.2/simple_live_app-1.7.2%2B10702-linux.deb
         only-arches: [x86_64]
-        sha256: 05007294d960a00ff425c8345328c21a04c4499e3d1d89b2d82eac1fa76307c9
+        sha256: 33f88c29367ce4b7f2e3241bfb0157540b3855fb2f52882b790018ef185245e7
         x-checker-data:
           type: json
           url: https://api.github.com/repos/xiaoyaocz/dart_simple_live/releases/latest
           version-query: .tag_name | sub("^v"; "")
           url-query: >-
-            .assets[] | select(.name | test("^simple_live_app-" + $version + "\\+\\d+-linux\\.deb$")) |
+            .assets[] | select(.name | test("^simple_live_app-" + $version + "\\+\\d+-linux\\.deb$"))
+            |
             .browser_download_url
 
       - type: file
@@ -169,6 +170,6 @@ modules:
       - type: script
         commands:
           - export TMPDIR="$XDG_RUNTIME_DIR/app/$FLATPAK_ID"
-          - export LD_LIBRARY_PATH=/app/lib 
+          - export LD_LIBRARY_PATH=/app/lib
           - exec /app/simple_live_app/simple_live_app "$@"
         dest-filename: simple_live_app.sh
