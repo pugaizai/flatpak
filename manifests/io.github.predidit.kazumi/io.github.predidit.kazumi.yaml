@@ -59,8 +59,8 @@ modules:
         sources:
           - type: git
             url: https://github.com/AyatanaIndicators/ayatana-ido.git
-            tag: 0.10.3
-            commit: 9906cc1d22f17c3629d32521473b172ae594ddcf
+            tag: 0.10.4
+            commit: f968079b09e2310fefc3fc307359025f1c74b3eb
             x-checker-data:
               type: anitya
               project-id: 18445
