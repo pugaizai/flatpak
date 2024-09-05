@@ -28,8 +28,11 @@
     <category>Office</category>
   </categories>
   <releases>
-    <release version="11.1.0.11723" date="2024-07-29">
+    <release version="12.1.0.17881" date="2024-09-05">
       <description></description>
+    </release>
+    <release version="11.1.0.11723" date="2024-07-29">
+      <description/>
     </release>
     <release version="11.1.0.11720" date="2024-07-26"/>
     <release version="11.1.0.11719" date="2024-02-21"/>

@@ -1,6 +1,6 @@
 id: cn.wps.office
 runtime: org.freedesktop.Platform
-runtime-version: "23.08"
+runtime-version: '23.08'
 sdk: org.freedesktop.Sdk
 command: wps
 separate-locales: false
@@ -21,8 +21,8 @@ finish-args:
   - --env=QT_PLUGIN_PATH=/app/lib/qt/plugins:/app/extra/wps-office/office6/qt/plugins
 
 cleanup:
-  - "*.a"
-  - "*.la"
+  - '*.a'
+  - '*.la'
   - /include
   - /lib/cmake
   - /lib/debug
@@ -93,9 +93,9 @@ modules:
       - type: extra-data
         filename: wps-office.deb
         only-arches: [x86_64]
-        url: https://archive.ubuntukylin.com/software/pool/partner/wps-office_11.1.0.11723_amd64.deb
-        sha256: 53e0b0f37e7568f6e763aa13f14940e2ed97168e185fcb30095ab80119690623
-        size: 411995048
+        url: https://archive.ubuntukylin.com/software/pool/partner/wps-office_12.1.0.17881_amd64.deb
+        sha256: dfb22d81f6e078dce3b7ddaa2e7644de747392d2fcbc58426da2a0cad0b6090c
+        size: 462903404
         x-checker-data:
           type: debian-repo
           package-name: wps-office
