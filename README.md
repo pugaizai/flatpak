@@ -1,6 +1,6 @@
 # Pugaizai's Flatpaks
 
-## Use My Repo (X86_64 Only)
+## Use My Repo
 
 ### Add Repo
 
