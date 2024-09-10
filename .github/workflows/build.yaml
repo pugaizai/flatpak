@@ -38,6 +38,11 @@ jobs:
 
           flatpak-builder build-dir manifests/io.github.predidit.kazumi/io.github.predidit.kazumi.yaml --repo=repo --arch=x86_64 --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
 
+          flatpak-builder build-dir manifests/com.tencent.WeChat/com.tencent.WeChat.yaml --repo=repo --arch=x86_64 --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
+
+          flatpak-builder build-dir manifests/com.qq.QQ/com.qq.QQ.yaml --repo=repo --arch=x86_64 --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
+          flatpak-builder build-dir manifests/com.qq.QQ/com.qq.QQ.yaml --repo=repo --arch=aarch64 --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
+
           flatpak-builder build-dir manifests/com.qq.docs/com.qq.docs.yaml --repo=repo --arch=x86_64 --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
           flatpak-builder build-dir manifests/com.qq.docs/com.qq.docs.yaml --repo=repo --arch=aarch64 --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
 
