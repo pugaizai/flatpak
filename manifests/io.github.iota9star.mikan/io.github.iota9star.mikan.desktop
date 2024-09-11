@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Mikan
+GenericName=Anime Tracker.
+Comment=Mikan Project.
+Exec=mikan
+Icon=io.github.iota9star.mikan
+Categories=Network;Video;Audio;AudioVideo;
+Terminal=false

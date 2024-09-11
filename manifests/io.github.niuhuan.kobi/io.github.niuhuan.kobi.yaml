@@ -56,7 +56,9 @@ modules:
         path: io.github.niuhuan.kobi.desktop
 
       - type: file
-        path: io.github.niuhuan.kobi.png
+        url: https://raw.githubusercontent.com/niuhuan/kobi/main/linux/appimage/AppRun.png
+        dest-filename: io.github.niuhuan.kobi.png
+        sha256: 3f221fc14f9e296533519411bfebc9591170015b6cceb49eaa66b81927ce9a27
 
       - type: script
         commands:

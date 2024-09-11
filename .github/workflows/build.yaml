@@ -33,6 +33,8 @@ jobs:
         run: |
           git config --global protocol.file.allow always
 
+          flatpak-builder build-dir manifests/io.github.iota9star.mikan/io.github.iota9star.mikan.yaml --repo=repo --arch=x86_64 --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
+
           flatpak-builder build-dir manifests/io.github.niuhuan.kobi/io.github.niuhuan.kobi.yaml --repo=repo --arch=x86_64 --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
 
           # flatpak-builder build-dir manifests/com.cloudchewie.cloudotp/com.cloudchewie.cloudotp.yaml --repo=repo --arch=x86_64 --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse

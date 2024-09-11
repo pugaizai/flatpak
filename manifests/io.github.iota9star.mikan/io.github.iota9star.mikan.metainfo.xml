@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>io.github.iota9star.mikan</id>
+  <launchable type="desktop-id">io.github.iota9star.mikan.desktop</launchable>
+  <name>Kobi</name>
+  <developer>niuhuan</developer>
+  <summary>Mikan Project.</summary>
+  <summary xml:lang="zh-cn">蜜柑计划</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>Apache-2.0</project_license>
+  <url type="homepage">https://github.com/iota9star/mikan_flutter</url>
+  <url type="bugtracker">https://github.com/iota9star/mikan_flutter/issues</url>
+  <description>
+    <p>Mikan Project.</p>
+    <p xml:lang="zh-cn">蜜柑计划</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <caption>Latest</caption>
+      <image type="source">https://raw.githubusercontent.com/iota9star/mikan_flutter/master/static/screenshot/img_1.png</image>
+    </screenshot>
+    <screenshot type="default">
+      <caption>Bangumi</caption>
+      <image type="source">https://raw.githubusercontent.com/iota9star/mikan_flutter/master/static/screenshot/img_2.png</image>
+    </screenshot>
+    <screenshot type="default">
+      <caption>Subscribe</caption>
+      <image type="source">https://raw.githubusercontent.com/iota9star/mikan_flutter/master/static/screenshot/img.png</image>
+    </screenshot>
+  </screenshots>
+  <releases>
+    <release version="1.2.7" date="2024-08-30"/>
+  </releases>
+  <content_rating type="oars-1.1"/>
+  <update_contact>i@pugai.life</update_contact>
+</component>
+
