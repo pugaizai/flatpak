@@ -19,6 +19,7 @@ jobs:
 
       - name: Install build depends
         run: |
+          sudo add-apt-repository ppa:flatpak/stable
           sudo apt update 
           sudo apt install flatpak flatpak-builder qemu-system-arm qemu-user-static
           flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
