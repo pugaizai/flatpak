@@ -2,8 +2,8 @@
 <component type="desktop">
   <id>io.github.iota9star.mikan</id>
   <launchable type="desktop-id">io.github.iota9star.mikan.desktop</launchable>
-  <name>Kobi</name>
-  <developer>niuhuan</developer>
+  <name>Mikan</name>
+  <developer>iota9star</developer>
   <summary>Mikan Project.</summary>
   <summary xml:lang="zh-cn">蜜柑计划</summary>
   <metadata_license>CC0-1.0</metadata_license>
