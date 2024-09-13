@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>io.github.PBH_BTN.PeerBanHelper</id>
+  <launchable type="desktop-id">io.github.PBH_BTN.PeerBanHelper.desktop</launchable>
+  <name>PeerBanHelper</name>
+  <developer>PBH-BTN</developer>
+  <summary>Auto ban unwanted bittorrent client.</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0</project_license>
+  <url type="homepage">https://github.com/PBH-BTN/PeerBanHelper</url>
+  <description>
+    <p>Auto ban unwanted bittorrent client.</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <caption>Homepage</caption>
+      <image type="source">https://github.com/PBH-BTN/PeerBanHelper/assets/19235246/d7f7ea9f-70df-40f1-a782-260450972bc9</image>
+    </screenshot>
+  </screenshots>
+  <releases>
+    <release version="6.2.1" date="2024-09-12"/>
+  </releases>
+  <content_rating type="oars-1.1"/>
+  <update_contact>i@pugai.life</update_contact>
+</component>
+

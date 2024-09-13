@@ -1,0 +1,62 @@
+id: io.github.PBH_BTN.PeerBanHelper
+runtime: org.freedesktop.Platform
+runtime-version: '23.08'
+sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.openjdk21
+command: peerbanhelper
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --share=network
+  - --env=PATH=/app/jre/bin:/app/bin:/usr/bin
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/gtk-doc
+modules:
+
+  - name: openjdk
+    buildsystem: simple
+    build-commands:
+      - /usr/lib/sdk/openjdk21/install.sh
+
+  - name: PeerBanHelper
+    buildsystem: simple
+    build-commands:
+      - install -Dm755 peerbanhelper -t ${FLATPAK_DEST}/bin/
+      - install -Dm644 peerbanhelper.jar -t ${FLATPAK_DEST}/bin/
+      - install -Dm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications/
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo/
+      - install -Dm644 ${FLATPAK_ID}.png -t ${FLATPAK_DEST}/share/icons/hicolor/256x256/apps/
+    sources:
+      - type: file
+        url: https://github.com/PBH-BTN/PeerBanHelper/releases/download/v6.2.1/PeerBanHelper.jar
+        dest-filename: peerbanhelper.jar
+        sha256: 10d1ec59fa0e7d2fbf6f4ca966b29f39658fdd1581ce64b8e8e0941113c09d4d
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/PBH-BTN/PeerBanHelper/releases/latest
+          version-query: .tag_name
+          url-query: .assets[] | select(.name=="PeerBanHelper.jar") | .browser_download_url
+
+      - type: file
+        path: io.github.PBH_BTN.PeerBanHelper.metainfo.xml
+
+      - type: file
+        path: io.github.PBH_BTN.PeerBanHelper.png
+
+      - type: file
+        path: io.github.PBH_BTN.PeerBanHelper.desktop
+
+      - type: script
+        commands:
+          - java -jar -Xmx256M -XX:+UseG1GC -XX:+UseStringDeduplication -XX:+ShrinkHeapInSteps -jar /app/bin/peerbanhelper.jar
+        dest-filename: peerbanhelper
+
