@@ -69,7 +69,7 @@ modules:
 
     modules:
       - shared-modules/intltool/intltool-0.51.json
-      
+
       - name: ayatana-ido
         buildsystem: cmake-ninja
         sources:
@@ -119,10 +119,10 @@ modules:
       - --enable-tempstore=yes
       - FLAGS=-DSQLITE_HAS_CODEC
       - LDFLAGS=-lcrypto -lm
-    cleanup: 
+    cleanup:
       - /bin
       - /man
-    sources: 
+    sources:
       - type: git
         url: https://github.com/sqlcipher/sqlcipher.git
         tag: v4.6.1
@@ -131,13 +131,14 @@ modules:
           project-id: 11213
           stable-only: true
           tag-template: v$version
+        commit: c5bd336ece77922433aaf6d6fe8cf203b0c299d5
     modules:
       - name: tcl
         subdir: unix
         config-opts:
           - --enable-shared=no
         build-options:
-            no-debuginfo: true
+          no-debuginfo: true
         cleanup:
           - /bin
           - /man
@@ -170,7 +171,8 @@ modules:
           url: https://api.github.com/repos/Robert-Stackflow/CloudOTP/releases/latest
           version-query: .tag_name | sub("^V"; "")
           url-query: >-
-            .assets[] | select(.name=="CloudOTP-" + $version + "-linux-amd64.deb") |
+            .assets[] | select(.name=="CloudOTP-" + $version + "-linux-amd64.deb")
+            |
             .browser_download_url
       - type: file
         path: com.cloudchewie.cloudotp.metainfo.xml
