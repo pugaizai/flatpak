@@ -161,14 +161,14 @@ modules:
       - install -Dm755 CloudOTP.sh /app/bin/CloudOTP
       - install -Dm644 com.cloudchewie.cloudotp.metainfo.xml -t /app/share/metainfo
     sources:
-      - type: archive
+      - type: file
         only-arches: [x86_64]
-        url: https://nightly.link/pugaizai/CloudOTP/actions/runs/10796348695/release-Linux.zip
-        sha256: f9efe1d7e6aa40bf68e3198077b72a4ea25b6fe1e136db2768df8b430adffa07
+        url: https://github.com/Robert-Stackflow/CloudOTP/releases/download/V2.4.4/CloudOTP-2.4.4-linux-amd64.deb
+        sha256: 23794dc7f479b0a6c16c0f1d271b7f8672c3e654f8974f89d6c044d0a825d1b7
         x-checker-data:
           type: json
           url: https://api.github.com/repos/Robert-Stackflow/CloudOTP/releases/latest
-          version-query: .tag_name
+          version-query: .tag_name | sub("^V"; "")
           url-query: >-
             .assets[] | select(.name=="CloudOTP-" + $version + "-linux-amd64.deb") |
             .browser_download_url

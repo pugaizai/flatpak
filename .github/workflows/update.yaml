@@ -20,9 +20,13 @@ jobs:
           - com.qq.qqmusic
           - com.xiaoyaocz.dmzjx
           - com.xiaoyaocz.simplelive
+          - com.cloudchewie.cloudotp
           - io.github.c0re100.qBittorrent-Enhanced-Edition
           - io.github.msojocs.bilibili
           - io.github.predidit.kazumi
+          - io.github.iota9star.mikan
+          - io.github.niuhuan.kobi
+          - io.github.PBH_BTN.PeerBanHelper
           - org.freedesktop.xorg.xeyes
           - top.jtmonster.jhentai
     steps:
