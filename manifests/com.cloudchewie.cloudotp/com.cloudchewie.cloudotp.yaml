@@ -1,7 +1,9 @@
 app-id: com.cloudchewie.cloudotp
-runtime: org.gnome.Platform
-runtime-version: '46'
-sdk: org.gnome.Sdk
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.vala
 command: CloudOTP
 finish-args:
   - --share=ipc
@@ -23,6 +25,9 @@ cleanup:
   - /man
   - /share/man
   - /share/gtk-doc
+build-options:
+  append-path: /usr/lib/sdk/vala/bin
+  prepend-ld-library-path: /usr/lib/sdk/vala/lib
 
 modules:
   - shared-modules/libsecret/libsecret.json
@@ -121,11 +126,11 @@ modules:
 
   - name: tcl
     subdir: unix
-    post-install:
-      - chmod 755 /app/lib/libtcl*.so
-    cleanup:
-      - /lib/pkgconfig
-      - /man
+    build-options:
+      no-debuginfo: true
+    config-opts:
+      - --enable-threads
+      - --enable-64bit
     sources:
       - type: archive
         url: https://downloads.sourceforge.net/project/tcl/Tcl/8.6.14/tcl8.6.14-src.tar.gz
@@ -139,11 +144,23 @@ modules:
   - name: sqlcipher
     buildsystem: autotools
     build-options:
-      cflags: -DSQLITE_HAS_CODEC
+      cflags:
+        -DSQLITE_SECURE_DELETE
+        -DSQLITE_ENABLE_COLUMN_METADATA
+        -DSQLITE_ENABLE_FTS3
+        -DSQLITE_ENABLE_RTREE=1
+        -DSQLITE_SOUNDEX=1
+        -DSQLITE_ENABLE_UNLOCK_NOTIFY
+        -DSQLITE_OMIT_LOOKASIDE=1
+        -DSQLITE_ENABLE_UPDATE_DELETE_LIMIT=1
+        -DSQLITE_MAX_SCHEMA_RETRY=25
+        -DSQLITE_HAS_CODEC
+        -DHAVE_USLEEP=1
       ldflags: -lcrypto
     config-opts:
       - --enable-tempstore
-      - --enable-releasemode
+      - --enable-threadsafe
+      - --disable-tcl
     sources:
       - type: git
         url: https://github.com/sqlcipher/sqlcipher.git
