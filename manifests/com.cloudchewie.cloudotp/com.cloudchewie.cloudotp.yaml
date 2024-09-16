@@ -9,12 +9,10 @@ finish-args:
   - --share=ipc
   - --socket=wayland
   - --socket=fallback-x11
-  - --socket=pulseaudio
   - --share=network
   - --device=dri
   - --talk-name=org.kde.StatusNotifierWatcher
   - --talk-name=org.freedesktop.Notifications
-  - --persist=cloudotp
 cleanup:
   - '*.a'
   - '*.la'
@@ -175,17 +173,16 @@ modules:
   - name: cloudotp
     buildsystem: simple
     build-commands:
-      - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
-      - mv opt/CloudOTP /app/
-      - cp -a usr/share /app/
-      - chmod +x /app/CloudOTP/CloudOTP
-      - install -Dm755 CloudOTP.sh /app/bin/CloudOTP
-      - install -Dm644 com.cloudchewie.cloudotp.metainfo.xml -t /app/share/metainfo
+      - bsdtar --to-stdout -xf CloudOTP.deb data.tar.zst | bsdtar -xf -
+      - cp -r opt/CloudOTP ${FLATPAK_DEST}/
+      - cp -r usr/share ${FLATPAK_DEST}/
+      - install -Dm755 CloudOTP.sh ${FLATPAK_DEST}/bin/CloudOTP
     sources:
       - type: file
         only-arches: [x86_64]
         url: https://github.com/Robert-Stackflow/CloudOTP/releases/download/V2.4.4/CloudOTP-2.4.4-linux-amd64.deb
         sha256: 23794dc7f479b0a6c16c0f1d271b7f8672c3e654f8974f89d6c044d0a825d1b7
+        dest-filename: CloudOTP.deb
         x-checker-data:
           type: json
           url: https://api.github.com/repos/Robert-Stackflow/CloudOTP/releases/latest
@@ -193,10 +190,9 @@ modules:
           url-query: >-
             .assets[] | select(.name=="CloudOTP-" + $version + "-linux-amd64.deb") |
             .browser_download_url
-      - type: file
-        path: com.cloudchewie.cloudotp.metainfo.xml
+
       - type: script
         commands:
-          - export TMPDIR="$XDG_RUNTIME_DIR/app/$FLATPAK_ID"
+          - export TMPDIR="${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}"
           - /app/CloudOTP/CloudOTP
         dest-filename: CloudOTP.sh
