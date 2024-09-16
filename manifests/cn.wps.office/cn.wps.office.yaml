@@ -31,8 +31,6 @@ cleanup:
   - /share/man
   - /share/gtk-doc
 modules:
-  - shared-modules/SDL2/SDL2-with-libdecor.json
-
   - shared-modules/glu/glu-9.json
 
   - name: wps
