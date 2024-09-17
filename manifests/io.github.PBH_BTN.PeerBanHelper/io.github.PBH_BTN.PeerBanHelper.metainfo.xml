@@ -18,9 +18,11 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="v6.2.5" date="2024-09-16">
+      <description></description>
+    </release>
     <release version="6.2.1" date="2024-09-12"/>
   </releases>
   <content_rating type="oars-1.1"/>
   <update_contact>i@pugai.life</update_contact>
 </component>
-
