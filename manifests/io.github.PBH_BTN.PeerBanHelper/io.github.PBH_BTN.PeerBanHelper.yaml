@@ -38,9 +38,9 @@ modules:
       - install -Dm644 ${FLATPAK_ID}.png -t ${FLATPAK_DEST}/share/icons/hicolor/256x256/apps/
     sources:
       - type: file
-        url: https://github.com/PBH-BTN/PeerBanHelper/releases/download/v6.2.6/PeerBanHelper.jar
+        url: https://github.com/PBH-BTN/PeerBanHelper/releases/download/v6.2.7/PeerBanHelper.jar
         dest-filename: peerbanhelper.jar
-        sha256: 99072a6809604ff492905043b45286dab4916fc7d2ac6af824f1ae87e409155d
+        sha256: d8dd86d8377d99c808f0edcf8764fb4ac696bcad1660b57c4cbe5f9357ed3acf
         x-checker-data:
           type: json
           url: https://api.github.com/repos/PBH-BTN/PeerBanHelper/releases/latest
