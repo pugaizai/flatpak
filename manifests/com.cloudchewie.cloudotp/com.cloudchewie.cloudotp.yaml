@@ -172,8 +172,8 @@ modules:
     sources:
       - type: file
         only-arches: [x86_64]
-        url: https://github.com/Robert-Stackflow/CloudOTP/releases/download/V2.4.4/CloudOTP-2.4.4-linux-amd64.deb
-        sha256: 23794dc7f479b0a6c16c0f1d271b7f8672c3e654f8974f89d6c044d0a825d1b7
+        url: https://github.com/Robert-Stackflow/CloudOTP/releases/download/V2.4.5/CloudOTP-2.4.5-linux-amd64.deb
+        sha256: 40592d2f3d40722f51a5f2b221ea9d52274064f0c5469f9335adb57147fb495a
         dest-filename: CloudOTP.deb
         x-checker-data:
           type: json
