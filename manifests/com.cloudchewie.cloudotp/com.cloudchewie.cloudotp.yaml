@@ -106,23 +106,6 @@ modules:
             url: https://launchpad.net/libdbusmenu/16.04/16.04.0/+download/libdbusmenu-16.04.0.tar.gz
             sha256: b9cc4a2acd74509435892823607d966d424bd9ad5d0b00938f27240a1bfa878a
 
-  - name: tcl
-    subdir: unix
-    build-options:
-      no-debuginfo: true
-    config-opts:
-      - --enable-threads
-      - --enable-64bit
-    sources:
-      - type: archive
-        url: https://downloads.sourceforge.net/project/tcl/Tcl/8.6.15/tcl8.6.15-src.tar.gz
-        sha256: 861e159753f2e2fbd6ec1484103715b0be56be3357522b858d3cbb5f893ffef1
-        x-checker-data:
-          type: anitya
-          project-id: 4941
-          stable-only: true
-          url-template: https://downloads.sourceforge.net/project/tcl/Tcl/$version/tcl$version-src.tar.gz
-
   - name: sqlcipher
     buildsystem: autotools
     build-options:
