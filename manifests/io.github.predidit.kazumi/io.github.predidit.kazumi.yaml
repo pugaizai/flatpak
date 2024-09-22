@@ -106,8 +106,8 @@ modules:
     sources:
       - type: file
         only-arches: [x86_64]
-        url: https://github.com/Predidit/Kazumi/releases/download/1.3.2/Kazumi_linux_1.3.2_amd64.deb
-        sha256: e667861c1c0cb0902aa1f4a3459dcb9568a915e2d7362b10966868da48fe18e4
+        url: https://github.com/Predidit/Kazumi/releases/download/1.3.3/Kazumi_linux_1.3.3_amd64.deb
+        sha256: 0c71b875b98c7955c980143021eca5e07bd768f58f7ca5147853f0dde457c684
         x-checker-data:
           type: json
           url: https://api.github.com/repos/Predidit/Kazumi/releases/latest
