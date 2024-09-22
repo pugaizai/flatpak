@@ -53,8 +53,8 @@ modules:
     sources:
       - type: file
         only-arches: [aarch64]
-        url: https://github.com/msojocs/bilibili-linux/releases/download/v1.14.0-2/io.github.msojocs.bilibili_1.14.0-2_arm64.deb
-        sha256: 51a188e012e17e8625b99a4046c8fe2348849855d860d7e5e095a105638e8a9d
+        url: https://github.com/msojocs/bilibili-linux/releases/download/v1.14.2-1/io.github.msojocs.bilibili_1.14.2-1_arm64.deb
+        sha256: 5e37ddff562260163e0a860b238a99bb03876df7d03877ba12bd4511e4233f72
         x-checker-data:
           type: json
           url: https://api.github.com/repos/msojocs/bilibili-linux/releases/latest
@@ -65,8 +65,8 @@ modules:
             .browser_download_url
       - type: file
         only-arches: [x86_64]
-        url: https://github.com/msojocs/bilibili-linux/releases/download/v1.14.0-2/io.github.msojocs.bilibili_1.14.0-2_amd64.deb
-        sha256: 41031d129284eebfdf3cc697ff212869aeca8e296188f3182d1bc63e4bf58ddb
+        url: https://github.com/msojocs/bilibili-linux/releases/download/v1.14.2-1/io.github.msojocs.bilibili_1.14.2-1_amd64.deb
+        sha256: 9f49fbcc70f287d2420693c2e45ebd6eba03af958c01dca284903370f5c1cc31
         x-checker-data:
           type: json
           url: https://api.github.com/repos/msojocs/bilibili-linux/releases/latest
