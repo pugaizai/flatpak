@@ -42,8 +42,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/mpv-player/mpv.git
-        tag: v0.38.0
-        commit: 02254b92dd237f03aa0a151c2a68778c4ea848f9
+        tag: v0.39.0
+        commit: a0fba7be57f3822d967b04f0f6b6d6341e7516e7
         x-checker-data:
           type: anitya
           project-id: 5348
