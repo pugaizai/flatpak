@@ -17,6 +17,8 @@ finish-args:
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.kde.StatusNotifierWatcher
   - --talk-name=org.freedesktop.ScreenSaver
+  # required to fix cursor scaling on wayland
+  - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
 
 cleanup:
   - '*.a'
@@ -83,6 +85,13 @@ modules:
           - export TMPDIR=$XDG_RUNTIME_DIR/app/$FLATPAK_ID
           - export ELECTRON_IS_DEV=0
           - export ELECTRON_FORCE_IS_PACKAGED=true
+          - export ELECTRON_DISABLE_SECURITY_WARNINGS=true
           - export NODE_ENV=production
-          - exec zypak-wrapper "/app/bilibili/electron/electron" "/app/bilibili/app/app.asar"
-            "$@"
+          - WAYLAND_SOCKET=${WAYLAND_DISPLAY:-"wayland-0"}
+          - |
+            if [[ -e "$XDG_RUNTIME_DIR/${WAYLAND_SOCKET}" || -e "${WAYLAND_DISPLAY}" ]]
+            then
+                FLAGS="--enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime"
+            fi
+          - exec zypak-wrapper "/app/bilibili/electron/electron" "/app/bilibili/app/app.asar" $FLAGS "$@"
+

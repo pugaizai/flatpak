@@ -4,7 +4,7 @@
 
 ### Add Repo
 
-`flatpak remote-add --if-not-exists pugai https://flatpak.pugai.life/pugai.flatpakrepo`
+`flatpak remote-add --if-not-exists pugai https://flatpak.pugai.life/pugai.flatpakrepo --user`
 
 ### Install Something
 
@@ -34,7 +34,7 @@
 
 ### Build
 
-`flatpak run org.flatpak.Builder build-dir manifests/<application-id>/<application-id>.yaml --repo=repo --force-clean --install-deps-from=flathub --ccache`
+`flatpak run org.flatpak.Builder build-dir manifests/<application-id>/<application-id>.yaml --repo=repo --force-clean --install-deps-from=flathub --ccache --user`
 
 ### Add Repo
 
