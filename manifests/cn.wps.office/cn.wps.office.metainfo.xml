@@ -22,7 +22,7 @@
   <url type="help">http://community.wps.cn/wiki</url>
   <url type="translate">https://github.com/wps-community/wps_i18n</url>
   <developer_name>Kingsoft Office Corporation</developer_name>
-  <update_contact>wps_linux_at_kingsoft.com</update_contact>
+  <update_contact>i@pugai.life</update_contact>
   ​<launchable type="desktop-id">cn.wps.office.desktop</launchable>
   <categories>
     <category>Office</category>

@@ -1,0 +1,81 @@
+app-id: pro.cycity.desktop
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+base: org.electronjs.Electron2.BaseApp
+base-version: '24.08'
+separate-locales: false
+command: cyc-desktop
+
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --socket=pulseaudio
+  - --device=dri
+  - --share=network
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=org.kde.StatusNotifierWatcher
+  - --talk-name=org.freedesktop.ScreenSaver
+  # required to fix cursor scaling on wayland
+  - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
+
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/gtk-doc
+
+add-extensions:
+  org.freedesktop.Platform.ffmpeg-full:
+    directory: lib/ffmpeg
+    version: '24.08'
+    add-ld-path: .
+
+modules:
+  - name: bilibili
+    buildsystem: simple
+    build-options:
+      no-debuginfo: true
+    build-commands:
+      - install -Dm644 pro.cycity.desktop.desktop -t /app/share/applications
+      - install -Dm644 pro.cycity.desktop.png -t /app/share/icons/hicolor/512x512/apps/
+      - install -Dm644 pro.cycity.desktop.metainfo.xml -t /app/share/metainfo
+      - install -Dm755 cyc-desktop.sh /app/bin/cyc-desktop
+      - install -Dm755 apply_extra -t /app/bin
+      - ln -svf /usr/bin/ffmpeg /app/bin/
+      - mkdir -p /app/lib/ffmpeg
+    sources:
+      - type: extra-data
+        only-arches: [x86_64]
+        url: https://alist.idti.cn/d/Public/Program/Linux/cyc-desktop_1.0.8_amd64.deb
+        sha256: 9499edfcb0406eeba122cac78008513358e246f89a932b1d5a4f5d57a470fc12
+        filename: bilibili.deb
+        size: 78753186
+      - type: file
+        path: pro.cycity.desktop.metainfo.xml
+      - type: file
+        path: pro.cycity.desktop.png     
+      - type: file
+        path: pro.cycity.desktop.desktop
+      - type: script
+        dest-filename: cyc-desktop.sh
+        commands:
+          - export TMPDIR=$XDG_RUNTIME_DIR/app/$FLATPAK_ID
+          - WAYLAND_SOCKET=${WAYLAND_DISPLAY:-"wayland-0"}
+          - |
+            if [[ -e "$XDG_RUNTIME_DIR/${WAYLAND_SOCKET}" || -e "${WAYLAND_DISPLAY}" ]]
+            then
+                FLAGS="--enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime"
+            fi
+          - exec zypak-wrapper "/app/extra/cyc-desktop/cyc-desktop" $FLAGS "$@"
+      - type: script
+        commands:
+          - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
+          - mv opt/cyc-desktop .
+          - rm -r *.deb usr opt
+        dest-filename: apply_extra

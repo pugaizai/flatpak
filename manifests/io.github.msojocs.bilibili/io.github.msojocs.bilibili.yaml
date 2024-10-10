@@ -14,6 +14,7 @@ finish-args:
   - --device=dri
   - --share=network
   - --filesystem=xdg-videos
+  - --filesystem=xdg-download
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.kde.StatusNotifierWatcher
   - --talk-name=org.freedesktop.ScreenSaver
@@ -43,20 +44,20 @@ modules:
     build-options:
       no-debuginfo: true
     build-commands:
-      - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
-      - rm -r usr/share/doc
-      - mv opt/apps/io.github.msojocs.bilibili/files/bin $FLATPAK_DEST/bilibili
-      - cp -a usr/share $FLATPAK_DEST/
-      - desktop-file-edit --set-key="Exec" --set-value="bilibili %U" $FLATPAK_DEST/share/applications/io.github.msojocs.bilibili.desktop
+      - install -Dm644 io.github.msojocs.bilibili.desktop -t /app/share/applications
+      - install -Dm644 io.github.msojocs.bilibili.svg -t /app/share/icons/hicolor/scalable/apps/
       - install -Dm644 io.github.msojocs.bilibili.metainfo.xml -t /app/share/metainfo
       - install -Dm755 bilibili.sh /app/bin/bilibili
+      - install -Dm755 apply_extra -t /app/bin
       - ln -svf /usr/bin/ffmpeg /app/bin/
       - mkdir -p /app/lib/ffmpeg
     sources:
-      - type: file
+      - type: extra-data
         only-arches: [aarch64]
         url: https://github.com/msojocs/bilibili-linux/releases/download/v1.14.2-1/io.github.msojocs.bilibili_1.14.2-1_arm64.deb
         sha256: 5e37ddff562260163e0a860b238a99bb03876df7d03877ba12bd4511e4233f72
+        filename: bilibili.deb
+        size: 83931152
         x-checker-data:
           type: json
           url: https://api.github.com/repos/msojocs/bilibili-linux/releases/latest
@@ -65,10 +66,12 @@ modules:
             .assets[] | select(.name=="io.github.msojocs.bilibili_" + $version + "_arm64.deb")
             |
             .browser_download_url
-      - type: file
+      - type: extra-data
         only-arches: [x86_64]
         url: https://github.com/msojocs/bilibili-linux/releases/download/v1.14.2-1/io.github.msojocs.bilibili_1.14.2-1_amd64.deb
         sha256: 9f49fbcc70f287d2420693c2e45ebd6eba03af958c01dca284903370f5c1cc31
+        filename: bilibili.deb
+        size: 87893708
         x-checker-data:
           type: json
           url: https://api.github.com/repos/msojocs/bilibili-linux/releases/latest
@@ -79,6 +82,10 @@ modules:
             .browser_download_url
       - type: file
         path: io.github.msojocs.bilibili.metainfo.xml
+      - type: file
+        path: io.github.msojocs.bilibili.desktop
+      - type: file
+        path: io.github.msojocs.bilibili.svg
       - type: script
         dest-filename: bilibili.sh
         commands:
@@ -93,5 +100,10 @@ modules:
             then
                 FLAGS="--enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime"
             fi
-          - exec zypak-wrapper "/app/bilibili/electron/electron" "/app/bilibili/app/app.asar" $FLAGS "$@"
-
+          - exec zypak-wrapper "/app/extra/bilibili/electron/electron" "/app/extra/bilibili/app/app.asar" $FLAGS "$@"
+      - type: script
+        commands:
+          - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
+          - mv opt/apps/io.github.msojocs.bilibili/files/bin ./bilibili
+          - rm -r *.deb usr opt
+        dest-filename: apply_extra
