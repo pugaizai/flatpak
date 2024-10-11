@@ -21,7 +21,6 @@ jobs:
           - com.qq.qqmusic
           - com.xiaoyaocz.dmzjx
           - com.xiaoyaocz.simplelive
-          - com.cloudchewie.cloudotp
           - io.github.c0re100.qBittorrent-Enhanced-Edition
           - io.github.msojocs.bilibili
           - io.github.predidit.kazumi

@@ -4,6 +4,3 @@
 [submodule "manifests/io.github.predidit.kazumi/shared-modules"]
 	path = manifests/io.github.predidit.kazumi/shared-modules
 	url = https://github.com/flathub/shared-modules.git
-[submodule "manifests/com.cloudchewie.cloudotp/shared-modules"]
-	path = manifests/com.cloudchewie.cloudotp/shared-modules
-	url = https://github.com/flathub/shared-modules.git
