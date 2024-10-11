@@ -34,6 +34,8 @@ jobs:
         run: |
           git config --global protocol.file.allow always
 
+          flatpak-builder build-dir manifests/pro.cycity.desktop/pro.cycity.desktop.yaml --repo=repo --arch=x86_64 --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
+
           flatpak-builder build-dir manifests/io.github.PBH_BTN.PeerBanHelper/io.github.PBH_BTN.PeerBanHelper.yaml --repo=repo --arch=x86_64 --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
 
           flatpak-builder build-dir manifests/io.github.iota9star.mikan/io.github.iota9star.mikan.yaml --repo=repo --arch=x86_64 --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
