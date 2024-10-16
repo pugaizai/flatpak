@@ -1,0 +1,51 @@
+app-id: life.pugai.honzuki
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+command: Honzuki
+finish-args:
+  - '--share=ipc'
+  - '--socket=fallback-x11'
+  - '--socket=wayland'
+  - '--share=network'
+  - '--device=dri'
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/gtk-doc
+modules:
+  - name: Honzuki
+    buildsystem: simple
+    build-options:
+      no-debuginfo: true
+    build-commands:
+      - bsdtar --to-stdout -xf Honzuki.deb data.tar.zst | bsdtar -xf -
+      - cp -r opt/Honzuki ${FLATPAK_DEST}/
+      - cp -r usr/share ${FLATPAK_DEST}/
+      - install -Dm755 Honzuki.sh ${FLATPAK_DEST}/bin/Honzuki
+    sources:
+      - type: file
+        url: https://github.com/pugaizai/honzuki/releases/download/1.0.1/Honzuki-1.0.0-linux-amd64.deb
+        only-arches: [x86_64]
+        sha256: 436e70b24aa9d86c15bb4a80c4c673fd0b8c09fff35f396aa55b820556d30aa5
+        dest-filename: Honzuki.deb
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/niuhuan/Honzuki/releases/latest
+          version-query: .tag_name
+          url-query: >-
+            .assets[] | select(.name=="Honzuki-" + $version + "-linux-amd64.deb")
+            |
+            .browser_download_url
+
+      - type: script
+        commands:
+          - export TMPDIR="$XDG_RUNTIME_DIR/app/$FLATPAK_ID"
+          - /app/Honzuki/Honzuki "$@"
+        dest-filename: Honzuki.sh
