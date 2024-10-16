@@ -41,7 +41,7 @@ modules:
         sha256: 886b89c8f57734e5324b88ac245bf0487c6a41c5d00a0e64c3cf2988c868f931
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/iota9star/mikan/releases/latest
+          url: https://api.github.com/repos/iota9star/mikan_flutter/releases/latest
           version-query: .tag_name | sub("^v"; "")
           url-query: >-
             .assets[] | select(.name=="linux-release.zip")
