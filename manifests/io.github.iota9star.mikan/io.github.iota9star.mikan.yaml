@@ -4,11 +4,11 @@ runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
 command: mikan
 finish-args:
-  - '--share=ipc'
-  - '--socket=fallback-x11'
-  - '--socket=wayland'
-  - '--share=network'
-  - '--device=dri'
+  - --share=ipc
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --share=network
+  - --device=dri
 cleanup:
   - '*.a'
   - '*.la'
@@ -35,10 +35,10 @@ modules:
       - install -Dm644 io.github.iota9star.mikan.desktop -t /app/share/applications/
     sources:
       - type: file
-        url: https://github.com/iota9star/mikan_flutter/releases/download/v1.2.7/linux-release.zip
+        url: https://github.com/iota9star/mikan_flutter/releases/download/v1.2.9/linux-release.zip
         dest-filename: mikan.zip
         only-arches: [x86_64]
-        sha256: 886b89c8f57734e5324b88ac245bf0487c6a41c5d00a0e64c3cf2988c868f931
+        sha256: 89148ce4ccf9462adef137267b1fe6aebd03dcc68161dcf1ed6953d0dcd8621b
         x-checker-data:
           type: json
           url: https://api.github.com/repos/iota9star/mikan_flutter/releases/latest
