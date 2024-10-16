@@ -37,7 +37,7 @@ modules:
         dest-filename: Honzuki.deb
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/niuhuan/Honzuki/releases/latest
+          url: https://api.github.com/repos/pugaizai/Honzuki/releases/latest
           version-query: .tag_name
           url-query: >-
             .assets[] | select(.name=="Honzuki-" + $version + "-linux-amd64.deb")
