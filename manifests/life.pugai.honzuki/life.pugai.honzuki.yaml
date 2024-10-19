@@ -4,11 +4,11 @@ runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
 command: Honzuki
 finish-args:
-  - '--share=ipc'
-  - '--socket=fallback-x11'
-  - '--socket=wayland'
-  - '--share=network'
-  - '--device=dri'
+  - --share=ipc
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --share=network
+  - --device=dri
 cleanup:
   - '*.a'
   - '*.la'
@@ -31,9 +31,9 @@ modules:
       - install -Dm755 Honzuki.sh ${FLATPAK_DEST}/bin/Honzuki
     sources:
       - type: file
-        url: https://github.com/pugaizai/honzuki/releases/download/1.0.1/Honzuki-1.0.0-linux-amd64.deb
+        url: https://github.com/pugaizai/honzuki/releases/download/1.0.2/Honzuki-1.0.2-linux-amd64.deb
         only-arches: [x86_64]
-        sha256: 436e70b24aa9d86c15bb4a80c4c673fd0b8c09fff35f396aa55b820556d30aa5
+        sha256: bdd032ecb1edacea8cf0bcdab192335eb4d9e00f17b129cb82b4d5e7af2e1160
         dest-filename: Honzuki.deb
         x-checker-data:
           type: json
