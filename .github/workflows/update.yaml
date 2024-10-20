@@ -29,6 +29,7 @@ jobs:
           - org.freedesktop.xorg.xeyes
           - top.jtmonster.jhentai
           - life.pugai.honzuki
+          - com.hoppscotch.hoppscotch
     steps:
       - uses: actions/checkout@v4 
       - uses: docker://ghcr.io/flathub/flatpak-external-data-checker:latest
