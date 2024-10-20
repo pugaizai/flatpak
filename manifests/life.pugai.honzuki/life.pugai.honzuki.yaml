@@ -31,9 +31,9 @@ modules:
       - install -Dm755 Honzuki.sh ${FLATPAK_DEST}/bin/Honzuki
     sources:
       - type: file
-        url: https://github.com/pugaizai/honzuki/releases/download/1.0.2/Honzuki-1.0.2-linux-amd64.deb
+        url: https://github.com/pugaizai/honzuki/releases/download/1.0.3/Honzuki-1.0.3-linux-amd64.deb
         only-arches: [x86_64]
-        sha256: bdd032ecb1edacea8cf0bcdab192335eb4d9e00f17b129cb82b4d5e7af2e1160
+        sha256: 5c4d8fc56acfac5b7241f1e5ea0070050e79f0d47a15b0c16b11082f2170f4f5
         dest-filename: Honzuki.deb
         x-checker-data:
           type: json
