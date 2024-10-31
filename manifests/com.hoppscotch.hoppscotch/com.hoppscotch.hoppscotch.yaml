@@ -29,15 +29,15 @@ modules:
       - install -Dm755 usr/bin/hoppscotch /app/bin/hoppscotch
       - install -Dm644 usr/share/applications/hoppscotch.desktop /app/share/applications/com.hoppscotch.hoppscotch.desktop
       - install -Dm644 com.hoppscotch.hoppscotch.metainfo.xml /app/share/metainfo/com.hoppscotch.hoppscotch.metainfo.xml
-      - for size in {32x32,48x48,64x64,128x128,256x256@2}; do
-          install -Dm644 usr/share/icons/hicolor/$size/apps/hoppscotch.png /app/share/icons/hicolor/$size/apps/com.hoppscotch.hoppscotch.png;
-        done
-      - desktop-file-edit --set-key="Categories" --set-value="Development;Network;" --set-key="Icon" --set-value="com.hoppscotch.hoppscotch" /app/share/applications/com.hoppscotch.hoppscotch.desktop
+      - for size in {32x32,48x48,64x64,128x128,256x256@2}; do install -Dm644 usr/share/icons/hicolor/$size/apps/hoppscotch.png
+        /app/share/icons/hicolor/$size/apps/com.hoppscotch.hoppscotch.png; done
+      - desktop-file-edit --set-key="Categories" --set-value="Development;Network;"
+        --set-key="Icon" --set-value="com.hoppscotch.hoppscotch" /app/share/applications/com.hoppscotch.hoppscotch.desktop
     sources:
       - type: file
         only-arches: [x86_64]
-        url: https://github.com/hoppscotch/releases/releases/download/v24.9.3-0/Hoppscotch_linux_x64.deb
-        sha256: af283fb6745b3bf03032f3b5399d593f51aca3041c8440ad7242f05bd5c5909b
+        url: https://github.com/hoppscotch/releases/releases/download/v24.10.0-0/Hoppscotch_linux_x64.deb
+        sha256: 46e271f9d76b1d474a9f30c8638654da2b156a04dd0a343a8f63d2a4bf5a9e91
         x-checker-data:
           type: json
           url: https://api.github.com/repos/hoppscotch/releases/releases/latest
