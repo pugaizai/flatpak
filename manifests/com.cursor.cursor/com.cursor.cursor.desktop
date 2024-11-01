@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Cursor
+Exec=cursor %U
+Terminal=false
+Type=Application
+Icon=com.cursor.cursor
+StartupWMClass=Cursor
+Comment=Cursor is an AI-first coding environment.
+MimeType=x-scheme-handler/cursor;
+Categories=TextEditor;Development;IDE;

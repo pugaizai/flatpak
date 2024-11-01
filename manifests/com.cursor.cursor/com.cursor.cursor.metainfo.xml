@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>com.cursor.cursor</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LicenseRef-proprietary=https://www.cursor.com/terms-of-service</project_license>
+  <name>Cursor</name>
+  <developer_name>Anysphere Inc.</developer_name>
+  <url type="homepage">https://www.cursor.com/</url>
+  <url type="bugtracker">https://github.com/getcursor/cursor/issues</url>
+  <summary>The AI Code Editor.</summary>
+  <description>
+    <p>Built to make you extraordinarily productive, Cursor is the best way to code with AI.</p>
+    <p>IMPORTANT: To use certain features in this flatpacked version (like the integrated terminal), please read the linked documentation.</p>
+    <p>This is the proprietary Anysphere build of Cursor, packaged into a Flatpak. This repackaging is not supported by Anysphere.</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://code.visualstudio.com/home/home-screenshot-linux-lg.png</image>
+      <caption>Editing TypeScript and searching for extensions</caption>
+    </screenshot>
+  </screenshots>
+  <launchable type="desktop-id">com.cursor.cursor.desktop</launchable>
+  <content_rating type="oars-1.1">
+    <content_attribute id="social-info">moderate</content_attribute>
+  </content_rating>
+  <releases>
+    <release version="1.94.2" date="2024-10-10">
+      <description></description>
+    </release>
+  </releases>
+</component>

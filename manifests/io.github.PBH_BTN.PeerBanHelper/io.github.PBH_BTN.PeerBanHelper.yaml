@@ -1,6 +1,6 @@
 id: io.github.PBH_BTN.PeerBanHelper
 runtime: org.freedesktop.Platform
-runtime-version: '24.08'
+runtime-version: "24.08"
 sdk: org.freedesktop.Sdk
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.openjdk21
@@ -12,8 +12,8 @@ finish-args:
   - --env=PATH=/app/jre/bin:/app/bin:/usr/bin
   - --persist=data
 cleanup:
-  - '*.a'
-  - '*.la'
+  - "*.a"
+  - "*.la"
   - /include
   - /lib/cmake
   - /lib/debug
@@ -22,7 +22,6 @@ cleanup:
   - /share/man
   - /share/gtk-doc
 modules:
-
   - name: openjdk
     buildsystem: simple
     build-commands:
@@ -32,20 +31,21 @@ modules:
     buildsystem: simple
     build-commands:
       - install -Dm755 peerbanhelper -t ${FLATPAK_DEST}/bin/
-      - install -Dm644 peerbanhelper.jar -t ${FLATPAK_DEST}/bin/
       - install -Dm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications/
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo/
       - install -Dm644 ${FLATPAK_ID}.png -t ${FLATPAK_DEST}/share/icons/hicolor/256x256/apps/
+      - install -Dm755 apply_extra -t ${FLATPAK_DEST}/bin/
     sources:
-      - type: file
-        url: https://github.com/PBH-BTN/PeerBanHelper/releases/download/v7.0.0/PeerBanHelper.jar
-        dest-filename: peerbanhelper.jar
-        sha256: 941368af414a6b78944ad97fdedcce769cb5e1328d61599bb5c9169181b683d3
+      - type: extra-data
+        url: https://github.com/PBH-BTN/PeerBanHelper/releases/download/v7.0.1/peerbanhelper_7.0.1_all.deb
+        filename: peerbanhelper.deb
+        sha256: f70519a96d69dc67a0ad448b045d502e84f8398df01309fa03df88266530553a
+        size: 49961046
         x-checker-data:
           type: json
           url: https://api.github.com/repos/PBH-BTN/PeerBanHelper/releases/latest
-          version-query: .tag_name
-          url-query: .assets[] | select(.name=="PeerBanHelper.jar") | .browser_download_url
+          version-query: .tag_name | sub("^v"; "")
+          url-query: .assets[] | select(.name=="peerbanhelper_" + $version + "_all.deb") | .browser_download_url
 
       - type: file
         path: io.github.PBH_BTN.PeerBanHelper.metainfo.xml
@@ -58,7 +58,12 @@ modules:
 
       - type: script
         commands:
-          - java -jar -Xmx256M -XX:+UseG1GC -XX:+UseStringDeduplication -XX:+ShrinkHeapInSteps
-            -jar /app/bin/peerbanhelper.jar
+          - java -Dpbh.release=debian -Dpbh.datadir=${XDG_CONFIG_HOME}/peerbanhelper -Xmx512M -XX:+UseG1GC -XX:+UseStringDeduplication -XX:+ShrinkHeapInSteps -jar /app/extra/peerbanhelper/PeerBanHelper.jar
         dest-filename: peerbanhelper
 
+      - type: script
+        commands:
+          - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
+          - mv usr/lib/peerbanhelper .
+          - rm -rf etc usr
+        dest-filename: apply_extra

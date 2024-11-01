@@ -1,0 +1,129 @@
+app-id: com.cursor.cursor
+runtime: org.freedesktop.Sdk
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+base: org.electronjs.Electron2.BaseApp
+base-version: '24.08'
+command: cursor
+separate-locales: false
+finish-args:
+  - --share=network
+  - --share=ipc
+  - --socket=x11
+  - --socket=pulseaudio
+  - --socket=ssh-auth
+  - --device=all
+  - --allow=devel
+  - --filesystem=host
+  - --env=NPM_CONFIG_GLOBALCONFIG=/app/etc/npmrc
+  - --env=LD_LIBRARY_PATH=/app/lib
+  # required to fix cursor scaling on wayland
+  - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
+  - --system-talk-name=org.freedesktop.login1
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=org.freedesktop.secrets
+  - --talk-name=org.kde.kwalletd5
+  - --talk-name=org.freedesktop.Flatpak
+  - --filesystem=xdg-run/gnupg:ro
+  - --filesystem=xdg-config/kdeglobals:ro
+  - --talk-name=com.canonical.AppMenu.Registrar
+
+add-extensions:
+  com.visualstudio.code.tool:
+    directory: tools
+    subdirectories: true
+    version: '24.08'
+    add-ld-path: lib
+    no-autodownload: true
+cleanup:
+  - /include
+  - /lib/pkgconfig
+  - /share/gtk-doc
+  - '*.la'
+modules:
+  - shared-modules/libusb/libusb.json
+
+  - name: unappimage
+    buildsystem: simple
+    build-commands:
+      - make -C squashfs-tools install INSTALL_DIR=/app/bin
+    sources:
+      - type: git
+        url: https://github.com/refi64/unappimage
+        commit: d7f86f2a0d7ec3a69211125207d5f127386b849a
+
+  - name: cursor
+    buildsystem: simple
+    build-commands:
+      - install -Dm755 cursor -t /app/bin/
+      - install -Dm644 com.cursor.cursor.png -t /app/share/icons/hicolor/512x512/apps/
+      - install -Dm644 com.cursor.cursor.metainfo.xml -t /app/share/metainfo/
+      - install -Dm644 com.cursor.cursor.desktop -t /app/share/applications/
+      - install -Dm644 npmrc -t /app/etc/
+      - install -Dm644 flatpak-warning.txt -t /app/share/cursor
+      - install -Dm755 apply_extra -t /app/bin/
+      - mkdir /app/tools
+    sources:
+      - type: script
+        dest-filename: apply_extra
+        commands:
+          - chmod +x cursor.AppImage
+          - unappimage cursor.AppImage >/dev/null
+          - mv squashfs-root cursor
+          - rm -rf cursor.AppImage cursor/{usr,AppRun,cursor.desktop,cursor.png,.DirIcon}
+          # fix double-title-bars bugs
+          - sed -i 's/,minHeight/,frame:false,minHeight/g' "cursor/resources/app/out/vs/code/electron-main/main.js"
+      - type: file
+        path: com.cursor.cursor.metainfo.xml
+      - type: file
+        path: com.cursor.cursor.desktop
+      - type: file
+        path: com.cursor.cursor.png
+      - type: file
+        path: cursor
+      - type: file
+        path: npmrc
+      - type: file
+        path: flatpak-warning.txt
+      - type: extra-data
+        filename: cursor.AppImage
+        only-arches: [x86_64]
+        url: https://downloader.cursor.sh/linux/appImage/x64
+        sha256: 083e9b4384fc0e12627623b13518110cbe286df119c7b8673b4568b556fa9437
+        size: 162787450
+      - type: extra-data
+        filename: cursor.AppImage
+        only-arches: [aarch64]
+        url: https://downloader.cursor.sh/linux/appImage/arm64
+        sha256: d69941d5dbc95e934aa6ad52ae4a4d8eab3b2bc90f54effc62ea608b9fb74e3a
+        size: 163167615
+
+  - name: host-spawn
+    buildsystem: simple
+    build-commands:
+      - install -Dm755 host-spawn /app/bin/host-spawn
+    sources:
+      - type: file
+        url: https://github.com/1player/host-spawn/releases/download/v1.6.0/host-spawn-x86_64
+        sha256: 75159f0d3924a0bd6d230c6414d19ad44609b5a16671db6624681c910f9bb4ff
+        dest-filename: host-spawn
+        only-arches: [x86_64]
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/1player/host-spawn/releases/latest
+          tag-query: .tag_name
+          version-query: .tag_name
+          timestamp-query: .published_at
+          url-query: '[.assets[] | select(.name|test(".+x86_64$"))][0] | .browser_download_url'
+      - type: file
+        url: https://github.com/1player/host-spawn/releases/download/v1.6.0/host-spawn-aarch64
+        sha256: 00f9617c139b9447e6c453a27602ca87f28cdac3aa62b04dcb38d215b2758165
+        dest-filename: host-spawn
+        only-arches: [aarch64]
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/1player/host-spawn/releases/latest
+          tag-query: .tag_name
+          version-query: .tag_name
+          timestamp-query: .published_at
+          url-query: '[.assets[] | select(.name|test(".+aarch64$"))][0] | .browser_download_url'
