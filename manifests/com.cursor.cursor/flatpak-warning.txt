@@ -55,3 +55,11 @@ You can use
   $ flatpak search <TEXT>
 
 to find others.
+
+To enable wayland, you have to turn on `--socket=wayland` with Flatseal, then create `~/.var/app/com.cursor.cursor/config/cursor-flags.conf` with the following content:
+
+  ```
+  --enable-features=UseOzonePlatform
+  --ozone-platform=wayland
+  --enable-wayland-ime
+  ```
