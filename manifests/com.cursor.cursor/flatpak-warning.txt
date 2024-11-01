@@ -14,7 +14,11 @@ to access SDKs on your host system!
 To execute commands on the host system, run inside the sandbox:
 
   $ host-spawn <COMMAND>
-  
+
+To run binaries/executables from the host without host-spawn.
+
+  $ EXTRA_PATH=<TOOL_PATH> flatpak run com.cursor.cursor
+
 To make the Integrated Terminal automatically use the host system's shell,
 you can add this to the settings:
 
@@ -31,7 +35,7 @@ you can add this to the settings:
 This Flatpak provides a standard development environment (gcc, python, etc).
 To see what's available:
 
-  $ flatpak run --command=sh com.visualstudio.code
+  $ flatpak run --command=sh com.cursor.cursor
   $ ls /usr/bin (shared runtime)
   $ ls /app/bin (bundled with this flatpak)
 
@@ -39,7 +43,7 @@ To get support for additional languages or tools within the Flatpak, you have to
 
   $ flatpak install flathub org.freedesktop.Sdk.Extension.dotnet
   $ flatpak install flathub org.freedesktop.Sdk.Extension.golang
-  $ FLATPAK_ENABLE_SDK_EXT=dotnet,golang flatpak run com.visualstudio.code
+  $ FLATPAK_ENABLE_SDK_EXT=dotnet,golang flatpak run com.cursor.cursor
 
 Similarly for shells and other tools:
 
