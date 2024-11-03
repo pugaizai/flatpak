@@ -1,0 +1,93 @@
+app-id: xyz.chatboxapp.ce
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+base: org.electronjs.Electron2.BaseApp
+base-version: '24.08'
+separate-locales: false
+command: chatbox
+
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --device=dri
+  - --share=network
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=org.kde.StatusNotifierWatcher
+  # required to fix cursor scaling on wayland
+  - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
+
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/gtk-doc
+
+modules:
+  - name: chatboxapp
+    buildsystem: simple
+    build-options:
+      no-debuginfo: true
+    build-commands:
+      - install -Dm644 xyz.chatboxapp.ce.desktop -t /app/share/applications
+      - install -Dm644 xyz.chatboxapp.ce.png -t /app/share/icons/hicolor/512x512/apps/
+      - install -Dm644 xyz.chatboxapp.ce.metainfo.xml -t /app/share/metainfo
+      - install -Dm755 chatbox -t /app/bin/
+      - install -Dm755 apply_extra -t /app/bin/
+    sources:
+      - type: extra-data
+        only-arches: [aarch64]
+        url: https://github.com/Bin-Huang/chatbox/releases/download/v0.10.1/Chatbox.CE-0.10.1-arm64.deb
+        sha256: 527f2c787428b1208f267869a9d540ea8b0daa21fac42f5df0004d571f8607bd
+        filename: chatboxapp.deb
+        size: 67392010
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/Bin-Huang/chatbox/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: >-
+            .assets[] | select(.name | test("Chatbox.CE-" + $version + "-arm64.deb"))
+            |
+            .browser_download_url
+      - type: extra-data
+        only-arches: [x86_64]
+        url: https://github.com/Bin-Huang/chatbox/releases/download/v0.10.1/Chatbox.CE-0.10.1-amd64.deb
+        sha256: de576eb71bfa50aaf8b09a1a456e97876ead0d530370bbc6afa29841898a120d
+        filename: chatboxapp.deb
+        size: 71330826
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/Bin-Huang/chatbox/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: >-
+            .assets[] | select(.name | test("Chatbox.CE-" + $version + "-amd64.deb"))
+            |
+            .browser_download_url
+      - type: file
+        path: xyz.chatboxapp.ce.metainfo.xml
+      - type: file
+        path: xyz.chatboxapp.ce.png     
+      - type: file
+        path: xyz.chatboxapp.ce.desktop
+      - type: script
+        dest-filename: chatbox
+        commands:
+          - export TMPDIR=$XDG_RUNTIME_DIR/app/$FLATPAK_ID
+          - WAYLAND_SOCKET=${WAYLAND_DISPLAY:-"wayland-0"}
+          - |
+            if [[ -e "$XDG_RUNTIME_DIR/${WAYLAND_SOCKET}" || -e "${WAYLAND_DISPLAY}" ]]
+            then
+                FLAGS="--enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime"
+            fi
+          - exec zypak-wrapper "/app/extra/chatbox/xyz.chatboxapp.ce" $FLAGS "$@"
+      - type: script
+        dest-filename: apply_extra
+        commands:
+          - bsdtar --to-stdout -xf chatboxapp.deb data.tar.xz | bsdtar -xf -
+          - mv "opt/Chatbox CE" ./chatbox
+          - rm -r chatboxapp.deb usr opt
