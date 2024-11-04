@@ -1,6 +1,6 @@
 id: io.github.PBH_BTN.PeerBanHelper
 runtime: org.freedesktop.Platform
-runtime-version: "24.08"
+runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.openjdk21
@@ -12,8 +12,8 @@ finish-args:
   - --env=PATH=/app/jre/bin:/app/bin:/usr/bin
   - --persist=data
 cleanup:
-  - "*.a"
-  - "*.la"
+  - '*.a'
+  - '*.la'
   - /include
   - /lib/cmake
   - /lib/debug
@@ -37,15 +37,16 @@ modules:
       - install -Dm755 apply_extra -t ${FLATPAK_DEST}/bin/
     sources:
       - type: extra-data
-        url: https://github.com/PBH-BTN/PeerBanHelper/releases/download/v7.0.1/peerbanhelper_7.0.1_all.deb
+        url: https://github.com/PBH-BTN/PeerBanHelper/releases/download/v7.0.2/peerbanhelper_7.0.2_all.deb
         filename: peerbanhelper.deb
-        sha256: f70519a96d69dc67a0ad448b045d502e84f8398df01309fa03df88266530553a
-        size: 49961046
+        sha256: a74d6e5ec3696c867ee76878f2afd0e931ef7177e6145d57e28b5738403f693a
+        size: 49942958
         x-checker-data:
           type: json
           url: https://api.github.com/repos/PBH-BTN/PeerBanHelper/releases/latest
           version-query: .tag_name | sub("^v"; "")
-          url-query: .assets[] | select(.name=="peerbanhelper_" + $version + "_all.deb") | .browser_download_url
+          url-query: .assets[] | select(.name=="peerbanhelper_" + $version + "_all.deb")
+            | .browser_download_url
 
       - type: file
         path: io.github.PBH_BTN.PeerBanHelper.metainfo.xml
@@ -58,7 +59,9 @@ modules:
 
       - type: script
         commands:
-          - java -Dpbh.release=debian -Dpbh.datadir=${XDG_CONFIG_HOME}/peerbanhelper -Xmx512M -XX:+UseG1GC -XX:+UseStringDeduplication -XX:+ShrinkHeapInSteps -jar /app/extra/peerbanhelper/PeerBanHelper.jar
+          - java -Dpbh.release=debian -Dpbh.datadir=${XDG_CONFIG_HOME}/peerbanhelper
+            -Xmx512M -XX:+UseG1GC -XX:+UseStringDeduplication -XX:+ShrinkHeapInSteps
+            -jar /app/extra/peerbanhelper/PeerBanHelper.jar
         dest-filename: peerbanhelper
 
       - type: script
