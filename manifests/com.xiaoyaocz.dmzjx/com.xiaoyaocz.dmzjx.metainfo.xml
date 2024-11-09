@@ -26,9 +26,11 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="zaix/v1.0.3" date="2024-09-29">
+      <description></description>
+    </release>
     <release version="2.1.1" date="2024-06-06"/>
   </releases>
   <content_rating type="oars-1.1"/>
   <update_contact>i@pugai.life</update_contact>
 </component>
-
