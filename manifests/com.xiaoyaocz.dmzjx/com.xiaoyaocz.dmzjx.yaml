@@ -6,11 +6,11 @@ rename-icon: flutter_dmzj
 rename-desktop-file: flutter_dmzj.desktop
 command: flutter_dmzj
 finish-args:
-  - '--share=ipc'
-  - '--socket=fallback-x11'
-  - '--socket=wayland'
-  - '--share=network'
-  - '--device=dri'
+  - --share=ipc
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --share=network
+  - --device=dri
 cleanup:
   - '*.a'
   - '*.la'
@@ -30,15 +30,16 @@ modules:
       - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
       - mv usr/share/flutter_dmzj /app/
       - mv usr/share /app/
-      - desktop-file-edit --set-key="Categories" --set-value="Graphics;Network;" --remove-key="Version" /app/share/applications/flutter_dmzj.desktop
+      - desktop-file-edit --set-key="Categories" --set-value="Graphics;Network;" --remove-key="Version"
+        /app/share/applications/flutter_dmzj.desktop
       - chmod +x /app/flutter_dmzj/flutter_dmzj
       - install -Dm755 flutter_dmzj.sh /app/bin/flutter_dmzj
       - install -Dm644 com.xiaoyaocz.dmzjx.metainfo.xml -t /app/share/metainfo
     sources:
       - type: file
-        url: https://github.com/xiaoyaocz/flutter_dmzj/releases/download/zaix%2Fv1.0.3-test/flutter_dmzj-1.0.3%2B10003-linux.deb
+        url: https://github.com/xiaoyaocz/flutter_dmzj/releases/download/zaix/v1.0.3-test/flutter_dmzj-1.0.3%2B10003-linux.deb
         only-arches: [x86_64]
-        sha256: 8a0aae64bfc5fc415da919c74c612a863a963f75ce8da7e4be8c355294c5f23b
+        sha256: 053a890777dd4d756feb7821b0f853733d3a947abcae949b10bbaf92df458ed6
         x-checker-data:
           type: json
           url: https://api.github.com/repos/xiaoyaocz/flutter_dmzj/releases/latest
