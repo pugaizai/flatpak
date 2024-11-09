@@ -37,9 +37,9 @@ modules:
       - install -Dm644 com.xiaoyaocz.dmzjx.metainfo.xml -t /app/share/metainfo
     sources:
       - type: file
-        url: https://github.com/xiaoyaocz/flutter_dmzj/releases/download/zaix/v1.0.3-test/flut222B10003-linux.deb
+        url: https://github.com/xiaoyaocz/flutter_dmzj/releases/download/zaix/v1.0.3-test/flutter_dmzj-1.0.3%2B10003-linux.deb
         only-arches: [x86_64]
-        sha256: 123456
+        sha256: 053a890777dd4d756feb7821b0f853733d3a947abcae949b10bbaf92df458ed6
         x-checker-data:
           type: json
           url: https://api.github.com/repos/xiaoyaocz/flutter_dmzj/releases/latest
