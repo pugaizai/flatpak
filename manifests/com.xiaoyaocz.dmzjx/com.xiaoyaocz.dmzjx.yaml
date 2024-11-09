@@ -42,7 +42,7 @@ modules:
         x-checker-data:
           type: json
           url: https://api.github.com/repos/xiaoyaocz/flutter_dmzj/releases/latest
-          version-query: .tag_name | sub("^zaix%2Fv"; ""; "-test")
+          version-query: .tag_name | sub("^zaix%2Fv"; "") | sub("-test$"; "")
           url-query: >-
             .assets[] | select(.name | test("^flutter_dmzj-" + $version + "\\+\\d+-linux\\.deb$")) |
             .browser_download_url
