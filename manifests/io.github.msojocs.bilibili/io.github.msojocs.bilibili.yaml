@@ -54,10 +54,10 @@ modules:
     sources:
       - type: extra-data
         only-arches: [aarch64]
-        url: https://github.com/msojocs/bilibili-linux/releases/download/v1.14.2-1/io.github.msojocs.bilibili_1.14.2-1_arm64.deb
-        sha256: 5e37ddff562260163e0a860b238a99bb03876df7d03877ba12bd4511e4233f72
+        url: https://github.com/msojocs/bilibili-linux/releases/download/v1.15.2-2/io.github.msojocs.bilibili_1.15.2-2_arm64.deb
+        sha256: f28d0c5f4221d3b290f7013e9e89d265aba948eb94572ba821b747626476f667
         filename: bilibili.deb
-        size: 83931152
+        size: 210123012
         x-checker-data:
           type: json
           url: https://api.github.com/repos/msojocs/bilibili-linux/releases/latest
@@ -68,10 +68,10 @@ modules:
             .browser_download_url
       - type: extra-data
         only-arches: [x86_64]
-        url: https://github.com/msojocs/bilibili-linux/releases/download/v1.14.2-1/io.github.msojocs.bilibili_1.14.2-1_amd64.deb
-        sha256: 9f49fbcc70f287d2420693c2e45ebd6eba03af958c01dca284903370f5c1cc31
+        url: https://github.com/msojocs/bilibili-linux/releases/download/v1.15.2-2/io.github.msojocs.bilibili_1.15.2-2_amd64.deb
+        sha256: 8ee021bdd78bce31c3b39f5e4bec30527dce9a70de702d7b55c969d10d0bb49c
         filename: bilibili.deb
-        size: 87893708
+        size: 210135592
         x-checker-data:
           type: json
           url: https://api.github.com/repos/msojocs/bilibili-linux/releases/latest
@@ -100,7 +100,8 @@ modules:
             then
                 FLAGS="--enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime"
             fi
-          - exec zypak-wrapper "/app/extra/bilibili/electron/electron" "/app/extra/bilibili/app/app.asar" $FLAGS "$@"
+          - exec zypak-wrapper "/app/extra/bilibili/electron/electron" "/app/extra/bilibili/app/app.asar"
+            $FLAGS "$@"
       - type: script
         commands:
           - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
