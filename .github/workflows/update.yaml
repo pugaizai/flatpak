@@ -28,7 +28,7 @@ jobs:
           - io.github.PBH_BTN.PeerBanHelper
           - org.freedesktop.xorg.xeyes
           - top.jtmonster.jhentai
-          - life.pugai.honzuki
+          # - life.pugai.honzuki
           - com.hoppscotch.hoppscotch
           - com.cursor.cursor
           - xyz.chatboxapp.ce
