@@ -2,9 +2,9 @@ app-id: com.xiaoyaocz.dmzjx
 runtime: org.freedesktop.Platform
 runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
-rename-icon: flutter_dmzj
-rename-desktop-file: flutter_dmzj.desktop
-command: flutter_dmzj
+rename-icon: ZAI-X
+rename-desktop-file: ZAI-X.desktop
+command: ZAI-X
 finish-args:
   - --share=ipc
   - --socket=fallback-x11
@@ -22,18 +22,18 @@ cleanup:
   - /share/man
   - /share/gtk-doc
 modules:
-  - name: flutter_dmzj
+  - name: ZAI-X
     buildsystem: simple
     build-options:
       no-debuginfo: true
     build-commands:
       - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
-      - mv usr/share/flutter_dmzj /app/
+      - mv usr/share/ZAI-X /app/
       - mv usr/share /app/
       - desktop-file-edit --set-key="Categories" --set-value="Graphics;Network;" --remove-key="Version"
-        /app/share/applications/flutter_dmzj.desktop
-      - chmod +x /app/flutter_dmzj/flutter_dmzj
-      - install -Dm755 flutter_dmzj.sh /app/bin/flutter_dmzj
+        /app/share/applications/ZAI-X.desktop
+      - chmod +x /app/ZAI-X/ZAI-X
+      - install -Dm755 ZAI-X.sh /app/bin/ZAI-X
       - install -Dm644 com.xiaoyaocz.dmzjx.metainfo.xml -t /app/share/metainfo
     sources:
       - type: file
@@ -53,5 +53,5 @@ modules:
       - type: script
         commands:
           - export TMPDIR="$XDG_RUNTIME_DIR/app/$FLATPAK_ID"
-          - /app/flutter_dmzj/flutter_dmzj "$@"
-        dest-filename: flutter_dmzj.sh
+          - /app/ZAI-X/ZAI-X "$@"
+        dest-filename: ZAI-X.sh
