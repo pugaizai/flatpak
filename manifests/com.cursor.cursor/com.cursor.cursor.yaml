@@ -98,7 +98,7 @@ modules:
       - type: extra-data
         filename: cursor.AppImage
         only-arches: [aarch64]
-        url: https://download.todesktop.com/230313mzl4w4u92/cursor-0.42.5-build-24111460bf2loz1-x86_64.AppImage
+        url: https://download.todesktop.com/230313mzl4w4u92/cursor-0.42.5-build-24111460bf2loz1-arm64.AppImage
         sha256: a534268cb6492b05ce0f11c6a16271f30329d69c6382bc13820f4e72f6097f13
         size: 163230572
         # x-checker-data:
