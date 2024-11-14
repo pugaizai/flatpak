@@ -74,6 +74,9 @@ jobs:
           flatpak-builder build-dir manifests/xyz.chatboxapp.ce/xyz.chatboxapp.ce.yaml --repo=repo --arch=x86_64 --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
           flatpak-builder build-dir manifests/xyz.chatboxapp.ce/xyz.chatboxapp.ce.yaml --repo=repo --arch=aarch64 --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
 
+          flatpak-builder build-dir manifests/com.larksuite.Lark/com.larksuite.Lark.yaml --repo=repo --arch=x86_64 --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
+          flatpak-builder build-dir manifests/com.larksuite.Lark/com.larksuite.Lark.yaml --repo=repo --arch=aarch64 --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
+
       - name: Sign repo
         run: |
           flatpak build-sign repo --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }}
