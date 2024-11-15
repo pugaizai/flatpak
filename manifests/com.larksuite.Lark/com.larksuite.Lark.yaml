@@ -24,8 +24,6 @@ modules:
     buildsystem: simple
     build-commands:
       - install -D -m 755 -t /app/bin/ apply_extra lark
-      - install -D -t /app/lib/ /usr/lib/x86_64-linux-gnu/{libbfd-*.so,libsframe.so.1}
-      - install -D -t /app/bin/ /usr/bin/ar
       - install -D -t /app/share/icons/hicolor/scalable/apps/ com.larksuite.Lark.svg
       - install -D -t /app/share/applications/ com.larksuite.Lark.desktop
       - install -D -t /app/share/metainfo/ com.larksuite.Lark.metainfo.xml
