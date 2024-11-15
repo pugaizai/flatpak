@@ -1,0 +1,75 @@
+app-id: com.larksuite.Lark
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+base: org.electronjs.Electron2.BaseApp
+base-version: '24.08'
+command: lark
+finish-args:
+  - --share=network
+  - --share=ipc
+  - --socket=x11
+  - --socket=pulseaudio
+  # For camera
+  - --device=all
+  - --talk-name=org.freedesktop.secrets
+  - --talk-name=org.gnome.keyring
+  - --talk-name=org.gnome.ScreenSaver
+  - --talk-name=org.kde.StatusNotifierWatcher
+  - --own-name=org.kde.*
+  # Share files
+  - --filesystem=xdg-documents:rw
+  - --filesystem=xdg-download:rw
+separate-locales: false
+modules:
+  - name: lark
+    buildsystem: simple
+    build-commands:
+      - install -D -m 755 -t /app/bin/ apply_extra lark
+      - install -D -t /app/share/icons/hicolor/scalable/apps/ com.larksuite.Lark.svg
+      - install -D -t /app/share/applications/ com.larksuite.Lark.desktop
+      - install -D -t /app/share/metainfo/ com.larksuite.Lark.metainfo.xml
+    sources:
+      - type: script
+        commands:
+          - export TMPDIR="$XDG_RUNTIME_DIR/app/$FLATPAK_ID"
+          - source /app/extra/lark/bytedance-lark.sh
+          - exec zypak-wrapper /app/extra/lark/lark "$@"
+        dest-filename: lark
+      - type: script
+        commands:
+          - bsdtar --to-stdout -xf Lark-linux.deb data.tar.xz | bsdtar -xf -
+          - mv opt/bytedance/lark .
+          - sed '/^exec -a/d' lark/bytedance-lark > lark/bytedance-lark.sh
+          - rm -rf opt usr *.tar.* debian-binary *.deb
+        dest-filename: apply_extra
+      - type: extra-data
+        filename: Lark-linux.deb
+        url: https://sf16-va.larksuitecdn.com/obj/lark-artifact-storage/1d51a0a0/Lark-linux_x64-7.28.10.deb
+        sha256: d35d5fd55654aee2becc12d3b464e5e10103620589cb6cf61925b0b167aaf07b
+        size: 380671576
+        only-arches:
+          - x86_64
+        x-checker-data:
+          type: json
+          url: https://www.larksuite.com/api/downloads
+          version-query: .versions.Linux_deb_x64.version_number
+          url-query: .versions.Linux_deb_x64.download_link
+      - type: extra-data
+        filename: Lark-linux.deb
+        url: https://sf16-va.larksuitecdn.com/obj/lark-artifact-storage/fd260437/Lark-linux_arm64-7.28.10.deb
+        sha256: ad57d0455a87dd3ed584a731faa1430c8c396930ae4c8c00e2ec7de8a3a89883
+        size: 348363856
+        only-arches:
+          - aarch64
+        x-checker-data:
+          type: json
+          url: https://www.larksuite.com/api/downloads
+          version-query: .versions.Linux_deb_arm.version_number
+          url-query: .versions.Linux_deb_arm.download_link
+      - type: file
+        path: com.larksuite.Lark.desktop
+      - type: file
+        path: com.larksuite.Lark.metainfo.xml
+      - type: file
+        path: com.larksuite.Lark.svg

@@ -32,6 +32,7 @@ jobs:
           - com.hoppscotch.hoppscotch
           - com.cursor.cursor
           - xyz.chatboxapp.ce
+          - com.larksuite.Lark
     steps:
       - uses: actions/checkout@v4 
       - uses: docker://ghcr.io/flathub/flatpak-external-data-checker:latest
