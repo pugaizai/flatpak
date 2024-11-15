@@ -16,7 +16,8 @@ finish-args:
   - --talk-name=org.gnome.keyring
   - --talk-name=org.gnome.ScreenSaver
   # Share files
-  - --filesystem=home
+  - --filesystem=xdg-documents:rw
+  - --filesystem=xdg-download:rw
 separate-locales: false
 modules:
   - name: lark
