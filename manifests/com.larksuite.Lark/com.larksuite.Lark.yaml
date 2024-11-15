@@ -28,9 +28,6 @@ modules:
       - install -D -t /app/share/icons/hicolor/scalable/apps/ com.larksuite.Lark.svg
       - install -D -t /app/share/applications/ com.larksuite.Lark.desktop
       - install -D -t /app/share/metainfo/ com.larksuite.Lark.metainfo.xml
-    only-arches:
-      - x86_64
-      - aarch64
     sources:
       - type: script
         commands:
@@ -58,7 +55,7 @@ modules:
           version-query: .versions.Linux_deb_x64.version_number
           url-query: .versions.Linux_deb_x64.download_link
       - type: extra-data
-        filename: Lark-linux-arm64.deb
+        filename: Lark-linux.deb
         url: https://sf16-va.larksuitecdn.com/obj/lark-artifact-storage/fd260437/Lark-linux_arm64-7.28.10.deb
         sha256: ad57d0455a87dd3ed584a731faa1430c8c396930ae4c8c00e2ec7de8a3a89883
         size: 348363856
