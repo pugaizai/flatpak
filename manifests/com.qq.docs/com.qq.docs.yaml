@@ -77,7 +77,7 @@ modules:
             then
                 FLAGS="--enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime"
             fi
-          - exec zypak-wrapper.sh /app/extra/docs/tdappdesktop "$@"
+          - exec zypak-wrapper.sh /app/extra/docs/tdappdesktop $FLAGS "$@"
       - type: script
         commands:
           - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
