@@ -32,12 +32,6 @@ cleanup:
   - /share/man
   - /share/gtk-doc
 
-add-extensions:
-  org.freedesktop.Platform.ffmpeg-full:
-    directory: lib/ffmpeg
-    version: '24.08'
-    add-ld-path: .
-
 modules:
   - name: bilibili
     buildsystem: simple
@@ -49,8 +43,6 @@ modules:
       - install -Dm644 io.github.msojocs.bilibili.metainfo.xml -t /app/share/metainfo
       - install -Dm755 bilibili.sh /app/bin/bilibili
       - install -Dm755 apply_extra -t /app/bin
-      - ln -svf /usr/bin/ffmpeg /app/bin/
-      - mkdir -p /app/lib/ffmpeg
     sources:
       - type: extra-data
         only-arches: [aarch64]

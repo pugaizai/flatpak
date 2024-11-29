@@ -30,12 +30,6 @@ cleanup:
   - /share/man
   - /share/gtk-doc
 
-add-extensions:
-  org.freedesktop.Platform.ffmpeg-full:
-    directory: lib/ffmpeg
-    version: '24.08'
-    add-ld-path: .
-
 modules:
   - name: bilibili
     buildsystem: simple
@@ -47,8 +41,6 @@ modules:
       - install -Dm644 pro.cycity.desktop.metainfo.xml -t /app/share/metainfo
       - install -Dm755 cyc-desktop.sh /app/bin/cyc-desktop
       - install -Dm755 apply_extra -t /app/bin
-      - ln -svf /usr/bin/ffmpeg /app/bin/
-      - mkdir -p /app/lib/ffmpeg
     sources:
       - type: extra-data
         only-arches: [x86_64]

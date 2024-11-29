@@ -13,7 +13,6 @@ finish-args:
   - --share=network
   - --device=dri
   - --talk-name=org.freedesktop.ScreenSaver
-  - --env=LC_NUMERIC=C
 cleanup:
   - '*.a'
   - '*.la'
@@ -24,11 +23,7 @@ cleanup:
   - /man
   - /share/man
   - /share/gtk-doc
-add-extensions:
-  org.freedesktop.Platform.ffmpeg-full:
-    directory: lib/ffmpeg
-    version: '24.08'
-    add-ld-path: .
+
 modules:
   - name: libmpv
     buildsystem: meson
@@ -39,30 +34,30 @@ modules:
       - -Dbuild-date=false
       - -Dcplayer=false
       - -Dmanpage-build=disabled
+      - -Dsdl2=enabled
+      # - -Dshaderc=enabled
+      - -Dvulkan=enabled
+      # - -Dvulkan-interop=enabled
     sources:
       - type: git
         url: https://github.com/mpv-player/mpv.git
         tag: v0.39.0
         commit: a0fba7be57f3822d967b04f0f6b6d6341e7516e7
         x-checker-data:
-          type: anitya
-          project-id: 5348
-          stable-only: true
-          tag-template: v$version
+          type: git
+          tag-pattern: ^v([\d.]+)$
+
     modules:
       - name: libXpresent
         buildsystem: autotools
         sources:
           - type: git
             url: https://gitlab.freedesktop.org/xorg/lib/libxpresent.git
-            sha256: 3ea271a49d798280fdceb746658b7d7b9f34340db15b993c827eebc0abc96285
             tag: libXpresent-1.0.1
             commit: 37507b5f44332accfb1064ee69a4f6a833994747
             x-checker-data:
-              type: anitya
-              project-id: 17166
-              stable-only: true
-              tag-template: libXpresent-$version
+              type: git
+              tag-pattern: ^libXpresent-([\d.]+)$
 
       - name: nv-codec-headers
         cleanup:
@@ -76,10 +71,8 @@ modules:
             tag: n12.2.72.0
             commit: c69278340ab1d5559c7d7bf0edf615dc33ddbba7
             x-checker-data:
-              type: anitya
-              project-id: 223796
-              stable-only: true
-              tag-template: n$version
+              type: git
+              tag-pattern: ^n([\d.]+)$
 
       - name: libass
         config-opts:
@@ -90,10 +83,8 @@ modules:
             tag: 0.17.3
             commit: e46aedea0a0d17da4c4ef49d84b94a7994664ab5
             x-checker-data:
-              type: anitya
-              project-id: 1560
-              stable-only: true
-              tag-template: $version
+              type: git
+              tag-pattern: ^(\d\.\d{1,3}\.\d{1,2})$
 
       - name: uchardet
         buildsystem: cmake-ninja
@@ -101,32 +92,115 @@ modules:
           - -DCMAKE_BUILD_TYPE=Release
           - -DBUILD_STATIC=0
         sources:
-          - type: git
-            url: https://gitlab.freedesktop.org/uchardet/uchardet.git
-            tag: v0.0.8
-            commit: ae6302a016088ad07177f86d417b20010053632b
+          - type: archive
+            url: https://www.freedesktop.org/software/uchardet/releases/uchardet-0.0.8.tar.xz
+            sha256: e97a60cfc00a1c147a674b097bb1422abd9fa78a2d9ce3f3fdcc2e78a34ac5f0
             x-checker-data:
               type: anitya
               project-id: 9265
               stable-only: true
-              tag-template: v$version
+              url-template: https://www.freedesktop.org/software/uchardet/releases/uchardet-$version.tar.xz
 
       - name: libplacebo
         buildsystem: meson
         config-opts:
-          - -Dglslang=disabled
+          - -Dshaderc=enabled
+          - -Dvulkan=enabled
           - -Dd3d11=disabled
           - -Ddemos=false
         sources:
           - type: git
             url: https://code.videolan.org/videolan/libplacebo.git
-            commit: 1fd3c7bde7b943fe8985c893310b5269a09b46c5
             tag: v7.349.0
+            commit: 1fd3c7bde7b943fe8985c893310b5269a09b46c5
+            x-checker-data:
+              type: git
+              tag-pattern: ^v([\d.]+)$
+        modules:
+          - name: shaderc
+            buildsystem: cmake-ninja
+            builddir: true
+            config-opts:
+              - -DSHADERC_SKIP_COPYRIGHT_CHECK=ON
+              - -DSHADERC_SKIP_EXAMPLES=ON
+              - -DSHADERC_SKIP_TESTS=ON
+              - -DSPIRV_SKIP_EXECUTABLES=ON
+              - -DENABLE_GLSLANG_BINARIES=OFF
+            cleanup:
+              - /bin
+              - /include
+              - /lib/cmake
+              - /lib/pkgconfig
+            sources:
+              - type: git
+                url: https://github.com/google/shaderc.git
+                tag: v2024.3
+                commit: ff84893dd52d28f0b1737d2635733d952013bd9c
+                x-checker-data:
+                  type: git
+                  tag-pattern: ^v(\d{4}\.\d{1,2})$
+              - type: archive
+                url: https://github.com/KhronosGroup/SPIRV-Tools/archive/refs/tags/sdk-1.3.261.1.tar.gz
+                sha256: ead95c626ad482882a141d1aa0ce47b9453871f72c42c0b28d39c82f60a52008
+                dest: third_party/spirv-tools
+                x-checker-data:
+                  type: anitya
+                  stable-only: true
+                  project-id: 334920
+                  url-template: https://github.com/KhronosGroup/SPIRV-Tools/archive/refs/tags/sdk-$version.tar.gz
+              - type: archive
+                url: https://github.com/KhronosGroup/SPIRV-Headers/archive/refs/tags/sdk-1.3.261.1.tar.gz
+                sha256: 32b4c6ae6a2fa9b56c2c17233c8056da47e331f76e117729925825ea3e77a739
+                dest: third_party/spirv-headers
+                x-checker-data:
+                  type: anitya
+                  stable-only: true
+                  project-id: 334920
+                  url-template: https://github.com/KhronosGroup/SPIRV-Headers/archive/refs/tags/sdk-$version.tar.gz
+              - type: git
+                url: https://github.com/KhronosGroup/glslang.git
+                tag: 15.0.0
+                commit: 46ef757e048e760b46601e6e77ae0cb72c97bd2f
+                dest: third_party/glslang
+                x-checker-data:
+                  type: git
+                  tag-pattern: ^(\d{1,2}\.\d{1,2}\.\d{1,4})$
+
+      - name: ffmpeg
+        cleanup:
+          - /share/ffmpeg/examples
+        config-opts:
+          - --disable-debug
+          - --disable-doc
+          - --disable-programs
+          - --disable-static
+          - --disable-encoders
+          - --disable-muxers
+          - --enable-shared
+          - --enable-gnutls
+          - --enable-gpl
+          - --enable-version3
+          - --enable-encoder=png,libwebp,libjxl
+          - --enable-libv4l2
+          - --enable-libdav1d
+          - --enable-libfontconfig
+          - --enable-libfreetype
+          - --enable-libopus
+          - --enable-librsvg
+          - --enable-libvpx
+          - --enable-libmp3lame
+          - --enable-libwebp
+          - --enable-libjxl
+          - --enable-libxml2
+        sources:
+          - type: archive
+            url: https://ffmpeg.org/releases/ffmpeg-7.1.tar.gz
+            sha256: 42a7dc0d1583885d1b8f6559fa7ce28f97acafea6803de6a8f73e3ba229348bd
             x-checker-data:
               type: anitya
-              project-id: 20101
+              project-id: 5405
               stable-only: true
-              tag-template: v$version
+              url-template: https://ffmpeg.org/releases/ffmpeg-$version.tar.gz
 
   - name: simple_live
     buildsystem: simple
@@ -144,7 +218,6 @@ modules:
       - install -Dm644 simple_live_app.png -t /app/share/icons/hicolor/512x512/apps
       - install -Dm644 com.xiaoyaocz.simplelive.metainfo.xml -t /app/share/metainfo
       - ln -s libmpv.so.2 /app/lib/libmpv.so.1
-      - mkdir -p /app/lib/ffmpeg
     sources:
       - type: file
         url: https://github.com/xiaoyaocz/dart_simple_live/releases/download/v1.7.4/simple_live_app-1.7.4%2B10704-linux.deb
