@@ -220,9 +220,9 @@ modules:
       - ln -s libmpv.so.2 /app/lib/libmpv.so.1
     sources:
       - type: file
-        url: https://github.com/xiaoyaocz/dart_simple_live/releases/download/v1.7.4/simple_live_app-1.7.4%2B10704-linux.deb
+        url: https://github.com/xiaoyaocz/dart_simple_live/releases/download/v1.7.5/simple_live_app-1.7.5%2B10705-linux.deb
         only-arches: [x86_64]
-        sha256: 64c0beca9cca928aa60f86e3759dbad4a855d7758fcbbd628662cadb4087762e
+        sha256: 74a0f11a5a9c03cde859df727855bf83c3958b4a53c5115bbe8cf64afda9af3b
         x-checker-data:
           type: json
           url: https://api.github.com/repos/xiaoyaocz/dart_simple_live/releases/latest
