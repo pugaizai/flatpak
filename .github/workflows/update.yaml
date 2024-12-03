@@ -33,6 +33,7 @@ jobs:
           - com.cursor.cursor
           - xyz.chatboxapp.ce
           - com.larksuite.Lark
+          - com.qq.qq
     steps:
       - uses: actions/checkout@v4 
       - uses: docker://ghcr.io/flathub/flatpak-external-data-checker:latest

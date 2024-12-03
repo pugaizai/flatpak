@@ -1,10 +1,10 @@
-app-id: org.qbittorrent.qBittorrent
-default-branch: stable
+app-id: io.github.c0re100.qBittorrent-Enhanced-Edition
 runtime: org.kde.Platform
 sdk: org.kde.Sdk
 runtime-version: '6.8'
 command: qbittorrent
 rename-icon: qbittorrent
+rename-desktop-file: org.qbittorrent.qBittorrent.desktop
 copy-icon: true
 finish-args:
   - --device=dri
@@ -16,6 +16,7 @@ finish-args:
   - --system-talk-name=org.freedesktop.login1
   - --system-talk-name=org.freedesktop.UPower
   - --talk-name=org.freedesktop.Notifications
+  - --talk-name=org.freedesktop.ScreenSaver
   - --talk-name=org.freedesktop.PowerManagement
   - --talk-name=org.gnome.SessionManager
   - --talk-name=org.kde.StatusNotifierWatcher
