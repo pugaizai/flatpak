@@ -9,17 +9,22 @@ command: bilibili
 
 finish-args:
   - --share=ipc
-  - --socket=x11
+  - --socket=wayland
+  - --socket=fallback-x11
   - --socket=pulseaudio
   - --device=dri
   - --share=network
   - --filesystem=xdg-videos
   - --filesystem=xdg-download
-  - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.kde.StatusNotifierWatcher
   - --talk-name=org.freedesktop.ScreenSaver
   # required to fix cursor scaling on wayland
   - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
+
+add-extensions:
+  org.freedesktop.Platform.Electron:
+    version: '24.08'
+    directory: electron
 
 cleanup:
   - '*.a'
@@ -38,38 +43,25 @@ modules:
     build-options:
       no-debuginfo: true
     build-commands:
-      - install -Dm644 io.github.msojocs.bilibili.desktop -t /app/share/applications
+      - mkdir -p /app/electron
+      - bsdtar -xvf bilibili.tar.gz
+      - install -Dm644 app/app.asar -t /app/bilibili/
+      - mv app/extensions /app/bilibili/
+      - install -Dm644 io.github.msojocs.bilibili.desktop -t /app/share/applications/
       - install -Dm644 io.github.msojocs.bilibili.svg -t /app/share/icons/hicolor/scalable/apps/
-      - install -Dm644 io.github.msojocs.bilibili.metainfo.xml -t /app/share/metainfo
+      - install -Dm644 io.github.msojocs.bilibili.metainfo.xml -t /app/share/metainfo/
       - install -Dm755 bilibili.sh /app/bin/bilibili
-      - install -Dm755 apply_extra -t /app/bin
     sources:
-      - type: extra-data
-        only-arches: [aarch64]
-        url: https://github.com/msojocs/bilibili-linux/releases/download/v1.15.2-2/io.github.msojocs.bilibili_1.15.2-2_arm64.deb
-        sha256: f28d0c5f4221d3b290f7013e9e89d265aba948eb94572ba821b747626476f667
-        filename: bilibili.deb
-        size: 210123012
+      - type: file
+        url: https://github.com/msojocs/bilibili-linux/releases/download/v1.15.2-2/bilibili-asar-v1.15.2-2.tar.gz
+        sha256: d3105e81fc3749c7f1ca843c4a378b6378333cbd12a8fce4a7bed9982e3c85e8
+        dest-filename: bilibili.tar.gz
         x-checker-data:
           type: json
           url: https://api.github.com/repos/msojocs/bilibili-linux/releases/latest
           version-query: .tag_name | sub("^v"; "")
           url-query: >-
-            .assets[] | select(.name=="io.github.msojocs.bilibili_" + $version + "_arm64.deb")
-            |
-            .browser_download_url
-      - type: extra-data
-        only-arches: [x86_64]
-        url: https://github.com/msojocs/bilibili-linux/releases/download/v1.15.2-2/io.github.msojocs.bilibili_1.15.2-2_amd64.deb
-        sha256: 8ee021bdd78bce31c3b39f5e4bec30527dce9a70de702d7b55c969d10d0bb49c
-        filename: bilibili.deb
-        size: 210135592
-        x-checker-data:
-          type: json
-          url: https://api.github.com/repos/msojocs/bilibili-linux/releases/latest
-          version-query: .tag_name | sub("^v"; "")
-          url-query: >-
-            .assets[] | select(.name=="io.github.msojocs.bilibili_" + $version + "_amd64.deb")
+            .assets[] | select(.name=="bilibili-asar-v" + $version + ".tar.gz")
             |
             .browser_download_url
       - type: file
@@ -82,21 +74,11 @@ modules:
         dest-filename: bilibili.sh
         commands:
           - export TMPDIR=$XDG_RUNTIME_DIR/app/$FLATPAK_ID
-          - export ELECTRON_IS_DEV=0
-          - export ELECTRON_FORCE_IS_PACKAGED=true
-          - export ELECTRON_DISABLE_SECURITY_WARNINGS=true
-          - export NODE_ENV=production
           - WAYLAND_SOCKET=${WAYLAND_DISPLAY:-"wayland-0"}
           - |
             if [[ -e "$XDG_RUNTIME_DIR/${WAYLAND_SOCKET}" || -e "${WAYLAND_DISPLAY}" ]]
             then
-                FLAGS="--enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime"
+                FLAGS="--enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime --wayland-text-input-version=3"
             fi
-          - exec zypak-wrapper "/app/extra/bilibili/electron/electron" "/app/extra/bilibili/app/app.asar"
-            $FLAGS "$@"
-      - type: script
-        commands:
-          - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
-          - mv opt/apps/io.github.msojocs.bilibili/files/bin ./bilibili
-          - rm -r *.deb usr opt
-        dest-filename: apply_extra
+          - exec zypak-wrapper "/app/electron/electron" "/app/bilibili/app.asar" $FLAGS "$@"
+
