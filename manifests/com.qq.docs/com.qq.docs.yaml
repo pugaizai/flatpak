@@ -13,7 +13,6 @@ finish-args:
   - --device=dri
   - --share=network
   - --filesystem=xdg-download
-  - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.kde.StatusNotifierWatcher
 
 cleanup:
