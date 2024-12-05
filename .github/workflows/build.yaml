@@ -70,6 +70,8 @@ jobs:
 
           flatpak-builder build-dir manifests/com.larksuite.Lark/com.larksuite.Lark.yaml --repo=repo --arch=x86_64 --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
 
+          flatpak-builder build-dir manifests/org.freedesktop.Platform.Electron/org.freedesktop.Platform.Electron.yaml --repo=repo --arch=x86_64 --default-branch=24.04 --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
+
       - name: Sign repo
         run: |
           flatpak build-sign repo --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }}
