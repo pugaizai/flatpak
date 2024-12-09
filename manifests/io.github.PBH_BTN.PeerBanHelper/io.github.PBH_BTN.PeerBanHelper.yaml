@@ -10,7 +10,6 @@ finish-args:
   - --socket=x11
   - --share=network
   - --env=PATH=/app/jre/bin:/app/bin:/usr/bin
-  - --persist=data
 cleanup:
   - '*.a'
   - '*.la'
@@ -52,14 +51,16 @@ modules:
         path: io.github.PBH_BTN.PeerBanHelper.metainfo.xml
 
       - type: file
-        path: io.github.PBH_BTN.PeerBanHelper.png
+        url: https://raw.githubusercontent.com/PBH-BTN/PeerBanHelper/refs/heads/master/install4j/icon.png
+        dest-filename: io.github.PBH_BTN.PeerBanHelper.png
+        sha256: c53e1606f11060cc84eb02edc075c4cb0699377a2a2bcb3edb35a81c3806ccc5
 
       - type: file
         path: io.github.PBH_BTN.PeerBanHelper.desktop
 
       - type: script
         commands:
-          - java -Dpbh.release=debian -Dpbh.datadir=${XDG_CONFIG_HOME}/peerbanhelper
+          - java -Dpbh.release=debian -Dpbh.configdir=${XDG_CONFIG_HOME}/peerbanhelper -Dpbh.datadir=${XDG_DATA_HOME}/peerbanhelper -Dpbh.logsdir=${XDG_CACHE_HOME}/peerbanhelper -Dpbh.log.level=WARN
             -Xmx512M -XX:+UseG1GC -XX:+UseStringDeduplication -XX:+ShrinkHeapInSteps
             -jar /app/extra/peerbanhelper/PeerBanHelper.jar
         dest-filename: peerbanhelper
