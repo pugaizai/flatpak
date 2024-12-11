@@ -36,10 +36,10 @@ modules:
       - install -Dm755 apply_extra -t ${FLATPAK_DEST}/bin/
     sources:
       - type: extra-data
-        url: https://github.com/PBH-BTN/PeerBanHelper/releases/download/v7.1.5/peerbanhelper_7.1.5_all.deb
+        url: https://github.com/PBH-BTN/PeerBanHelper/releases/download/v7.2.1/peerbanhelper_7.2.1_all.deb
         filename: peerbanhelper.deb
-        sha256: f7b8e67fea83034567b903a4e70a3403fcef0992230ba73b9269058fcff2ffb5
-        size: 50605016
+        sha256: 97d764a6f7eaa51b57554c7f4336c4afdb9f054e6f8f2364ac0d8381339731db
+        size: 53220704
         x-checker-data:
           type: json
           url: https://api.github.com/repos/PBH-BTN/PeerBanHelper/releases/latest
@@ -60,9 +60,10 @@ modules:
 
       - type: script
         commands:
-          - java -Dpbh.release=debian -Dpbh.configdir=${XDG_CONFIG_HOME}/peerbanhelper -Dpbh.datadir=${XDG_DATA_HOME}/peerbanhelper -Dpbh.logsdir=${XDG_CACHE_HOME}/peerbanhelper -Dpbh.log.level=WARN
-            -Xmx512M -XX:+UseG1GC -XX:+UseStringDeduplication -XX:+ShrinkHeapInSteps
-            -jar /app/extra/peerbanhelper/PeerBanHelper.jar
+          - java -Dpbh.release=debian -Dpbh.configdir=${XDG_CONFIG_HOME}/peerbanhelper
+            -Dpbh.datadir=${XDG_DATA_HOME}/peerbanhelper -Dpbh.logsdir=${XDG_CACHE_HOME}/peerbanhelper
+            -Dpbh.log.level=WARN -Xmx512M -XX:+UseG1GC -XX:+UseStringDeduplication
+            -XX:+ShrinkHeapInSteps -jar /app/extra/peerbanhelper/PeerBanHelper.jar
         dest-filename: peerbanhelper
 
       - type: script
