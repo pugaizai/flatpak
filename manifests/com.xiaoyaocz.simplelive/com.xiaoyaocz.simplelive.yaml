@@ -135,6 +135,7 @@ modules:
           - --disable-debug
           - --disable-doc
           - --disable-static
+          - --disable-programs
           - --disable-encoders
           - --disable-muxers
           - --enable-shared
@@ -162,7 +163,6 @@ modules:
               project-id: 5405
               stable-only: true
               url-template: https://ffmpeg.org/releases/ffmpeg-$version.tar.gz
-
 
   - name: simple_live
     buildsystem: simple
