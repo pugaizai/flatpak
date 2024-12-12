@@ -41,8 +41,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/boostorg/boost.git
-        tag: boost-1.86.0
-        commit: 65c1319bb92fe7a9a4abd588eff5818d9c2bccf9
+        tag: boost-1.87.0
+        commit: c89e6267665516192015a9e40955e154466f4f68
         x-checker-data:
           type: anitya
           project-id: 6845
