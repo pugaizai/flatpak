@@ -37,7 +37,7 @@ modules:
         sha256: 26beb34b5261211585157e3a1033505752433ed718639f82a8fde0a1fcd98b85
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/jiangtian616/JHenTai/releases/latest
+          url: https://api.github.com/repos/pugaizai/JHenTai/releases/latest
           version-query: .tag_name | sub("^v"; "")
           url-query: >-
             .assets[] | select(.name | test("^JHenTai-.*-Linux-amd64\\.deb$"))
