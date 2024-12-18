@@ -53,8 +53,8 @@ modules:
       - install -Dm755 bilibili.sh /app/bin/bilibili
     sources:
       - type: file
-        url: https://github.com/msojocs/bilibili-linux/releases/download/v1.15.2-2/bilibili-asar-v1.15.2-2.tar.gz
-        sha256: d3105e81fc3749c7f1ca843c4a378b6378333cbd12a8fce4a7bed9982e3c85e8
+        url: https://github.com/msojocs/bilibili-linux/releases/download/v1.16.1-1/bilibili-asar-v1.16.1-1.tar.gz
+        sha256: bab660d0ffe3339823fd9f808dd47449b1783c44960f8f957c867ac4d008a53e
         dest-filename: bilibili.tar.gz
         x-checker-data:
           type: json
@@ -80,5 +80,6 @@ modules:
             then
                 FLAGS="--enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime --wayland-text-input-version=3"
             fi
-          - exec zypak-wrapper "/app/electron/electron" "/app/bilibili/app.asar" $FLAGS "$@"
+          - exec zypak-wrapper "/app/electron/electron" "/app/bilibili/app.asar" $FLAGS
+            "$@"
 
