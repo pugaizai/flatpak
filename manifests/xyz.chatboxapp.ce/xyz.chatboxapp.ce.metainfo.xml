@@ -26,8 +26,11 @@
     </screenshot>
   </screenshots>
   <releases>
-    <release version="0.10.2" date="2024-11-07">
+    <release version="0.10.3" date="2024-12-16">
       <description></description>
+    </release>
+    <release version="0.10.2" date="2024-11-07">
+      <description/>
     </release>
     <release version="0.10.1" date="2024-10-19">
       <description>Initial release of Chatbox CE.</description>
