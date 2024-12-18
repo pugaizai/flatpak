@@ -88,9 +88,9 @@ modules:
       - type: extra-data
         filename: cursor.AppImage
         only-arches: [x86_64]
-        url: https://download.todesktop.com/230313mzl4w4u92/cursor-0.44.0-build-2412187f9v0nffu-x86_64.AppImage
-        sha256: 8ccd952a0f59c78b0da96b4d81d062895f384f92a4c84c62d0affb3ffba20f7d
-        size: 162424461
+        url: https://download.todesktop.com/230313mzl4w4u92/cursor-0.44.2-build-241218ntls52u8v-x86_64.AppImage
+        sha256: 649f4ca4272c6770e87fb0e1e4936af93048b5aae854b42a39da353a89d0613f
+        size: 165716570
         x-checker-data:
           type: electron-updater
           url: https://download.todesktop.com/230313mzl4w4u92/latest-linux.yml
