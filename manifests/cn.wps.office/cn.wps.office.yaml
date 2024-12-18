@@ -36,15 +36,15 @@ modules:
   - name: wps
     buildsystem: simple
     build-commands:
-      - install -Dm755 apply_extra.sh /app/bin/apply_extra
-      - install -Dm755 wps.sh /app/bin/wps
-      - ln -s wps /app/bin/et
-      - ln -s wps /app/bin/wpp
-      - ln -s wps /app/bin/wpspdf
-      - install -Dm755 /usr/bin/desktop-file-edit -t /app/bin/
-      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo/
-      - install -Dm644 cn.wps.office.desktop -t /app/share/applications/
-      - install -Dm644 cn.wps.office.svg -t /app/share/icons/hicolor/scalable/apps/
+      - install -Dm755 apply_extra.sh ${FLATPAK_DEST}/bin/apply_extra
+      - install -Dm755 wps.sh ${FLATPAK_DEST}/bin/wps
+      - ln -s wps ${FLATPAK_DEST}/bin/et
+      - ln -s wps ${FLATPAK_DEST}/bin/wpp
+      - ln -s wps ${FLATPAK_DEST}/bin/wpspdf
+      - install -Dm755 /usr/bin/desktop-file-edit -t ${FLATPAK_DEST}/bin/
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo/
+      - install -Dm644 cn.wps.office.desktop -t ${FLATPAK_DEST}/share/applications/
+      - install -Dm644 cn.wps.office.svg -t ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/
     sources:
       - type: file
         path: apply_extra.sh

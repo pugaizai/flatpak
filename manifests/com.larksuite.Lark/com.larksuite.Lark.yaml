@@ -25,14 +25,14 @@ modules:
   - name: lark
     buildsystem: simple
     build-commands:
-      - install -D -m 755 -t /app/bin/ apply_extra lark
-      - install -D -t /app/share/icons/hicolor/scalable/apps/ com.larksuite.Lark.svg
-      - install -D -t /app/share/applications/ com.larksuite.Lark.desktop
-      - install -D -t /app/share/metainfo/ com.larksuite.Lark.metainfo.xml
+      - install -D -m 755 -t ${FLATPAK_DEST}/bin/ apply_extra lark
+      - install -D -t ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/ com.larksuite.Lark.svg
+      - install -D -t ${FLATPAK_DEST}/share/applications/ com.larksuite.Lark.desktop
+      - install -D -t ${FLATPAK_DEST}/share/metainfo/ com.larksuite.Lark.metainfo.xml
     sources:
       - type: script
         commands:
-          - export TMPDIR="$XDG_RUNTIME_DIR/app/$FLATPAK_ID"
+          - export TMPDIR="${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}"
           - source /app/extra/lark/bytedance-lark.sh
           - exec zypak-wrapper /app/extra/lark/lark "$@"
         dest-filename: lark

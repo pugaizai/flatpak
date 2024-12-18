@@ -1,0 +1,56 @@
+app-id: io.github.venera_app.venera
+runtime: org.gnome.Platform
+runtime-version: '47'
+sdk: org.gnome.Sdk
+command: venera
+rename-icon: venera
+rename-desktop-file: venera.desktop
+finish-args:
+  - --share=ipc
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --share=network
+  - --device=dri
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/gtk-doc
+modules:
+  - name: venera
+    buildsystem: simple
+    build-options:
+      no-debuginfo: true
+    build-commands:
+      - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
+      - mv usr/local/lib/venera ${FLATPAK_DEST}/
+      - desktop-file-edit --set-key="Categories" --set-value="Graphics;Network;" --set-key="Exec" --set-value="venera" --remove-key="Version" --remove-key="TryExec" usr/share/applications/venera.desktop
+      - install -Dm644 usr/share/applications/venera.desktop -t ${FLATPAK_DEST}/share/applications/
+      - install -Dm644 usr/share/icons/venera.png -t ${FLATPAK_DEST}/share/icons/hicolor/64x64/apps/
+      - install -Dm755 venera.sh ${FLATPAK_DEST}/bin/venera
+      - install -Dm644 io.github.venera_app.venera.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+    sources:
+      - type: file
+        only-arches: [x86_64]
+        url: https://github.com/venera-app/venera/releases/download/v1.1.2/venera_1.1.2_amd64.deb
+        sha256: 41b9e38a0a38b85f3a1e7fee6fcbffffe44ecfb5fcf9d820fe320d1b22806240
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/venera-app/venera/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: >-
+            .assets[] | select(.name=="venera_" + $version + "_amd64.deb")
+            |
+            .browser_download_url
+      - type: file
+        path: io.github.venera_app.venera.metainfo.xml
+      - type: script
+        commands:
+          - export TMPDIR="${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}"
+          - exec /app/venera/venera "$@"
+        dest-filename: venera.sh

@@ -53,7 +53,7 @@ modules:
       - localedir=/usr/share/locale
     no-make-install: true
     post-install:
-      - install -Dm755 cups/libcups.so $FLATPAK_DEST/lib/libcups.so.2
+      - install -Dm755 cups/libcups.so ${FLATPAK_DEST}/lib/libcups.so.2
     sources:
       - type: git
         url: https://github.com/OpenPrinting/cups.git
@@ -66,9 +66,9 @@ modules:
   - name: librename
     buildsystem: simple
     build-commands:
-      - mkdir -p $FLATPAK_DEST/etc/preload
+      - mkdir -p ${FLATPAK_DEST}/etc/preload
       - g++ -shared -fPIC -o rename.so rename.cpp -ldl
-      - install -Dm755 ./rename.so -t $FLATPAK_DEST/etc/preload/
+      - install -Dm755 ./rename.so -t ${FLATPAK_DEST}/etc/preload/
     sources:
       - type: file
         path: patch/rename.cpp
@@ -76,20 +76,20 @@ modules:
   - name: qq
     buildsystem: simple
     build-commands:
-      - install apply_extra $FLATPAK_DEST/bin
-      - install -Dm755 qq.sh $FLATPAK_DEST/bin/qq
-      - install -Dm644 com.qq.qq.metainfo.xml -t $FLATPAK_DEST/share/metainfo
-      - install -Dm644 com.qq.qq.png -t $FLATPAK_DEST/share/icons/hicolor/512x512/apps
-      - install -Dm644 com.qq.qq.desktop -t $FLATPAK_DEST/share/applications
+      - install apply_extra ${FLATPAK_DEST}/bin
+      - install -Dm755 qq.sh ${FLATPAK_DEST}/bin/qq
+      - install -Dm644 com.qq.qq.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+      - install -Dm644 com.qq.qq.png -t ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps
+      - install -Dm644 com.qq.qq.desktop -t ${FLATPAK_DEST}/share/applications
     sources:
       - type: script
         commands:
           - export ZYPAK_LD_PRELOAD="/app/etc/preload/rename.so"
-          - export TMPDIR="$XDG_RUNTIME_DIR/app/$FLATPAK_ID"
+          - export TMPDIR="${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}"
           - export LITELOADERQQNT_PROFILE="${LITELOADERQQNT_PROFILE:-$XDG_CONFIG_HOME/LiteLoaderQQNT}"
           - WAYLAND_SOCKET=${WAYLAND_DISPLAY:-"wayland-0"}
           - |
-            if [[ -e "$XDG_RUNTIME_DIR/${WAYLAND_SOCKET}" || -e "${WAYLAND_DISPLAY}" ]]
+            if [[ -e "${XDG_RUNTIME_DIR}/${WAYLAND_SOCKET}" || -e "${WAYLAND_DISPLAY}" ]]
             then
                 FLAGS="--enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime"
             fi
@@ -139,11 +139,11 @@ modules:
   - name: liteloader
     buildsystem: simple
     build-commands:
-      - install -Dm644 package.json $FLATPAK_DEST/lib/LiteLoaderQQNT/package.json
-      - install -Dm644 LICENSE $FLATPAK_DEST/lib/LiteLoaderQQNT/LICENSE
-      - install -Dm644 README.md $FLATPAK_DEST/lib/LiteLoaderQQNT/README.md
-      - cp -r src $FLATPAK_DEST/lib/LiteLoaderQQNT/src
-      - install -Dm755 patch_qq $FLATPAK_DEST/bin/patch_qq
+      - install -Dm644 package.json ${FLATPAK_DEST}/lib/LiteLoaderQQNT/package.json
+      - install -Dm644 LICENSE ${FLATPAK_DEST}/lib/LiteLoaderQQNT/LICENSE
+      - install -Dm644 README.md ${FLATPAK_DEST}/lib/LiteLoaderQQNT/README.md
+      - cp -r src ${FLATPAK_DEST}/lib/LiteLoaderQQNT/src
+      - install -Dm755 patch_qq ${FLATPAK_DEST}/bin/patch_qq
     sources:
       - type: git
         url: https://github.com/LiteLoaderQQNT/LiteLoaderQQNT.git

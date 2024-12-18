@@ -34,11 +34,11 @@ modules:
     build-options:
       no-debuginfo: true
     build-commands:
-      - install -Dm644 xyz.chatboxapp.ce.desktop -t /app/share/applications
-      - install -Dm644 xyz.chatboxapp.ce.png -t /app/share/icons/hicolor/512x512/apps/
-      - install -Dm644 xyz.chatboxapp.ce.metainfo.xml -t /app/share/metainfo
-      - install -Dm755 chatbox -t /app/bin/
-      - install -Dm755 apply_extra -t /app/bin/
+      - install -Dm644 xyz.chatboxapp.ce.desktop -t ${FLATPAK_DEST}/share/applications
+      - install -Dm644 xyz.chatboxapp.ce.png -t ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/
+      - install -Dm644 xyz.chatboxapp.ce.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+      - install -Dm755 chatbox -t ${FLATPAK_DEST}/bin/
+      - install -Dm755 apply_extra -t ${FLATPAK_DEST}/bin/
     sources:
       - type: extra-data
         only-arches: [aarch64]
@@ -77,10 +77,10 @@ modules:
       - type: script
         dest-filename: chatbox
         commands:
-          - export TMPDIR=$XDG_RUNTIME_DIR/app/$FLATPAK_ID
+          - export TMPDIR=${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}
           - WAYLAND_SOCKET=${WAYLAND_DISPLAY:-"wayland-0"}
           - |
-            if [[ -e "$XDG_RUNTIME_DIR/${WAYLAND_SOCKET}" || -e "${WAYLAND_DISPLAY}" ]]
+            if [[ -e "${XDG_RUNTIME_DIR}/${WAYLAND_SOCKET}" || -e "${WAYLAND_DISPLAY}" ]]
             then
                 FLAGS="--enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime"
             fi

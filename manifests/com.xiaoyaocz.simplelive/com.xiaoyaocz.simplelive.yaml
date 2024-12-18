@@ -171,15 +171,15 @@ modules:
     build-commands:
       - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
       - rm -r usr/share/icons
-      - mv usr/share/simple_live_app /app/
-      - cp -a usr/share /app/
+      - mv usr/share/simple_live_app ${FLATPAK_DEST}/
+      - cp -a usr/share ${FLATPAK_DEST}/
       - desktop-file-edit --set-name="Simple Live" --set-key="Categories" --set-value="AudioVideo;Audio;Video;Network;"
-        --remove-key="Version" /app/share/applications/simple_live_app.desktop
-      - chmod +x /app/simple_live_app/simple_live_app
-      - install -Dm755 simple_live_app.sh /app/bin/simple_live_app
-      - install -Dm644 simple_live_app.png -t /app/share/icons/hicolor/512x512/apps
-      - install -Dm644 com.xiaoyaocz.simplelive.metainfo.xml -t /app/share/metainfo
-      - ln -s libmpv.so.2 /app/lib/libmpv.so.1
+        --remove-key="Version" ${FLATPAK_DEST}/share/applications/simple_live_app.desktop
+      - chmod +x ${FLATPAK_DEST}/simple_live_app/simple_live_app
+      - install -Dm755 simple_live_app.sh ${FLATPAK_DEST}/bin/simple_live_app
+      - install -Dm644 simple_live_app.png -t ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps
+      - install -Dm644 com.xiaoyaocz.simplelive.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+      - ln -s libmpv.so.2 ${FLATPAK_DEST}/lib/libmpv.so.1
     sources:
       - type: file
         url: https://github.com/xiaoyaocz/dart_simple_live/releases/download/v1.7.5/simple_live_app-1.7.5%2B10705-linux.deb
@@ -204,7 +204,7 @@ modules:
 
       - type: script
         commands:
-          - export TMPDIR="$XDG_RUNTIME_DIR/app/$FLATPAK_ID"
+          - export TMPDIR="${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}"
           - export LD_LIBRARY_PATH=/app/lib
           - exec /app/simple_live_app/simple_live_app "$@"
         dest-filename: simple_live_app.sh

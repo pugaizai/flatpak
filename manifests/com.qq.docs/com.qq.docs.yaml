@@ -32,11 +32,11 @@ modules:
     build-options:
       no-debuginfo: true
     build-commands:
-      - install -Dm755 apply_extra -t /app/bin
-      - install -Dm644 com.qq.docs.svg -t /app/share/icons/hicolor/scalable/apps
-      - install -Dm644 com.qq.docs.desktop -t /app/share/applications
-      - install -Dm644 com.qq.docs.metainfo.xml -t /app/share/metainfo
-      - install -Dm755 tdappdesktop.sh /app/bin/tdappdesktop
+      - install -Dm755 apply_extra -t ${FLATPAK_DEST}/bin
+      - install -Dm644 com.qq.docs.svg -t ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps
+      - install -Dm644 com.qq.docs.desktop -t ${FLATPAK_DEST}/share/applications
+      - install -Dm644 com.qq.docs.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+      - install -Dm755 tdappdesktop.sh ${FLATPAK_DEST}/bin/tdappdesktop
     sources:
       - type: extra-data
         only-arches: [aarch64]
@@ -69,10 +69,10 @@ modules:
       - type: script
         dest-filename: tdappdesktop.sh
         commands:
-          - export TMPDIR=$XDG_RUNTIME_DIR/app/$FLATPAK_ID
+          - export TMPDIR=${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}
           - WAYLAND_SOCKET=${WAYLAND_DISPLAY:-"wayland-0"}
           - |
-            if [[ -e "$XDG_RUNTIME_DIR/${WAYLAND_SOCKET}" || -e "${WAYLAND_DISPLAY}" ]]
+            if [[ -e "${XDG_RUNTIME_DIR}/${WAYLAND_SOCKET}" || -e "${WAYLAND_DISPLAY}" ]]
             then
                 FLAGS="--enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime"
             fi

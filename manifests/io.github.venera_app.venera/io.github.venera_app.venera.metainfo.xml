@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>io.github.venera_app.venera</id>
+  <launchable type="desktop-id">io.github.venera_app.venera.desktop</launchable>
+  <name>Venera</name>
+  <developer>venera-app</developer>
+  <summary>A comic app</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0</project_license>
+  <url type="homepage">https://github.com/venera-app/venera</url>
+  <url type="bugtracker">https://github.com/venera-app/venera/issues</url>
+  <description>
+    <p>A comic reader that support reading local and network comics.</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <caption>Main</caption>
+      <image type="source">https://raw.githubusercontent.com/wgh136/pixes/refs/heads/master/screenshots/1.png</image>
+    </screenshot>
+  </screenshots>
+  <releases>
+    <release version="1.1.2" date="2024-12-19">
+      <description></description>
+    </release>
+  </releases>
+  <content_rating type="oars-1.1"/>
+  <update_contact>i@pugai.life</update_contact>
+</component>

@@ -43,14 +43,14 @@ modules:
     build-options:
       no-debuginfo: true
     build-commands:
-      - mkdir -p /app/electron
+      - mkdir -p ${FLATPAK_DEST}/electron
       - bsdtar -xvf bilibili.tar.gz
-      - install -Dm644 app/app.asar -t /app/bilibili/
-      - mv app/extensions /app/bilibili/
-      - install -Dm644 io.github.msojocs.bilibili.desktop -t /app/share/applications/
-      - install -Dm644 io.github.msojocs.bilibili.svg -t /app/share/icons/hicolor/scalable/apps/
-      - install -Dm644 io.github.msojocs.bilibili.metainfo.xml -t /app/share/metainfo/
-      - install -Dm755 bilibili.sh /app/bin/bilibili
+      - install -Dm644 app/app.asar -t ${FLATPAK_DEST}/bilibili/
+      - mv app/extensions ${FLATPAK_DEST}/bilibili/
+      - install -Dm644 io.github.msojocs.bilibili.desktop -t ${FLATPAK_DEST}/share/applications/
+      - install -Dm644 io.github.msojocs.bilibili.svg -t ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/
+      - install -Dm644 io.github.msojocs.bilibili.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo/
+      - install -Dm755 bilibili.sh ${FLATPAK_DEST}/bin/bilibili
     sources:
       - type: file
         url: https://github.com/msojocs/bilibili-linux/releases/download/v1.16.1-1/bilibili-asar-v1.16.1-1.tar.gz
@@ -73,10 +73,10 @@ modules:
       - type: script
         dest-filename: bilibili.sh
         commands:
-          - export TMPDIR=$XDG_RUNTIME_DIR/app/$FLATPAK_ID
+          - export TMPDIR=${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}
           - WAYLAND_SOCKET=${WAYLAND_DISPLAY:-"wayland-0"}
           - |
-            if [[ -e "$XDG_RUNTIME_DIR/${WAYLAND_SOCKET}" || -e "${WAYLAND_DISPLAY}" ]]
+            if [[ -e "${XDG_RUNTIME_DIR}/${WAYLAND_SOCKET}" || -e "${WAYLAND_DISPLAY}" ]]
             then
                 FLAGS="--enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime --wayland-text-input-version=3"
             fi

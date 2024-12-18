@@ -34,17 +34,15 @@ jobs:
         run: |
           git config --global protocol.file.allow always
 
+          flatpak-builder build-dir manifests/io.github.wgh136.pixes/io.github.wgh136.pixes.yaml --repo=repo --arch=x86_64 --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
+
+          flatpak-builder build-dir manifests/io.github.venera_app.venera/io.github.venera_app.venera.yaml --repo=repo --arch=x86_64 --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
+
           flatpak-builder build-dir manifests/com.hoppscotch.hoppscotch/com.hoppscotch.hoppscotch.yaml --repo=repo --arch=x86_64 --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
 
           flatpak-builder build-dir manifests/pro.cycity.desktop/pro.cycity.desktop.yaml --repo=repo --arch=x86_64 --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
 
-          flatpak-builder build-dir manifests/io.github.iota9star.mikan/io.github.iota9star.mikan.yaml --repo=repo --arch=x86_64 --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
-
-          flatpak-builder build-dir manifests/io.github.niuhuan.kobi/io.github.niuhuan.kobi.yaml --repo=repo --arch=x86_64 --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
-
           flatpak-builder build-dir manifests/cn.wps.office/cn.wps.office.yaml --repo=repo --arch=x86_64 --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
-
-          flatpak-builder build-dir manifests/com.xiaoyaocz.dmzjx/com.xiaoyaocz.dmzjx.yaml --repo=repo --arch=x86_64 --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
 
           flatpak-builder build-dir manifests/com.xiaoyaocz.simplelive/com.xiaoyaocz.simplelive.yaml --repo=repo --arch=x86_64 --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
 

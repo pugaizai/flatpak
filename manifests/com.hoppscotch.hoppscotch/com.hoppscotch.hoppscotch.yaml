@@ -26,13 +26,13 @@ modules:
       no-debuginfo: true
     build-commands:
       - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
-      - install -Dm755 usr/bin/hoppscotch /app/bin/hoppscotch
-      - install -Dm644 usr/share/applications/hoppscotch.desktop /app/share/applications/com.hoppscotch.hoppscotch.desktop
-      - install -Dm644 com.hoppscotch.hoppscotch.metainfo.xml /app/share/metainfo/com.hoppscotch.hoppscotch.metainfo.xml
+      - install -Dm755 usr/bin/hoppscotch ${FLATPAK_DEST}/bin/hoppscotch
+      - install -Dm644 usr/share/applications/hoppscotch.desktop ${FLATPAK_DEST}/share/applications/com.hoppscotch.hoppscotch.desktop
+      - install -Dm644 com.hoppscotch.hoppscotch.metainfo.xml ${FLATPAK_DEST}/share/metainfo/com.hoppscotch.hoppscotch.metainfo.xml
       - for size in {32x32,48x48,64x64,128x128,256x256@2}; do install -Dm644 usr/share/icons/hicolor/$size/apps/hoppscotch.png
-        /app/share/icons/hicolor/$size/apps/com.hoppscotch.hoppscotch.png; done
+        ${FLATPAK_DEST}/share/icons/hicolor/$size/apps/com.hoppscotch.hoppscotch.png; done
       - desktop-file-edit --set-key="Categories" --set-value="Development;Network;"
-        --set-key="Icon" --set-value="com.hoppscotch.hoppscotch" /app/share/applications/com.hoppscotch.hoppscotch.desktop
+        --set-key="Icon" --set-value="com.hoppscotch.hoppscotch" ${FLATPAK_DEST}/share/applications/com.hoppscotch.hoppscotch.desktop
     sources:
       - type: file
         only-arches: [x86_64]

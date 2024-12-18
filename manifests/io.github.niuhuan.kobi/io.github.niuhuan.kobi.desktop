@@ -1,9 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Kobi
-GenericName=Comic Reader
-Comment=Copymanga Client.
-Exec=kobi
-Icon=io.github.niuhuan.kobi
-Categories=Network;Graphics;
-Terminal=false

@@ -26,10 +26,10 @@ modules:
       no-debuginfo: true
     build-commands:
       - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
-      - cp -a usr/share /app/
-      - mv opt/jhentai /app/
-      - install -Dm755 jhentai.sh /app/bin/jhentai
-      - install -Dm644 top.jtmonster.jhentai.metainfo.xml -t /app/share/metainfo
+      - cp -a usr/share ${FLATPAK_DEST}/
+      - mv opt/jhentai ${FLATPAK_DEST}/
+      - install -Dm755 jhentai.sh ${FLATPAK_DEST}/bin/jhentai
+      - install -Dm644 top.jtmonster.jhentai.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
     sources:
       - type: file
         only-arches: [x86_64]
@@ -47,6 +47,6 @@ modules:
         path: top.jtmonster.jhentai.metainfo.xml
       - type: script
         commands:
-          - export TMPDIR="$XDG_RUNTIME_DIR/app/$FLATPAK_ID"
+          - export TMPDIR="${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}"
           - exec /app/jhentai/jhentai "$@"
         dest-filename: jhentai.sh
