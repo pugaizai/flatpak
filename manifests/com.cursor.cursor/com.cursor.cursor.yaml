@@ -88,9 +88,9 @@ modules:
       - type: extra-data
         filename: cursor.AppImage
         only-arches: [x86_64]
-        url: https://download.todesktop.com/230313mzl4w4u92/cursor-0.44.2-build-241218ntls52u8v-x86_64.AppImage
-        sha256: 649f4ca4272c6770e87fb0e1e4936af93048b5aae854b42a39da353a89d0613f
-        size: 165716570
+        url: https://download.todesktop.com/230313mzl4w4u92/cursor-0.44.3-build-241218sybfbogmq-x86_64.AppImage
+        sha256: db169dc18afc5933169c892685c7dd38fafc8a73702bbb7500b6aaf82554ce4f
+        size: 165716638
         x-checker-data:
           type: electron-updater
           url: https://download.todesktop.com/230313mzl4w4u92/latest-linux.yml
@@ -99,8 +99,8 @@ modules:
         filename: cursor.AppImage
         only-arches: [aarch64]
         url: https://download.todesktop.com/230313mzl4w4u92/cursor-0.44.2-build-241218ntls52u8v-arm64.AppImage
-        sha256: 2c55c0f9e0585cb762ce97baf8aaec941773085a08b5f9c3a3179d8dae0840ce
-        size: 166088862
+        sha256: 00a3652430fbee7fbe7cac7d8caa7d9301c0856dac878f468cab09b9dc3f8bd5
+        size: 166088922
         # x-checker-data:
         #   type: electron-updater
         #   url: https://download.todesktop.com/230313mzl4w4u92/latest-linux-arm64.yml
