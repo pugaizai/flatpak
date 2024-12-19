@@ -30,7 +30,6 @@ jobs:
           - xyz.chatboxapp.ce
           - com.larksuite.Lark
           - com.qq.qq
-          - io.github.wgh136.pixes
           - io.github.venera_app.venera
 
     steps:
