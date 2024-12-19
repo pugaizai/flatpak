@@ -1,5 +1,7 @@
 # Pugaizai's Flatpaks
 
+## [Flatpak List](https://github.com/pugaizai/flatpak/tree/main/manifests)
+
 ## Use My Repo
 
 ### Add Repo
