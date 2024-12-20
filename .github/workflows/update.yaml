@@ -31,6 +31,7 @@ jobs:
           - com.larksuite.Lark
           - com.qq.qq
           - io.github.venera_app.venera
+          - com.tominlab.wonderpen
 
     steps:
       - uses: actions/checkout@v4 

@@ -1,0 +1,93 @@
+app-id: com.tominlab.wonderpen
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+base: org.electronjs.Electron2.BaseApp
+base-version: '24.08'
+separate-locales: false
+rename-icon: wonderpen
+rename-desktop-file: wonderpen.desktop
+command: wonderpen
+finish-args:
+  - --share=ipc
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --device=dri
+  - --share=network
+  - --filesystem=xdg-documents
+  # required to fix cursor scaling on wayland
+  - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
+
+add-extensions:
+  org.freedesktop.Platform.Electron:
+    version: '24.08'
+    directory: electron
+
+modules:
+  - name: wonderpen
+    buildsystem: simple
+    build-options:
+      no-debuginfo: true
+    build-commands:
+      - bsdtar --to-stdout -xf wonderpen.deb data.* | bsdtar -xf -
+      - rm -r usr/share/doc
+      - rm -r opt/WonderPen/resources/app.asar.unpacked/node_modules/better-sqlite3
+      - mkdir -p ${FLATPAK_DEST}/electron
+      - cp -a opt/WonderPen/resources ${FLATPAK_DEST}/WonderPen
+      - cp -a usr/share ${FLATPAK_DEST}/
+      - desktop-file-edit --set-key="Exec" --set-value="wonderpen %U" ${FLATPAK_DEST}/share/applications/wonderpen.desktop
+      - desktop-file-edit --set-key="Name[zh_CN]" --set-value="妙笔" ${FLATPAK_DEST}/share/applications/wonderpen.desktop
+      - desktop-file-edit --set-key="Name[zh_TW]" --set-value="妙筆" ${FLATPAK_DEST}/share/applications/wonderpen.desktop
+      - install -Dm644 com.tominlab.wonderpen.metainfo.xml -t /app/share/metainfo
+      - install -Dm755 wonderpen.sh /app/bin/wonderpen
+      - install -Dm755 better_sqlite3.node -t ${FLATPAK_DEST}/WonderPen/app.asar.unpacked/node_modules/better-sqlite3/build/Release
+    sources:
+      - type: archive
+        only-arches: [x86_64]
+        url: https://github.com/pugaizai/better-sqlite3/releases/download/v11.7.0/better-sqlite3-v11.7.0-electron-v130-linux-x64.tar.gz
+        sha256: 682a396367e4c20fd7040febb699ea5fe49d88f60ae475ff42806227707a0e7c
+        strip-components: 2
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/pugaizai/better-sqlite3/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: >-
+            .assets[] | select(.name | "better-sqlite3-v" + $version + "-electron-v130-linux-x64.tar.gz")
+            |
+            .browser_download_url
+      - type: archive
+        only-arches: [aarch64]
+        url: https://github.com/pugaizai/better-sqlite3/releases/download/v11.7.0/better-sqlite3-v11.7.0-electron-v130-linux-arm64.tar.gz
+        sha256: c6e5a5ccd77dcd7be1d8742f26923ca80435745238d29f4257f807bce23227b9
+        strip-components: 2
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/pugaizai/better-sqlite3/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: >-
+            .assets[] | select(.name | "better-sqlite3-v" + $version + "-electron-v130-linux-arm64.tar.gz")
+            |
+            .browser_download_url
+      - type: file
+        dest-filename: wonderpen.deb
+        url: https://file.tominlab.com/WonderPen/2.5/WonderPen_linux_amd64_2.5.8(7566).deb
+        sha256: d776212650f30dafcf942fbee54b883133c09d06c7ac870c0f44a207b1a9dbbe
+        x-checker-data:
+          type: json
+          url: https://app.tominlab.com/api/product/wonderpen/downloads/latest
+          version-query: .data[0] | .version
+          url-query: .data[] | select(.format=="linux_deb" and (.url | contains("amd64")))
+            | "https://file.tominlab.com/" + .url
+      - type: file
+        path: com.tominlab.wonderpen.metainfo.xml
+      - type: script
+        dest-filename: wonderpen.sh
+        commands:
+          - export TMPDIR=${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}
+          - WAYLAND_SOCKET=${WAYLAND_DISPLAY:-"wayland-0"}
+          - |
+            if [[ -e "${XDG_RUNTIME_DIR}/${WAYLAND_SOCKET}" || -e "${WAYLAND_DISPLAY}" ]]
+            then
+                FLAGS="--enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime --wayland-text-input-version=3"
+            fi
+          - exec zypak-wrapper "/app/electron/electron" "/app/WonderPen/app.asar" $FLAGS "$@"
