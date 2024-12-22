@@ -69,11 +69,11 @@ modules:
             |
             .browser_download_url
       - type: file
-        path: ${FLATPAK_ID}.metainfo.xml
+        path: xyz.chatboxapp.ce.metainfo.xml
       - type: file
-        path: ${FLATPAK_ID}.png
+        path: xyz.chatboxapp.ce.png
       - type: file
-        path: ${FLATPAK_ID}.desktop
+        path: xyz.chatboxapp.ce.desktop
       - type: script
         dest-filename: chatbox
         commands:

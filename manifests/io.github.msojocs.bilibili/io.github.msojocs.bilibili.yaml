@@ -65,11 +65,11 @@ modules:
             |
             .browser_download_url
       - type: file
-        path: ${FLATPAK_ID}.metainfo.xml
+        path: io.github.msojocs.bilibili.metainfo.xml
       - type: file
-        path: ${FLATPAK_ID}.desktop
+        path: io.github.msojocs.bilibili.desktop
       - type: file
-        path: ${FLATPAK_ID}.svg
+        path: io.github.msojocs.bilibili.svg
       - type: script
         dest-filename: bilibili.sh
         commands:

@@ -106,11 +106,11 @@ modules:
           # fix double-title-bars bugs
           - sed -i 's/,minHeight/,frame:false,minHeight/g' "cursor/resources/app/out/vs/code/electron-main/main.js"
       - type: file
-        path: ${FLATPAK_ID}.metainfo.xml
+        path: com.cursor.cursor.metainfo.xml
       - type: file
-        path: ${FLATPAK_ID}.desktop
+        path: com.cursor.cursor.desktop
       - type: file
-        path: ${FLATPAK_ID}.png
+        path: com.cursor.cursor.png
       - type: file
         path: cursor
       - type: file

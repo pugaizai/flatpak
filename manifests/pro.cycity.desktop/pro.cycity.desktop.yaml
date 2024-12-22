@@ -49,11 +49,11 @@ modules:
         filename: bilibili.deb
         size: 78753186
       - type: file
-        path: ${FLATPAK_ID}.metainfo.xml
+        path: pro.cycity.desktop.metainfo.xml
       - type: file
-        path: ${FLATPAK_ID}.png     
+        path: pro.cycity.desktop.png     
       - type: file
-        path: ${FLATPAK_ID}.desktop
+        path: pro.cycity.desktop.desktop
       - type: script
         dest-filename: cyc-desktop.sh
         commands:

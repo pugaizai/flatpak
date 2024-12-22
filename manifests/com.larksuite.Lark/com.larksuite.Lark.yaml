@@ -79,8 +79,8 @@ modules:
           version-query: .versions.Linux_deb_arm.version_number
           url-query: .versions.Linux_deb_arm.download_link
       - type: file
-        path: ${FLATPAK_ID}.desktop
+        path: com.larksuite.Lark.desktop
       - type: file
-        path: ${FLATPAK_ID}.metainfo.xml
+        path: com.larksuite.Lark.metainfo.xml
       - type: file
-        path: ${FLATPAK_ID}.svg
+        path: com.larksuite.Lark.svg

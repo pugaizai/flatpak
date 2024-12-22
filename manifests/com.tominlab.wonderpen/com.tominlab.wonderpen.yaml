@@ -78,8 +78,10 @@ modules:
           version-query: .data[0] | .version
           url-query: .data[] | select(.format=="linux_deb" and (.url | contains("amd64")))
             | "https://file.tominlab.com/" + .url
+
       - type: file
-        path: ${FLATPAK_ID}.metainfo.xml
+        path: com.tominlab.wonderpen.metainfo.xml
+
       - type: script
         dest-filename: wonderpen.sh
         commands:

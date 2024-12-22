@@ -199,7 +199,7 @@ modules:
         sha256: 9a748937746a91370d97386f194f6bc285e32637595a769c0c33ea213508a0cc
 
       - type: file
-        path: ${FLATPAK_ID}.metainfo.xml
+        path: com.xiaoyaocz.simplelive.metainfo.xml
 
       - type: script
         commands:

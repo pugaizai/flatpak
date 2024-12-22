@@ -102,13 +102,13 @@ modules:
       - type: file
         path: npmrc
       - type: file
-        path: ${FLATPAK_ID}.metainfo.xml
+        path: com.visualstudio.code.metainfo.xml
       - type: file
-        path: ${FLATPAK_ID}.desktop
+        path: com.visualstudio.code.desktop
       - type: file
-        path: ${FLATPAK_ID}-url-handler.desktop
+        path: com.visualstudio.code-url-handler.desktop
       - type: file
-        path: ${FLATPAK_ID}-workspace.xml
+        path: com.visualstudio.code-workspace.xml
       - type: file
         path: icons/vscode_64.png
       - type: file

@@ -61,11 +61,11 @@ modules:
           url-query: '"https://desktop.docs.qq.com/Installer/30001/\($version)/TencentDocs-x64.deb"'
         size: 156377250
       - type: file
-        path: ${FLATPAK_ID}.metainfo.xml
+        path: com.qq.docs.metainfo.xml
       - type: file
-        path: ${FLATPAK_ID}.svg
+        path: com.qq.docs.svg
       - type: file
-        path: ${FLATPAK_ID}.desktop
+        path: com.qq.docs.desktop
       - type: script
         dest-filename: tdappdesktop.sh
         commands:
