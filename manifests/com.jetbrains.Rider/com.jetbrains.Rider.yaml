@@ -1,0 +1,83 @@
+app-id: com.jetbrains.Rider
+runtime: org.freedesktop.Sdk
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+command: rider
+separate-locales: false
+tags:
+  - proprietary
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --share=network
+  - --socket=pulseaudio
+  - --filesystem=host
+  - --filesystem=xdg-run/keyring
+  - --socket=session-bus
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=org.freedesktop.secrets
+  - --talk-name=org.freedesktop.Flatpak
+  - --device=all
+  - --env=RIDER_JDK=/app/extra/rider/jre64
+modules:
+  - shared-modules/libsecret/libsecret.json
+
+  - name: rider
+    buildsystem: simple
+    build-commands:
+      - unzip rider_logos.zip
+      - install -D apply_extra /app/bin/apply_extra
+      - install -D -m644 rider_logos/icon-rider.svg ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
+      - install -D -m644 -t ${FLATPAK_DEST}/share/applications/ ${FLATPAK_ID}.desktop
+      - install -D -m644 -t ${FLATPAK_DEST}/share/metainfo/ ${FLATPAK_ID}.metainfo.xml
+      - cat idea.properties | tee -a ${FLATPAK_DEST}/bin/idea.properties
+    sources:
+      - type: extra-data
+        url: https://download.jetbrains.com/rider/JetBrains.Rider-2024.3.2.tar.gz
+        sha256: 7c716bad550067960222bf1d97c5ac7c40d0ceba6cafd754065038f4d23b2a9e
+        filename: rider.tar.gz
+        only-arches:
+          - x86_64
+        x-checker-data:
+          type: jetbrains
+          code: RD
+          is-main-source: true
+        size: 1880538329
+      - type: extra-data
+        url: https://download.jetbrains.com/rider/JetBrains.Rider-2024.3.2-aarch64.tar.gz
+        sha256: f1eff56a298f58bd25fcce7f7d572b2ba9e3bd1b51ff6457ab5f6dfe7f789b4a
+        filename: rider.tar.gz
+        only-arches:
+          - aarch64
+        x-checker-data:
+          type: jetbrains
+          code: RD
+          is-main-source: true
+        size: 1871230298
+      - type: file
+        path: com.jetbrains.Rider.desktop
+      - type: file
+        path: com.jetbrains.Rider.metainfo.xml
+      - type: script
+        commands:
+          - mkdir rider/
+          - tar -xzf rider.tar.gz --directory=rider/ --strip-components=1
+          - rm rider.tar.gz
+        dest-filename: apply_extra
+      - type: file
+        sha256: 894d2776d31ac722a2958f4dfd549652b4ea2c1615aafd403cdd7a3277e02850
+        url: https://resources.jetbrains.com/storage/products/rider/docs/rider_logos.zip
+        size: 210376
+      - type: file
+        path: idea.properties
+
+  - name: wrapper
+    buildsystem: meson
+    config-opts:
+      - -Deditor_binary=/app/extra/rider/bin/rider.sh
+      - -Dprogram_name=rider
+      - -Deditor_title=Rider
+    sources:
+      - type: git
+        url: https://github.com/Lctrs/jetbrains-flatpak-wrapper.git
+        commit: 5a054811ab2144ceaf343169b240a70eeb4dfb47
