@@ -20,10 +20,15 @@ finish-args:
   - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
 
 cleanup:
-  - /include
-  - /lib/pkgconfig
-  - /share/gtk-doc
+  - '*.a'
   - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/gtk-doc
 
 modules:
 
@@ -78,9 +83,9 @@ modules:
     build-commands:
       - install apply_extra ${FLATPAK_DEST}/bin
       - install -Dm755 qq.sh ${FLATPAK_DEST}/bin/qq
-      - install -Dm644 com.qq.qq.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
-      - install -Dm644 com.qq.qq.png -t ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps
-      - install -Dm644 com.qq.qq.desktop -t ${FLATPAK_DEST}/share/applications
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+      - install -Dm644 ${FLATPAK_ID}.png -t ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps
+      - install -Dm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications
     sources:
       - type: script
         commands:
@@ -105,13 +110,13 @@ modules:
         dest-filename: apply_extra
 
       - type: file
-        path: com.qq.qq.metainfo.xml
+        path: ${FLATPAK_ID}.metainfo.xml
 
       - type: file
-        path: com.qq.qq.png
+        path: ${FLATPAK_ID}.png
 
       - type: file
-        path: com.qq.qq.desktop
+        path: ${FLATPAK_ID}.desktop
 
       - type: extra-data
         filename: qq.deb

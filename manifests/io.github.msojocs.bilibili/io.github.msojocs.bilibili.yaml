@@ -47,9 +47,9 @@ modules:
       - bsdtar -xvf bilibili.tar.gz
       - install -Dm644 app/app.asar -t ${FLATPAK_DEST}/bilibili/
       - mv app/extensions ${FLATPAK_DEST}/bilibili/
-      - install -Dm644 io.github.msojocs.bilibili.desktop -t ${FLATPAK_DEST}/share/applications/
-      - install -Dm644 io.github.msojocs.bilibili.svg -t ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/
-      - install -Dm644 io.github.msojocs.bilibili.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo/
+      - install -Dm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications/
+      - install -Dm644 ${FLATPAK_ID}.svg -t ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo/
       - install -Dm755 bilibili.sh ${FLATPAK_DEST}/bin/bilibili
     sources:
       - type: file
@@ -65,11 +65,11 @@ modules:
             |
             .browser_download_url
       - type: file
-        path: io.github.msojocs.bilibili.metainfo.xml
+        path: ${FLATPAK_ID}.metainfo.xml
       - type: file
-        path: io.github.msojocs.bilibili.desktop
+        path: ${FLATPAK_ID}.desktop
       - type: file
-        path: io.github.msojocs.bilibili.svg
+        path: ${FLATPAK_ID}.svg
       - type: script
         dest-filename: bilibili.sh
         commands:

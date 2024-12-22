@@ -35,6 +35,7 @@ add-extensions:
     version: '24.08'
     add-ld-path: lib
     no-autodownload: true
+
 cleanup:
   - '*.a'
   - '*.la'
@@ -45,10 +46,11 @@ cleanup:
   - /man
   - /share/man
   - /share/gtk-doc
+
 modules:
   - shared-modules/libusb/libusb.json
 
-  # fix libsecret under flatpak
+  # Provide libsecret without gcrypt, forcing it to use the D-Bus backend
   # https://github.com/flathub/org.signal.Signal/pull/756/commits/2caf105b18f906e7707f67b3cf7384a21f461564
   - name: libsecret
     buildsystem: meson
@@ -86,9 +88,9 @@ modules:
     buildsystem: simple
     build-commands:
       - install -Dm755 cursor -t ${FLATPAK_DEST}/bin/
-      - install -Dm644 com.cursor.cursor.png -t ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/
-      - install -Dm644 com.cursor.cursor.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo/
-      - install -Dm644 com.cursor.cursor.desktop -t ${FLATPAK_DEST}/share/applications/
+      - install -Dm644 ${FLATPAK_ID}.png -t ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo/
+      - install -Dm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications/
       - install -Dm644 npmrc -t ${FLATPAK_DEST}/etc/
       - install -Dm644 flatpak-warning.txt -t ${FLATPAK_DEST}/share/cursor
       - install -Dm755 apply_extra -t ${FLATPAK_DEST}/bin/
@@ -104,11 +106,11 @@ modules:
           # fix double-title-bars bugs
           - sed -i 's/,minHeight/,frame:false,minHeight/g' "cursor/resources/app/out/vs/code/electron-main/main.js"
       - type: file
-        path: com.cursor.cursor.metainfo.xml
+        path: ${FLATPAK_ID}.metainfo.xml
       - type: file
-        path: com.cursor.cursor.desktop
+        path: ${FLATPAK_ID}.desktop
       - type: file
-        path: com.cursor.cursor.png
+        path: ${FLATPAK_ID}.png
       - type: file
         path: cursor
       - type: file
@@ -138,7 +140,7 @@ modules:
   - name: host-spawn
     buildsystem: simple
     build-commands:
-      - install -Dm755 host-spawn /app/bin/host-spawn
+      - install -Dm755 host-spawn ${FLATPAK_DEST}/bin/host-spawn
     sources:
       - type: file
         url: https://github.com/1player/host-spawn/releases/download/v1.6.0/host-spawn-x86_64

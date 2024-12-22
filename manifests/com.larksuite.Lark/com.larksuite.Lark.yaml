@@ -20,15 +20,26 @@ finish-args:
   # Share files
   - --filesystem=xdg-documents:rw
   - --filesystem=xdg-download:rw
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/gtk-doc
 separate-locales: false
 modules:
   - name: lark
     buildsystem: simple
     build-commands:
-      - install -D -m 755 -t ${FLATPAK_DEST}/bin/ apply_extra lark
-      - install -D -t ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/ com.larksuite.Lark.svg
-      - install -D -t ${FLATPAK_DEST}/share/applications/ com.larksuite.Lark.desktop
-      - install -D -t ${FLATPAK_DEST}/share/metainfo/ com.larksuite.Lark.metainfo.xml
+      - install -Dm755 lark -t ${FLATPAK_DEST}/bin
+      - install -Dm755 apply_extra -t ${FLATPAK_DEST}/bin
+      - install -Dm644 ${FLATPAK_ID}.svg -t ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps
+      - install -Dm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
     sources:
       - type: script
         commands:
@@ -41,7 +52,7 @@ modules:
           - bsdtar --to-stdout -xf Lark-linux.deb data.tar.xz | bsdtar -xf -
           - mv opt/bytedance/lark .
           - sed '/^exec -a/d' lark/bytedance-lark > lark/bytedance-lark.sh
-          - rm -rf opt usr *.tar.* debian-binary *.deb
+          - rm -rf opt usr *.deb
         dest-filename: apply_extra
       - type: extra-data
         filename: Lark-linux.deb
@@ -68,8 +79,8 @@ modules:
           version-query: .versions.Linux_deb_arm.version_number
           url-query: .versions.Linux_deb_arm.download_link
       - type: file
-        path: com.larksuite.Lark.desktop
+        path: ${FLATPAK_ID}.desktop
       - type: file
-        path: com.larksuite.Lark.metainfo.xml
+        path: ${FLATPAK_ID}.metainfo.xml
       - type: file
-        path: com.larksuite.Lark.svg
+        path: ${FLATPAK_ID}.svg

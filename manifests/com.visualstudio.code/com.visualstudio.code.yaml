@@ -75,19 +75,19 @@ modules:
   - name: vscode
     buildsystem: simple
     build-commands:
-      - install -D code.sh /app/bin/code
-      - install -Dm644 vscode_64.png /app/share/icons/hicolor/64x64/apps/com.visualstudio.code.png
-      - install -Dm644 vscode_128.png /app/share/icons/hicolor/128x128/apps/com.visualstudio.code.png
-      - install -Dm644 vscode_256.png /app/share/icons/hicolor/256x256/apps/com.visualstudio.code.png
-      - install -Dm644 vscode_512.png /app/share/icons/hicolor/512x512/apps/com.visualstudio.code.png
-      - install -Dm644 com.visualstudio.code.metainfo.xml -t /app/share/metainfo
-      - install -Dm644 com.visualstudio.code.desktop -t /app/share/applications
-      - install -Dm644 com.visualstudio.code-url-handler.desktop -t /app/share/applications
-      - install -Dm644 com.visualstudio.code-workspace.xml -t /app/share/mime/packages
-      - install -Dm644 npmrc -t /app/etc
-      - install -Dm644 flatpak-warning.txt -t /app/share/vscode
-      - install -D apply_extra -t /app/bin
-      - mkdir /app/tools
+      - install -Dm755 code.sh ${FLATPAK_DEST}/bin/code
+      - install -Dm644 vscode_64.png ${FLATPAK_DEST}/share/icons/hicolor/64x64/apps/${FLATPAK_ID}.png
+      - install -Dm644 vscode_128.png ${FLATPAK_DEST}/share/icons/hicolor/128x128/apps/${FLATPAK_ID}.png
+      - install -Dm644 vscode_256.png ${FLATPAK_DEST}/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.png
+      - install -Dm644 vscode_512.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+      - install -Dm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications
+      - install -Dm644 ${FLATPAK_ID}-url-handler.desktop -t ${FLATPAK_DEST}/share/applications
+      - install -Dm644 ${FLATPAK_ID}-workspace.xml -t ${FLATPAK_DEST}/share/mime/packages
+      - install -Dm644 npmrc -t ${FLATPAK_DEST}/etc
+      - install -Dm644 flatpak-warning.txt -t ${FLATPAK_DEST}/share/vscode
+      - install -Dm755 apply_extra -t ${FLATPAK_DEST}/bin
+      - mkdir ${FLATPAK_DEST}/tools
     sources:
       - type: script
         dest-filename: apply_extra
@@ -102,13 +102,13 @@ modules:
       - type: file
         path: npmrc
       - type: file
-        path: com.visualstudio.code.metainfo.xml
+        path: ${FLATPAK_ID}.metainfo.xml
       - type: file
-        path: com.visualstudio.code.desktop
+        path: ${FLATPAK_ID}.desktop
       - type: file
-        path: com.visualstudio.code-url-handler.desktop
+        path: ${FLATPAK_ID}-url-handler.desktop
       - type: file
-        path: com.visualstudio.code-workspace.xml
+        path: ${FLATPAK_ID}-workspace.xml
       - type: file
         path: icons/vscode_64.png
       - type: file
@@ -147,7 +147,7 @@ modules:
   - name: kerberos
     subdir: src
     post-install:
-      - install -Dm644 ../krb5.conf /app/etc/krb5.conf
+      - install -Dm644 ../krb5.conf ${FLATPAK_DEST}/etc/krb5.conf
     sources:
       - type: archive
         url: https://kerberos.org/dist/krb5/1.20/krb5-1.20.tar.gz
@@ -158,7 +158,7 @@ modules:
   - name: host-spawn
     buildsystem: simple
     build-commands:
-      - install -Dm755 host-spawn /app/bin/host-spawn
+      - install -Dm755 host-spawn ${FLATPAK_DEST}/bin/host-spawn
     sources:
       - type: file
         url: https://github.com/1player/host-spawn/releases/download/v1.6.0/host-spawn-x86_64

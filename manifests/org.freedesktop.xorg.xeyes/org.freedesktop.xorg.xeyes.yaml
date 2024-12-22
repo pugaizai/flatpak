@@ -9,11 +9,15 @@ finish-args:
   - --share=ipc
 
 cleanup:
-  - /lib/pkgconfig
-  - /share/man
-  - /share/doc
+  - '*.a'
+  - '*.la'
   - /include
-  - /lib/*.a
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/gtk-doc
 
 modules:
   - name: libXmu
@@ -46,8 +50,8 @@ modules:
           stable-only: true
           tag-template: xeyes-$version
       - type: file
-        path: org.freedesktop.xorg.xeyes.png
+        path: ${FLATPAK_ID}.png
       - type: file
-        path: org.freedesktop.xorg.xeyes.desktop
+        path: ${FLATPAK_ID}.desktop
       - type: file
-        path: org.freedesktop.xorg.xeyes.metainfo.xml
+        path: ${FLATPAK_ID}.metainfo.xml

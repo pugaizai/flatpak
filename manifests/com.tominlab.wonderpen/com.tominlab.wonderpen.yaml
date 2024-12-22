@@ -38,8 +38,8 @@ modules:
       - desktop-file-edit --set-key="Exec" --set-value="wonderpen %U" ${FLATPAK_DEST}/share/applications/wonderpen.desktop
       - desktop-file-edit --set-key="Name[zh_CN]" --set-value="妙笔" ${FLATPAK_DEST}/share/applications/wonderpen.desktop
       - desktop-file-edit --set-key="Name[zh_TW]" --set-value="妙筆" ${FLATPAK_DEST}/share/applications/wonderpen.desktop
-      - install -Dm644 com.tominlab.wonderpen.metainfo.xml -t /app/share/metainfo
-      - install -Dm755 wonderpen.sh /app/bin/wonderpen
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+      - install -Dm755 wonderpen.sh ${FLATPAK_DEST}/bin/wonderpen
       - install -Dm755 better_sqlite3.node -t ${FLATPAK_DEST}/WonderPen/app.asar.unpacked/node_modules/better-sqlite3/build/Release
     sources:
       - type: archive
@@ -79,7 +79,7 @@ modules:
           url-query: .data[] | select(.format=="linux_deb" and (.url | contains("amd64")))
             | "https://file.tominlab.com/" + .url
       - type: file
-        path: com.tominlab.wonderpen.metainfo.xml
+        path: ${FLATPAK_ID}.metainfo.xml
       - type: script
         dest-filename: wonderpen.sh
         commands:

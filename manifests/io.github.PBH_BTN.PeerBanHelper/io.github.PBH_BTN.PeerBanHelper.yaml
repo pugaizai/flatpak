@@ -48,15 +48,15 @@ modules:
             | .browser_download_url
 
       - type: file
-        path: io.github.PBH_BTN.PeerBanHelper.metainfo.xml
+        path: ${FLATPAK_ID}.metainfo.xml
 
       - type: file
         url: https://raw.githubusercontent.com/PBH-BTN/PeerBanHelper/refs/heads/master/install4j/icon.png
-        dest-filename: io.github.PBH_BTN.PeerBanHelper.png
+        dest-filename: ${FLATPAK_ID}.png
         sha256: c53e1606f11060cc84eb02edc075c4cb0699377a2a2bcb3edb35a81c3806ccc5
 
       - type: file
-        path: io.github.PBH_BTN.PeerBanHelper.desktop
+        path: ${FLATPAK_ID}.desktop
 
       - type: script
         commands:

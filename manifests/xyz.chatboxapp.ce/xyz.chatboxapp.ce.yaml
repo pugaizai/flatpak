@@ -34,9 +34,9 @@ modules:
     build-options:
       no-debuginfo: true
     build-commands:
-      - install -Dm644 xyz.chatboxapp.ce.desktop -t ${FLATPAK_DEST}/share/applications
-      - install -Dm644 xyz.chatboxapp.ce.png -t ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/
-      - install -Dm644 xyz.chatboxapp.ce.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+      - install -Dm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications
+      - install -Dm644 ${FLATPAK_ID}.png -t ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
       - install -Dm755 chatbox -t ${FLATPAK_DEST}/bin/
       - install -Dm755 apply_extra -t ${FLATPAK_DEST}/bin/
     sources:
@@ -69,11 +69,11 @@ modules:
             |
             .browser_download_url
       - type: file
-        path: xyz.chatboxapp.ce.metainfo.xml
+        path: ${FLATPAK_ID}.metainfo.xml
       - type: file
-        path: xyz.chatboxapp.ce.png
+        path: ${FLATPAK_ID}.png
       - type: file
-        path: xyz.chatboxapp.ce.desktop
+        path: ${FLATPAK_ID}.desktop
       - type: script
         dest-filename: chatbox
         commands:

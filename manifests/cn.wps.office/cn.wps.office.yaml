@@ -43,20 +43,20 @@ modules:
       - ln -s wps ${FLATPAK_DEST}/bin/wpspdf
       - install -Dm755 /usr/bin/desktop-file-edit -t ${FLATPAK_DEST}/bin/
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo/
-      - install -Dm644 cn.wps.office.desktop -t ${FLATPAK_DEST}/share/applications/
-      - install -Dm644 cn.wps.office.svg -t ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/
+      - install -Dm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications/
+      - install -Dm644 ${FLATPAK_ID}.svg -t ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/
     sources:
       - type: file
         path: apply_extra.sh
 
       - type: file
-        path: cn.wps.office.metainfo.xml
+        path: ${FLATPAK_ID}.metainfo.xml
 
       - type: file
-        path: cn.wps.office.desktop
+        path: ${FLATPAK_ID}.desktop
 
       - type: file
-        path: cn.wps.office.svg
+        path: ${FLATPAK_ID}.svg
 
       - type: file
         path: wps.sh

@@ -36,9 +36,9 @@ modules:
     build-options:
       no-debuginfo: true
     build-commands:
-      - install -Dm644 pro.cycity.desktop.desktop -t ${FLATPAK_DEST}/share/applications
-      - install -Dm644 pro.cycity.desktop.png -t ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/
-      - install -Dm644 pro.cycity.desktop.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+      - install -Dm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications
+      - install -Dm644 ${FLATPAK_ID}.png -t ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
       - install -Dm755 cyc-desktop.sh ${FLATPAK_DEST}/bin/cyc-desktop
       - install -Dm755 apply_extra -t ${FLATPAK_DEST}/bin
     sources:
@@ -49,11 +49,11 @@ modules:
         filename: bilibili.deb
         size: 78753186
       - type: file
-        path: pro.cycity.desktop.metainfo.xml
+        path: ${FLATPAK_ID}.metainfo.xml
       - type: file
-        path: pro.cycity.desktop.png     
+        path: ${FLATPAK_ID}.png     
       - type: file
-        path: pro.cycity.desktop.desktop
+        path: ${FLATPAK_ID}.desktop
       - type: script
         dest-filename: cyc-desktop.sh
         commands:

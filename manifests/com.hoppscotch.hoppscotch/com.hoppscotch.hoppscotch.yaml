@@ -3,6 +3,8 @@ runtime: org.gnome.Platform
 runtime-version: '47'
 sdk: org.gnome.Sdk
 command: hoppscotch
+rename-icon: hoppscotch
+rename-desktop-file: hoppscotch.desktop
 finish-args:
   - --share=ipc
   - --socket=fallback-x11
@@ -26,13 +28,11 @@ modules:
       no-debuginfo: true
     build-commands:
       - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
+      - desktop-file-edit --set-key="Categories" --set-value="Development;Network;" usr/share/applications/hoppscotch.desktop
       - install -Dm755 usr/bin/hoppscotch ${FLATPAK_DEST}/bin/hoppscotch
-      - install -Dm644 usr/share/applications/hoppscotch.desktop ${FLATPAK_DEST}/share/applications/com.hoppscotch.hoppscotch.desktop
-      - install -Dm644 com.hoppscotch.hoppscotch.metainfo.xml ${FLATPAK_DEST}/share/metainfo/com.hoppscotch.hoppscotch.metainfo.xml
-      - for size in {32x32,128x128,256x256@2}; do install -Dm644 usr/share/icons/hicolor/$size/apps/hoppscotch.png
-        ${FLATPAK_DEST}/share/icons/hicolor/$size/apps/com.hoppscotch.hoppscotch.png; done
-      - desktop-file-edit --set-key="Categories" --set-value="Development;Network;"
-        --set-key="Icon" --set-value="com.hoppscotch.hoppscotch" ${FLATPAK_DEST}/share/applications/com.hoppscotch.hoppscotch.desktop
+      - install -Dm644 usr/share/applications/hoppscotch.desktop -t ${FLATPAK_DEST}/share/applications
+      - install -Dm644 usr/share/icons/hicolor/128x128/apps/hoppscotch.png -t ${FLATPAK_DEST}/share/icons/hicolor/128x128/apps
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
     sources:
       - type: file
         only-arches: [x86_64]
@@ -47,4 +47,4 @@ modules:
             |
             .browser_download_url
       - type: file
-        path: com.hoppscotch.hoppscotch.metainfo.xml
+        path: ${FLATPAK_ID}.metainfo.xml

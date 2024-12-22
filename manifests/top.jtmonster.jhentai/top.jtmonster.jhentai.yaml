@@ -29,7 +29,7 @@ modules:
       - cp -a usr/share ${FLATPAK_DEST}/
       - mv opt/jhentai ${FLATPAK_DEST}/
       - install -Dm755 jhentai.sh ${FLATPAK_DEST}/bin/jhentai
-      - install -Dm644 top.jtmonster.jhentai.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
     sources:
       - type: file
         only-arches: [x86_64]
@@ -44,7 +44,7 @@ modules:
             |
             .browser_download_url
       - type: file
-        path: top.jtmonster.jhentai.metainfo.xml
+        path: ${FLATPAK_ID}.metainfo.xml
       - type: script
         commands:
           - export TMPDIR="${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}"

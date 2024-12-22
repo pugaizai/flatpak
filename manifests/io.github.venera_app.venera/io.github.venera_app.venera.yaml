@@ -33,7 +33,7 @@ modules:
       - install -Dm644 usr/share/applications/venera.desktop -t ${FLATPAK_DEST}/share/applications/
       - install -Dm644 usr/share/icons/venera.png -t ${FLATPAK_DEST}/share/icons/hicolor/64x64/apps/
       - install -Dm755 venera.sh ${FLATPAK_DEST}/bin/venera
-      - install -Dm644 io.github.venera_app.venera.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
     sources:
       - type: file
         only-arches: [x86_64]
@@ -48,7 +48,7 @@ modules:
             |
             .browser_download_url
       - type: file
-        path: io.github.venera_app.venera.metainfo.xml
+        path: ${FLATPAK_ID}.metainfo.xml
       - type: script
         commands:
           - export TMPDIR="${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}"

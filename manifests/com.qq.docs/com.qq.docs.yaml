@@ -33,9 +33,9 @@ modules:
       no-debuginfo: true
     build-commands:
       - install -Dm755 apply_extra -t ${FLATPAK_DEST}/bin
-      - install -Dm644 com.qq.docs.svg -t ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps
-      - install -Dm644 com.qq.docs.desktop -t ${FLATPAK_DEST}/share/applications
-      - install -Dm644 com.qq.docs.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+      - install -Dm644 ${FLATPAK_ID}.svg -t ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps
+      - install -Dm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
       - install -Dm755 tdappdesktop.sh ${FLATPAK_DEST}/bin/tdappdesktop
     sources:
       - type: extra-data
@@ -61,11 +61,11 @@ modules:
           url-query: '"https://desktop.docs.qq.com/Installer/30001/\($version)/TencentDocs-x64.deb"'
         size: 156377250
       - type: file
-        path: com.qq.docs.metainfo.xml
+        path: ${FLATPAK_ID}.metainfo.xml
       - type: file
-        path: com.qq.docs.svg
+        path: ${FLATPAK_ID}.svg
       - type: file
-        path: com.qq.docs.desktop
+        path: ${FLATPAK_ID}.desktop
       - type: script
         dest-filename: tdappdesktop.sh
         commands:

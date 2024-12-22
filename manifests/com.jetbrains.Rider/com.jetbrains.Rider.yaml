@@ -19,6 +19,17 @@ finish-args:
   - --talk-name=org.freedesktop.Flatpak
   - --device=all
   - --env=RIDER_JDK=/app/extra/rider/jre64
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/gtk-doc
+
 modules:
   - shared-modules/libsecret/libsecret.json
 
@@ -26,7 +37,7 @@ modules:
     buildsystem: simple
     build-commands:
       - unzip rider_logos.zip
-      - install -D apply_extra /app/bin/apply_extra
+      - install -D apply_extra ${FLATPAK_DEST}/bin/apply_extra
       - install -D -m644 rider_logos/icon-rider.svg ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
       - install -D -m644 -t ${FLATPAK_DEST}/share/applications/ ${FLATPAK_ID}.desktop
       - install -D -m644 -t ${FLATPAK_DEST}/share/metainfo/ ${FLATPAK_ID}.metainfo.xml

@@ -175,10 +175,9 @@ modules:
       - cp -a usr/share ${FLATPAK_DEST}/
       - desktop-file-edit --set-name="Simple Live" --set-key="Categories" --set-value="AudioVideo;Audio;Video;Network;"
         --remove-key="Version" ${FLATPAK_DEST}/share/applications/simple_live_app.desktop
-      - chmod +x ${FLATPAK_DEST}/simple_live_app/simple_live_app
       - install -Dm755 simple_live_app.sh ${FLATPAK_DEST}/bin/simple_live_app
       - install -Dm644 simple_live_app.png -t ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps
-      - install -Dm644 com.xiaoyaocz.simplelive.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
       - ln -s libmpv.so.2 ${FLATPAK_DEST}/lib/libmpv.so.1
     sources:
       - type: file
@@ -200,7 +199,7 @@ modules:
         sha256: 9a748937746a91370d97386f194f6bc285e32637595a769c0c33ea213508a0cc
 
       - type: file
-        path: com.xiaoyaocz.simplelive.metainfo.xml
+        path: ${FLATPAK_ID}.metainfo.xml
 
       - type: script
         commands:
