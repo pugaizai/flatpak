@@ -28,7 +28,8 @@ modules:
       no-debuginfo: true
     build-commands:
       - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
-      - desktop-file-edit --set-key="Categories" --set-value="Development;Network;" usr/share/applications/hoppscotch.desktop
+      - desktop-file-edit --set-key="Categories" --set-value="Development;Network;"
+        usr/share/applications/hoppscotch.desktop
       - install -Dm755 usr/bin/hoppscotch ${FLATPAK_DEST}/bin/hoppscotch
       - install -Dm644 usr/share/applications/hoppscotch.desktop -t ${FLATPAK_DEST}/share/applications
       - install -Dm644 usr/share/icons/hicolor/128x128/apps/hoppscotch.png -t ${FLATPAK_DEST}/share/icons/hicolor/128x128/apps
@@ -36,8 +37,8 @@ modules:
     sources:
       - type: file
         only-arches: [x86_64]
-        url: https://github.com/hoppscotch/releases/releases/download/v24.11.0-0/Hoppscotch_linux_x64.deb
-        sha256: 15a5e0e0e1ce76cfd029080b72c175030b1d65839b5685d4b3c7507f1acc6026
+        url: https://github.com/hoppscotch/releases/releases/download/v24.12.0-0/Hoppscotch_linux_x64.deb
+        sha256: 274a57e5cf32a0882605e9b58fdbbaabbcdd6e6241ec0844df50b8eac87a5f1a
         x-checker-data:
           type: json
           url: https://api.github.com/repos/hoppscotch/releases/releases/latest
