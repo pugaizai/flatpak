@@ -117,7 +117,7 @@ modules:
             dest: 3rdparty/jinja
             x-checker-data:
               type: anitya
-              projet-id: 3894
+              project-id: 3894
               url-template: https://github.com/pallets/jinja/archive/refs/tags/$version.tar.gz
           - type: archive
             url: https://github.com/Dav1dde/glad/archive/refs/tags/v2.0.4.tar.gz
@@ -125,7 +125,7 @@ modules:
             dest: 3rdparty/glad
             x-checker-data:
               type: anitya
-              projet-id: 300234
+              project-id: 300234
               url-template: https://github.com/Dav1dde/glad/archive/refs/tags/v$version.tar.gz
 
       - name: ffmpeg
