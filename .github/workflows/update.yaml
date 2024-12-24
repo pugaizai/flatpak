@@ -20,6 +20,7 @@ jobs:
           - com.jetbrains.Rider
           - cn.wps.office
           - com.qq.docs
+          - com.qq.weixin
           - com.qq.qqmusic
           - com.xiaoyaocz.simplelive
           - io.github.c0re100.qBittorrent-Enhanced-Edition

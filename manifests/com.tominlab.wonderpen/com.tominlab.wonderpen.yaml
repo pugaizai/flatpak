@@ -52,7 +52,7 @@ modules:
           url: https://api.github.com/repos/pugaizai/better-sqlite3/releases/latest
           version-query: .tag_name | sub("^v"; "")
           url-query: >-
-            .assets[] | select(.name | "better-sqlite3-v" + $version + "-electron-v130-linux-x64.tar.gz")
+            .assets[] | select(.name | test("better-sqlite3-v" + $version + "-electron-v130-linux-x64.tar.gz"))
             |
             .browser_download_url
       - type: archive
@@ -65,13 +65,13 @@ modules:
           url: https://api.github.com/repos/pugaizai/better-sqlite3/releases/latest
           version-query: .tag_name | sub("^v"; "")
           url-query: >-
-            .assets[] | select(.name | "better-sqlite3-v" + $version + "-electron-v130-linux-arm64.tar.gz")
+            .assets[] | select(.name | test("better-sqlite3-v" + $version + "-electron-v130-linux-arm64.tar.gz"))
             |
             .browser_download_url
       - type: file
         dest-filename: wonderpen.deb
-        url: https://file.tominlab.com/WonderPen/2.5/WonderPen_linux_amd64_2.5.8(7566).deb
-        sha256: d776212650f30dafcf942fbee54b883133c09d06c7ac870c0f44a207b1a9dbbe
+        url: https://file.tominlab.com/WonderPen/2.5/WonderPen_linux_amd64_2.5.9(7612).deb
+        sha256: 5d86ec16273a068cacf0091c555a060a8748b919b84aedc056d5b07d4bd5b57c
         x-checker-data:
           type: json
           url: https://app.tominlab.com/api/product/wonderpen/downloads/latest
