@@ -130,7 +130,7 @@ modules:
       - type: extra-data
         filename: cursor.AppImage
         only-arches: [aarch64]
-        url: https://download.todesktop.com/230313mzl4w4u92/cursor-0.44.5-build-241220s3ux0e1tv-arm64.AppImage
+        url: https://download.todesktop.com/230313mzl4w4u92/cursor-0.44.8-build-241222ooktny8mh-arm64.AppImage
         sha256: b4f0872f44d5e0aa9ad8194c53886a763160d5709fa7d4c2d233f2cb512c3a88
         size: 166093267
         # x-checker-data:
