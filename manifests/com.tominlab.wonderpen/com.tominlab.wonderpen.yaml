@@ -31,7 +31,7 @@ modules:
     build-commands:
       - bsdtar --to-stdout -xf wonderpen.deb data.* | bsdtar -xf -
       - rm -r usr/share/doc
-      - rm -r opt/WonderPen/resources/app.asar.unpacked/node_modules/better-sqlite3
+      - rm opt/WonderPen/resources/app.asar.unpacked/node_modules/better-sqlite3/build/Release/better_sqlite3.node
       - mkdir -p ${FLATPAK_DEST}/electron
       - cp -a opt/WonderPen/resources ${FLATPAK_DEST}/WonderPen
       - cp -a usr/share ${FLATPAK_DEST}/
