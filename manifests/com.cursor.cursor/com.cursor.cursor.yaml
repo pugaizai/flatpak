@@ -120,9 +120,9 @@ modules:
       - type: extra-data
         filename: cursor.AppImage
         only-arches: [x86_64]
-        url: https://download.todesktop.com/230313mzl4w4u92/cursor-0.44.5-build-241220s3ux0e1tv-x86_64.AppImage
-        sha256: e486c8b0ec89748cc3a7139df822def147716a8709149724899bcd4ae197b72b
-        size: 165716484
+        url: https://download.todesktop.com/230313mzl4w4u92/cursor-0.44.8-build-241222ooktny8mh-x86_64.AppImage
+        sha256: e4514a417bcbd17b1dff353f4170f0818134884168c9b321bebdda6019e525b9
+        size: 165721002
         x-checker-data:
           type: electron-updater
           url: https://download.todesktop.com/230313mzl4w4u92/latest-linux.yml
