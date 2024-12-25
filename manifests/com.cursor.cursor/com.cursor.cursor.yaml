@@ -131,8 +131,8 @@ modules:
         filename: cursor.AppImage
         only-arches: [aarch64]
         url: https://download.todesktop.com/230313mzl4w4u92/cursor-0.44.5-build-241220s3ux0e1tv-arm64.AppImage
-        sha256: b4f0872f44d5e0aa9ad8194c53886a763160d5709fa7d4c2d233f2cb512c3a88
-        size: 166093267
+        sha256: 680489d8860fc8426350ca29d09e43cee96e680f2aabf44765bc9a1e902df246
+        size: 166088771
         # x-checker-data:
         #   type: electron-updater
         #   url: https://download.todesktop.com/230313mzl4w4u92/latest-linux-arm64.yml
