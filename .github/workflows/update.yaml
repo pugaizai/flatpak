@@ -13,7 +13,6 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
-      fail-fast: true
       matrix:
         appid: # list all flatpak application id to check
           - com.visualstudio.code
