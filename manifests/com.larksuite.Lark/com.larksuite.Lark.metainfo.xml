@@ -17,6 +17,11 @@
     <control>pointing</control>
     <control>keyboard</control>
   </recommends>
+  <releases>
+    <release version="7.28.10" date="2024-12-24">
+      <description></description>
+    </release>
+  </releases>
   <content_rating type="oars-1.1"/>
   <launchable type="desktop-id">com.larksuite.Lark.desktop</launchable>
   <translation type="gettext"></translation>
