@@ -30,7 +30,7 @@ modules:
       - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
       - mv usr/local/lib/venera ${FLATPAK_DEST}/
       - desktop-file-edit --set-key="Categories" --set-value="Graphics;Network;" --set-key="Exec"
-        --set-value="venera" --remove-key="Version" --remove-key="TryExec" usr/share/applications/venera.desktop
+        --set-value="venera" --remove-key="TryExec" usr/share/applications/venera.desktop
       - install -Dm644 usr/share/applications/venera.desktop -t ${FLATPAK_DEST}/share/applications/
       - install -Dm644 usr/share/icons/venera.png -t ${FLATPAK_DEST}/share/icons/hicolor/64x64/apps/
       - install -Dm755 venera.sh ${FLATPAK_DEST}/bin/venera
