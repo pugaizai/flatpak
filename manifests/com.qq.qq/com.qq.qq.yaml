@@ -138,4 +138,3 @@ modules:
           type: html
           url: https://im.qq.com/rainbow/linuxQQDownload
           pattern: (https://dldir1.qq.com/qqfile/qq/QQNT/Linux/QQ_([\d\.\_]+)_arm64[^/d]*.deb)
-
