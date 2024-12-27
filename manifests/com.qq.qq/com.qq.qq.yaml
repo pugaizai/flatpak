@@ -91,7 +91,6 @@ modules:
         commands:
           - export ZYPAK_LD_PRELOAD="/app/etc/preload/rename.so"
           - export TMPDIR="${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}"
-          - export LITELOADERQQNT_PROFILE="${LITELOADERQQNT_PROFILE:-$XDG_CONFIG_HOME/LiteLoaderQQNT}"
           - WAYLAND_SOCKET=${WAYLAND_DISPLAY:-"wayland-0"}
           - |
             if [[ -e "${XDG_RUNTIME_DIR}/${WAYLAND_SOCKET}" || -e "${WAYLAND_DISPLAY}" ]]
@@ -106,7 +105,6 @@ modules:
           - bsdtar --to-stdout -xf qq.deb data.* | bsdtar -xf -
           - mv opt/QQ .
           - rm -rf qq.deb usr opt data.*
-          - patch_qq
         dest-filename: apply_extra
 
       - type: file
@@ -141,29 +139,3 @@ modules:
           url: https://im.qq.com/rainbow/linuxQQDownload
           pattern: (https://dldir1.qq.com/qqfile/qq/QQNT/Linux/QQ_([\d\.\_]+)_arm64[^/d]*.deb)
 
-  - name: liteloader
-    buildsystem: simple
-    build-commands:
-      - install -Dm644 package.json ${FLATPAK_DEST}/lib/LiteLoaderQQNT/package.json
-      - install -Dm644 LICENSE ${FLATPAK_DEST}/lib/LiteLoaderQQNT/LICENSE
-      - install -Dm644 README.md ${FLATPAK_DEST}/lib/LiteLoaderQQNT/README.md
-      - cp -r src ${FLATPAK_DEST}/lib/LiteLoaderQQNT/src
-      - install -Dm755 patch_qq ${FLATPAK_DEST}/bin/patch_qq
-    sources:
-      - type: git
-        url: https://github.com/LiteLoaderQQNT/LiteLoaderQQNT.git
-        commit: 745e89ccd4469510c3b96fcfb21dd8026629eec8
-        tag: 1.2.3
-        x-checker-data:
-          type: git
-          tag-pattern: ^([\d.]+)$
-          is-important: true
-
-      - type: script
-        commands:
-          - echo Applying modifications to QQ...
-          - entrypoint=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c10)
-          - echo 'require("/app/lib/LiteLoaderQQNT");' > QQ/resources/app/app_launcher/$entrypoint.js
-          - sed -i "s|\"main\":\ \".*\",|\"main\":\ \"./app_launcher/$entrypoint.js\",|"
-            QQ/resources/app/package.json
-        dest-filename: patch_qq
