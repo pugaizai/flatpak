@@ -44,12 +44,12 @@ modules:
     sources:
       - type: archive
         only-arches: [x86_64]
-        url: https://github.com/pugaizai/better-sqlite3/releases/download/v11.7.0/better-sqlite3-v11.7.0-electron-v130-linux-x64.tar.gz
-        sha256: 682a396367e4c20fd7040febb699ea5fe49d88f60ae475ff42806227707a0e7c
+        url: https://github.com/WiseLibs/better-sqlite3/releases/download/v11.7.1/better-sqlite3-v11.7.1-electron-v130-linux-x64.tar.gz
+        sha256: 42b1a6d3183ea2042fe2b877be1d83630ef492e401902889000f92e16325ed13
         strip-components: 2
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/pugaizai/better-sqlite3/releases/latest
+          url: https://api.github.com/repos/WiseLibs/better-sqlite3/releases/latest
           version-query: .tag_name | sub("^v"; "")
           url-query: >-
             .assets[] | select(.name | test("better-sqlite3-v" + $version + "-electron-v130-linux-x64.tar.gz"))
@@ -57,12 +57,12 @@ modules:
             .browser_download_url
       - type: archive
         only-arches: [aarch64]
-        url: https://github.com/pugaizai/better-sqlite3/releases/download/v11.7.0/better-sqlite3-v11.7.0-electron-v130-linux-arm64.tar.gz
-        sha256: c6e5a5ccd77dcd7be1d8742f26923ca80435745238d29f4257f807bce23227b9
+        url: https://github.com/WiseLibs/better-sqlite3/releases/download/v11.7.1/better-sqlite3-v11.7.1-electron-v130-linux-arm64.tar.gz
+        sha256: f49c3bfc00a4457ebded5181edc4a9900d90342c1d34657666790bb1934821bd
         strip-components: 2
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/pugaizai/better-sqlite3/releases/latest
+          url: https://api.github.com/repos/WiseLibs/better-sqlite3/releases/latest
           version-query: .tag_name | sub("^v"; "")
           url-query: >-
             .assets[] | select(.name | test("better-sqlite3-v" + $version + "-electron-v130-linux-arm64.tar.gz"))
