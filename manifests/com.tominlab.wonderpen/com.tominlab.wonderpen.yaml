@@ -44,8 +44,8 @@ modules:
     sources:
       - type: archive
         only-arches: [x86_64]
-        url: https://github.com/WiseLibs/better-sqlite3/releases/download/v11.7.1/better-sqlite3-v11.7.1-electron-v130-linux-x64.tar.gz
-        sha256: 42b1a6d3183ea2042fe2b877be1d83630ef492e401902889000f92e16325ed13
+        url: https://github.com/WiseLibs/better-sqlite3/releases/download/v11.7.0/better-sqlite3-v11.7.0-electron-v130-linux-x64.tar.gz
+        sha256: 8f8ae4d4bedbcfca1346906fec84883e3e6ad9d2a6a6b3444180e204a2ad3148
         strip-components: 2
         x-checker-data:
           type: json
@@ -92,4 +92,5 @@ modules:
             then
                 FLAGS="--enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime --wayland-text-input-version=3"
             fi
-          - exec zypak-wrapper "/app/electron/electron" "/app/WonderPen/app.asar" $FLAGS "$@"
+          - exec zypak-wrapper "/app/electron/electron" "/app/WonderPen/app.asar"
+            $FLAGS "$@"
