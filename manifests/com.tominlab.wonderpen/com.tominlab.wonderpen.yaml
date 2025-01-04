@@ -44,8 +44,8 @@ modules:
     sources:
       - type: archive
         only-arches: [x86_64]
-        url: https://github.com/WiseLibs/better-sqlite3/releases/download/v11.7.1/better-sqlite3-v11.7.1-electron-v130-linux-x64.tar.gz
-        sha256: 42b1a6d3183ea2042fe2b877be1d83630ef492e401902889000f92e16325ed13
+        url: https://github.com/WiseLibs/better-sqlite3/releases/download/v11.7.2/better-sqlite3-v11.7.2-electron-v130-linux-x64.tar.gz
+        sha256: bdb5e742345effd0a22c11c8da91be2a7104b3cc209eadcabf871e31c988a57e
         strip-components: 2
         x-checker-data:
           type: json
@@ -57,8 +57,8 @@ modules:
             .browser_download_url
       - type: archive
         only-arches: [aarch64]
-        url: https://github.com/WiseLibs/better-sqlite3/releases/download/v11.7.1/better-sqlite3-v11.7.1-electron-v130-linux-arm64.tar.gz
-        sha256: f49c3bfc00a4457ebded5181edc4a9900d90342c1d34657666790bb1934821bd
+        url: https://github.com/WiseLibs/better-sqlite3/releases/download/v11.7.2/better-sqlite3-v11.7.2-electron-v130-linux-arm64.tar.gz
+        sha256: aa75e7d0c95d686ebd302ce778d1714846b47a2f886adb532c2c1f18a9186199
         strip-components: 2
         x-checker-data:
           type: json
@@ -92,4 +92,5 @@ modules:
             then
                 FLAGS="--enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime --wayland-text-input-version=3"
             fi
-          - exec zypak-wrapper "/app/electron/electron" "/app/WonderPen/app.asar" $FLAGS "$@"
+          - exec zypak-wrapper "/app/electron/electron" "/app/WonderPen/app.asar"
+            $FLAGS "$@"
