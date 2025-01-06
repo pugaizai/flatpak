@@ -38,8 +38,8 @@ modules:
     sources:
       - type: file
         only-arches: [x86_64]
-        url: https://github.com/venera-app/venera/releases/download/v1.1.3/venera_1.1.3_amd64.deb
-        sha256: 27b74b7319eb13f03525d5e3d3bb06c86525da0bd0d4564752ce899f25b4f52f
+        url: https://github.com/venera-app/venera/releases/download/v1.1.4/venera_1.1.4_amd64.deb
+        sha256: f8a5016506d60d35fef94081459ca57c88fba17c08ae3383ed64f2e317bdf7a0
         x-checker-data:
           type: json
           url: https://api.github.com/repos/venera-app/venera/releases/latest
