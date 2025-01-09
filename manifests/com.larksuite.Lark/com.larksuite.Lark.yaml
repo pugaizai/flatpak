@@ -64,7 +64,7 @@ modules:
         x-checker-data:
           type: json
           url: https://www.larksuite.com/api/downloads
-          version-query: .versions.Linux_deb_x64.version_number
+          version-query: .versions.Linux_deb_x64.version_number | sub("^Linux-x64-deb@V"; "")
           url-query: .versions.Linux_deb_x64.download_link
       - type: extra-data
         filename: Lark-linux.deb
@@ -76,7 +76,7 @@ modules:
         x-checker-data:
           type: json
           url: https://www.larksuite.com/api/downloads
-          version-query: .versions.Linux_deb_arm.version_number
+          version-query: .versions.Linux_deb_arm.version_number | sub("^Linux-arm64-deb@V"; "")
           url-query: .versions.Linux_deb_arm.download_link
       - type: file
         path: com.larksuite.Lark.desktop
