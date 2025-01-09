@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
   <!--Created with jdAppStreamEdit 9.2-->
   <id>com.larksuite.Lark</id>
@@ -18,11 +18,14 @@
     <control>keyboard</control>
   </recommends>
   <releases>
-    <release version="7.28.10" date="2024-12-24">
+    <release version="Linux-arm64-deb@V7.32.11" date="2025-01-03">
       <description></description>
+    </release>
+    <release version="7.28.10" date="2024-12-24">
+      <description/>
     </release>
   </releases>
   <content_rating type="oars-1.1"/>
   <launchable type="desktop-id">com.larksuite.Lark.desktop</launchable>
-  <translation type="gettext"></translation>
+  <translation type="gettext"/>
 </component>
