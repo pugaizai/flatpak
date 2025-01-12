@@ -40,8 +40,6 @@ jobs:
 
           flatpak-builder build-dir manifests/com.visualstudio.code/com.visualstudio.code.yaml --repo=repo --arch=x86_64 --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
 
-          flatpak-builder build-dir manifests/com.tominlab.wonderpen/com.tominlab.wonderpen.yaml --repo=repo --arch=x86_64 --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
-
           flatpak-builder build-dir manifests/io.github.venera_app.venera/io.github.venera_app.venera.yaml --repo=repo --arch=x86_64 --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
 
           flatpak-builder build-dir manifests/com.hoppscotch.hoppscotch/com.hoppscotch.hoppscotch.yaml --repo=repo --arch=x86_64 --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
