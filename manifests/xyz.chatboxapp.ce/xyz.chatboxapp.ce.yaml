@@ -42,10 +42,10 @@ modules:
     sources:
       - type: extra-data
         only-arches: [aarch64]
-        url: https://github.com/Bin-Huang/chatbox/releases/download/v0.10.3/Chatbox.CE-0.10.3-arm64.deb
-        sha256: 6d3d3ca3c848a8b2120402bd903f2b72276e99d5c6a5b18ef6df015c0f5dbd42
+        url: https://github.com/Bin-Huang/chatbox/releases/download/v0.10.4/Chatbox.CE-0.10.4-arm64.deb
+        sha256: b283bbdc42fdc82d90592df3c78a95b4addd4bde577c64d882c040eb48431314
         filename: chatboxapp.deb
-        size: 67347596
+        size: 67387142
         x-checker-data:
           type: json
           url: https://api.github.com/repos/Bin-Huang/chatbox/releases/latest
@@ -56,10 +56,10 @@ modules:
             .browser_download_url
       - type: extra-data
         only-arches: [x86_64]
-        url: https://github.com/Bin-Huang/chatbox/releases/download/v0.10.3/Chatbox.CE-0.10.3-amd64.deb
-        sha256: d67f4b2acbd24c42e7f369efa87e938f84efa56056af5199d34b3eb30520ff6e
+        url: https://github.com/Bin-Huang/chatbox/releases/download/v0.10.4/Chatbox.CE-0.10.4-amd64.deb
+        sha256: 532d0b8664a68c9f3ec44af2c4e475905c58c3736d95ef195c5b812d0a26ab22
         filename: chatboxapp.deb
-        size: 71333054
+        size: 71342892
         x-checker-data:
           type: json
           url: https://api.github.com/repos/Bin-Huang/chatbox/releases/latest
