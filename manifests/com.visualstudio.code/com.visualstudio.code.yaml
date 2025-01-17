@@ -65,8 +65,8 @@ modules:
       - /share/man
     sources:
       - type: archive
-        url: https://download.gnome.org/sources/libsecret/0.21/libsecret-0.21.5.tar.xz
-        sha256: 08f45c44760ab4c2d6febd6e0eeb421663b29a72be52c48c61c507b0ef6a7920
+        url: https://download.gnome.org/sources/libsecret/0.21/libsecret-0.21.6.tar.xz
+        sha256: 747b8c175be108c880d3adfb9c3537ea66e520e4ad2dccf5dce58003aeeca090
         x-checker-data:
           type: gnome
           name: libsecret
@@ -120,9 +120,9 @@ modules:
       - type: extra-data
         filename: code.deb
         only-arches: [x86_64]
-        url: https://update.code.visualstudio.com/1.96.3/linux-deb-x64/stable
-        sha256: 52ef3249cf543f77b2b8c9d380eef91293fbdc28afffe306b021e399c6e5ed5a
-        size: 104530518
+        url: https://update.code.visualstudio.com/1.96.4/linux-deb-x64/stable
+        sha256: 67f8a32eb1e24e3ba3c8e586f0871ae20a5522dc8d76323e187cd9b5f9bce0e9
+        size: 104535782
         x-checker-data:
           type: json
           url: https://api.github.com/repos/microsoft/vscode/releases/latest
@@ -134,9 +134,9 @@ modules:
       - type: extra-data
         filename: code.deb
         only-arches: [aarch64]
-        url: https://update.code.visualstudio.com/1.96.3/linux-deb-arm64/stable
-        sha256: 55b6e8983afb003ecff3daddf6db31c4329b9ef6f748fa7b487a1d06de5b5d72
-        size: 96674234
+        url: https://update.code.visualstudio.com/1.96.4/linux-deb-arm64/stable
+        sha256: 1d8a7ea71fc5c90863bf29f64c1a4cd5ba9a4004b673a7b7553e4db769f9ffd3
+        size: 96675306
         x-checker-data:
           type: json
           url: https://api.github.com/repos/microsoft/vscode/releases/latest
