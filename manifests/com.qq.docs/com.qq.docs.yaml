@@ -41,9 +41,9 @@ modules:
       - type: extra-data
         only-arches: [aarch64]
         filename: docs.deb
-        url: https://desktop.docs.qq.com/Installer/30001/3.9.0/TencentDocs-arm64.deb
-        sha256: e9a3c6a9a5943b6cb6448b3016a37585aff4da6a68af7b33f33e4588ef4ea6a5
-        size: 151397154
+        url: https://desktop.docs.qq.com/Installer/30001/3.9.6/TencentDocs-arm64.deb
+        sha256: b79185049515234b7b548955b785240ecee7909630620b3eca2279b7cb2ca61a
+        size: 159206770
         x-checker-data:
           type: json
           url: https://docs.qq.com/api/package/update
