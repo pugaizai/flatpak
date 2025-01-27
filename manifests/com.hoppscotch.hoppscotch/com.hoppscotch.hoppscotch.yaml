@@ -37,8 +37,8 @@ modules:
     sources:
       - type: file
         only-arches: [x86_64]
-        url: https://github.com/hoppscotch/releases/releases/download/v24.12.1-0/Hoppscotch_linux_x64.deb
-        sha256: a976d022cda9e4e3516fc180d984ce7b0eb4b892a903358d523b35b35a3549f6
+        url: https://github.com/hoppscotch/releases/releases/download/v24.12.2-0/Hoppscotch_linux_x64.deb
+        sha256: a83a26dd2fcbde15ba8844a4970d8274c2c71a488d2c91364f3c88accb1fc89a
         x-checker-data:
           type: json
           url: https://api.github.com/repos/hoppscotch/releases/releases/latest
