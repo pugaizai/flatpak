@@ -1,0 +1,57 @@
+app-id: io.github.wgh136.pixes
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+command: pixes
+rename-icon: pixes
+rename-desktop-file: pixes.desktop
+finish-args:
+  - --share=ipc
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --share=network
+  - --device=dri
+  - --own-name=com.github.wgh136.pixes
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/gtk-doc
+modules:
+  - name: pixes
+    buildsystem: simple
+    build-options:
+      no-debuginfo: true
+    build-commands:
+      - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
+      - mv usr/local/lib/pixes ${FLATPAK_DEST}/
+      - desktop-file-edit --set-key="Categories" --set-value="Graphics;Network;" --set-key="Exec" --set-value="pixes %U" --remove-key="Version" --remove-key="TryExec" usr/share/applications/pixes.desktop
+      - install -Dm644 usr/share/applications/pixes.desktop -t ${FLATPAK_DEST}/share/applications/
+      - install -Dm644 usr/share/icons/pixes.png -t ${FLATPAK_DEST}/share/icons/hicolor/128x128/apps/
+      - install -Dm755 pixes.sh ${FLATPAK_DEST}/bin/pixes
+      - install -Dm644 io.github.wgh136.pixes.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+    sources:
+      - type: file
+        only-arches: [x86_64]
+        url: https://github.com/wgh136/pixes/releases/download/v1.1.1/pixes_1.1.1_amd64.deb
+        sha256: 8f8d5af42a99ce210b8faf5b2f9215ab07d088995b0a5427946990d2e297709a
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/wgh136/pixes/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: >-
+            .assets[] | select(.name=="pixes_" + $version + "_amd64.deb")
+            |
+            .browser_download_url
+      - type: file
+        path: io.github.wgh136.pixes.metainfo.xml
+      - type: script
+        commands:
+          - export TMPDIR="${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}"
+          - /app/pixes/pixes "$@"
+        dest-filename: pixes.sh
