@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>io.github.wgh136.pixes</id>
+  <launchable type="desktop-id">io.github.wgh136.pixes.desktop</launchable>
+  <name>Pixes</name>
+  <developer>wgh136</developer>
+  <summary>Unofficial pixiv app</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  <url type="homepage">https://github.com/wgh136/pixes</url>
+  <url type="bugtracker">https://github.com/wgh136/pixes/issues</url>
+  <description>
+    <p>Unofficial Pixiv app, support Windows, Android, iOS, macOS, linux.</p>
+    <p>All main features are implemented.</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <caption>Main</caption>
+      <image type="source">https://raw.githubusercontent.com/wgh136/pixes/refs/heads/master/screenshots/1.png</image>
+    </screenshot>
+  </screenshots>
+  <releases>
+    <release version="1.1.1" date="2025-01-30">
+      <description></description>
+    </release>
+  </releases>
+  <content_rating type="oars-1.1"/>
+  <update_contact>i@pugai.life</update_contact>
+</component>
