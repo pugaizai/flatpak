@@ -33,6 +33,7 @@ jobs:
           - com.larksuite.Lark
           - com.qq.qq
           - io.github.venera_app.venera
+          - io.github.wgh136.pixes
 
     steps:
       - uses: actions/checkout@v4 
