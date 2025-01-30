@@ -20,8 +20,11 @@
     </screenshot>
   </screenshots>
   <releases>
-    <release version="1.1.1" date="2025-01-30">
+    <release version="1.1.0" date="2024-12-19">
       <description></description>
+    </release>
+    <release version="1.1.1" date="2025-01-30">
+      <description/>
     </release>
   </releases>
   <content_rating type="oars-1.1"/>

@@ -30,7 +30,8 @@ modules:
     build-commands:
       - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
       - mv usr/local/lib/pixes ${FLATPAK_DEST}/
-      - desktop-file-edit --set-key="Categories" --set-value="Graphics;Network;" --set-key="Exec" --set-value="pixes %U" --remove-key="Version" --remove-key="TryExec" usr/share/applications/pixes.desktop
+      - desktop-file-edit --set-key="Categories" --set-value="Graphics;Network;" --set-key="Exec"
+        --set-value="pixes %U" --remove-key="Version" --remove-key="TryExec" usr/share/applications/pixes.desktop
       - install -Dm644 usr/share/applications/pixes.desktop -t ${FLATPAK_DEST}/share/applications/
       - install -Dm644 usr/share/icons/pixes.png -t ${FLATPAK_DEST}/share/icons/hicolor/128x128/apps/
       - install -Dm755 pixes.sh ${FLATPAK_DEST}/bin/pixes
@@ -38,8 +39,8 @@ modules:
     sources:
       - type: file
         only-arches: [x86_64]
-        url: https://github.com/wgh136/pixes/releases/download/v1.1.1/pixes_1.1.1_amd64.deb
-        sha256: 8f8d5af42a99ce210b8faf5b2f9215ab07d088995b0a5427946990d2e297709a
+        url: https://github.com/wgh136/pixes/releases/download/v1.1.0/pixes_1.1.0_amd64.deb
+        sha256: ad3776798eb3d3d9c844682c3baa0acf9e2fa6eada8b94b71a2a9acabf092ede
         x-checker-data:
           type: json
           url: https://api.github.com/repos/wgh136/pixes/releases/latest
