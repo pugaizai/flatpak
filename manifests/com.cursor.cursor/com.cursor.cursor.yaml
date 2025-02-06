@@ -120,9 +120,9 @@ modules:
       - type: extra-data
         filename: cursor.AppImage
         only-arches: [x86_64]
-        url: https://download.todesktop.com/230313mzl4w4u92/cursor-0.45.9-build-250202tgstl42dt-x86_64.AppImage
-        sha256: ad4e1e879e4dfcb78c000ab61629c05130003e5329a5dcfd23ff24679254b503
-        size: 154327484
+        url: https://download.todesktop.com/230313mzl4w4u92/cursor-0.45.10-build-250205buadkzpea-x86_64.AppImage
+        sha256: 564f292516ce1050fb5f46d96741c905a2aafea9b29b8765a2202eda3fd91078
+        size: 154331587
         x-checker-data:
           type: electron-updater
           url: https://download.todesktop.com/230313mzl4w4u92/latest-linux.yml
@@ -130,9 +130,9 @@ modules:
       - type: extra-data
         filename: cursor.AppImage
         only-arches: [aarch64]
-        url: https://download.todesktop.com/230313mzl4w4u92/cursor-0.45.9-build-250202tgstl42dt-arm64.AppImage
-        sha256: 6e83fa908752afa8e5e9560c1e701db872e8df67e749cf4820d6cfc813cb2e8d
-        size: 154438822
+        url: https://download.todesktop.com/230313mzl4w4u92/cursor-0.45.10-build-250205buadkzpea-arm64.AppImage
+        sha256: 8f4cadeeba2a0c57e99ecff4aa90838b0c95df0bfd81dc9142d6f1eef727ac22
+        size: 154438909
         x-checker-data:
           type: electron-updater
           url: https://download.todesktop.com/230313mzl4w4u92/latest-linux-arm64.yml
