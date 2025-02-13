@@ -49,6 +49,18 @@ modules:
             |
             .browser_download_url
       - type: file
+        only-arches: [aarch64]
+        url: https://github.com/venera-app/venera/releases/download/v1.2.5/venera_1.2.5_arm64.deb
+        sha256: f5a65c11e9bf8a07ebd39487a64c49a801efd13d241936696a9fe254785a2a7e
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/venera-app/venera/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: >-
+            .assets[] | select(.name=="venera_" + $version + "_arm64.deb")
+            |
+            .browser_download_url
+      - type: file
         path: io.github.venera_app.venera.metainfo.xml
       - type: script
         commands:
