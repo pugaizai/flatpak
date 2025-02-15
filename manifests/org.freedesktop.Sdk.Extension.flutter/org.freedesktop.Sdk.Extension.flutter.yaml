@@ -13,7 +13,6 @@ modules:
         url: https://github.com/flutter/flutter.git
         tag: 3.29.0
         commit: 35c388afb57ef061d06a39b537336c87e0e3d1b1
-        disable-shallow-clone: true
         x-checker-data:
           type: git
           tag-pattern: ^([\d.]+)$
