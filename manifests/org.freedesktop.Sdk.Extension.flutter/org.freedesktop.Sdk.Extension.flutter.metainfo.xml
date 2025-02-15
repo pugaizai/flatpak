@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="runtime">
+  <id>org.freedesktop.Sdk.Extension.flutter</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <name>Flutter Sdk extension</name>
+  <summary>Flutter toolset</summary>
+  <url type="homepage">https://flutter.dev/</url>
+  <releases>
+    <release version="3.29.0" date="2025-02-13">
+      <description></description>
+    </release>
+  </releases>
+</component>

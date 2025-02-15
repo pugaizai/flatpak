@@ -80,7 +80,7 @@ modules:
             commit: e46aedea0a0d17da4c4ef49d84b94a7994664ab5
             x-checker-data:
               type: git
-              tag-pattern: ^(\d\.\d{1,3}\.\d{1,2})$
+              tag-pattern: ^([\d.]+)$
 
       - name: uchardet
         buildsystem: cmake-ninja
@@ -88,14 +88,13 @@ modules:
           - -DCMAKE_BUILD_TYPE=Release
           - -DBUILD_STATIC=0
         sources:
-          - type: archive
-            url: https://www.freedesktop.org/software/uchardet/releases/uchardet-0.0.8.tar.xz
-            sha256: e97a60cfc00a1c147a674b097bb1422abd9fa78a2d9ce3f3fdcc2e78a34ac5f0
+          - type: git
+            url: https://gitlab.freedesktop.org/uchardet/uchardet.git
+            tag: v0.0.8
+            commit: ae6302a016088ad07177f86d417b20010053632b
             x-checker-data:
-              type: anitya
-              project-id: 9265
-              stable-only: true
-              url-template: https://www.freedesktop.org/software/uchardet/releases/uchardet-$version.tar.xz
+              type: git
+              tag-pattern: ^v([\d.]+)$
 
       - name: libplacebo
         buildsystem: meson
@@ -155,15 +154,15 @@ modules:
           - --enable-libjxl
           - --enable-libxml2
         sources:
-          - type: archive
-            url: https://ffmpeg.org/releases/ffmpeg-7.1.tar.gz
-            sha256: 42a7dc0d1583885d1b8f6559fa7ce28f97acafea6803de6a8f73e3ba229348bd
+          - type: git
+            url: https://github.com/FFmpeg/FFmpeg.git
+            mirror-urls:
+              - https://git.ffmpeg.org/ffmpeg.git
+            tag: n7.1
+            commit: b08d7969c550a804a59511c7b83f2dd8cc0499b8
             x-checker-data:
-              type: anitya
-              project-id: 5405
-              stable-only: true
-              url-template: https://ffmpeg.org/releases/ffmpeg-$version.tar.gz
-
+              type: git
+              tag-pattern: ^n([\d.]{3,7})$
   - name: simple_live
     buildsystem: simple
     build-options:
