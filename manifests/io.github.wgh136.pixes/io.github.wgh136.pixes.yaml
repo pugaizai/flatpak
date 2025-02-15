@@ -49,6 +49,18 @@ modules:
             |
             .browser_download_url
       - type: file
+        only-arches: [aarch64]
+        url: https://github.com/wgh136/pixes/releases/download/v1.1.1/pixes_1.1.1_arm64.deb
+        sha256: 9bb730f83be71790074e37dcf997ca113c5a7a8f638180b02e07964e7be1d20a
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/wgh136/pixes/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: >-
+            .assets[] | select(.name=="pixes_" + $version + "_arm64.deb")
+            |
+            .browser_download_url
+      - type: file
         path: io.github.wgh136.pixes.metainfo.xml
       - type: script
         commands:

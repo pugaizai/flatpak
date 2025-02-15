@@ -33,14 +33,26 @@ modules:
     sources:
       - type: file
         only-arches: [x86_64]
-        url: https://github.com/pugaizai/JHenTai/releases/download/v8.0.6%2B274/JHenTai-8.0.6%2B274-Linux-amd64.deb
-        sha256: 89037820f64f2a19d678b993541f2c45f6f4073dc002dd7601a3334ecde7a678
+        url: https://github.com/pugaizai/JHenTai/releases/download/v8.0.6%2B277/JHenTai-8.0.6%2B277-Linux-x64.deb
+        sha256: 86aa149bcf2ff4c8760e7e904810f7a8e5be9da3c33cbe02201b67264087bc2b
         x-checker-data:
           type: json
           url: https://api.github.com/repos/pugaizai/JHenTai/releases/latest
           version-query: .tag_name | sub("^v"; "")
           url-query: >-
-            .assets[] | select(.name | test("^JHenTai-.*-Linux-amd64\\.deb$"))
+            .assets[] | select(.name | test("^JHenTai-.*-Linux-x64\\.deb$"))
+            |
+            .browser_download_url
+      - type: file
+        only-arches: [aarch64]
+        url: https://github.com/pugaizai/JHenTai/releases/download/v8.0.6%2B277/JHenTai-8.0.6%2B277-Linux-arm64.deb
+        sha256: 8525016ef3b2831fd950c335537927176479695e09676e1f26e866c35e961204
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/pugaizai/JHenTai/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: >-
+            .assets[] | select(.name | test("^JHenTai-.*-Linux-arm64\\.deb$"))
             |
             .browser_download_url
       - type: file
