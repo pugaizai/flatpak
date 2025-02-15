@@ -2,9 +2,9 @@ app-id: io.github.wgh136.pixes
 runtime: org.freedesktop.Platform
 runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.llvm19
 command: pixes
-rename-icon: pixes
-rename-desktop-file: pixes.desktop
 finish-args:
   - --share=ipc
   - --socket=fallback-x11
@@ -26,44 +26,37 @@ modules:
   - name: pixes
     buildsystem: simple
     build-options:
-      no-debuginfo: true
+      append-path: /usr/lib/sdk/llvm19/bin
+      prepend-ld-library-path: /usr/lib/sdk/llvm19/lib
+      arch:
+        x86_64:
+          env:
+            FLUTTER_ARCH: x64
+        aarch64:
+          env:
+            FLUTTER_ARCH: arm64
+      build-args:
+        - --share=network
     build-commands:
-      - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
-      - mv usr/local/lib/pixes ${FLATPAK_DEST}/
-      - desktop-file-edit --set-key="Categories" --set-value="Graphics;Network;" --set-key="Exec" --set-value="pixes %U" --remove-key="Version" --remove-key="TryExec" usr/share/applications/pixes.desktop
-      - install -Dm644 usr/share/applications/pixes.desktop -t ${FLATPAK_DEST}/share/applications/
-      - install -Dm644 usr/share/icons/pixes.png -t ${FLATPAK_DEST}/share/icons/hicolor/128x128/apps/
+      - git clone --branch 3.29.0 https://github.com/flutter/flutter.git
+      - flutter/bin/flutter build linux --release
+      - cp -rv build/linux/${FLUTTER_ARCH}/release/bundle ${FLATPAK_DEST}/pixes
       - install -Dm755 pixes.sh ${FLATPAK_DEST}/bin/pixes
-      - install -Dm644 io.github.wgh136.pixes.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo/
+      - install -Dm644 debian/gui/pixes.desktop ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
+      - install -Dm644 debian/gui/pixes.png ${FLATPAK_DEST}/share/icons/hicolor/128x128/apps/${FLATPAK_ID}.png
+      - desktop-file-edit --set-key="Categories" --set-value="Graphics;Network;" --set-key="Exec" --set-value="pixes" --set-key="Icon" --set-value="io.github.wgh136.pixes" ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
     sources:
-      - type: file
-        only-arches: [x86_64]
-        url: https://github.com/wgh136/pixes/releases/download/v1.1.1/pixes_1.1.1_amd64.deb
-        sha256: 69ea760607ddb2fa3c1a223a91caa3386eba9e3dff5af39113eec9fb05b45df1
+      - type: git
+        url: https://github.com/wgh136/pixes.git
+        tag: v1.1.1
+        commit: cbc69b4707b068a5cc6ec3df87741a9658288b33
         x-checker-data:
-          type: json
-          url: https://api.github.com/repos/wgh136/pixes/releases/latest
-          version-query: .tag_name | sub("^v"; "")
-          url-query: >-
-            .assets[] | select(.name=="pixes_" + $version + "_amd64.deb")
-            |
-            .browser_download_url
-      - type: file
-        only-arches: [aarch64]
-        url: https://github.com/wgh136/pixes/releases/download/v1.1.1/pixes_1.1.1_arm64.deb
-        sha256: 9bb730f83be71790074e37dcf997ca113c5a7a8f638180b02e07964e7be1d20a
-        x-checker-data:
-          type: json
-          url: https://api.github.com/repos/wgh136/pixes/releases/latest
-          version-query: .tag_name | sub("^v"; "")
-          url-query: >-
-            .assets[] | select(.name=="pixes_" + $version + "_arm64.deb")
-            |
-            .browser_download_url
+          type: git
+          tag-pattern: ^v([\d.]+)$
       - type: file
         path: io.github.wgh136.pixes.metainfo.xml
       - type: script
         commands:
-          - export TMPDIR="${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}"
           - /app/pixes/pixes "$@"
         dest-filename: pixes.sh

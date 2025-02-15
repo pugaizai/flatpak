@@ -15,7 +15,6 @@ jobs:
     strategy:
       matrix:
         appid: # list all flatpak application id to check
-          - org.freedesktop.Sdk.Extension.flutter
           - com.visualstudio.code
           - com.jetbrains.Rider
           - cn.wps.office
