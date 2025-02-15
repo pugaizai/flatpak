@@ -17,7 +17,6 @@ modules:
         x-checker-data:
           type: git
           tag-pattern: ^([\d.]+)$
-      - type: 
     build-options:
       build-args:
         - --share=network
