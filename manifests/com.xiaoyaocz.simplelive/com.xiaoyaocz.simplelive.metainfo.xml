@@ -3,7 +3,9 @@
   <id>com.xiaoyaocz.simplelive</id>
   <launchable type="desktop-id">com.xiaoyaocz.simplelive.desktop</launchable>
   <name>Simple Live</name>
-  <developer>xiaoyaocz</developer>
+  <developer id="com.xiaoyaocz">
+    <name>xiaoyaocz</name>
+  </developer>
   <summary>Simply watch live streaming</summary>
   <summary xml:lang="zh-cn">简简单单的看直播</summary>
   <metadata_license>CC0-1.0</metadata_license>

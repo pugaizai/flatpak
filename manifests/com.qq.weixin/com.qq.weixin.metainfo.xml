@@ -4,7 +4,9 @@
   <name>WeChat</name>
   <name xml:lang="zh-Hans">微信</name>
   <project_license>LicenseRef-proprietary=https://www.wechat.com/en/service_terms.html</project_license>
-  <developer_name>Tencent</developer_name>
+  <developer id="com.qq">
+    <name>Tencent</name>
+  </developer>
   <summary>Free messaging and calling app</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <launchable type="desktop-id">com.qq.weixin.desktop</launchable>

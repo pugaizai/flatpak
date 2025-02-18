@@ -26,23 +26,26 @@ modules:
   - name: pixes
     buildsystem: simple
     build-options:
-      append-path: /usr/lib/sdk/llvm19/bin
-      prepend-ld-library-path: /usr/lib/sdk/llvm19/lib
       arch:
         x86_64:
           env:
-            FLUTTER_ARCH: x64
+            BUNDLE_PATH: build/linux/x64/release
         aarch64:
           env:
-            FLUTTER_ARCH: arm64
-      build-args:
-        - --share=network
+            BUNDLE_PATH: build/linux/arm64/release
+      append-path: /usr/lib/sdk/llvm19/bin:/var/lib/flutter/bin
+      prepend-ld-library-path: /usr/lib/sdk/llvm19/lib
+      env:
+        PUB_CACHE: /run/build/pixes/.pub-cache
     build-commands:
-      - git clone --branch 3.29.0 https://github.com/flutter/flutter.git
-      - flutter/bin/flutter build linux --release
-      - cp -rv build/linux/${FLUTTER_ARCH}/release/bundle ${FLATPAK_DEST}/pixes
-      - install -Dm755 pixes.sh ${FLATPAK_DEST}/bin/pixes
-      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo/
+      - mkdir -p build/native_assets/linux
+      - setup-flutter.sh
+      - mkdir -p ${BUNDLE_PATH}/_deps/sqlite3-src
+      - mv sqlite-autoconf-3470100/* ${BUNDLE_PATH}/_deps/sqlite3-src
+      - flutter build linux --release --verbose
+      - mkdir -p ${FLATPAK_DEST}/bin
+      - cp -r ${BUNDLE_PATH}/bundle/* ${FLATPAK_DEST}/bin
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
       - install -Dm644 debian/gui/pixes.desktop ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
       - install -Dm644 debian/gui/pixes.png ${FLATPAK_DEST}/share/icons/hicolor/128x128/apps/${FLATPAK_ID}.png
       - desktop-file-edit --set-key="Categories" --set-value="Graphics;Network;" --set-key="Exec" --set-value="pixes" --set-key="Icon" --set-value="io.github.wgh136.pixes" ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
@@ -56,7 +59,17 @@ modules:
           tag-pattern: ^v([\d.]+)$
       - type: file
         path: io.github.wgh136.pixes.metainfo.xml
-      - type: script
-        commands:
-          - /app/pixes/pixes "$@"
-        dest-filename: pixes.sh
+      # flutter
+      - type: file
+        path: package_config.json
+        dest: flutter/packages/flutter_tools/.dart_tool
+      - pubspec-sources-flutter.json
+      - pubspec-sources-pixes.json
+      - type: archive
+        url: https://sqlite.org/2024/sqlite-autoconf-3470100.tar.gz
+        sha256: 416a6f45bf2cacd494b208fdee1beda509abda951d5f47bc4f2792126f01b452
+        strip-components: 0
+      - type: patch
+        path: 0001-avoid-download-from-internet.patch
+    modules:
+      - flutter-sdk-3.29.0.json

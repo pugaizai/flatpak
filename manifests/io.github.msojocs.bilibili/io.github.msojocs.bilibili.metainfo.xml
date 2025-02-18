@@ -3,7 +3,9 @@
   <id>io.github.msojocs.bilibili</id>
   <launchable type="desktop-id">io.github.msojocs.bilibili.desktop</launchable>
   <name>Bilibili</name>
-  <developer>Bilibili</developer>
+  <developer id="com.bilibili">
+    <name>Bilibili</name>
+  </developer>
   <summary>HD Anime, Videos</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>MIT</project_license>

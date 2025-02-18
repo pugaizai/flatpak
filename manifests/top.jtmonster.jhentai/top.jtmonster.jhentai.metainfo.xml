@@ -3,7 +3,9 @@
   <id>top.jtmonster.jhentai</id>
   <launchable type="desktop-id">top.jtmonster.jhentai.desktop</launchable>
   <name>JHenTai</name>
-  <developer>jiangtian616</developer>
+  <developer id="top.jtmonster">
+    <name>jiangtian616</name>
+  </developer>
   <summary>A cross-platform app made for e-hentai and exhentai</summary>
   <summary xml:lang="zh-cn">为 e-hentai 和 exhentai 打造的跨平台客户端</summary>
   <metadata_license>CC0-1.0</metadata_license>

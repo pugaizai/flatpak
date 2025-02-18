@@ -1,0 +1,55 @@
+# This file is used to generate flutter sources
+# https://github.com/TheAppgineer/flatpak-flutter
+app-id: io.github.wgh136.pixes
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.llvm19
+command: pixes
+finish-args:
+  - --share=ipc
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --share=network
+  - --device=dri
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/gtk-doc
+modules:
+  - name: pixes
+    buildsystem: simple
+    build-options:
+      build-args:
+        - --share=network
+      append-path: /usr/lib/sdk/llvm19/bin
+      prepend-ld-library-path: /usr/lib/sdk/llvm19/lib
+      env:
+        PUB_CACHE: /run/build/pixes/.pub-cache
+    build-commands:
+      - flutter/bin/flutter build linux --release --verbose
+    sources:
+      - type: git
+        url: https://github.com/wgh136/pixes.git
+        tag: v1.1.1
+        commit: cbc69b4707b068a5cc6ec3df87741a9658288b33
+        x-checker-data:
+          type: git
+          tag-pattern: ^v([\d.]+)$
+      - type: file
+        path: io.github.wgh136.pixes.metainfo.xml
+      - type: git
+        url: https://github.com/flutter/flutter.git
+        tag: 3.29.0
+        dest: flutter
+      # Workaround: To keep engine.version and allow shallow clones: https://github.com/flutter/flutter/issues/163308
+      - type: shell
+        commands:
+          - rm -f flutter/engine/src/.gn

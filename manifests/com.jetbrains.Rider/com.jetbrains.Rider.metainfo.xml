@@ -21,7 +21,9 @@
   <url type="help">https://www.jetbrains.com/help/rider/</url>
   <url type="homepage">http://www.jetbrains.com/rider/</url>
   <launchable type="desktop-id">com.jetbrains.Rider.desktop</launchable>
-  <developer_name>JetBrains s.r.o.</developer_name>
+  <developer id="com.jetbrains">
+     <name>JetBrains s.r.o.</name>
+  </developer>
   <screenshots>
     <screenshot type="default">
       <image type="source">https://www.jetbrains.com/rider/features/screenshots/img/mac@2x.png</image>

@@ -3,7 +3,9 @@
   <id>io.github.PBH_BTN.PeerBanHelper</id>
   <launchable type="desktop-id">io.github.PBH_BTN.PeerBanHelper.desktop</launchable>
   <name>Peer Ban Helper</name>
-  <developer>PBH-BTN</developer>
+  <developer id="io.github.PBH_BTN">
+    <name>PBH-BTN</name>
+  </developer>
   <summary>Auto ban unwanted bittorrent client.</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0</project_license>

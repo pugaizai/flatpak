@@ -5,7 +5,9 @@
   <name>xeyes</name>
   <summary>Shows a pair of eyes that follow the mouse cursor</summary>
   <summary xml:lang="de">Zeigt ein Augenpaar, das dem Mauszeiger folgt</summary>
-  <developer_name>X.Org Foundation</developer_name>
+  <developer id="org.freedesktop">
+    <name>X.Org Foundation</name>
+  </developer_name>
   <launchable type="desktop-id">org.freedesktop.xorg.xeyes.desktop</launchable>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>X11</project_license>

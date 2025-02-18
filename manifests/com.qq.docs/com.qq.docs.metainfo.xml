@@ -4,7 +4,9 @@
   <launchable type="desktop-id">com.qq.docs.desktop</launchable>
   <name>Tencent Docs</name>
   <name xml:lang="zh-cn">腾讯文档</name>
-  <developer>Tencent</developer>
+  <developer id="com.qq">
+    <name>Tencent</name>
+  </developer>
   <summary>Online Office Suite</summary>
   <summary xml:lang="zh-cn">在线办公套件</summary>
   <metadata_license>CC0-1.0</metadata_license>

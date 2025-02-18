@@ -3,7 +3,9 @@
   <id>io.github.venera_app.venera</id>
   <launchable type="desktop-id">io.github.venera_app.venera.desktop</launchable>
   <name>Venera</name>
-  <developer>venera-app</developer>
+  <developer id="io.github.venera_app">
+    <name>nyne</name>
+  </developer>
   <summary>A comic app</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0</project_license>

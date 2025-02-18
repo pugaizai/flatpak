@@ -4,7 +4,9 @@
   <launchable type="desktop-id">pro.cycity.desktop.desktop</launchable>
   <name>CYC Anime</name>
   <name xml:lang="zh-cn">次元城动漫</name>
-  <developer>CycDeveloper</developer>
+  <developer id="pro.cycity">
+    <name>CycDeveloper</name>
+  </developer>
   <summary>HD Anime, Videos</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LicenseRef-proprietary</project_license>

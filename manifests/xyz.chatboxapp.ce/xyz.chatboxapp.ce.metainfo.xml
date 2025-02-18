@@ -4,7 +4,9 @@
   <launchable type="desktop-id">xyz.chatboxapp.ce.desktop</launchable>
   <name>Chatbox CE</name>
   <name xml:lang="zh-cn">Chatbox 社区版</name>
-  <developer>Bin-Huang</developer>
+  <developer id="xyz.chatboxapp">
+    <name>Bin-Huang</name>
+  </developer>
   <summary>A desktop client for multiple cutting-edge AI models.</summary>
   <summary xml:lang="zh-cn">一个支持多种前沿AI模型的桌面客户端。</summary>
   <metadata_license>CC0-1.0</metadata_license>

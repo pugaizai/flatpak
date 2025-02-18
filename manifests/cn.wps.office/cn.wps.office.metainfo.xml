@@ -21,7 +21,9 @@
   <url type="faq">http://wps-community.org/faq</url>
   <url type="help">http://community.wps.cn/wiki</url>
   <url type="translate">https://github.com/wps-community/wps_i18n</url>
-  <developer_name>Kingsoft Office Corporation</developer_name>
+  <developer id="cn.wps">
+    <name>Kingsoft Office Corporation</name>
+  </developer>
   <update_contact>i@pugai.life</update_contact>
   <launchable type="desktop-id">cn.wps.office.desktop</launchable>
   <categories>

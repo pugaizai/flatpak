@@ -4,7 +4,9 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LicenseRef-proprietary=https://www.cursor.com/terms-of-service</project_license>
   <name>Cursor</name>
-  <developer_name>Anysphere Inc.</developer_name>
+  <developer id="com.cursor">
+    <name>Anysphere Inc.</name>
+  </developer>
   <url type="homepage">https://www.cursor.com/</url>
   <url type="bugtracker">https://github.com/getcursor/cursor/issues</url>
   <summary>The AI Code Editor.</summary>
