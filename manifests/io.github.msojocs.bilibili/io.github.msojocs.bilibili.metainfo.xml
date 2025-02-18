@@ -17,7 +17,7 @@
   <screenshots>
     <screenshot type="default">
       <caption>Homepage</caption>
-      <image type="source">https://raw.githubusercontent.com/msojocs/bilibili-linux/v1.14.0-1/res/screenshots/1.png</image>
+      <image type="source">https://raw.githubusercontent.com/msojocs/bilibili-linux/refs/heads/master/res/screenshots/1.png</image>
     </screenshot>
   </screenshots>
   <releases>
