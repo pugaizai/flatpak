@@ -11,7 +11,6 @@ on:
 jobs:
   flatpak-external-data-checker:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         appid: # list all flatpak application id to check
@@ -31,12 +30,6 @@ jobs:
           - com.larksuite.Lark
           - com.qq.qq
           - org.freedesktop.Platform.Electron
-
-        flutter-app-id:
-          - io.github.venera_app.venera
-          - io.github.wgh136.pixes
-          - top.jtmonster.jhentai
-          - com.xiaoyaocz.simplelive
     steps:
       - uses: actions/checkout@v4 
       - uses: docker://ghcr.io/flathub/flatpak-external-data-checker:latest
@@ -50,6 +43,17 @@ jobs:
         with:
           args: --update --never-fork manifests/${{ matrix.appid }}/${{ matrix.appid }}.yml # e.g. com.organization.myapp.json
 
+  flatpak-external-data-checker-flutter:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        appid: # list all flatpak application id to check
+        - io.github.venera_app.venera
+        - io.github.wgh136.pixes
+        - top.jtmonster.jhentai
+        - com.xiaoyaocz.simplelive
+    steps:
+      - uses: actions/checkout@v4 
       - uses: docker://ghcr.io/flathub/flatpak-external-data-checker:latest
         env:
           GIT_AUTHOR_NAME: Flatpak External Data Checker
@@ -59,4 +63,5 @@ jobs:
           GIT_COMMITTER_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          args: --update --never-fork manifests/${{ matrix.flutter-app-id }}/${{ matrix.flutter-app-id }}.yml # e.g. com.organization.myapp.json
+          args: --update --never-fork manifests/${{ matrix.appid }}/${{ matrix.appid }}.yml # e.g. com.organization.myapp.json
+          
