@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  flatpak-external-data-checker:
+  check-update:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -43,7 +43,7 @@ jobs:
         with:
           args: --update --never-fork manifests/${{ matrix.appid }}/${{ matrix.appid }}.yml # e.g. com.organization.myapp.json
 
-  flatpak-external-data-checker-flutter:
+  check-update-flutter:
     runs-on: ubuntu-latest
     strategy:
       matrix:
