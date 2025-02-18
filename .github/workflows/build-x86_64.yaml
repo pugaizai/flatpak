@@ -33,10 +33,14 @@ jobs:
       - name: Build
         run: |
           git config --global protocol.file.allow always
+          
+          flatpak-builder build-dir manifests/io.github.wgh136.pixes/io.github.wgh136.pixes.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
 
-          flatpak-builder build-dir manifests/io.github.wgh136.pixes/io.github.wgh136.pixes.yaml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
+          flatpak-builder build-dir manifests/io.github.venera_app.venera/io.github.venera_app.venera.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
 
-          flatpak-builder build-dir manifests/io.github.venera_app.venera/io.github.venera_app.venera.yaml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
+          flatpak-builder build-dir manifests/com.xiaoyaocz.simplelive/com.xiaoyaocz.simplelive.yaml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
+
+          flatpak-builder build-dir manifests/top.jtmonster.jhentai/top.jtmonster.jhentai.yaml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
 
           flatpak-builder build-dir manifests/com.qq.weixin/com.qq.weixin.yaml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
 
@@ -49,10 +53,6 @@ jobs:
           flatpak-builder build-dir manifests/pro.cycity.desktop/pro.cycity.desktop.yaml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
 
           flatpak-builder build-dir manifests/cn.wps.office/cn.wps.office.yaml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
-
-          flatpak-builder build-dir manifests/com.xiaoyaocz.simplelive/com.xiaoyaocz.simplelive.yaml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
-
-          flatpak-builder build-dir manifests/top.jtmonster.jhentai/top.jtmonster.jhentai.yaml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
 
           flatpak-builder build-dir manifests/com.qq.qq/com.qq.qq.yaml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
 
