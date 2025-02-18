@@ -21,20 +21,22 @@ jobs:
           - com.qq.docs
           - com.qq.weixin
           - com.qq.qqmusic
-          - com.xiaoyaocz.simplelive
           - io.github.c0re100.qBittorrent-Enhanced-Edition
           - io.github.msojocs.bilibili
           - io.github.PBH_BTN.PeerBanHelper
           - org.freedesktop.xorg.xeyes
-          - top.jtmonster.jhentai
           - com.hoppscotch.hoppscotch
           - com.cursor.cursor
           - xyz.chatboxapp.ce
           - com.larksuite.Lark
           - com.qq.qq
+          - org.freedesktop.Platform.Electron
+
+        flutter-app-id:
           - io.github.venera_app.venera
           - io.github.wgh136.pixes
-
+          - top.jtmonster.jhentai
+          - com.xiaoyaocz.simplelive
     steps:
       - uses: actions/checkout@v4 
       - uses: docker://ghcr.io/flathub/flatpak-external-data-checker:latest
@@ -46,4 +48,4 @@ jobs:
           GIT_COMMITTER_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          args: --update --never-fork manifests/${{ matrix.appid }}/${{ matrix.appid }}.yaml # e.g. com.organization.myapp.json
+          args: --update --never-fork manifests/${{ matrix.appid }}/${{ matrix.appid }}.yml # e.g. com.organization.myapp.json

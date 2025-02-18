@@ -1,0 +1,96 @@
+name: Build x86_64
+
+on:
+  workflow_dispatch
+
+# If previous workflow is still running, we push again, we will cancel the previous workflow
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Install build depends
+        run: |
+          sudo add-apt-repository ppa:flatpak/stable
+          sudo apt update 
+          sudo apt install flatpak flatpak-builder
+          flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+      - name: Import GPG key
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+
+      - name: Build
+        run: |
+          git config --global protocol.file.allow always
+          
+          flatpak-builder build-dir manifests/io.github.wgh136.pixes/io.github.wgh136.pixes.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
+
+          flatpak-builder build-dir manifests/io.github.venera_app.venera/io.github.venera_app.venera.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
+
+          flatpak-builder build-dir manifests/com.xiaoyaocz.simplelive/com.xiaoyaocz.simplelive.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
+
+          flatpak-builder build-dir manifests/top.jtmonster.jhentai/top.jtmonster.jhentai.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
+
+          flatpak-builder build-dir manifests/com.qq.weixin/com.qq.weixin.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
+
+          flatpak-builder build-dir manifests/com.jetbrains.Rider/com.jetbrains.Rider.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
+
+          flatpak-builder build-dir manifests/com.visualstudio.code/com.visualstudio.code.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
+
+          flatpak-builder build-dir manifests/com.hoppscotch.hoppscotch/com.hoppscotch.hoppscotch.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
+
+          flatpak-builder build-dir manifests/pro.cycity.desktop/pro.cycity.desktop.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
+
+          flatpak-builder build-dir manifests/cn.wps.office/cn.wps.office.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
+
+          flatpak-builder build-dir manifests/com.qq.qq/com.qq.qq.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
+
+          flatpak-builder build-dir manifests/com.qq.docs/com.qq.docs.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
+
+          flatpak-builder build-dir manifests/com.qq.qqmusic/com.qq.qqmusic.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
+
+          flatpak-builder build-dir manifests/io.github.c0re100.qBittorrent-Enhanced-Edition/io.github.c0re100.qBittorrent-Enhanced-Edition.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
+
+          flatpak-builder build-dir manifests/io.github.msojocs.bilibili/io.github.msojocs.bilibili.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
+
+          flatpak-builder build-dir manifests/org.freedesktop.xorg.xeyes/org.freedesktop.xorg.xeyes.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
+
+          flatpak-builder build-dir manifests/com.cursor.cursor/com.cursor.cursor.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
+
+          flatpak-builder build-dir manifests/io.github.PBH_BTN.PeerBanHelper/io.github.PBH_BTN.PeerBanHelper.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
+
+          flatpak-builder build-dir manifests/xyz.chatboxapp.ce/xyz.chatboxapp.ce.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
+
+          flatpak-builder build-dir manifests/com.larksuite.Lark/com.larksuite.Lark.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
+
+          flatpak-builder build-dir manifests/org.freedesktop.Platform.Electron/org.freedesktop.Platform.Electron.yml --repo=repo --default-branch=24.04 --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
+
+      - name: Sign repo
+        run: |
+          flatpak build-sign repo --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }}
+
+      - name: Upload to R2
+        uses: ryand56/r2-upload-action@latest # Can be any release
+        with:
+          r2-account-id: ${{ secrets.R2_ACCOUNT_ID }}
+          r2-access-key-id: ${{ secrets.R2_ACCESS_KEY_ID }}
+          r2-secret-access-key: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          r2-bucket: ${{ secrets.R2_BUCKET }}
+          source-dir: repo
+          destination-dir: repo # Can be anything as long as it is an actual path
+          output-file-url: 'true' # defaults to true
+          multipart-size: 100 # If the file size is greater than the value provided here, then use multipart upload
+          max-retries: 5 # The maximum number of retries it takes to upload a multipart chunk until it moves on to the next part
+          multipart-concurrent: true # Whether to concurrently upload a multipart chunk
+          keep-file-fresh: 'true' # defaults to false

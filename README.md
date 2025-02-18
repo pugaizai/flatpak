@@ -28,15 +28,13 @@
 
 ### Install Flatpak Builder
 
-`flatpak install org.flatpak.Builder`
-
 ### Clone
 
 `git clone https://github.com/pugaizai/flatpak.git --recursive`
 
 ### Build
 
-`flatpak run org.flatpak.Builder build-dir manifests/<application-id>/<application-id>.yaml --repo=repo --force-clean --install-deps-from=flathub --ccache --user`
+`flatpak-builder build-dir manifests/<application-id>/<application-id>.yml --repo=repo --force-clean --install-deps-from=flathub --ccache --user`
 
 ### Add Repo
 

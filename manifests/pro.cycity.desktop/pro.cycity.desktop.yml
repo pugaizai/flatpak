@@ -13,11 +13,24 @@ finish-args:
   - --socket=pulseaudio
   - --device=dri
   - --share=network
+  - --talk-name=org.mate.SessionManager
+  - --talk-name=org.gnome.SessionManager
+  - --talk-name=org.freedesktop.PowerManagement
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.kde.StatusNotifierWatcher
   - --talk-name=org.freedesktop.ScreenSaver
   # required to fix cursor scaling on wayland
   - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
+
+add-extensions:
+  org.freedesktop.Platform.Electron:
+    version: '24.08'
+    directory: electron
+
+  org.freedesktop.Platform.ffmpeg-full:
+      version: '24.08'
+      directory: lib/ffmpeg
+      add-ld-path: .
 
 cleanup:
   - '*.a'
@@ -31,11 +44,13 @@ cleanup:
   - /share/gtk-doc
 
 modules:
-  - name: bilibili
+  - name: cycity
     buildsystem: simple
     build-options:
       no-debuginfo: true
     build-commands:
+      - mkdir -p ${FLATPAK_DEST}/electron
+      - mkdir -p ${FLATPAK_DEST}/lib/ffmpeg
       - install -Dm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications
       - install -Dm644 ${FLATPAK_ID}.png -t ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
@@ -43,10 +58,9 @@ modules:
       - install -Dm755 apply_extra -t ${FLATPAK_DEST}/bin
     sources:
       - type: extra-data
-        only-arches: [x86_64]
         url: https://alist.idti.cn/d/Public/Program/Linux/cyc-desktop_1.0.8_amd64.deb
         sha256: 9499edfcb0406eeba122cac78008513358e246f89a932b1d5a4f5d57a470fc12
-        filename: bilibili.deb
+        filename: cycity.deb
         size: 78753186
       - type: file
         path: pro.cycity.desktop.metainfo.xml
@@ -64,10 +78,10 @@ modules:
             then
                 FLAGS="--enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime"
             fi
-          - exec zypak-wrapper "/app/extra/cyc-desktop/cyc-desktop" $FLAGS "$@"
+          - exec zypak-wrapper "/app/electron/electron" "/app/extra/app.asar" $FLAGS "$@"
       - type: script
         commands:
           - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
-          - mv opt/cyc-desktop .
+          - mv opt/cyc-desktop/resources/app.asar .
           - rm -r *.deb usr opt
         dest-filename: apply_extra
