@@ -34,6 +34,8 @@ modules:
       - -Dbuild-date=false
       - -Dcplayer=false
       - -Dmanpage-build=disabled
+      - -Dvulkan=enabled
+      - -Dsdl2=enabled
     sources:
       - type: git
         url: https://github.com/mpv-player/mpv.git
@@ -99,33 +101,18 @@ modules:
       - name: libplacebo
         buildsystem: meson
         config-opts:
+          - -Dvulkan=enabled
+          - -Dshaderc=enabled
           - -Dd3d11=disabled
           - -Ddemos=false
         sources:
-          - type: archive
-            url: https://code.videolan.org/videolan/libplacebo/-/archive/v7.349.0/libplacebo-v7.349.0.tar.gz
-            sha256: 79120e685a1836344b51b13b6a5661622486a84e4d4a35f6c8d01679a20fbc86
+          - type: git
+            url: https://code.videolan.org/videolan/libplacebo.git
+            tag: v7.349.0
+            commit: 1fd3c7bde7b943fe8985c893310b5269a09b46c5
             x-checker-data:
-              type: anitya
-              project-id: 20101
-              stable-only: true
-              url-template: https://code.videolan.org/videolan/libplacebo/-/archive/v$version/libplacebo-v$version.tar.gz
-          - type: archive
-            url: https://github.com/pallets/jinja/archive/refs/tags/3.1.5.tar.gz
-            sha256: 684d78790cc747f4b4b68b365783af8cac770c2c66d9f414b21c8b8480e019d0
-            dest: 3rdparty/jinja
-            x-checker-data:
-              type: anitya
-              project-id: 3894
-              url-template: https://github.com/pallets/jinja/archive/refs/tags/$version.tar.gz
-          - type: archive
-            url: https://github.com/Dav1dde/glad/archive/refs/tags/v2.0.8.tar.gz
-            sha256: 44f06f9195427c7017f5028d0894f57eb216b0a8f7c4eda7ce883732aeb2d0fc
-            dest: 3rdparty/glad
-            x-checker-data:
-              type: anitya
-              project-id: 300234
-              url-template: https://github.com/Dav1dde/glad/archive/refs/tags/v$version.tar.gz
+              type: git
+              tag-pattern: ^v([\d.]+)$
 
       - name: ffmpeg
         cleanup:
@@ -153,16 +140,17 @@ modules:
           - --enable-libwebp
           - --enable-libjxl
           - --enable-libxml2
+          - --enable-libplacebo
+          - --enable-vulkan
         sources:
           - type: git
-            url: https://github.com/FFmpeg/FFmpeg.git
-            mirror-urls:
-              - https://git.ffmpeg.org/ffmpeg.git
-            tag: n7.1
+            url: https://git.ffmpeg.org/ffmpeg.git
             commit: b08d7969c550a804a59511c7b83f2dd8cc0499b8
+            tag: n7.1
             x-checker-data:
               type: git
-              tag-pattern: ^n([\d.]{3,7})$
+              tag-pattern: ^n([\d.]+)$
+
   - name: simple_live
     buildsystem: simple
     build-options:

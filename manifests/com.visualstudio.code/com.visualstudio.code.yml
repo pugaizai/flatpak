@@ -64,13 +64,13 @@ modules:
       - /lib/pkgconfig
       - /share/man
     sources:
-      - type: archive
-        url: https://download.gnome.org/sources/libsecret/0.21/libsecret-0.21.6.tar.xz
-        sha256: 747b8c175be108c880d3adfb9c3537ea66e520e4ad2dccf5dce58003aeeca090
+      - type: git
+        url: https://gitlab.gnome.org/GNOME/libsecret.git
+        tag: 0.21.6
+        commit: e59012225c2857d53738574423416b541f11a131
         x-checker-data:
-          type: gnome
-          name: libsecret
-          stable-only: true
+          type: git
+          tag-pattern: ^([\d.]+)$
 
   - name: vscode
     buildsystem: simple
@@ -144,14 +144,23 @@ modules:
           timestamp-query: .published_at
           url-query: '"https://update.code.visualstudio.com/" + $version + "/linux-deb-arm64/stable"'
 
-  - name: kerberos
+  - name: krb5
+    buildsystem: simple
+    build-commands:
+      - autoreconf
+      - ./configure --prefix=/app
+      - make -j $FLATPAK_BUILDER_N_JOBS
+      - make install
+      - install -Dm644 krb5.conf ${FLATPAK_DEST}/etc/krb5.conf
     subdir: src
-    post-install:
-      - install -Dm644 ../krb5.conf ${FLATPAK_DEST}/etc/krb5.conf
     sources:
-      - type: archive
-        url: https://kerberos.org/dist/krb5/1.20/krb5-1.20.tar.gz
-        sha256: 7e022bdd3c851830173f9faaa006a230a0e0fdad4c953e85bff4bf0da036e12f
+      - type: git
+        url: https://github.com/krb5/krb5.git
+        tag: krb5-1.21.3-final
+        commit: 8f56f544dd179056e9b8d02552e6c5e392eb2966
+        x-checker-data:
+          type: git
+          tag-pattern: ^krb5-([\d.]+)-final$
       - type: file
         path: krb5.conf
 

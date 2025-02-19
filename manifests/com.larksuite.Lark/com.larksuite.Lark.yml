@@ -59,8 +59,7 @@ modules:
         url: https://sf16-va.larksuitecdn.com/obj/lark-artifact-storage/afc02e52/Lark-linux_x64-7.32.11.deb
         sha256: 85f2ca6cacd9cce62a3461282f0e203172368df36fb453d4ee100e0de03d4b15
         size: 382855940
-        only-arches:
-          - x86_64
+        only-arches: [x86_64]
         x-checker-data:
           type: json
           url: https://www.larksuite.com/api/downloads
@@ -71,8 +70,7 @@ modules:
         url: https://sf16-va.larksuitecdn.com/obj/lark-artifact-storage/240d90bd/Lark-linux_arm64-7.32.11.deb
         sha256: f11e44e1b067ccc5ef6687324d7a87ac96fd83e81b06d56b2a63b6dcdc562a4a
         size: 349235304
-        only-arches:
-          - aarch64
+        only-arches: [aarch64]
         x-checker-data:
           type: json
           url: https://www.larksuite.com/api/downloads

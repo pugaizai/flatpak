@@ -44,10 +44,8 @@ modules:
         tag: boost-1.87.0
         commit: c89e6267665516192015a9e40955e154466f4f68
         x-checker-data:
-          type: anitya
-          project-id: 6845
-          stable-only: true
-          tag-template: boost-$version
+          type: git
+          tag-pattern: ^boost-([\d.]+)$
 
   - name: libtorrent
     buildsystem: cmake-ninja
@@ -64,10 +62,8 @@ modules:
         tag: v2.0.11
         commit: 9d7443f467147d1784fb7516d2a882db1abb5a8b
         x-checker-data:
-          type: anitya
-          project-id: 269917
-          stable-only: true
-          tag-template: v$version
+          type: git
+          tag-pattern: ^v([\d.]+)$
   - name: qbittorrent
     buildsystem: cmake-ninja
     builddir: true
@@ -82,7 +78,5 @@ modules:
         tag: release-5.0.3.10
         commit: fce68498d75399704ea5f956b7f0273e240194e3
         x-checker-data:
-          type: anitya
-          project-id: 199749
-          stable-only: true
-          tag-template: release-$version
+          type: git
+          tag-pattern: ^release-([\d.]+)$

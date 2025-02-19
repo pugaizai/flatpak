@@ -43,10 +43,10 @@ modules:
         x-checker-data:
           type: json
           url: https://api.github.com/repos/PBH-BTN/PeerBanHelper/releases/latest
+          is-main-source: true
           version-query: .tag_name | sub("^v"; "")
           url-query: .assets[] | select(.name=="peerbanhelper_" + $version + "_all.deb")
             | .browser_download_url
-          is-main-source: true
 
       - type: file
         path: io.github.PBH_BTN.PeerBanHelper.metainfo.xml
