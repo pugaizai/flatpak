@@ -27,11 +27,6 @@ add-extensions:
     version: '24.08'
     directory: electron
 
-  org.freedesktop.Platform.ffmpeg-full:
-      version: '24.08'
-      directory: lib/ffmpeg
-      add-ld-path: .
-
 cleanup:
   - '*.a'
   - '*.la'
@@ -50,7 +45,6 @@ modules:
       no-debuginfo: true
     build-commands:
       - mkdir -p ${FLATPAK_DEST}/electron
-      - mkdir -p ${FLATPAK_DEST}/lib/ffmpeg
       - install -Dm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications
       - install -Dm644 ${FLATPAK_ID}.png -t ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo

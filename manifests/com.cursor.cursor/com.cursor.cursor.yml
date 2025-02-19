@@ -103,8 +103,8 @@ modules:
           - unappimage cursor.AppImage >/dev/null
           - mv squashfs-root cursor
           - rm -rf cursor.AppImage cursor/{usr,AppRun,cursor.desktop,cursor.png,.DirIcon}
-          # fix double-title-bars bugs
-          - sed -i 's/,minHeight/,frame:false,minHeight/g' "cursor/resources/app/out/vs/code/electron-main/main.js"
+          # # fix double-title-bars bugs
+          # - sed -i 's/,minHeight/,frame:false,minHeight/g' "cursor/resources/app/out/vs/code/electron-main/main.js"
       - type: file
         path: com.cursor.cursor.metainfo.xml
       - type: file

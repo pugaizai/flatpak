@@ -2,6 +2,8 @@ app-id: top.jtmonster.jhentai
 runtime: org.gnome.Platform
 runtime-version: '47'
 sdk: org.gnome.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.llvm19
 command: jhentai
 finish-args:
   - --share=ipc
@@ -23,42 +25,49 @@ modules:
   - name: jhentai
     buildsystem: simple
     build-options:
-      no-debuginfo: true
+      arch:
+        x86_64:
+          env:
+            BUNDLE_PATH: build/linux/x64/release
+        aarch64:
+          env:
+            BUNDLE_PATH: build/linux/arm64/release
+      append-path: /usr/lib/sdk/llvm19/bin:/var/lib/flutter/bin
+      prepend-ld-library-path: /usr/lib/sdk/llvm19/lib
+      env:
+        PUB_CACHE: /run/build/jhentai/.pub-cache
     build-commands:
-      - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
-      - cp -a usr/share ${FLATPAK_DEST}/
-      - mv opt/jhentai ${FLATPAK_DEST}/
-      - install -Dm755 jhentai.sh ${FLATPAK_DEST}/bin/jhentai
+      - mkdir -p build/native_assets/linux
+      - setup-flutter.sh
+      - mkdir -p ${BUNDLE_PATH}/_deps/sqlite3-src
+      - mv sqlite-autoconf-3390000/* ${BUNDLE_PATH}/_deps/sqlite3-src
+      - flutter build linux --release --verbose --target lib/src/main.dart
+      - mkdir -p ${FLATPAK_DEST}/bin
+      - cp -r ${BUNDLE_PATH}/bundle/* ${FLATPAK_DEST}/bin
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+      - install -Dm644 linux/assets/${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications
+      - install -Dm644 assets/icon/JHenTai_512.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
     sources:
-      - type: file
-        only-arches: [x86_64]
-        url: https://github.com/jiangtian616/JHenTai/releases/download/v8.0.6%2B277/JHenTai-8.0.6%2B277-Linux-x64.deb
-        sha256: 86aa149bcf2ff4c8760e7e904810f7a8e5be9da3c33cbe02201b67264087bc2b
+      - type: git
+        url: https://github.com/jiangtian616/JHenTai.git
+        tag: v8.0.6+277
+        commit: 8bc13ab2b678907e2bafd0724bde4ac6c342f8a2
         x-checker-data:
-          type: json
-          url: https://api.github.com/repos/jiangtian616/JHenTai/releases/latest
-          version-query: .tag_name | sub("^v"; "")
-          url-query: >-
-            .assets[] | select(.name | test("^JHenTai-.*-Linux-x64\\.deb$"))
-            |
-            .browser_download_url
-      - type: file
-        only-arches: [aarch64]
-        url: https://github.com/jiangtian616/JHenTai/releases/download/v8.0.6%2B277/JHenTai-8.0.6%2B277-Linux-arm64.deb
-        sha256: 8525016ef3b2831fd950c335537927176479695e09676e1f26e866c35e961204
-        x-checker-data:
-          type: json
-          url: https://api.github.com/repos/jiangtian616/JHenTai/releases/latest
-          version-query: .tag_name | sub("^v"; "")
-          url-query: >-
-            .assets[] | select(.name | test("^JHenTai-.*-Linux-arm64\\.deb$"))
-            |
-            .browser_download_url
+          type: git
+          tag-pattern: ^v([\d.]+(?:\+\d+)?)$
       - type: file
         path: top.jtmonster.jhentai.metainfo.xml
-      - type: script
-        commands:
-          - export TMPDIR="${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}"
-          - exec /app/jhentai/jhentai "$@"
-        dest-filename: jhentai.sh
+      # flutter
+      - type: file
+        path: package_config.json
+        dest: flutter/packages/flutter_tools/.dart_tool
+      - pubspec-sources-flutter.json
+      - pubspec-sources-jhentai.json
+      - type: archive
+        url: https://www.sqlite.org/2022/sqlite-autoconf-3390000.tar.gz
+        sha256: e90bcaef6dd5813fcdee4e867f6b65f3c9bfd0aec0f1017f9f3bbce1e4ed09e2
+        strip-components: 0
+      - type: patch
+        path: 0001-avoid-download-from-internet.patch
+    modules:
+      - flutter-sdk-3.24.5.json
