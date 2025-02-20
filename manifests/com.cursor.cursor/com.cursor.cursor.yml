@@ -32,7 +32,7 @@ add-extensions:
   com.visualstudio.code.tool:
     directory: tools
     subdirectories: true
-    versions: 'stable;24.08'
+    versions: stable;24.08
     add-ld-path: lib
     no-autodownload: true
 
@@ -120,9 +120,9 @@ modules:
       - type: extra-data
         filename: cursor.AppImage
         only-arches: [x86_64]
-        url: https://download.todesktop.com/230313mzl4w4u92/cursor-0.45.11-build-250207y6nbaw5qc-x86_64.AppImage
-        sha256: 9294b860796ff42ddeec49b8c82978612f6736034da4cb12c9798c953dbd8422
-        size: 154327659
+        url: https://download.todesktop.com/230313mzl4w4u92/cursor-0.45.14-build-250219jnihavxsz-x86_64.AppImage
+        sha256: e4c196262f133fed778d97fa60c314539b9863fdce053171b46a62aef823f192
+        size: 154331840
         x-checker-data:
           type: electron-updater
           url: https://download.todesktop.com/230313mzl4w4u92/latest-linux.yml
@@ -130,9 +130,9 @@ modules:
       - type: extra-data
         filename: cursor.AppImage
         only-arches: [aarch64]
-        url: https://download.todesktop.com/230313mzl4w4u92/cursor-0.45.11-build-250207y6nbaw5qc-arm64.AppImage
-        sha256: 5f2c725d1cea6676f75d0d3b5cff94de15469b646afa48dc3cc69ea2acaac32b
-        size: 154438926
+        url: https://download.todesktop.com/230313mzl4w4u92/cursor-0.45.14-build-250219jnihavxsz-arm64.AppImage
+        sha256: f0e5253ee3cd82a6c67b6c7b806fa6de7deee940ef82755e9248c9d3ca55391b
+        size: 154439047
         x-checker-data:
           type: electron-updater
           url: https://download.todesktop.com/230313mzl4w4u92/latest-linux-arm64.yml
