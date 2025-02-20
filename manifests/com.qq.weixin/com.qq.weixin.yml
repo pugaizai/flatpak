@@ -27,6 +27,18 @@ finish-args:
   # Only supports xcb
   - --env=QT_QPA_PLATFORM=xcb
 
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/doc
+  - /share/gtk-doc
+
 modules:
   # Need libtiff.so.5
   - name: tiff

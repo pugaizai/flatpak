@@ -22,6 +22,7 @@ cleanup:
   - /lib/pkgconfig
   - /man
   - /share/man
+  - /share/doc
   - /share/gtk-doc
 
 modules:

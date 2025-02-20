@@ -35,6 +35,7 @@ cleanup:
   - /lib/pkgconfig
   - /man
   - /share/man
+  - /share/doc
   - /share/gtk-doc
 
 modules:
@@ -47,6 +48,7 @@ modules:
       - bsdtar -xvf bilibili.tar.gz
       - install -Dm644 app/app.asar -t ${FLATPAK_DEST}/bilibili/
       - mv app/extensions ${FLATPAK_DEST}/bilibili/
+      - desktop-file-edit --set-key="Icon" --set-value="io.github.msojocs.bilibili" ${FLATPAK_ID}.desktop
       - install -Dm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications/
       - install -Dm644 ${FLATPAK_ID}.svg -t ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo/
@@ -67,9 +69,13 @@ modules:
       - type: file
         path: io.github.msojocs.bilibili.metainfo.xml
       - type: file
-        path: io.github.msojocs.bilibili.desktop
+        url: https://raw.githubusercontent.com/msojocs/bilibili-linux/refs/heads/master/res/bilibili.desktop
+        sha256: 2e7065c4255edcf39a9d07c83ae81e7c8a9b650c7a570c56e255e5647fd535d4
+        dest-filename: io.github.msojocs.bilibili.desktop
       - type: file
-        path: io.github.msojocs.bilibili.svg
+        url: https://raw.githubusercontent.com/msojocs/bilibili-linux/refs/heads/master/res/icons/bilibili.svg
+        sha256: 7cf1a17b2a0932927396d5fd6a5c7c5b418222a405cc99322d0a730741f41b89
+        dest-filename: io.github.msojocs.bilibili.svg
       - type: script
         dest-filename: bilibili.sh
         commands:

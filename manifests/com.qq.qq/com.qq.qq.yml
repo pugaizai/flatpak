@@ -28,6 +28,7 @@ cleanup:
   - /lib/pkgconfig
   - /man
   - /share/man
+  - /share/doc
   - /share/gtk-doc
 
 modules:
@@ -36,8 +37,8 @@ modules:
     buildsystem: simple
     build-commands:
       - autoreconf
-      - ./configure --prefix=/app
-      - make -j $FLATPAK_BUILDER_N_JOBS
+      - ./configure --prefix=${FLATPAK_DEST}
+      - make -j ${FLATPAK_BUILDER_N_JOBS}
       - make install
     subdir: src
     sources:
