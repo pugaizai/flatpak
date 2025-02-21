@@ -140,30 +140,18 @@ modules:
 
   - name: host-spawn
     buildsystem: simple
+    build-options:
+      append-path: /usr/lib/sdk/golang/bin
     build-commands:
-      - install -Dm755 host-spawn ${FLATPAK_DEST}/bin/host-spawn
+      - CGO_ENABLED=0 go build -mod=vendor -o "${FLATPAK_DEST}/bin/host-spawn"
     sources:
-      - type: file
-        url: https://github.com/1player/host-spawn/releases/download/v1.6.1/host-spawn-x86_64
-        sha256: 733746ab498e07d065cbecf80bacd447eb21846d1462e8fe23fdd9d9dc977b50
-        dest-filename: host-spawn
-        only-arches: [x86_64]
+      - type: archive
+        url: https://github.com/1player/host-spawn/releases/download/v1.6.1/host-spawn-vendor.tar.zst
+        sha256: 17e5d4846b0532467035523a742a11e60f31766b3f237a06e7b75daf7858ab3c
         x-checker-data:
           type: json
           url: https://api.github.com/repos/1player/host-spawn/releases/latest
           tag-query: .tag_name
           version-query: .tag_name
           timestamp-query: .published_at
-          url-query: '[.assets[] | select(.name|test(".+x86_64$"))][0] | .browser_download_url'
-      - type: file
-        url: https://github.com/1player/host-spawn/releases/download/v1.6.1/host-spawn-aarch64
-        sha256: 71b7744a4d0b29279523cc0f0ed1a7af5e9555510bd9e6d4685391b59faefaac
-        dest-filename: host-spawn
-        only-arches: [aarch64]
-        x-checker-data:
-          type: json
-          url: https://api.github.com/repos/1player/host-spawn/releases/latest
-          tag-query: .tag_name
-          version-query: .tag_name
-          timestamp-query: .published_at
-          url-query: '[.assets[] | select(.name|test(".+aarch64$"))][0] | .browser_download_url'
+          url-query: '[.assets[] | select(.name|test(".+tar.zst$"))][0] | .browser_download_url'

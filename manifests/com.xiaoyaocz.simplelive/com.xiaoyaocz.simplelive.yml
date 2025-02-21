@@ -2,8 +2,6 @@ app-id: com.xiaoyaocz.simplelive
 runtime: org.freedesktop.Platform
 runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
-rename-icon: simple_live_app
-rename-desktop-file: simple_live_app.desktop
 command: simple_live_app
 finish-args:
   - --share=ipc
@@ -13,6 +11,7 @@ finish-args:
   - --share=network
   - --device=dri
   - --talk-name=org.freedesktop.ScreenSaver
+  - --system-talk-name=org.freedesktop.NetworkManager
 cleanup:
   - '*.a'
   - '*.la'
@@ -169,12 +168,11 @@ modules:
       env:
         PUB_CACHE: /run/build/simplelive/.pub-cache
     build-commands:
-      - flutter pub global activate flutter_distributor
-      - cd simple_live_app && flutter_distributor package --platform linux --targets deb,zip --skip-clean
+      - cd simple_live_app && flutter build linux --release --verbose
       - mkdir -p ${FLATPAK_DEST}/bin
       - cp -r ${BUNDLE_PATH}/* ${FLATPAK_DEST}/bin
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
-      - install -Dm644 linux/assets/${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications
+      - install -Dm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications
       - install -Dm644 simple_live_app/assets/images/logo.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
     sources:
       - type: git
@@ -186,6 +184,8 @@ modules:
           tag-pattern: ^v([\d.]+)$
       - type: file
         path: com.xiaoyaocz.simplelive.metainfo.xml
+      - type: file
+        path: com.xiaoyaocz.simplelive.desktop
       - type: git
         url: https://github.com/flutter/flutter.git
         tag: 3.22.3

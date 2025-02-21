@@ -36,7 +36,7 @@ modules:
   - name: krb5
     buildsystem: simple
     build-commands:
-      - autoreconf
+      - autoreconf -i
       - ./configure --prefix=${FLATPAK_DEST}
       - make -j ${FLATPAK_BUILDER_N_JOBS}
       - make install

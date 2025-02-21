@@ -11,6 +11,8 @@ finish-args:
   - --socket=wayland
   - --share=network
   - --device=dri
+  - --talk-name=org.freedesktop.ScreenSaver
+  - --system-talk-name=org.freedesktop.NetworkManager
 cleanup:
   - '*.a'
   - '*.la'
@@ -23,6 +25,27 @@ cleanup:
   - /share/doc
   - /share/gtk-doc
 modules:
+
+  - name: rustup
+    buildsystem: simple
+    build-options:
+      build-args:
+        - --share=network
+      env:
+        CARGO_HOME: /var/lib/rustup
+        RUSTUP_HOME: /var/lib/rustup
+    build-commands:
+      - chmod +x rustup-init && ./rustup-init -y --profile minimal --no-modify-path
+    sources:
+      - type: file
+        only-arches: [x86_64]
+        url: https://static.rust-lang.org/rustup/dist/x86_64-unknown-linux-gnu/rustup-init
+        sha256: 6aeece6993e902708983b209d04c0d1dbb14ebb405ddb87def578d41f920f56d
+      - type: file
+        only-arches: [aarch64]
+        url: https://static.rust-lang.org/rustup/dist/aarch64-unknown-linux-gnu/rustup-init
+        sha256: 1cffbf51e63e634c746f741de50649bbbcbd9dbe1de363c9ecef64e278dba2b2
+
   - name: venera
     buildsystem: simple
     build-options:
@@ -35,9 +58,11 @@ modules:
         aarch64:
           env:
             BUNDLE_PATH: build/linux/arm64/release/bundle
-      append-path: /usr/lib/sdk/llvm19/bin:/run/build/venera/flutter/bin
+      append-path: /var/lib/rustup/bin:/usr/lib/sdk/llvm19/bin:/run/build/venera/flutter/bin
       prepend-ld-library-path: /usr/lib/sdk/llvm19/lib
       env:
+        RUSTUP_HOME: /var/lib/rustup
+        CARGO_HOME: /run/build/venera/cargo
         PUB_CACHE: /run/build/venera/.pub-cache
     build-commands:
       - flutter build linux --release --verbose

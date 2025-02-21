@@ -14,6 +14,10 @@ jobs:
     strategy:
       matrix:
         appid: # list all flatpak application id to check
+          - io.github.venera_app.venera
+          - io.github.wgh136.pixes
+          - top.jtmonster.jhentai
+          - com.xiaoyaocz.simplelive
           - com.visualstudio.code
           - com.jetbrains.Rider
           - cn.wps.office
@@ -26,7 +30,6 @@ jobs:
           - org.freedesktop.xorg.xeyes
           - com.hoppscotch.hoppscotch
           - com.cursor.cursor
-          - xyz.chatboxapp.ce
           - com.larksuite.Lark
           - com.qq.qq
           - org.freedesktop.Platform.Electron
@@ -42,26 +45,3 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           args: --update --never-fork manifests/${{ matrix.appid }}/${{ matrix.appid }}.yml # e.g. com.organization.myapp.json
-
-  check-update-flutter:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        appid: # list all flatpak application id to check
-        - io.github.venera_app.venera
-        - io.github.wgh136.pixes
-        - top.jtmonster.jhentai
-        - com.xiaoyaocz.simplelive
-    steps:
-      - uses: actions/checkout@v4 
-      - uses: docker://ghcr.io/flathub/flatpak-external-data-checker:latest
-        env:
-          GIT_AUTHOR_NAME: Flatpak External Data Checker
-          GIT_COMMITTER_NAME: Flatpak External Data Checker
-          # email sets "github-actions[bot]" as commit author, see https://github.community/t/github-actions-bot-email-address/17204/6
-          GIT_AUTHOR_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
-          GIT_COMMITTER_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          args: --update --never-fork manifests/${{ matrix.appid }}/${{ matrix.appid }}.yml # e.g. com.organization.myapp.json
-          

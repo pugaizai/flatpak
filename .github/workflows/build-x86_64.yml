@@ -50,8 +50,6 @@ jobs:
 
           flatpak-builder build-dir manifests/com.hoppscotch.hoppscotch/com.hoppscotch.hoppscotch.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
 
-          flatpak-builder build-dir manifests/pro.cycity.desktop/pro.cycity.desktop.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
-
           flatpak-builder build-dir manifests/cn.wps.office/cn.wps.office.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
 
           flatpak-builder build-dir manifests/com.qq.qq/com.qq.qq.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
@@ -69,8 +67,6 @@ jobs:
           flatpak-builder build-dir manifests/com.cursor.cursor/com.cursor.cursor.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
 
           flatpak-builder build-dir manifests/io.github.PBH_BTN.PeerBanHelper/io.github.PBH_BTN.PeerBanHelper.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
-
-          flatpak-builder build-dir manifests/xyz.chatboxapp.ce/xyz.chatboxapp.ce.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
 
           flatpak-builder build-dir manifests/com.larksuite.Lark/com.larksuite.Lark.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
 
