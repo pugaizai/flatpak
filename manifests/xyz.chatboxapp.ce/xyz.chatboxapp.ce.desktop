@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=Chatbox CE
-Exec=chatbox %U
-Terminal=false
-Type=Application
-Icon=xyz.chatboxapp.ce
-StartupWMClass=Chatbox CE
-Comment=A desktop client for multiple cutting-edge AI models
-Categories=Utility;Network

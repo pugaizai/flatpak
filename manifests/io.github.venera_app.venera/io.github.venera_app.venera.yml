@@ -2,9 +2,9 @@ app-id: io.github.venera_app.venera
 runtime: org.gnome.Platform
 runtime-version: '47'
 sdk: org.gnome.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.llvm19
 command: venera
-rename-icon: venera
-rename-desktop-file: venera.desktop
 finish-args:
   - --share=ipc
   - --socket=fallback-x11
@@ -26,45 +26,42 @@ modules:
   - name: venera
     buildsystem: simple
     build-options:
-      no-debuginfo: true
+      build-args:
+        - --share=network
+      arch:
+        x86_64:
+          env:
+            BUNDLE_PATH: build/linux/x64/release/bundle
+        aarch64:
+          env:
+            BUNDLE_PATH: build/linux/arm64/release/bundle
+      append-path: /usr/lib/sdk/llvm19/bin:/run/build/venera/flutter/bin
+      prepend-ld-library-path: /usr/lib/sdk/llvm19/lib
+      env:
+        PUB_CACHE: /run/build/venera/.pub-cache
     build-commands:
-      - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
-      - mv usr/local/lib/venera ${FLATPAK_DEST}/
-      - desktop-file-edit --set-key="Categories" --set-value="Graphics;Network;" --set-key="Exec"
-        --set-value="venera" --remove-key="TryExec" usr/share/applications/venera.desktop
-      - install -Dm644 usr/share/applications/venera.desktop -t ${FLATPAK_DEST}/share/applications/
-      - install -Dm644 usr/share/icons/venera.png -t ${FLATPAK_DEST}/share/icons/hicolor/64x64/apps/
-      - install -Dm755 venera.sh ${FLATPAK_DEST}/bin/venera
+      - flutter build linux --release --verbose
+      - mkdir -p ${FLATPAK_DEST}/bin
+      - cp -r ${BUNDLE_PATH}/* ${FLATPAK_DEST}/bin
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+      - install -Dm644 debian/gui/venera.desktop ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
+      - install -Dm644 debian/gui/venera.png ${FLATPAK_DEST}/share/icons/hicolor/64x64/apps/${FLATPAK_ID}.png
+      - desktop-file-edit --set-key="Categories" --set-value="Graphics;Network;" --set-key="Exec" --set-value="venera" --set-key="Icon" --set-value="io.github.venera_app.venera" ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
     sources:
-      - type: file
-        only-arches: [x86_64]
-        url: https://github.com/venera-app/venera/releases/download/v1.3.0/venera_1.3.0_amd64.deb
-        sha256: 52621df4d0242191ba445f6b8db4a5aca91cb08de4f53561a71b93f1acc6c6dc
+      - type: git
+        url: https://github.com/venera-app/venera.git
+        tag: v1.3.0
+        commit: 7994ffb6a4653575a158569a4173d8df52467644
         x-checker-data:
-          type: json
-          url: https://api.github.com/repos/venera-app/venera/releases/latest
-          version-query: .tag_name | sub("^v"; "")
-          url-query: >-
-            .assets[] | select(.name=="venera_" + $version + "_amd64.deb")
-            |
-            .browser_download_url
-      - type: file
-        only-arches: [aarch64]
-        url: https://github.com/venera-app/venera/releases/download/v1.3.0/venera_1.3.0_arm64.deb
-        sha256: 7a1f2630c3c6975982bddd41d74e2ca69536be0822b16d6bafa5c130d45db305
-        x-checker-data:
-          type: json
-          url: https://api.github.com/repos/venera-app/venera/releases/latest
-          version-query: .tag_name | sub("^v"; "")
-          url-query: >-
-            .assets[] | select(.name=="venera_" + $version + "_arm64.deb")
-            |
-            .browser_download_url
+          type: git
+          tag-pattern: ^v([\d.]+)$
       - type: file
         path: io.github.venera_app.venera.metainfo.xml
-      - type: script
+      - type: git
+        url: https://github.com/flutter/flutter.git
+        tag: 3.29.0
+        dest: flutter
+      # Workaround: To keep engine.version and allow shallow clones: https://github.com/flutter/flutter/issues/163308
+      - type: shell
         commands:
-          - export TMPDIR="${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}"
-          - exec /app/venera/venera "$@"
-        dest-filename: venera.sh
+          - rm -f flutter/engine/src/.gn

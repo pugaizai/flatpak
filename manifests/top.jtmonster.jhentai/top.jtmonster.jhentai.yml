@@ -11,6 +11,7 @@ finish-args:
   - --socket=wayland
   - --share=network
   - --device=dri
+  - --talk-name=org.freedesktop.ScreenSaver
 cleanup:
   - '*.a'
   - '*.la'
@@ -26,25 +27,23 @@ modules:
   - name: jhentai
     buildsystem: simple
     build-options:
+      build-args:
+        - --share=network
       arch:
         x86_64:
           env:
-            BUNDLE_PATH: build/linux/x64/release
+            BUNDLE_PATH: build/linux/x64/release/bundle
         aarch64:
           env:
-            BUNDLE_PATH: build/linux/arm64/release
-      append-path: /usr/lib/sdk/llvm19/bin:/var/lib/flutter/bin
+            BUNDLE_PATH: build/linux/arm64/release/bundle
+      append-path: /usr/lib/sdk/llvm19/bin:/run/build/jhentai/flutter/bin
       prepend-ld-library-path: /usr/lib/sdk/llvm19/lib
       env:
         PUB_CACHE: /run/build/jhentai/.pub-cache
     build-commands:
-      - mkdir -p build/native_assets/linux
-      - setup-flutter.sh
-      - mkdir -p ${BUNDLE_PATH}/_deps/sqlite3-src
-      - mv sqlite-autoconf-3390000/* ${BUNDLE_PATH}/_deps/sqlite3-src
       - flutter build linux --release --verbose --target lib/src/main.dart
       - mkdir -p ${FLATPAK_DEST}/bin
-      - cp -r ${BUNDLE_PATH}/bundle/* ${FLATPAK_DEST}/bin
+      - cp -r ${BUNDLE_PATH}/* ${FLATPAK_DEST}/bin
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
       - install -Dm644 linux/assets/${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications
       - install -Dm644 assets/icon/JHenTai_512.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
@@ -58,17 +57,7 @@ modules:
           tag-pattern: ^v([\d.]+(?:\+\d+)?)$
       - type: file
         path: top.jtmonster.jhentai.metainfo.xml
-      # flutter
-      - type: file
-        path: package_config.json
-        dest: flutter/packages/flutter_tools/.dart_tool
-      - pubspec-sources-flutter.json
-      - pubspec-sources-jhentai.json
-      - type: archive
-        url: https://www.sqlite.org/2022/sqlite-autoconf-3390000.tar.gz
-        sha256: e90bcaef6dd5813fcdee4e867f6b65f3c9bfd0aec0f1017f9f3bbce1e4ed09e2
-        strip-components: 0
-      - type: patch
-        path: 0001-avoid-download-from-internet.patch
-    modules:
-      - flutter-sdk-3.24.5.json
+      - type: git
+        url: https://github.com/flutter/flutter.git
+        tag: 3.24.5
+        dest: flutter
