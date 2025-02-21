@@ -6,6 +6,8 @@ on:
       - .github/workflows/update.yaml
   schedule: # for scheduling to work this file must be in the default branch
      - cron: "0 12 * * *" # 每天中午12点运行一次
+       paths:  # 仅当清单文件变更时才触发
+         - 'manifests/**/*.yml'
   workflow_dispatch:
 
 jobs:
@@ -14,12 +16,12 @@ jobs:
     strategy:
       matrix:
         appid: # list all flatpak application id to check
+          # - io.github.arvinlovegood.go-stock
+          # - com.cherry_ai.cherrystudio
           - io.github.venera_app.venera
           - io.github.wgh136.pixes
           - top.jtmonster.jhentai
           - com.xiaoyaocz.simplelive
-          - com.visualstudio.code
-          - com.jetbrains.Rider
           - cn.wps.office
           - com.qq.docs
           - com.qq.weixin
@@ -28,7 +30,6 @@ jobs:
           - io.github.msojocs.bilibili
           - io.github.PBH_BTN.PeerBanHelper
           - org.freedesktop.xorg.xeyes
-          - com.hoppscotch.hoppscotch
           - com.cursor.cursor
           - com.larksuite.Lark
           - com.qq.qq

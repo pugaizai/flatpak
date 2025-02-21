@@ -19,9 +19,14 @@ jobs:
 
       - name: Install build depends
         run: |
-          sudo add-apt-repository ppa:flatpak/stable
-          sudo apt update 
-          sudo apt install flatpak flatpak-builder
+          sudo add-apt-repository -y ppa:flatpak/stable
+          sudo apt-get update -q
+          sudo apt-get install -y --no-install-recommends \
+            flatpak \
+            flatpak-builder \
+            ca-certificates \
+            gnupg \
+            software-properties-common
           flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
       - name: Import GPG key
@@ -33,44 +38,37 @@ jobs:
       - name: Build
         run: |
           git config --global protocol.file.allow always
-          
-          flatpak-builder build-dir manifests/io.github.wgh136.pixes/io.github.wgh136.pixes.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
 
-          flatpak-builder build-dir manifests/io.github.venera_app.venera/io.github.venera_app.venera.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
+          declare -a apps=(
+            "manifests/io.github.wgh136.pixes/io.github.wgh136.pixes.yml"
+            "manifests/io.github.venera_app.venera/io.github.venera_app.venera.yml"
+            "manifests/com.xiaoyaocz.simplelive/com.xiaoyaocz.simplelive.yml"
+            "manifests/top.jtmonster.jhentai/top.jtmonster.jhentai.yml"
+            "manifests/com.qq.weixin/com.qq.weixin.yml"
+            "manifests/cn.wps.office/cn.wps.office.yml"
+            "manifests/com.qq.qq/com.qq.qq.yml"
+            "manifests/com.qq.docs/com.qq.docs.yml"
+            "manifests/com.qq.qqmusic/com.qq.qqmusic.yml"
+            "manifests/io.github.c0re100.qbittorrent-enhanced-edition/io.github.c0re100.qbittorrent-enhanced-edition.yml"
+            "manifests/io.github.msojocs.bilibili/io.github.msojocs.bilibili.yml"
+            "manifests/org.freedesktop.xorg.xeyes/org.freedesktop.xorg.xeyes.yml"
+            "manifests/com.cursor.cursor/com.cursor.cursor.yml"
+            "manifests/io.github.pbh_btn.peerbanhelper/io.github.pbh_btn.peerbanhelper.yml"
+            "manifests/com.larksuite.Lark/com.larksuite.Lark.yml"
+            "manifests/org.freedesktop.Platform.Electron/org.freedesktop.Platform.Electron.yml"
+          )
 
-          flatpak-builder build-dir manifests/com.xiaoyaocz.simplelive/com.xiaoyaocz.simplelive.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
-
-          flatpak-builder build-dir manifests/top.jtmonster.jhentai/top.jtmonster.jhentai.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
-
-          flatpak-builder build-dir manifests/com.qq.weixin/com.qq.weixin.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
-
-          flatpak-builder build-dir manifests/com.jetbrains.Rider/com.jetbrains.Rider.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
-
-          flatpak-builder build-dir manifests/com.visualstudio.code/com.visualstudio.code.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
-
-          flatpak-builder build-dir manifests/com.hoppscotch.hoppscotch/com.hoppscotch.hoppscotch.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
-
-          flatpak-builder build-dir manifests/cn.wps.office/cn.wps.office.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
-
-          flatpak-builder build-dir manifests/com.qq.qq/com.qq.qq.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
-
-          flatpak-builder build-dir manifests/com.qq.docs/com.qq.docs.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
-
-          flatpak-builder build-dir manifests/com.qq.qqmusic/com.qq.qqmusic.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
-
-          flatpak-builder build-dir manifests/io.github.c0re100.qBittorrent-Enhanced-Edition/io.github.c0re100.qBittorrent-Enhanced-Edition.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
-
-          flatpak-builder build-dir manifests/io.github.msojocs.bilibili/io.github.msojocs.bilibili.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
-
-          flatpak-builder build-dir manifests/org.freedesktop.xorg.xeyes/org.freedesktop.xorg.xeyes.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
-
-          flatpak-builder build-dir manifests/com.cursor.cursor/com.cursor.cursor.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
-
-          flatpak-builder build-dir manifests/io.github.PBH_BTN.PeerBanHelper/io.github.PBH_BTN.PeerBanHelper.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
-
-          flatpak-builder build-dir manifests/com.larksuite.Lark/com.larksuite.Lark.yml --repo=repo --default-branch=stable --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
-
-          flatpak-builder build-dir manifests/org.freedesktop.Platform.Electron/org.freedesktop.Platform.Electron.yml --repo=repo --default-branch=24.04 --force-clean --user --install-deps-from=flathub --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --ccache --disable-rofiles-fuse
+          for app in "${apps[@]}"; do
+            flatpak-builder build-dir "$app" \
+              --repo=repo \
+              --default-branch=stable \
+              --force-clean \
+              --user \
+              --install-deps-from=flathub \
+              --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} \
+              --ccache \
+              --disable-rofiles-fuse
+          done
 
       - name: Sign repo
         run: |

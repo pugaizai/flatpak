@@ -5,6 +5,7 @@ runtime-version: '6.8'
 command: qbittorrent
 rename-icon: qbittorrent
 rename-desktop-file: org.qbittorrent.qBittorrent.desktop
+rename-appdata-file: org.qbittorrent.qBittorrent.metainfo.xml
 copy-icon: true
 finish-args:
   - --device=dri
