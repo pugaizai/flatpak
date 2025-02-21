@@ -1,4 +1,4 @@
-id: io.github.PBH_BTN.PeerBanHelper
+id: io.github.pbh_btn.peerbanhelper
 runtime: org.freedesktop.Platform
 runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
@@ -50,15 +50,15 @@ modules:
             | .browser_download_url
 
       - type: file
-        path: io.github.PBH_BTN.PeerBanHelper.metainfo.xml
+        path: io.github.pbh_btn.peerbanhelper.metainfo.xml
 
       - type: file
         url: https://raw.githubusercontent.com/PBH-BTN/PeerBanHelper/refs/heads/master/install4j/icon.png
-        dest-filename: io.github.PBH_BTN.PeerBanHelper.png
+        dest-filename: io.github.pbh_btn.peerbanhelper.png
         sha256: c53e1606f11060cc84eb02edc075c4cb0699377a2a2bcb3edb35a81c3806ccc5
 
       - type: file
-        path: io.github.PBH_BTN.PeerBanHelper.desktop
+        path: io.github.pbh_btn.peerbanhelper.desktop
 
       - type: script
         commands:

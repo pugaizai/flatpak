@@ -2,6 +2,8 @@ app-id: com.cursor.cursor
 runtime: org.freedesktop.Sdk
 runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.golang
 base: org.electronjs.Electron2.BaseApp
 base-version: '24.08'
 command: cursor

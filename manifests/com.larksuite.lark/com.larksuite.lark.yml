@@ -1,4 +1,4 @@
-app-id: com.larksuite.Lark
+app-id: com.larksuite.lark
 runtime: org.freedesktop.Platform
 runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
@@ -78,8 +78,8 @@ modules:
           version-query: .versions.Linux_deb_arm.version_number | sub("^Linux-arm64-deb@V"; "")
           url-query: .versions.Linux_deb_arm.download_link
       - type: file
-        path: com.larksuite.Lark.desktop
+        path: com.larksuite.lark.desktop
       - type: file
-        path: com.larksuite.Lark.metainfo.xml
+        path: com.larksuite.lark.metainfo.xml
       - type: file
-        path: com.larksuite.Lark.svg
+        path: com.larksuite.lark.svg

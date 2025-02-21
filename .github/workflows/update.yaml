@@ -31,7 +31,7 @@ jobs:
           - io.github.PBH_BTN.PeerBanHelper
           - org.freedesktop.xorg.xeyes
           - com.cursor.cursor
-          - com.larksuite.Lark
+          - com.larksuite.lark
           - com.qq.qq
           - org.freedesktop.Platform.Electron
     steps:

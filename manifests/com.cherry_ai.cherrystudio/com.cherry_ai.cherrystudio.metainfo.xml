@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>com.cherry_ai.cherrystudio.desktop</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>Apache-2.0-and-LicenseRef-https://raw.githubusercontent.com/CherryHQ/cherry-studio/refs/heads/main/LICENSE</project_license>
+  <name>Cherry Studio</name>
+  <summary>Cross-platform desktop client supporting multiple LLM providers</summary>
+  <summary xml:lang="zh_CN">支持多LLM提供商的跨平台桌面客户端</summary>
+  <developer id="com.cherry_ai">
+    <name>CherryHQ</name>
+  </developer>
+
+  <description>
+    <p>Cherry Studio is a multi-AI service desktop client with key features:</p>
+    <p xml:lang="zh_CN">Cherry Studio 是一款集成多AI服务的桌面客户端，主要功能包括：</p>
+    <ul>
+      <li>Supports cloud services (OpenAI/Gemini/Anthropic) and local models (Ollama/LM Studio)
+        <li xml:lang="zh_CN">支持主流云服务（OpenAI/Gemini/Anthropic）和本地模型（Ollama/LM Studio）</li>
+      </li>
+      <li>300+ pre-configured AI assistants and custom assistant creation
+        <li xml:lang="zh_CN">300+预配置AI助手与自定义助手创建</li>
+      </li>
+      <li>Multi-model parallel chat and response comparison
+        <li xml:lang="zh_CN">多模型并行对话与答案对比</li>
+      </li>
+      <li>Document processing supports text/images/Office/PDF formats
+        <li xml:lang="zh_CN">文档处理支持文本/图片/Office/PDF等格式</li>
+      </li>
+      <li>Built-in tools: Mermaid diagrams, code highlighting, global search
+        <li xml:lang="zh_CN">集成Mermaid图表、代码高亮、全局搜索等实用工具</li>
+      </li>
+      <li>Cross-platform support (Windows/macOS/Linux)
+        <li xml:lang="zh_CN">跨平台支持（Windows/macOS/Linux）</li>
+      </li>
+    </ul>
+  </description>
+
+  <screenshots>
+    <screenshot type="default">
+      <image>https://github.com/user-attachments/assets/28585d83-4bf0-4714-b561-8c7bf57cc600</image>
+      <caption>Main interface with multi-model chat</caption>
+      <caption xml:lang="zh_CN">主界面与多模型对话</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://github.com/user-attachments/assets/8576863a-f632-4776-bc12-657eeced9da3</image>
+      <caption>AI Provider Configuration</caption>
+      <caption xml:lang="zh_CN">AI服务商配置界面</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://github.com/user-attachments/assets/790790d7-b462-48dd-bde1-91c1697a4648</image>
+      <caption>Model API Settings (OpenAI/Anthropic/Custom Endpoints)</caption>
+      <caption xml:lang="zh_CN">模型API设置（支持OpenAI/Anthropic/自定义端点）</caption>
+    </screenshot>
+  </screenshots>
+
+  <releases>
+    <release version="1.0.0" date="2024-03-15"/>
+  </releases>
+
+  <content_rating type="oars-1.1">
+    <content_attribute id="social-chat">intense</content_attribute>
+    <content_attribute id="money-purchasing">none</content_attribute>
+  </content_rating>
+
+  <categories>
+    <category>Development</category>
+    <category>ArtificialIntelligence</category>
+  </categories>
+
+  <url type="homepage">https://cherry-ai.com</url>
+  <url type="bugtracker">https://github.com/cherry-ai/cherrystudio/issues</url>
+  <url type="help">https://docs.cherry-ai.com</url>
+  <url type="vcs">https://github.com/cherry-ai/cherrystudio</url>
+  <url type="contact">kangfenmao@gmail.com</url>
+
+  <launchable type="desktop-id">com.cherry_ai.cherrystudio.desktop</launchable>
+</component>

@@ -49,7 +49,7 @@ jobs:
             "manifests/org.freedesktop.xorg.xeyes/org.freedesktop.xorg.xeyes.yml"
             "manifests/com.cursor.cursor/com.cursor.cursor.yml"
             "manifests/io.github.pbh_btn.peerbanhelper/io.github.pbh_btn.peerbanhelper.yml"
-            "manifests/com.larksuite.Lark/com.larksuite.Lark.yml"
+            "manifests/com.larksuite.lark/com.larksuite.lark.yml"
             "manifests/org.freedesktop.Platform.Electron/org.freedesktop.Platform.Electron.yml"
           )
 
