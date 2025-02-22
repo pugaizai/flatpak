@@ -16,7 +16,7 @@ finish-args:
   - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
 
 add-extensions:
-  org.freedesktop.Platform.Electron:
+  org.freedesktop.Platform.electron:
     version: '24.08'
     directory: electron
 

@@ -71,12 +71,14 @@ modules:
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
       - install -Dm644 debian/gui/venera.desktop ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
       - install -Dm644 debian/gui/venera.png ${FLATPAK_DEST}/share/icons/hicolor/64x64/apps/${FLATPAK_ID}.png
-      - desktop-file-edit --set-key="Categories" --set-value="Graphics;Network;" --set-key="Exec" --set-value="venera" --set-key="Icon" --set-value="io.github.venera_app.venera" ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
+      - desktop-file-edit --set-key="Categories" --set-value="Graphics;Network;" --set-key="Exec"
+        --set-value="venera" --set-key="Icon" --set-value="io.github.venera_app.venera"
+        ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
     sources:
       - type: git
         url: https://github.com/venera-app/venera.git
-        tag: v1.3.0
-        commit: 7994ffb6a4653575a158569a4173d8df52467644
+        tag: v1.3.1
+        commit: 587c5d804063a760c735de02ff4bc88dffc7b42e
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
