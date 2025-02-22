@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-  <!--Created with jdAppStreamEdit 9.2-->
   <id>com.larksuite.lark</id>
   <name>Lark</name>
   <summary>Lark</summary>

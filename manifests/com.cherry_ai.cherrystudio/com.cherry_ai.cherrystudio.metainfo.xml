@@ -2,7 +2,7 @@
 <component type="desktop">
   <id>com.cherry_ai.cherrystudio.desktop</id>
   <metadata_license>CC0-1.0</metadata_license>
-  <project_license>Apache-2.0-and-LicenseRef-https://raw.githubusercontent.com/CherryHQ/cherry-studio/refs/heads/main/LICENSE</project_license>
+  <project_license>LicenseRef-https://github.com/CherryHQ/cherry-studio?tab=License-1-ov-file</project_license>
   <name>Cherry Studio</name>
   <summary>Cross-platform desktop client supporting multiple LLM providers</summary>
   <summary xml:lang="zh_CN">支持多LLM提供商的跨平台桌面客户端</summary>
@@ -11,27 +11,26 @@
   </developer>
 
   <description>
-    <p>Cherry Studio is a multi-AI service desktop client with key features:</p>
-    <p xml:lang="zh_CN">Cherry Studio 是一款集成多AI服务的桌面客户端，主要功能包括：</p>
+    <p>Cherry Studio is a cross-platform desktop application that integrates multiple AI services, providing seamless access to cloud-based and local AI models through a unified interface.</p>
+    <p xml:lang="zh_CN">Cherry Studio 是一款跨平台桌面应用，集成了多种AI服务，通过统一界面无缝访问云端和本地AI模型。</p>
     <ul>
-      <li>Supports cloud services (OpenAI/Gemini/Anthropic) and local models (Ollama/LM Studio)
-        <li xml:lang="zh_CN">支持主流云服务（OpenAI/Gemini/Anthropic）和本地模型（Ollama/LM Studio）</li>
-      </li>
-      <li>300+ pre-configured AI assistants and custom assistant creation
-        <li xml:lang="zh_CN">300+预配置AI助手与自定义助手创建</li>
-      </li>
-      <li>Multi-model parallel chat and response comparison
-        <li xml:lang="zh_CN">多模型并行对话与答案对比</li>
-      </li>
-      <li>Document processing supports text/images/Office/PDF formats
-        <li xml:lang="zh_CN">文档处理支持文本/图片/Office/PDF等格式</li>
-      </li>
-      <li>Built-in tools: Mermaid diagrams, code highlighting, global search
-        <li xml:lang="zh_CN">集成Mermaid图表、代码高亮、全局搜索等实用工具</li>
-      </li>
-      <li>Cross-platform support (Windows/macOS/Linux)
-        <li xml:lang="zh_CN">跨平台支持（Windows/macOS/Linux）</li>
-      </li>
+      <li>Supports cloud services (OpenAI/Gemini/Anthropic) and local models (Ollama/LM Studio)</li>
+      <li xml:lang="zh_CN">支持主流云服务（OpenAI/Gemini/Anthropic）和本地模型（Ollama/LM Studio）</li>
+
+      <li>300+ pre-configured AI assistants and custom assistant creation</li>
+      <li xml:lang="zh_CN">300+预配置AI助手与自定义助手创建</li>
+
+      <li>Multi-model parallel chat and response comparison</li>
+      <li xml:lang="zh_CN">多模型并行对话与答案对比</li>
+
+      <li>Document processing supports text/images/Office/PDF formats</li>
+      <li xml:lang="zh_CN">文档处理支持文本/图片/Office/PDF等格式</li>
+
+      <li>Built-in tools: Mermaid diagrams, code highlighting, global search</li>
+      <li xml:lang="zh_CN">集成Mermaid图表、代码高亮、全局搜索等实用工具</li>
+
+      <li>Cross-platform support (Windows/macOS/Linux)</li>
+      <li xml:lang="zh_CN">跨平台支持（Windows/macOS/Linux）</li>
     </ul>
   </description>
 
@@ -68,10 +67,9 @@
   </categories>
 
   <url type="homepage">https://cherry-ai.com</url>
-  <url type="bugtracker">https://github.com/cherry-ai/cherrystudio/issues</url>
-  <url type="help">https://docs.cherry-ai.com</url>
-  <url type="vcs">https://github.com/cherry-ai/cherrystudio</url>
-  <url type="contact">kangfenmao@gmail.com</url>
+  <url type="bugtracker">https://github.com/CherryHQ/cherry-studio/issues</url>
+  <url type="help">https://docs.cherry-ai.com/</url>
+  <url type="contact">https://docs.cherry-ai.com/contact-us/questions</url>
 
   <launchable type="desktop-id">com.cherry_ai.cherrystudio.desktop</launchable>
 </component>

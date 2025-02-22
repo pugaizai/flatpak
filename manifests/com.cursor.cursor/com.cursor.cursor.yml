@@ -143,17 +143,16 @@ modules:
   - name: host-spawn
     buildsystem: simple
     build-options:
+      build-args:
+        - --share=network
       append-path: /usr/lib/sdk/golang/bin
     build-commands:
-      - CGO_ENABLED=0 go build -mod=vendor -o "${FLATPAK_DEST}/bin/host-spawn"
+      - CGO_ENABLED=0 go build -o "${FLATPAK_DEST}/bin/host-spawn"
     sources:
-      - type: archive
-        url: https://github.com/1player/host-spawn/releases/download/v1.6.1/host-spawn-vendor.tar.zst
-        sha256: 17e5d4846b0532467035523a742a11e60f31766b3f237a06e7b75daf7858ab3c
+      - type: git
+        url: https://github.com/1player/host-spawn
+        tag: v1.6.1
+        commit: db1173ae2ef04beca8961a35c225117498263e23
         x-checker-data:
-          type: json
-          url: https://api.github.com/repos/1player/host-spawn/releases/latest
-          tag-query: .tag_name
-          version-query: .tag_name
-          timestamp-query: .published_at
-          url-query: '[.assets[] | select(.name|test(".+tar.zst$"))][0] | .browser_download_url'
+          type: git
+          tag-pattern: ^v([\d.]+)$
