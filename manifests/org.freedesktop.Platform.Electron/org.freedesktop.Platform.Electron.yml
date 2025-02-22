@@ -43,4 +43,3 @@ modules:
           project-id: 17779
           stable-only: true
           url-template: https://github.com/electron/electron/releases/download/v$version/electron-v$version-linux-x64.zip
-

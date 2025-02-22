@@ -17,7 +17,7 @@ jobs:
       matrix:
         appid: # list all flatpak application id to check
           # - io.github.arvinlovegood.go-stock
-          # - com.cherry_ai.cherrystudio
+          - com.cherry_ai.cherrystudio
           - io.github.venera_app.venera
           - io.github.wgh136.pixes
           - top.jtmonster.jhentai

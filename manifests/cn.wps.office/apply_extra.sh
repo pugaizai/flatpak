@@ -48,4 +48,3 @@ rm -r wps-office.deb deb-package
 
 # Remove plugin path so we can override the default path with based on QT_PLUGIN_PATH
 sed -i 's|^Plugins=.*||g' wps-office/office6/qt.conf
-

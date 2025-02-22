@@ -2,8 +2,6 @@ app-id: com.cherry_ai.cherrystudio
 runtime: org.freedesktop.Platform
 runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
-sdk-extensions:
-  - org.freedesktop.Sdk.Extension.node22
 base: org.electronjs.Electron2.BaseApp
 base-version: '24.08'
 command: cherrystudio
@@ -13,27 +11,78 @@ finish-args:
   - --socket=wayland
   - --share=network
   - --device=dri
+  - --talk-name=org.kde.StatusNotifierWatcher
+  # required to fix cursor scaling on wayland
+  - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
+
+add-extensions:
+  org.freedesktop.Platform.Electron:
+    version: '24.08'
+    directory: electron
+
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/doc
+  - /share/gtk-doc
 
 modules:
   - name: cherrystudio
     buildsystem: simple
     build-options:
-      build-args:
-        - --share=network
-      append-path: /usr/lib/sdk/node22/bin
+      no-debuginfo: true
     build-commands:
-      - yarn
-      - yarn build:linux
-      - mkdir -p ${FLATPAK_DEST}/app
-      - cp -r dist/* ${FLATPAK_DEST}/app/
-      - ln -s ${FLATPAK_DEST}/app/dist/main.js ${FLATPAK_DEST}/bin/cherrystudio
+      - mkdir -p ${FLATPAK_DEST}/electron
+      - chmod +x Cherry-Studio.AppImage
+      - ./Cherry-Studio.AppImage --appimage-extract
+      - mv squashfs-root/resources ${FLATPAK_DEST}/cherrystudio
+      - desktop-file-edit --set-key="Icon" --set-value="com.cherry_ai.cherrystudio"
+        --set-key="Categories" --set-value="Utility;Network;" --set-key="Exec" --set-value="cherrystudio
+        %U" --remove-key="X-AppImage-Version" squashfs-root/cherrystudio.desktop
+      - install -Dm644 squashfs-root/cherrystudio.desktop ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+      - install -Dm644 ${FLATPAK_ID}.png -t ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps
+      - install -Dm755 cherrystudio.sh ${FLATPAK_DEST}/bin/cherrystudio
     sources:
-      - type: git
-        url: https://github.com/CherryHQ/cherry-studio.git
-        tag: v0.9.27
-        commit: 7f05626a8fe76b99a22ed4e36e436533a10d902d
+      - type: file
+        only-arches: [x86_64]
+        url: https://github.com/CherryHQ/cherry-studio/releases/download/v0.9.27/Cherry-Studio-0.9.27-x86_64.AppImage
+        sha256: ff2531c0cf95a3eb9ddc6a11275e8404a2b64c7ac5400929b7a757ff00ef2da3
+        dest-filename: Cherry-Studio.AppImage
         x-checker-data:
-          type: git
-          tag-pattern: ^v([\d.]+)$
+          type: json
+          url: https://api.github.com/repos/CherryHQ/cherry-studio/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: .assets[] | select(.name | endswith("x86_64.AppImage")) | .browser_download_url
+      - type: file
+        only-arches: [aarch64]
+        url: https://github.com/CherryHQ/cherry-studio/releases/download/v0.9.27/Cherry-Studio-0.9.27-arm64.AppImage
+        sha256: 04a523121feefe0c48bdecbd46b8ab2067eddc51c23ce5aa577b81e92377a49b
+        dest-filename: Cherry-Studio.AppImage
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/CherryHQ/cherry-studio/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: .assets[] | select(.name | endswith("arm64.AppImage")) | .browser_download_url
       - type: file
         path: com.cherry_ai.cherrystudio.metainfo.xml
+      - type: file
+        path: com.cherry_ai.cherrystudio.png
+      - type: script
+        dest-filename: cherrystudio.sh
+        commands:
+          - export TMPDIR=${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}
+          - WAYLAND_SOCKET=${WAYLAND_DISPLAY:-"wayland-0"}
+          - |
+            if [[ -e "${XDG_RUNTIME_DIR}/${WAYLAND_SOCKET}" || -e "${WAYLAND_DISPLAY}" ]]
+            then
+                FLAGS="--enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime --wayland-text-input-version=3"
+            fi
+          - exec zypak-wrapper "/app/electron/electron" "/app/cherrystudio/app.asar"
+            $FLAGS "$@"
