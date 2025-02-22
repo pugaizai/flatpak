@@ -36,7 +36,6 @@ jobs:
           git config --global protocol.file.allow always
 
           declare -a apps=(
-            "manifests/io.github.arvinlovegood.go-stock/io.github.arvinlovegood.go-stock.yml"
             "manifests/com.cherry_ai.cherrystudio/com.cherry_ai.cherrystudio.yml"
             "manifests/io.github.wgh136.pixes/io.github.wgh136.pixes.yml"
             "manifests/io.github.venera_app.venera/io.github.venera_app.venera.yml"

@@ -12,6 +12,8 @@ finish-args:
   - --share=network
   - --device=dri
   - --talk-name=org.kde.StatusNotifierWatcher
+  - --system-talk-name=org.freedesktop.login1
+  - --system-talk-name=org.chromium.bluetooth.Manager
   # required to fix cursor scaling on wayland
   - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
 
@@ -52,8 +54,8 @@ modules:
     sources:
       - type: file
         only-arches: [x86_64]
-        url: https://github.com/CherryHQ/cherry-studio/releases/download/v0.9.27/Cherry-Studio-0.9.27-x86_64.AppImage
-        sha256: ff2531c0cf95a3eb9ddc6a11275e8404a2b64c7ac5400929b7a757ff00ef2da3
+        url: https://github.com/CherryHQ/cherry-studio/releases/download/v0.9.29/Cherry-Studio-0.9.29-x86_64.AppImage
+        sha256: 510fdc4145d59582fe87b317b314f4cce07c597b0a98aa734ce2833836fc4409
         dest-filename: Cherry-Studio.AppImage
         x-checker-data:
           type: json
@@ -62,8 +64,8 @@ modules:
           url-query: .assets[] | select(.name | endswith("x86_64.AppImage")) | .browser_download_url
       - type: file
         only-arches: [aarch64]
-        url: https://github.com/CherryHQ/cherry-studio/releases/download/v0.9.27/Cherry-Studio-0.9.27-arm64.AppImage
-        sha256: 04a523121feefe0c48bdecbd46b8ab2067eddc51c23ce5aa577b81e92377a49b
+        url: https://github.com/CherryHQ/cherry-studio/releases/download/v0.9.29/Cherry-Studio-0.9.29-arm64.AppImage
+        sha256: a6c4fa7315a7ffc91692af99664f597ddb097078411d6f88910afc2a934cf719
         dest-filename: Cherry-Studio.AppImage
         x-checker-data:
           type: json

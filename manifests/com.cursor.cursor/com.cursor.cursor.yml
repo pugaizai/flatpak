@@ -84,7 +84,8 @@ modules:
         - --share=network
       append-path: /usr/lib/sdk/golang/bin
     build-commands:
-      - CGO_ENABLED=0 go build -o "${FLATPAK_DEST}/bin/host-spawn"
+      - VERSION=$(grep -m 1 -oP '(?<=## \[)\d+\.\d+\.\d+(?=\])' CHANGELOG.md)
+      - CGO_ENABLED=0 go build -ldflags "-X main.Version=${VERSION}" -o "${FLATPAK_DEST}/bin/host-spawn"
     sources:
       - type: git
         url: https://github.com/1player/host-spawn
