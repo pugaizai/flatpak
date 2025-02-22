@@ -60,9 +60,6 @@ modules:
         path: io.github.wgh136.pixes.metainfo.xml
       - type: git
         url: https://github.com/flutter/flutter.git
-        tag: 3.29.0
+        tag: 3.27.4
+        commit: d8a9f9a52e5af486f80d932e838ee93861ffd863
         dest: flutter
-      # Workaround: To keep engine.version and allow shallow clones: https://github.com/flutter/flutter/issues/163308
-      - type: shell
-        commands:
-          - rm -f flutter/engine/src/.gn
