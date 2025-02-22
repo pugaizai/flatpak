@@ -5,7 +5,6 @@ sdk: org.freedesktop.Sdk
 base: org.electronjs.Electron2.BaseApp
 base-version: '24.08'
 command: qq
-separate-locales: false
 
 finish-args:
   - --share=ipc
@@ -86,6 +85,8 @@ modules:
 
   - name: qq
     buildsystem: simple
+    build-options:
+      no-debuginfo: true
     build-commands:
       - install apply_extra ${FLATPAK_DEST}/bin
       - install -Dm755 qq.sh ${FLATPAK_DEST}/bin/qq

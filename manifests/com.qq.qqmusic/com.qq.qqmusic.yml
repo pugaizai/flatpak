@@ -4,7 +4,6 @@ runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
 base: org.electronjs.Electron2.BaseApp
 base-version: '24.08'
-separate-locales: false
 command: qqmusic
 
 finish-args:

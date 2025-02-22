@@ -52,6 +52,8 @@ modules:
 
   - name: wechat
     buildsystem: simple
+    build-options:
+      no-debuginfo: true
     build-commands:
       - install -Dm755 apply_extra -t ${FLATPAK_DEST}/bin
       - install -Dm755 wechat -t ${FLATPAK_DEST}/bin

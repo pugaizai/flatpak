@@ -4,7 +4,6 @@ runtime: org.freedesktop.Platform
 runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
 build-extension: true
-separate-locales: false
 cleanup:
   - '*.a'
   - '*.la'

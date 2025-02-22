@@ -4,6 +4,8 @@ runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.node22
+base: org.electronjs.Electron2.BaseApp
+base-version: '24.08'
 command: cherrystudio
 finish-args:
   - --share=ipc

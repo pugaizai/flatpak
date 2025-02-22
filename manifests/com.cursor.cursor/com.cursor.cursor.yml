@@ -7,7 +7,6 @@ sdk-extensions:
 base: org.electronjs.Electron2.BaseApp
 base-version: '24.08'
 command: cursor
-separate-locales: false
 finish-args:
   - --share=network
   - --share=ipc
@@ -78,6 +77,23 @@ modules:
           type: git
           tag-pattern: ^([\d.]+)$
 
+  - name: host-spawn
+    buildsystem: simple
+    build-options:
+      build-args:
+        - --share=network
+      append-path: /usr/lib/sdk/golang/bin
+    build-commands:
+      - CGO_ENABLED=0 go build -o "${FLATPAK_DEST}/bin/host-spawn"
+    sources:
+      - type: git
+        url: https://github.com/1player/host-spawn
+        tag: v1.6.1
+        commit: db1173ae2ef04beca8961a35c225117498263e23
+        x-checker-data:
+          type: git
+          tag-pattern: ^v([\d.]+)$
+
   - name: unappimage
     buildsystem: simple
     build-commands:
@@ -89,6 +105,8 @@ modules:
 
   - name: cursor
     buildsystem: simple
+    build-options:
+      no-debuginfo: true
     build-commands:
       - install -Dm755 cursor -t ${FLATPAK_DEST}/bin/
       - install -Dm644 ${FLATPAK_ID}.png -t ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/
@@ -139,20 +157,3 @@ modules:
         x-checker-data:
           type: electron-updater
           url: https://download.todesktop.com/230313mzl4w4u92/latest-linux-arm64.yml
-
-  - name: host-spawn
-    buildsystem: simple
-    build-options:
-      build-args:
-        - --share=network
-      append-path: /usr/lib/sdk/golang/bin
-    build-commands:
-      - CGO_ENABLED=0 go build -o "${FLATPAK_DEST}/bin/host-spawn"
-    sources:
-      - type: git
-        url: https://github.com/1player/host-spawn
-        tag: v1.6.1
-        commit: db1173ae2ef04beca8961a35c225117498263e23
-        x-checker-data:
-          type: git
-          tag-pattern: ^v([\d.]+)$

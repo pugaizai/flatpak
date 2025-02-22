@@ -3,7 +3,6 @@ runtime: org.freedesktop.Platform
 runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
 command: wps
-separate-locales: false
 finish-args:
   - --share=ipc
   - --socket=x11
@@ -36,6 +35,8 @@ modules:
 
   - name: wps
     buildsystem: simple
+    build-options:
+      no-debuginfo: true
     build-commands:
       - install -Dm755 apply_extra.sh ${FLATPAK_DEST}/bin/apply_extra
       - install -Dm755 wps.sh ${FLATPAK_DEST}/bin/wps
