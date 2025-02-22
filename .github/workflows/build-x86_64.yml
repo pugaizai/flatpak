@@ -3,7 +3,7 @@ name: Build x86_64
 on:
   workflow_dispatch
 
-# If previous workflow is still running, we push again, we will cancel the previous workflow
+# 如果前一个工作流仍在运行，当我们再次推送时，将取消前一个工作流
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref_name }}
   cancel-in-progress: true
@@ -24,6 +24,7 @@ jobs:
           sudo apt-get install -y flatpak flatpak-builder ca-certificates gnupg software-properties-common
           flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
+      # 导入GPG密钥
       - name: Import GPG key
         uses: crazy-max/ghaction-import-gpg@v6
         with:
@@ -35,6 +36,7 @@ jobs:
           git config --global protocol.file.allow always
 
           declare -a apps=(
+            "manifests/io.github.arvinlovegood.go-stock/io.github.arvinlovegood.go-stock.yml"
             "manifests/com.cherry_ai.cherrystudio/com.cherry_ai.cherrystudio.yml"
             "manifests/io.github.wgh136.pixes/io.github.wgh136.pixes.yml"
             "manifests/io.github.venera_app.venera/io.github.venera_app.venera.yml"
@@ -66,21 +68,22 @@ jobs:
               --disable-rofiles-fuse
           done
 
+      # 签名仓库
       - name: Sign repo
         run: |
           flatpak build-sign repo --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }}
 
       - name: Upload to R2
-        uses: ryand56/r2-upload-action@latest # Can be any release
+        uses: ryand56/r2-upload-action@latest # 可以是任何版本
         with:
           r2-account-id: ${{ secrets.R2_ACCOUNT_ID }}
           r2-access-key-id: ${{ secrets.R2_ACCESS_KEY_ID }}
           r2-secret-access-key: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           r2-bucket: ${{ secrets.R2_BUCKET }}
           source-dir: repo
-          destination-dir: repo # Can be anything as long as it is an actual path
-          output-file-url: 'true' # defaults to true
-          multipart-size: 100 # If the file size is greater than the value provided here, then use multipart upload
-          max-retries: 5 # The maximum number of retries it takes to upload a multipart chunk until it moves on to the next part
-          multipart-concurrent: true # Whether to concurrently upload a multipart chunk
-          keep-file-fresh: 'true' # defaults to false
+          destination-dir: repo # 可以是任何实际路径
+          output-file-url: 'true' # 默认为true
+          multipart-size: 100 # 如果文件大小大于此处提供的值，则使用分段上传
+          max-retries: 5 # 上传分段块的最大重试次数，直到继续下一个部分
+          multipart-concurrent: true # 是否并发上传分段块
+          keep-file-fresh: 'true' # 默认为false
