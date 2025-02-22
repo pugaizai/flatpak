@@ -4,6 +4,6 @@ Name=Peer Ban Helper
 GenericName=Peer Ban Helper.
 Comment=Auto ban unwanted bittorrent client.
 Exec=peerbanhelper
-Icon=io.github.PBH_BTN.PeerBanHelper
+Icon=io.github.pbh_btn.peerbanhelper
 Categories=Network;
 Terminal=false

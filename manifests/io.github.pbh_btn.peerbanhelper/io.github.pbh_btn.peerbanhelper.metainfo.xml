@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
-  <id>io.github.PBH_BTN.PeerBanHelper</id>
-  <launchable type="desktop-id">io.github.PBH_BTN.PeerBanHelper.desktop</launchable>
+  <id>io.github.pbh_btn.peerbanhelper</id>
+  <launchable type="desktop-id">io.github.pbh_btn.peerbanhelper.desktop</launchable>
   <name>Peer Ban Helper</name>
   <developer id="io.github.PBH_BTN">
     <name>PBH-BTN</name>
