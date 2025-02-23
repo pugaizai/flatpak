@@ -32,11 +32,6 @@ modules:
     build-options:
       append-path: /usr/lib/sdk/node22/bin:/usr/lib/sdk/golang/bin
     build-commands:
-      - VERSION=$(grep -m1 -oP '(?<=## \[)\d+\.\d+\.\d+(?=\])' CHANGELOG.md)
-      # 使用扩展提供的工具链
-      - /usr/lib/sdk/golang/bin/go build -ldflags="-X main.Version=$VERSION" -o ${FLATPAK_DEST}/bin/go-stock
-      - /usr/lib/sdk/node22/bin/npm install --prefix ${FLATPAK_DEST}/lib/node_modules
-
     sources:
       - type: git
         url: https://github.com/arvinlovegood/go-stock
