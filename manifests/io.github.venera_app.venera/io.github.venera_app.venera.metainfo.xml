@@ -12,7 +12,8 @@
   <url type="homepage">https://github.com/venera-app/venera</url>
   <url type="bugtracker">https://github.com/venera-app/venera/issues</url>
   <description>
-    <p>A comic reader that support reading local and network comics.</p>
+    <p>Venera is a versatile comic reader that supports both local and network comics, offering a seamless reading experience with support for multiple formats and customizable viewing options.</p>
+    <p xml:lang="zh_CN">Venera 是一款多功能的漫画阅读器，支持本地和网络漫画，提供流畅的阅读体验，支持多种格式和可自定义的查看选项。</p>
   </description>
   <screenshots>
     <screenshot type="default">
@@ -23,33 +24,6 @@
   <releases>
     <release version="1.3.0" date="2025-02-15">
       <description></description>
-    </release>
-    <release version="1.2.5" date="2025-02-13">
-      <description/>
-    </release>
-    <release version="1.2.4" date="2025-02-09">
-      <description/>
-    </release>
-    <release version="1.2.3" date="2025-02-01">
-      <description/>
-    </release>
-    <release version="1.2.2" date="2025-01-26">
-      <description/>
-    </release>
-    <release version="1.2.1" date="2025-01-21">
-      <description/>
-    </release>
-    <release version="1.2.0" date="2025-01-18">
-      <description/>
-    </release>
-    <release version="1.1.4" date="2025-01-06">
-      <description/>
-    </release>
-    <release version="1.1.3" date="2024-12-26">
-      <description/>
-    </release>
-    <release version="1.1.2" date="2024-12-19">
-      <description/>
     </release>
   </releases>
   <content_rating type="oars-1.1"/>

@@ -3,24 +3,24 @@
   <id>com.qq.docs</id>
   <launchable type="desktop-id">com.qq.docs.desktop</launchable>
   <name>Tencent Docs</name>
-  <name xml:lang="zh-cn">腾讯文档</name>
+  <name xml:lang="zh_CN">腾讯文档</name>
   <developer id="com.qq">
     <name>Tencent</name>
   </developer>
   <summary>Online Office Suite</summary>
-  <summary xml:lang="zh-cn">在线办公套件</summary>
+  <summary xml:lang="zh_CN">在线办公套件</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>MIT</project_license>
   <url type="homepage">https://docs.qq.com/home</url>
   <url type="faq">https://kf.qq.com/product/txwd.html#hid=hot_faq</url>
   <description>
-    <p>Tencent Docs, Make collaboration more efficient and creation easier.</p>
-    <p xml:lang="zh-cn">腾讯文档，让协作更高效，创作更轻松。</p>
+    <p>Tencent Docs, an online office suite that enables real-time collaboration with cloud storage and multi-platform access, making teamwork more efficient and creation effortless.</p>
+    <p xml:lang="zh_CN">腾讯文档，提供实时协作的在线办公套件，支持云端存储与多端同步，让团队协作更高效，创作过程更轻松。</p>
   </description>
   <screenshots>
     <screenshot type="default">
       <caption>Docs</caption>
-      <caption xml:lang="zh-cn">文档</caption>
+      <caption xml:lang="zh_CN">文档</caption>
       <image type="source">https://docs.gtimg.com/home/_/node_modules/@tencent/docs-design-resources/cooperation/website/image/products/products_doc_800-f80e28.png</image>
     </screenshot>
   </screenshots>
@@ -28,22 +28,6 @@
     <release version="3.9.7" date="2025-02-07">
       <description></description>
     </release>
-    <release version="3.9.6" date="2025-01-22">
-      <description/>
-    </release>
-    <release version="3.9.0" date="2024-12-04">
-      <description/>
-    </release>
-    <release version="3.8.10" date="2024-10-17">
-      <description/>
-    </release>
-    <release version="3.8.1" date="2024-08-27">
-      <description/>
-    </release>
-    <release version="3.6.1" date="2024-07-03">
-      <description/>
-    </release>
-    <release version="3.5.5" date="2024-07-03"/>
   </releases>
   <content_rating type="oars-1.1"/>
   <update_contact>i@pugai.life</update_contact>

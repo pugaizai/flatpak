@@ -12,7 +12,8 @@
   <url type="homepage">https://github.com/msojocs/bilibili-linux</url>
   <url type="bugtracker">https://github.com/msojocs/bilibili-linux/issues</url>
   <description>
-    <p>Linux version ported based on Bilibili official client</p>
+    <p>Bilibili Linux is a feature-rich desktop client for the popular Chinese video platform, offering seamless video playback, community interaction, and support for all Bilibili features on Linux systems.</p>
+    <p xml:lang="zh_CN">Bilibili Linux 是一款功能丰富的桌面客户端，支持在Linux系统上流畅播放视频、参与社区互动，并支持Bilibili的所有功能。</p>
   </description>
   <screenshots>
     <screenshot type="default">
@@ -24,34 +25,6 @@
     <release version="1.16.2-4" date="2025-02-08">
       <description></description>
     </release>
-    <release version="1.16.2-3" date="2025-02-01">
-      <description/>
-    </release>
-    <release version="1.16.2-2" date="2025-01-15">
-      <description/>
-    </release>
-    <release version="1.16.2-1" date="2025-01-12">
-      <description/>
-    </release>
-    <release version="1.16.1-3" date="2025-01-05">
-      <description/>
-    </release>
-    <release version="1.16.1-2" date="2024-12-28">
-      <description/>
-    </release>
-    <release version="1.16.1-1" date="2024-12-17">
-      <description/>
-    </release>
-    <release version="1.15.2-2" date="2024-11-09">
-      <description/>
-    </release>
-    <release version="1.14.2-1" date="2024-09-22">
-      <description/>
-    </release>
-    <release version="1.14.0-2" date="2024-07-27">
-      <description/>
-    </release>
-    <release version="1.14.0-1" date="2024-06-30"/>
   </releases>
   <content_rating type="oars-1.1"/>
   <update_contact>i@pugai.life</update_contact>

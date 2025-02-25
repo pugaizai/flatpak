@@ -1,6 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
 <component type="desktop">
-  <!--Created with jdAppStreamEdit 8.0-->
   <id>org.freedesktop.xorg.xeyes</id>
   <name>xeyes</name>
   <summary>Shows a pair of eyes that follow the mouse cursor</summary>
@@ -37,9 +36,9 @@ natively.</p>
   <categories>
     <category>Utility</category>
   </categories>
-  <requires>
+  <recommends>
     <control>pointing</control>
-  </requires>
+  </recommends>
   <content_rating type="oars-1.1"/>
   <provides>
     <binary>xeyes</binary>

@@ -14,74 +14,20 @@
   <url type="bugtracker">https://github.com/jiangtian616/JHenTai/issues</url>
   <url type="faq">https://github.com/jiangtian616/JHenTai/wiki/Common-Questions</url>
   <description>
-    <p>An E-Hentai app for Android and iOS and Windows and MacOS and Linux.</p>
-    <p xml:lang="zh-cn">E-hentai 的一个多端 app ，现支持 Android 、 iOS 、 Windows 、 MacOS 和 Linux 系统。</p>
+    <p>JHenTai is a feature-rich cross-platform client for E-Hentai and ExHentai, offering seamless browsing, advanced search, and support for multiple platforms including Android, iOS, Windows, MacOS, and Linux.</p>
+    <p xml:lang="zh_CN">JHenTai 是一款功能丰富的跨平台客户端，支持 E-Hentai 和 ExHentai，提供流畅的浏览体验、高级搜索功能，并支持 Android、iOS、Windows、MacOS 和 Linux 系统。</p>
     <p>Still in development stage, welcome to submit issues or feature requests.</p>
-    <p xml:lnag="zh-cn">仍在发展阶段，十分欢迎提交各种 bug 反馈或 Feature Request。</p>
+    <p xml:lang="zh_CN">仍在发展阶段，十分欢迎提交各种 bug 反馈或 Feature Request。</p>
   </description>
   <screenshots>
     <screenshot type="default">
       <caption>Desktop Layout</caption>
-      <image type="source">https://raw.githubusercontent.com/jiangtian616/JHenTai/master/screenshot/desktop.png</image>
+      <image type="source">https://raw.githubusercontent.com/jiangtian616/JHenTai/master/screenshot/desktop1.png</image>
     </screenshot>
   </screenshots>
   <releases>
     <release version="8.0.6+274" date="2025-01-05">
       <description></description>
-    </release>
-    <release version="8.0.6+271" date="2024-12-12">
-      <description/>
-    </release>
-    <release version="8.0.5" date="2024-10-25">
-      <description/>
-    </release>
-    <release version="8.0.5+266" date="2024-10-27">
-      <description/>
-    </release>
-    <release version="8.0.4+263" date="2024-10-20">
-      <description/>
-    </release>
-    <release version="8.0.4+262" date="2024-10-16">
-      <description/>
-    </release>
-    <release version="8.0.3" date="2024-09-27">
-      <description/>
-    </release>
-    <release version="8.0.1+257" date="2024-08-27">
-      <description/>
-    </release>
-    <release version="8.0.1+256" date="2024-08-14">
-      <description/>
-    </release>
-    <release version="8.0.1" date="2024-08-12">
-      <description/>
-    </release>
-    <release version="8.0.0+254" date="2024-08-04">
-      <description/>
-    </release>
-    <release version="8.0.0+252" date="2024-08-03">
-      <description/>
-    </release>
-    <release version="8.0.0+250" date="2024-08-01">
-      <description/>
-    </release>
-    <release version="8.0.0+249" date="2024-08-01">
-      <description/>
-    </release>
-    <release version="8.0.0+248" date="2024-07-31">
-      <description/>
-    </release>
-    <release version="8.0.0+247" date="2024-07-30">
-      <description/>
-    </release>
-    <release version="8.0.0+246" date="2024-07-30">
-      <description/>
-    </release>
-    <release version="8.0.0+245" date="2024-07-29">
-      <description/>
-    </release>
-    <release version="7.5.5" date="2024-05-21">
-      <description/>
     </release>
   </releases>
   <content_rating type="oars-1.1">

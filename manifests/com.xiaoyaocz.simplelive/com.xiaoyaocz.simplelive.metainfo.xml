@@ -7,23 +7,25 @@
     <name>xiaoyaocz</name>
   </developer>
   <summary>Simply watch live streaming</summary>
-  <summary xml:lang="zh-cn">简简单单的看直播</summary>
+  <summary xml:lang="zh_CN">简简单单的看直播</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0</project_license>
   <url type="homepage">https://github.com/xiaoyaocz/dart_simple_live/</url>
   <url type="bugtracker">https://github.com/xiaoyaocz/dart_simple_live/issues</url>
   <description>
+    <p>Simple Live is a lightweight and user-friendly application for watching live streams across multiple platforms, offering a seamless viewing experience with support for popular streaming services.</p>
+    <p xml:lang="zh_CN">Simple Live 是一款轻量级且用户友好的直播观看应用，支持多个主流直播平台，提供流畅的观看体验。</p>
     <p>Simple Live support platforms:</p>
-    <p xml:lang="zh-cn">支持直播平台：</p>
+    <p xml:lang="zh_CN">支持直播平台：</p>
     <ul>
         <li>Huya</li>
-        <li xml:lang="zh-cn">虎牙</li>
+        <li xml:lang="zh_CN">虎牙</li>
         <li>Douyu</li>
-        <li xml:lang="zh-cn">斗鱼</li>
+        <li xml:lang="zh_CN">斗鱼</li>
         <li>Bilibili</li>
-        <li xml:lang="zh-cn">哔哩哔哩</li>
+        <li xml:lang="zh_CN">哔哩哔哩</li>
         <li>Douyin</li>
-        <li xml:lang="zh-cn">抖音</li>
+        <li xml:lang="zh_CN">抖音</li>
     </ul>
   </description>
   <screenshots>
@@ -40,9 +42,6 @@
     <release version="1.7.5" date="2024-12-02">
       <description></description>
     </release>
-    <release version="1.6.5" date="2024-07-18"/>
-    <release version="1.4.7" date="2024-01-05"/>
-    <release version="1.4.5" date="2023-11-07"/>
   </releases>
   <content_rating type="oars-1.1"/>
   <update_contact>i@pugai.life</update_contact>

@@ -2,7 +2,7 @@
 <component type="desktop-application">
   <id>cn.wps.office</id>
   <metadata_license>CC0-1.0</metadata_license>
-  <project_license>LicenseRef-proprietary=http://wps-community.org/license.md</project_license>
+  <project_license>LicenseRef-proprietary=https://privacy.wps.cn/policies/eula/personal-wps-office</project_license>
   <name>WPS Office (Chinese Edition)</name>
   <summary>WPS Office Suite (Chinese Edition)</summary>
   <description>
@@ -14,13 +14,9 @@
     <p>NOTE: This wrapper is not verified by, affiliated with, or
     supported by Kingsoft Office Corporation</p>
   </description>
-  <icon type="remote">https://www.wps.com/_content/images/about/logo.png</icon>
-  <url type="homepage">https://www.wps.com/linux</url>
-  <url type="bugtracker">http://community.wps.cn/bug/login_page.php</url>
-  <url type="donation">http://wps-community.org/donate</url>
-  <url type="faq">http://wps-community.org/faq</url>
-  <url type="help">http://community.wps.cn/wiki</url>
-  <url type="translate">https://github.com/wps-community/wps_i18n</url>
+  <url type="homepage">https://www.wps.cn/product/wpslinux</url>
+  <url type="faq">https://helpdesk.wps.cn/</url>
+  <url type="help">https://helpdesk.wps.cn/</url>
   <developer id="cn.wps">
     <name>Kingsoft Office Corporation</name>
   </developer>
@@ -31,42 +27,7 @@
   </categories>
   <releases>
     <release version="12.1.0.17900" date="2024-11-07">
-      <description></description>
-    </release>
-    <release version="12.1.0.17885" date="2024-09-12">
-      <description/>
-    </release>
-    <release version="12.1.0.17881" date="2024-09-05">
-      <description/>
-    </release>
-    <release version="11.1.0.11723" date="2024-07-29">
-      <description/>
-    </release>
-    <release version="11.1.0.11720" date="2024-07-26"/>
-    <release version="11.1.0.11719" date="2024-02-21"/>
-    <release version="11.1.0.11698" date="2023-04-28"/>
-    <release version="11.1.0.11691" date="2023-02-02"/>
-    <release version="11.1.0.11664" date="2022-06-08"/>
-    <release version="11.1.0.10976" date="2022-04-20"/>
-    <release version="11.1.0.10920" date="2022-01-18"/>
-    <release version="11.1.0.10702" date="2021-08-05"/>
-    <release version="11.1.0.10161" date="2021-01-14"/>
-    <release version="11.1.0.9719" date="2020-10-28"/>
-    <release version="11.1.0.9711" date="2020-10-21"/>
-    <release version="11.1.0.9662" date="2020-09-22"/>
-    <release version="11.1.0.9615" date="2020-07-20"/>
-    <release version="11.1.0.9604" date="2020-07-08"/>
-    <release version="11.1.0.9522" date="2020-06-06"/>
-    <release version="11.1.0.9505" date="2020-04-08"/>
-    <release version="11.1.0.9126" date="2020-02-27"/>
-    <release version="11.1.0.9080" date="2020-01-09"/>
-    <release version="11.1.0.8865" date="2019-09-11"/>
-    <release version="11.1.0.8722" date="2019-07-05"/>
-    <release version="11.1.0.8392" date="2019-04-15"/>
-    <release version="11.1.0.8372" date="2019-04-02"/>
-    <release version="10.1.0.6758" date="2019-03-09"/>
-    <release version="10.1.0.6757" date="2018-09-11">
-      <description>  
+      <description>
         <ul>
           <li>Support users' online feedback</li>
           <li>Support Chinese and English language switching</li>
@@ -96,7 +57,6 @@
         </ul>
       </description>
     </release>
-    <release version="10.1.0.5707~a21" date="2017-06-15"/>
   </releases>
   <screenshots>
     <screenshot type="default">
