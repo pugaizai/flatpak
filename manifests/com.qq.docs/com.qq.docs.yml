@@ -41,9 +41,9 @@ modules:
       - type: extra-data
         only-arches: [aarch64]
         filename: docs.deb
-        url: https://desktop.docs.qq.com/Installer/30001/3.9.7/TencentDocs-arm64.deb
-        sha256: 85430fe7ae400e48032551059aba2ab203e812b04cf2e653f784589bf0335ccf
-        size: 159215982
+        url: https://desktop.docs.qq.com/Installer/30001/3.9.8/TencentDocs-arm64.deb
+        sha256: 79b20c8cc99de6e22709d2d8011d0578cefcbbc9dedd41220da6cdebf19f17a4
+        size: 159611388
         x-checker-data:
           type: json
           url: https://docs.qq.com/api/package/update
@@ -52,14 +52,14 @@ modules:
       - type: extra-data
         only-arches: [x86_64]
         filename: docs.deb
-        url: https://desktop.docs.qq.com/Installer/30001/3.9.7/TencentDocs-x64.deb
-        sha256: 6b705723f07be079ed4b3ce84542b9025bc75a90460406f3ebd5c3bb5a1349d3
+        url: https://desktop.docs.qq.com/Installer/30001/3.9.8/TencentDocs-x64.deb
+        sha256: 8424a11cacf33c5d172f6aa4b48af22b14324dfc423a0a989ce0d9a5c4580884
         x-checker-data:
           type: json
           url: https://docs.qq.com/api/package/update
           version-query: .result.update_info | fromjson | .version
           url-query: '"https://desktop.docs.qq.com/Installer/30001/\($version)/TencentDocs-x64.deb"'
-        size: 163003810
+        size: 163249052
       - type: file
         path: com.qq.docs.metainfo.xml
       - type: file
