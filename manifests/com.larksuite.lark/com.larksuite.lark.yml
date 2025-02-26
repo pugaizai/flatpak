@@ -18,8 +18,8 @@ finish-args:
   - --talk-name=org.kde.StatusNotifierWatcher
   - --own-name=org.kde.*
   # Share files
-  - --filesystem=xdg-documents:rw
-  - --filesystem=xdg-download:rw
+  - --filesystem=xdg-documents
+  - --filesystem=xdg-download
 cleanup:
   - '*.a'
   - '*.la'
