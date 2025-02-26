@@ -18,6 +18,8 @@ finish-args:
   - --talk-name=org.gnome.ScreenSaver
   - --talk-name=org.kde.StatusNotifierWatcher
   - --own-name=org.kde.*
+  - --system-talk-name=org.freedesktop.login1
+  - --system-talk-name=org.freedesktop.UPower
   # Share files
   - --filesystem=xdg-documents
   - --filesystem=xdg-download
