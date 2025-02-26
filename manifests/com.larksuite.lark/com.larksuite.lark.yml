@@ -12,6 +12,7 @@ finish-args:
   - --socket=pulseaudio
   # For camera
   - --device=all
+  - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.freedesktop.secrets
   - --talk-name=org.gnome.keyring
   - --talk-name=org.gnome.ScreenSaver
