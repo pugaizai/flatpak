@@ -11,6 +11,7 @@ finish-args:
   - --socket=x11
   - --socket=pulseaudio
   - --device=all
+  - --talk-name=org.a11y.Bus
   # File Manager
   - --talk-name=org.freedesktop.FileManager1
   # System tray icon
