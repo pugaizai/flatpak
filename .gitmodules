@@ -4,9 +4,3 @@
 [submodule "manifests/com.cursor.cursor/shared-modules"]
 	path = manifests/com.cursor.cursor/shared-modules
 	url = https://github.com/flathub/shared-modules.git
-[submodule "manifests/com.jetbrains.Rider/shared-modules"]
-	path = manifests/com.jetbrains.Rider/shared-modules
-	url = https://github.com/flathub/shared-modules.git
-[submodule "manifests/com.visualstudio.code/shared-modules"]
-	path = manifests/com.visualstudio.code/shared-modules
-	url = https://github.com/flathub/shared-modules.git
