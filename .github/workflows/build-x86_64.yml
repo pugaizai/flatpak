@@ -36,6 +36,7 @@ jobs:
           git config --global protocol.file.allow always
 
           declare -a apps=(
+            "manifests/com.alibabainc.dingtalk/com.alibabainc.dingtalk.yml"
             "manifests/com.cherry_ai.cherrystudio/com.cherry_ai.cherrystudio.yml"
             "manifests/io.github.wgh136.pixes/io.github.wgh136.pixes.yml"
             "manifests/io.github.venera_app.venera/io.github.venera_app.venera.yml"
@@ -52,6 +53,7 @@ jobs:
             "manifests/com.cursor.cursor/com.cursor.cursor.yml"
             "manifests/io.github.pbh_btn.peerbanhelper/io.github.pbh_btn.peerbanhelper.yml"
             "manifests/com.larksuite.lark/com.larksuite.lark.yml"
+            "manifests/cn.feishu.feishu/cn.feishu.feishu.yml"
             "manifests/org.freedesktop.Platform.electron/org.freedesktop.Platform.electron.yml"
           )
 

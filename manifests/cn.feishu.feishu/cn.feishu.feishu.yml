@@ -1,10 +1,10 @@
-app-id: com.larksuite.lark
+app-id: cn.feishu.feishu
 runtime: org.freedesktop.Platform
 runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
 base: org.electronjs.Electron2.BaseApp
 base-version: '24.08'
-command: lark
+command: feishu
 finish-args:
   - --share=network
   - --share=ipc
@@ -37,12 +37,12 @@ cleanup:
   - /share/doc
   - /share/gtk-doc
 modules:
-  - name: lark
+  - name: feishu
     buildsystem: simple
     build-options:
       no-debuginfo: true
     build-commands:
-      - install -Dm755 lark -t ${FLATPAK_DEST}/bin
+      - install -Dm755 feishu -t ${FLATPAK_DEST}/bin
       - install -Dm755 apply_extra -t ${FLATPAK_DEST}/bin
       - install -Dm644 ${FLATPAK_ID}.svg -t ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps
       - install -Dm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications
@@ -51,41 +51,43 @@ modules:
       - type: script
         commands:
           - export TMPDIR="${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}"
-          - source /app/extra/lark/bytedance-lark.sh
-          - exec zypak-wrapper /app/extra/lark/lark "$@"
-        dest-filename: lark
+          - source /app/extra/feishu/bytedance-feishu.sh
+          - exec zypak-wrapper /app/extra/feishu/feishu "$@"
+        dest-filename: feishu
       - type: script
         commands:
-          - bsdtar --to-stdout -xf Lark-linux.deb data.tar.xz | bsdtar -xf -
-          - mv opt/bytedance/lark .
-          - sed '/^exec -a/d' lark/bytedance-lark > lark/bytedance-lark.sh
+          - bsdtar --to-stdout -xf feishu-linux.deb data.tar.xz | bsdtar -xf -
+          - mv opt/bytedance/feishu .
+          - sed '/^exec -a/d' feishu/bytedance-feishu > feishu/bytedance-feishu.sh
           - rm -rf opt usr *.deb
         dest-filename: apply_extra
       - type: extra-data
-        filename: Lark-linux.deb
-        url: https://sf16-va.larksuitecdn.com/obj/lark-artifact-storage/afc02e52/Lark-linux_x64-7.32.11.deb
-        sha256: 85f2ca6cacd9cce62a3461282f0e203172368df36fb453d4ee100e0de03d4b15
-        size: 382855940
+        filename: feishu-linux.deb
+        url: https://sf3-cn.feishucdn.com/obj/ee-appcenter/18b9e5d0/Feishu-linux_x64-7.32.11.deb
+        sha256: 814f9f362504da4084df8d3bbdd8d0a84ee82e047dbd7ca768136e577119aea7
+        size: 382623684
         only-arches: [x86_64]
         x-checker-data:
           type: json
-          url: https://www.larksuite.com/api/downloads
-          version-query: .versions.Linux_deb_x64.version_number | sub("^Linux-x64-deb@V"; "")
+          url: https://www.feishu.cn/api/downloads
+          version-query: .versions.Linux_deb_x64.version_number | capture("@V(?<v>.*)")
+            | .v
           url-query: .versions.Linux_deb_x64.download_link
       - type: extra-data
-        filename: Lark-linux.deb
-        url: https://sf16-va.larksuitecdn.com/obj/lark-artifact-storage/240d90bd/Lark-linux_arm64-7.32.11.deb
-        sha256: f11e44e1b067ccc5ef6687324d7a87ac96fd83e81b06d56b2a63b6dcdc562a4a
-        size: 349235304
+        filename: feishu-linux.deb
+        url: https://sf3-cn.feishucdn.com/obj/ee-appcenter/8946d4de/Feishu-linux_arm64-7.32.11.deb
+        sha256: 818210cac6c823d51dd5aede5ea411b4eb01036ac8dbdfb19f19ed02e98551d9
+        size: 349248568
         only-arches: [aarch64]
         x-checker-data:
           type: json
-          url: https://www.larksuite.com/api/downloads
-          version-query: .versions.Linux_deb_arm.version_number | sub("^Linux-arm64-deb@V"; "")
+          url: https://www.feishu.cn/api/downloads
+          version-query: .versions.Linux_deb_arm.version_number | capture("@V(?<v>.*)")
+            | .v
           url-query: .versions.Linux_deb_arm.download_link
       - type: file
-        path: com.larksuite.lark.desktop
+        path: cn.feishu.feishu.desktop
       - type: file
-        path: com.larksuite.lark.metainfo.xml
+        path: cn.feishu.feishu.metainfo.xml
       - type: file
-        path: com.larksuite.lark.svg
+        path: cn.feishu.feishu.svg
