@@ -70,18 +70,20 @@ modules:
         x-checker-data:
           type: json
           url: https://www.larksuite.com/api/downloads
-          version-query: .versions.Linux_deb_x64.version_number | sub("^Linux-x64-deb@V"; "")
+          version-query: .versions.Linux_deb_x64.version_number | sub("^Linux-x64-deb@V";
+            "")
           url-query: .versions.Linux_deb_x64.download_link
       - type: extra-data
         filename: Lark-linux.deb
-        url: https://sf16-va.larksuitecdn.com/obj/lark-artifact-storage/240d90bd/Lark-linux_arm64-7.32.11.deb
+        url: https://sf16-sg.larksuitecdn.com/obj/lark-artifact-storage/240d90bd/Lark-linux_arm64-7.32.11.deb
         sha256: f11e44e1b067ccc5ef6687324d7a87ac96fd83e81b06d56b2a63b6dcdc562a4a
         size: 349235304
         only-arches: [aarch64]
         x-checker-data:
           type: json
           url: https://www.larksuite.com/api/downloads
-          version-query: .versions.Linux_deb_arm.version_number | sub("^Linux-arm64-deb@V"; "")
+          version-query: .versions.Linux_deb_arm.version_number | sub("^Linux-arm64-deb@V";
+            "")
           url-query: .versions.Linux_deb_arm.download_link
       - type: file
         path: com.larksuite.lark.desktop
