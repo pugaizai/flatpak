@@ -63,7 +63,7 @@ modules:
         dest-filename: apply_extra
       - type: extra-data
         filename: Lark-linux.deb
-        url: https://sf16-va.larksuitecdn.com/obj/lark-artifact-storage/afc02e52/Lark-linux_x64-7.32.11.deb
+        url: https://sf16-sg.larksuitecdn.com/obj/lark-artifact-storage/afc02e52/Lark-linux_x64-7.32.11.deb
         sha256: 85f2ca6cacd9cce62a3461282f0e203172368df36fb453d4ee100e0de03d4b15
         size: 382855940
         only-arches: [x86_64]
