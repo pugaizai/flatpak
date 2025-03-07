@@ -40,11 +40,11 @@ modules:
       - type: file
         only-arches: [x86_64]
         url: https://static.rust-lang.org/rustup/dist/x86_64-unknown-linux-gnu/rustup-init
-        sha256: 6aeece6993e902708983b209d04c0d1dbb14ebb405ddb87def578d41f920f56d
+        sha256: a3339fb004c3d0bb9862ba0bce001861fe5cbde9c10d16591eb3f39ee6cd3e7f
       - type: file
         only-arches: [aarch64]
         url: https://static.rust-lang.org/rustup/dist/aarch64-unknown-linux-gnu/rustup-init
-        sha256: 1cffbf51e63e634c746f741de50649bbbcbd9dbe1de363c9ecef64e278dba2b2
+        sha256: c64b33db2c6b9385817ec0e49a84bcfe018ed6e328fe755c3c809580cc70ce7a
 
   - name: venera
     buildsystem: simple
