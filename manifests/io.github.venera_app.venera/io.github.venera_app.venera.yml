@@ -86,9 +86,6 @@ modules:
         path: io.github.venera_app.venera.metainfo.xml
       - type: git
         url: https://github.com/flutter/flutter.git
-        tag: 3.29.0
-        commit: 35c388afb57ef061d06a39b537336c87e0e3d1b1
+        tag: 3.29.1
+        commit: 09de023485e95e6d1225c2baa44b8feb85e0d45f
         dest: flutter
-      # Patch: Anticipating the fix for: https://github.com/flutter/flutter/issues/163308
-      - type: patch
-        path: update_engine_version.sh.patch
