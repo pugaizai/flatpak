@@ -141,19 +141,22 @@ modules:
       - type: extra-data
         filename: cursor.AppImage
         only-arches: [x86_64]
-        url: https://download.todesktop.com/230313mzl4w4u92/cursor-0.45.14-build-250219jnihavxsz-x86_64.AppImage
-        sha256: e4c196262f133fed778d97fa60c314539b9863fdce053171b46a62aef823f192
-        size: 154331840
-        x-checker-data:
-          type: electron-updater
-          url: https://download.todesktop.com/230313mzl4w4u92/latest-linux.yml
-          is-main-source: true
+        url: https://anysphere-binaries.s3.us-east-1.amazonaws.com/production/client/linux/x64/appimage/Cursor-0.46.10-7b3e0d45d4f952938dbd8e1e29c1b17003198481.deb.glibc2.25-x86_64.AppImage
+        sha256: 0c171d9f9e24a9e8675877e3fa75d32323ddc71d1364b63f343c7f55851bc787
+        size: 186135744
+        # x-checker-data:
+        #   type: json
+        #   url: https://api2.cursor.sh/updates/api/update/linux-x64/cursor/0.0.0/
+        #   version-query: .version
+        #   url-query: .url
       - type: extra-data
         filename: cursor.AppImage
         only-arches: [aarch64]
         url: https://download.todesktop.com/230313mzl4w4u92/cursor-0.45.14-build-250219jnihavxsz-arm64.AppImage
         sha256: f0e5253ee3cd82a6c67b6c7b806fa6de7deee940ef82755e9248c9d3ca55391b
         size: 154439047
-        x-checker-data:
-          type: electron-updater
-          url: https://download.todesktop.com/230313mzl4w4u92/latest-linux-arm64.yml
+        # x-checker-data:
+        #   type: json
+        #   url: https://api2.cursor.sh/updates/api/update/linux-arm/cursor/0.0.0/
+        #   version-query: .version
+        #   url-query: .url
