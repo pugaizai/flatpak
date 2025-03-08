@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
-  <id>com.cursor.cursor</id>
+  <id>co.anysphere.cursor</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LicenseRef-proprietary=https://www.cursor.com/terms-of-service</project_license>
   <name>Cursor</name>
@@ -21,7 +21,7 @@
       <caption>Editing TypeScript and searching for extensions</caption>
     </screenshot>
   </screenshots>
-  <launchable type="desktop-id">com.cursor.cursor.desktop</launchable>
+  <launchable type="desktop-id">co.anysphere.cursor.desktop</launchable>
   <content_rating type="oars-1.1">
     <content_attribute id="social-info">moderate</content_attribute>
   </content_rating>
