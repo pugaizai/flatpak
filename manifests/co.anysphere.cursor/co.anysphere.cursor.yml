@@ -169,9 +169,9 @@ modules:
       - type: extra-data
         filename: cursor.AppImage
         only-arches: [x86_64]
-        url: https://anysphere-binaries.s3.us-east-1.amazonaws.com/production/client/linux/x64/appimage/Cursor-0.46.10-7b3e0d45d4f952938dbd8e1e29c1b17003198481.deb.glibc2.25-x86_64.AppImage
-        sha256: 0c171d9f9e24a9e8675877e3fa75d32323ddc71d1364b63f343c7f55851bc787
-        size: 186135744
+        url: https://anysphere-binaries.s3.us-east-1.amazonaws.com/production/client/linux/x64/appimage/Cursor-0.46.11-ae378be9dc2f5f1a6a1a220c6e25f9f03c8d4e19.deb.glibc2.25-x86_64.AppImage
+        sha256: 25191161e875de4dd97872eb70b643c8ccd961fe3046c76a9b6ec7695e5ac05c
+        size: 186148032
         # x-checker-data:
         #   type: json
         #   url: https://api2.cursor.sh/updates/api/update/linux-x64/cursor/0.0.0/
