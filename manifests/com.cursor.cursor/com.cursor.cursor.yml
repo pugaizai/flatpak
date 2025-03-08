@@ -1,4 +1,4 @@
-app-id: com.cursor.cursor
+app-id: co.anysphere.cursor
 runtime: org.freedesktop.Sdk
 runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
