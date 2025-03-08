@@ -6,6 +6,7 @@ sdk-extensions:
   - org.freedesktop.Sdk.Extension.golang
 base: org.electronjs.Electron2.BaseApp
 base-version: '24.08'
+rename-icon: cursor
 command: cursor
 finish-args:
   - --share=network
@@ -77,6 +78,27 @@ modules:
           type: git
           tag-pattern: ^([\d.]+)$
 
+  - name: krb5
+    buildsystem: simple
+    post-install:
+      - install -Dm644 ../krb5.conf /app/etc/krb5.conf
+    build-commands:
+      - autoreconf -i
+      - ./configure --prefix=${FLATPAK_DEST}
+      - make -j ${FLATPAK_BUILDER_N_JOBS}
+      - make install
+    subdir: src
+    sources:
+      - type: git
+        url: https://github.com/krb5/krb5.git
+        tag: krb5-1.21.3-final
+        commit: 8f56f544dd179056e9b8d02552e6c5e392eb2966
+        x-checker-data:
+          type: git
+          tag-pattern: ^krb5-([\d.]+)-final$
+      - type: file
+        path: krb5.conf
+
   - name: host-spawn
     buildsystem: simple
     build-options:
@@ -108,10 +130,12 @@ modules:
     build-options:
       no-debuginfo: true
     build-commands:
+      - mv icons ${FLATPAK_DEST}/share/icons/
       - install -Dm755 cursor -t ${FLATPAK_DEST}/bin/
-      - install -Dm644 ${FLATPAK_ID}.png -t ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo/
       - install -Dm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications/
+      - install -Dm644 ${FLATPAK_ID}-url-handler.desktop -t /app/share/applications/
+      - install -Dm644 ${FLATPAK_ID}-workspace.xml -t /app/share/mime/packages/
       - install -Dm644 npmrc -t ${FLATPAK_DEST}/etc/
       - install -Dm644 flatpak-warning.txt -t ${FLATPAK_DEST}/share/cursor
       - install -Dm755 apply_extra -t ${FLATPAK_DEST}/bin/
@@ -122,8 +146,8 @@ modules:
         commands:
           - chmod +x cursor.AppImage
           - unappimage cursor.AppImage >/dev/null
-          - mv squashfs-root cursor
-          - rm -rf cursor.AppImage cursor/{usr,AppRun,cursor.desktop,cursor.png,.DirIcon}
+          - mv squashfs-root/usr/share/cursor .
+          - rm -rf squashfs-root
           # # fix double-title-bars bugs
           # - sed -i 's/,minHeight/,frame:false,minHeight/g' "cursor/resources/app/out/vs/code/electron-main/main.js"
       - type: file
@@ -131,7 +155,11 @@ modules:
       - type: file
         path: co.anysphere.cursor.desktop
       - type: file
-        path: co.anysphere.cursor.png
+        path: co.anysphere.cursor-url-handler.desktop
+      - type: file
+        path: co.anysphere.cursor-workspace.xml
+      - type: dir
+        path: cursor-icons
       - type: file
         path: cursor
       - type: file

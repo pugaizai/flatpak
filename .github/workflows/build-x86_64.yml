@@ -49,7 +49,7 @@ jobs:
             "manifests/io.github.c0re100.qbittorrent-enhanced-edition/io.github.c0re100.qbittorrent-enhanced-edition.yml"
             "manifests/io.github.msojocs.bilibili/io.github.msojocs.bilibili.yml"
             "manifests/org.freedesktop.xorg.xeyes/org.freedesktop.xorg.xeyes.yml"
-            "manifests/com.cursor.cursor/com.cursor.cursor.yml"
+            "manifests/co.anysphere.cursor/co.anysphere.cursor.yml"
             "manifests/io.github.pbh_btn.peerbanhelper/io.github.pbh_btn.peerbanhelper.yml"
             "manifests/com.larksuite.lark/com.larksuite.lark.yml"
             "manifests/cn.feishu.feishu/cn.feishu.feishu.yml"
