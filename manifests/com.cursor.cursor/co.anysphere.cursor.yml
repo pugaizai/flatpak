@@ -127,11 +127,11 @@ modules:
           # # fix double-title-bars bugs
           # - sed -i 's/,minHeight/,frame:false,minHeight/g' "cursor/resources/app/out/vs/code/electron-main/main.js"
       - type: file
-        path: com.cursor.cursor.metainfo.xml
+        path: co.anysphere.cursor.metainfo.xml
       - type: file
-        path: com.cursor.cursor.desktop
+        path: co.anysphere.cursor.desktop
       - type: file
-        path: com.cursor.cursor.png
+        path: co.anysphere.cursor.png
       - type: file
         path: cursor
       - type: file
