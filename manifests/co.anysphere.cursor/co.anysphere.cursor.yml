@@ -72,8 +72,8 @@ modules:
     sources:
       - type: git
         url: https://gitlab.gnome.org/GNOME/libsecret.git
-        tag: 0.21.6
-        commit: e59012225c2857d53738574423416b541f11a131
+        tag: 0.21.7
+        commit: 0936f740c02b60f02657729cd99f581db4517a41
         x-checker-data:
           type: git
           tag-pattern: ^([\d.]+)$
@@ -106,7 +106,8 @@ modules:
         - --share=network
       append-path: /usr/lib/sdk/golang/bin
     build-commands:
-      - CGO_ENABLED=0 go build -ldflags "-X main.Version=$(grep -m1 -oP '^\s*##\s*\K\d+\.\d+\.\d+' CHANGELOG.md)" -o "${FLATPAK_DEST}/bin/host-spawn"
+      - CGO_ENABLED=0 go build -ldflags "-X main.Version=$(grep -m1 -oP '^\s*##\s*\K\d+\.\d+\.\d+'
+        CHANGELOG.md)" -o "${FLATPAK_DEST}/bin/host-spawn"
     sources:
       - type: git
         url: https://github.com/1player/host-spawn
