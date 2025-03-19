@@ -49,15 +49,16 @@ modules:
       - bsdtar -xvf bilibili.tar.gz
       - install -Dm644 app/app.asar -t ${FLATPAK_DEST}/bilibili/
       - mv app/extensions ${FLATPAK_DEST}/bilibili/
-      - desktop-file-edit --set-key="Icon" --set-value="io.github.msojocs.bilibili" ${FLATPAK_ID}.desktop
+      - desktop-file-edit --set-key="Icon" --set-value="io.github.msojocs.bilibili"
+        ${FLATPAK_ID}.desktop
       - install -Dm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications/
       - install -Dm644 ${FLATPAK_ID}.svg -t ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo/
       - install -Dm755 bilibili.sh ${FLATPAK_DEST}/bin/bilibili
     sources:
       - type: file
-        url: https://github.com/msojocs/bilibili-linux/releases/download/v1.16.2-4/bilibili-asar-v1.16.2-4.tar.gz
-        sha256: 44c632107551abc72445aa6582f3787ef7465f4f1e4ef4647b6447adfc3c3d16
+        url: https://github.com/msojocs/bilibili-linux/releases/download/v1.16.3-1/bilibili-asar-v1.16.3-1.tar.gz
+        sha256: 5081eaa83703b4a8da6d60d460b234f2be2e724e0b45620866055b8ab93b3824
         dest-filename: bilibili.tar.gz
         x-checker-data:
           type: json
