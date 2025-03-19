@@ -63,9 +63,9 @@ modules:
         dest-filename: apply_extra
       - type: extra-data
         filename: feishu-linux.deb
-        url: https://sf3-cn.feishucdn.com/obj/ee-appcenter/18b9e5d0/Feishu-linux_x64-7.32.11.deb
-        sha256: 814f9f362504da4084df8d3bbdd8d0a84ee82e047dbd7ca768136e577119aea7
-        size: 382623684
+        url: https://sf3-cn.feishucdn.com/obj/ee-appcenter/9bcfe8ba/Feishu-linux_x64-7.36.11.deb
+        sha256: 8aa11cc1f17acf68c9d13985cc3bb681fe9e6a91dc24f68b49511282d0bd5948
+        size: 388475888
         only-arches: [x86_64]
         x-checker-data:
           type: json
@@ -75,9 +75,9 @@ modules:
           url-query: .versions.Linux_deb_x64.download_link
       - type: extra-data
         filename: feishu-linux.deb
-        url: https://sf3-cn.feishucdn.com/obj/ee-appcenter/8946d4de/Feishu-linux_arm64-7.32.11.deb
-        sha256: 818210cac6c823d51dd5aede5ea411b4eb01036ac8dbdfb19f19ed02e98551d9
-        size: 349248568
+        url: https://sf3-cn.feishucdn.com/obj/ee-appcenter/484fc204/Feishu-linux_arm64-7.36.11.deb
+        sha256: 5d36b918e301b225c8e480e10d092d4b17547eebc6edcd95587b92efa705b2a1
+        size: 355243804
         only-arches: [aarch64]
         x-checker-data:
           type: json

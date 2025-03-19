@@ -18,10 +18,13 @@
   <url type="homepage">https://feishu.cn/</url>
   <developer id="cn.feishu">
     <name>Feishu Linux Team</name>
-  </developer >
+  </developer>
   <releases>
-    <release version="7.22.9" date="2024-08-14">
+    <release version="7.36.11" date="2025-03-07">
       <description></description>
+    </release>
+    <release version="7.22.9" date="2024-08-14">
+      <description/>
     </release>
   </releases>
   <launchable type="desktop-id">cn.feishu.feishu.desktop</launchable>
