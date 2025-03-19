@@ -63,9 +63,9 @@ modules:
         dest-filename: apply_extra
       - type: extra-data
         filename: Lark-linux.deb
-        url: https://sf16-sg.larksuitecdn.com/obj/lark-artifact-storage/afc02e52/Lark-linux_x64-7.32.11.deb
-        sha256: 85f2ca6cacd9cce62a3461282f0e203172368df36fb453d4ee100e0de03d4b15
-        size: 382855940
+        url: https://sf16-sg.larksuitecdn.com/obj/lark-artifact-storage/932c7f7e/Lark-linux_x64-7.36.11.deb
+        sha256: 4d13f48cb205225a4b0050893ad623bd2cf091837b86b8af66d3c0665679317e
+        size: 388737436
         only-arches: [x86_64]
         x-checker-data:
           type: json
@@ -75,9 +75,9 @@ modules:
           url-query: .versions.Linux_deb_x64.download_link
       - type: extra-data
         filename: Lark-linux.deb
-        url: https://sf16-sg.larksuitecdn.com/obj/lark-artifact-storage/240d90bd/Lark-linux_arm64-7.32.11.deb
-        sha256: f11e44e1b067ccc5ef6687324d7a87ac96fd83e81b06d56b2a63b6dcdc562a4a
-        size: 349235304
+        url: https://sf16-sg.larksuitecdn.com/obj/lark-artifact-storage/dbee26ba/Lark-linux_arm64-7.36.11.deb
+        sha256: 60e61221d573f8965128ef3c27b02a069f442001614900846064afe7de2d449b
+        size: 355422604
         only-arches: [aarch64]
         x-checker-data:
           type: json
