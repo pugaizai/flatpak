@@ -1,6 +1,6 @@
 id: io.github.pieterdd.RcloneShuttle
 runtime: org.gnome.Platform
-runtime-version: '46'
+runtime-version: '48'
 sdk: org.gnome.Sdk
 sdk-extensions:
 - org.freedesktop.Sdk.Extension.rust-stable
@@ -41,7 +41,8 @@ modules:
       env:
         CARGO_HOME: /run/build/rclone-shuttle/cargo
     build-commands:
-      - cargo build --release --verbose
+      - cargo update
+      - cargo build --release
       - install -Dm755 target/release/rclone-shuttle -t ${FLATPAK_DEST}/bin
       - install -Dm644 meta/io.github.pieterdd.RcloneShuttle.png -t ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps
       - install -Dm644 meta/io.github.pieterdd.RcloneShuttle.desktop -t ${FLATPAK_DEST}/share/applications
