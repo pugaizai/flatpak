@@ -149,8 +149,6 @@ modules:
           - unappimage cursor.AppImage >/dev/null
           - mv squashfs-root/usr/share/cursor .
           - rm -rf squashfs-root
-          # # fix double-title-bars bugs
-          # - sed -i 's/,minHeight/,frame:false,minHeight/g' "cursor/resources/app/out/vs/code/electron-main/main.js"
       - type: file
         path: co.anysphere.cursor.metainfo.xml
       - type: file
@@ -170,22 +168,12 @@ modules:
       - type: extra-data
         filename: cursor.AppImage
         only-arches: [x86_64]
-        url: https://anysphere-binaries.s3.us-east-1.amazonaws.com/production/client/linux/x64/appimage/Cursor-0.46.11-ae378be9dc2f5f1a6a1a220c6e25f9f03c8d4e19.deb.glibc2.25-x86_64.AppImage
-        sha256: 25191161e875de4dd97872eb70b643c8ccd961fe3046c76a9b6ec7695e5ac05c
-        size: 186148032
-        # x-checker-data:
-        #   type: json
-        #   url: https://api2.cursor.sh/updates/api/update/linux-x64/cursor/0.0.0/
-        #   version-query: .version
-        #   url-query: .url
+        url: https://downloads.cursor.com/production/b6fb41b5f36bda05cab7109606e7404a65d1ff32/linux/x64/Cursor-0.47.9-x86_64.AppImage
+        sha256: 2f464e0c61e63bc48386aae792aee3c22df473a97efc44a3f855c754a821b1f7
+        size: 173799928
       - type: extra-data
         filename: cursor.AppImage
         only-arches: [aarch64]
-        url: https://download.todesktop.com/230313mzl4w4u92/cursor-0.45.14-build-250219jnihavxsz-arm64.AppImage
-        sha256: f0e5253ee3cd82a6c67b6c7b806fa6de7deee940ef82755e9248c9d3ca55391b
-        size: 154439047
-        # x-checker-data:
-        #   type: json
-        #   url: https://api2.cursor.sh/updates/api/update/linux-arm/cursor/0.0.0/
-        #   version-query: .version
-        #   url-query: .url
+        url: https://downloads.cursor.com/production/b6fb41b5f36bda05cab7109606e7404a65d1ff32/linux/arm64/Cursor-0.47.9-aarch64.AppImage
+        sha256: 3a168aba32d7b74e832f8ddf639bd168665ede9f18d66b76db2e4eaf333798c9
+        size: 170445320
