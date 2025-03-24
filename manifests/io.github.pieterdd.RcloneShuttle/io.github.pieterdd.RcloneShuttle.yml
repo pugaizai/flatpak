@@ -29,10 +29,10 @@ modules:
       - type: git
         url: https://github.com/rclone/rclone
         tag: v1.69.1
+        commit: 4e77a4ff73645f45873188de2683067d6756038e
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
-        commit: 4e77a4ff73645f45873188de2683067d6756038e
   - name: rclone-shuttle
     buildsystem: simple
     build-options:
@@ -52,7 +52,7 @@ modules:
       - type: git
         url: https://github.com/pieterdd/RcloneShuttle
         tag: 0.1.4
+        commit: 72882a7b8b091d0ec2a919b6bf4f5a753c3f688f
         x-checker-data:
           type: git
           tag-pattern: ^([\d.]+)$
-        commit: 72882a7b8b091d0ec2a919b6bf4f5a753c3f688f
