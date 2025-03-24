@@ -15,6 +15,17 @@ finish-args:
   - --env=G_MESSAGES_DEBUG=none
   - --env=RUST_BACKTRACE=1
   - --filesystem=host
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/doc
+  - /share/gtk-doc
 modules:
   - name: rclone
     buildsystem: simple
