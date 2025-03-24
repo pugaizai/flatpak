@@ -3,18 +3,18 @@ runtime: org.gnome.Platform
 runtime-version: '48'
 sdk: org.gnome.Sdk
 sdk-extensions:
-- org.freedesktop.Sdk.Extension.rust-stable
-- org.freedesktop.Sdk.Extension.golang
+  - org.freedesktop.Sdk.Extension.rust-stable
+  - org.freedesktop.Sdk.Extension.golang
 command: rclone-shuttle
 finish-args:
-- "--share=ipc"
-- "--share=network"
-- "--socket=fallback-x11"
-- "--socket=wayland"
-- "--device=dri"
-- "--env=G_MESSAGES_DEBUG=none"
-- "--env=RUST_BACKTRACE=1"
-- "--filesystem=host"
+  - --share=ipc
+  - --share=network
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --device=dri
+  - --env=G_MESSAGES_DEBUG=none
+  - --env=RUST_BACKTRACE=1
+  - --filesystem=host
 modules:
   - name: rclone
     buildsystem: simple
@@ -32,6 +32,7 @@ modules:
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
+        commit: 4e77a4ff73645f45873188de2683067d6756038e
   - name: rclone-shuttle
     buildsystem: simple
     build-options:
@@ -54,3 +55,4 @@ modules:
         x-checker-data:
           type: git
           tag-pattern: ^([\d.]+)$
+        commit: 72882a7b8b091d0ec2a919b6bf4f5a753c3f688f
