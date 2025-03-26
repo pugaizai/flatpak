@@ -39,10 +39,10 @@ modules:
       - install -Dm755 apply_extra -t ${FLATPAK_DEST}/bin/
     sources:
       - type: extra-data
-        url: https://github.com/PBH-BTN/PeerBanHelper/releases/download/v7.4.4/peerbanhelper_7.4.4_all.deb
+        url: https://github.com/PBH-BTN/PeerBanHelper/releases/download/v7.4.5/peerbanhelper_7.4.5_all.deb
         filename: peerbanhelper.deb
-        sha256: 77dea65e2e2dbd6ee94d574e433767a0f8844b91eff96ec663c58018e30f9dba
-        size: 58795544
+        sha256: 2900bee6b08ffa9af2e0a2665d4ddf804ed21ca3ec780b1cbf033366718c28a9
+        size: 58418386
         x-checker-data:
           type: json
           url: https://api.github.com/repos/PBH-BTN/PeerBanHelper/releases/latest
