@@ -39,8 +39,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/mpv-player/mpv.git
-        tag: v0.39.0
-        commit: a0fba7be57f3822d967b04f0f6b6d6341e7516e7
+        tag: v0.40.0
+        commit: e48ac7ce08462f5e33af6ef9deeac6fa87eef01e
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
