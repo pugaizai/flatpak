@@ -3,7 +3,7 @@ runtime: org.gnome.Platform
 runtime-version: '48'
 sdk: org.gnome.Sdk
 sdk-extensions:
-  - org.freedesktop.Sdk.Extension.llvm19
+  - org.freedesktop.Sdk.Extension.llvm20
 command: venera
 finish-args:
   - --share=ipc
@@ -70,7 +70,7 @@ modules:
       - cp -r ${BUNDLE_PATH}/* ${FLATPAK_DEST}/bin
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
       - install -Dm644 debian/gui/venera.desktop ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
-      - install -Dm644 debian/gui/venera.png ${FLATPAK_DEST}/share/icons/hicolor/64x64/apps/${FLATPAK_ID}.png
+      - install -Dm644 io.github.venera_app.venera.png -t ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/
       - desktop-file-edit --set-key="Categories" --set-value="Graphics;Network;" --set-key="Exec"
         --set-value="venera" --set-key="Icon" --set-value="io.github.venera_app.venera"
         ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
@@ -84,6 +84,8 @@ modules:
           tag-pattern: ^v([\d.]+)$
       - type: file
         path: io.github.venera_app.venera.metainfo.xml
+      - type: file
+        path: io.github.venera_app.venera.png
       - type: git
         url: https://github.com/flutter/flutter.git
         tag: 3.29.2
