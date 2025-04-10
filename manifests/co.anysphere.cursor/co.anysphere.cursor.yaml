@@ -168,12 +168,12 @@ modules:
       - type: extra-data
         filename: cursor.AppImage
         only-arches: [x86_64]
-        url: https://downloads.cursor.com/production/b6fb41b5f36bda05cab7109606e7404a65d1ff32/linux/x64/Cursor-0.47.9-x86_64.AppImage
-        sha256: 2f464e0c61e63bc48386aae792aee3c22df473a97efc44a3f855c754a821b1f7
-        size: 173799928
+        url: https://downloads.cursor.com/production/7801a556824585b7f2721900066bc87c4a09b743/linux/x64/Cursor-0.48.8-x86_64.AppImage
+        sha256: ff99b0125ccdd2e511a695822d83cf102b3a1b35ed079e2fdbe8d00f54477091
+        size: 186557632
       - type: extra-data
         filename: cursor.AppImage
         only-arches: [aarch64]
-        url: https://downloads.cursor.com/production/b6fb41b5f36bda05cab7109606e7404a65d1ff32/linux/arm64/Cursor-0.47.9-aarch64.AppImage
-        sha256: 3a168aba32d7b74e832f8ddf639bd168665ede9f18d66b76db2e4eaf333798c9
-        size: 170445320
+        url: https://downloads.cursor.com/production/7801a556824585b7f2721900066bc87c4a09b743/linux/arm64/Cursor-0.48.8-aarch64.AppImage
+        sha256: 3971948d3370734559f10edaaccca17e137f6cf4ce0984bd05f8b52384c90976
+        size: 171006472

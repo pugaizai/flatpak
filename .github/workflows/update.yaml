@@ -7,7 +7,7 @@ on:
   schedule: # 为了调度正常工作，此文件必须在默认分支中
      - cron: "0 12 * * *" # 每天中午12点运行一次
        paths:  # 仅当清单文件变更时才触发
-         - 'manifests/**/*.yml'
+         - 'manifests/**/*.yaml'
   workflow_dispatch:
 
 jobs:
@@ -46,4 +46,4 @@ jobs:
           GIT_COMMITTER_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          args: --update --never-fork manifests/${{ matrix.appid }}/${{ matrix.appid }}.yml # 例如 com.organization.myapp.json
+          args: --update --never-fork manifests/${{ matrix.appid }}/${{ matrix.appid }}.yaml # 例如 com.organization.myapp.json

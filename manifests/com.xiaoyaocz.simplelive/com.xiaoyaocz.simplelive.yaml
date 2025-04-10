@@ -2,6 +2,8 @@ app-id: com.xiaoyaocz.simplelive
 runtime: org.freedesktop.Platform
 runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.llvm20
 command: simple_live_app
 finish-args:
   - --share=ipc
@@ -163,8 +165,8 @@ modules:
         aarch64:
           env:
             BUNDLE_PATH: simple_live_app/build/linux/arm64/release/bundle
-      append-path: /usr/lib/sdk/llvm19/bin:/run/build/simplelive/flutter/bin
-      prepend-ld-library-path: /usr/lib/sdk/llvm19/lib
+      append-path: /usr/lib/sdk/llvm20/bin:/run/build/simplelive/flutter/bin
+      prepend-ld-library-path: /usr/lib/sdk/llvm20/lib
       env:
         PUB_CACHE: /run/build/simplelive/.pub-cache
     build-commands:
@@ -188,6 +190,9 @@ modules:
         path: com.xiaoyaocz.simplelive.desktop
       - type: git
         url: https://github.com/flutter/flutter.git
-        tag: 3.22.3
-        commit: b0850beeb25f6d5b10426284f506557f66181b36
+        tag: 3.29.2
+        commit: c23637390482d4cf9598c3ce3f2be31aa7332daf
         dest: flutter
+        x-checker-data:
+          type: git
+          tag-pattern: ^([\d.]+)$
