@@ -62,8 +62,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/pieterdd/RcloneShuttle
-        tag: 0.1.4
-        commit: 72882a7b8b091d0ec2a919b6bf4f5a753c3f688f
+        tag: 0.1.5
+        commit: 25f90c330d1e6727a780aeb6d909715285cbb04d
         x-checker-data:
           type: git
           tag-pattern: ^([\d.]+)$
