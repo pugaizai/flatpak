@@ -39,8 +39,11 @@
     </screenshot>
   </screenshots>
   <releases>
-    <release version="1.7.5" date="2024-12-02">
+    <release version="3.29.3" date="2025-04-15">
       <description></description>
+    </release>
+    <release version="1.7.5" date="2024-12-02">
+      <description/>
     </release>
   </releases>
   <content_rating type="oars-1.1"/>
