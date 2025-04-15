@@ -47,7 +47,9 @@ modules:
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
       - install -Dm644 debian/gui/pixes.desktop ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
       - install -Dm644 debian/gui/pixes.png ${FLATPAK_DEST}/share/icons/hicolor/128x128/apps/${FLATPAK_ID}.png
-      - desktop-file-edit --set-key="Categories" --set-value="Graphics;Network;" --set-key="Exec" --set-value="pixes %u" --set-key="Icon" --set-value="io.github.wgh136.pixes" ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
+      - desktop-file-edit --set-key="Categories" --set-value="Graphics;Network;" --set-key="Exec"
+        --set-value="pixes %u" --set-key="Icon" --set-value="io.github.wgh136.pixes"
+        ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
     sources:
       - type: git
         url: https://github.com/wgh136/pixes.git
@@ -60,8 +62,8 @@ modules:
         path: io.github.wgh136.pixes.metainfo.xml
       - type: git
         url: https://github.com/flutter/flutter.git
-        tag: 3.29.2
-        commit: c23637390482d4cf9598c3ce3f2be31aa7332daf
+        tag: 3.29.3
+        commit: ea121f8859e4b13e47a8f845e4586164519588bc
         dest: flutter
         x-checker-data:
           type: git
