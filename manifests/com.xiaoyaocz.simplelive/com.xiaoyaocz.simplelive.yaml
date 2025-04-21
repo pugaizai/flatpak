@@ -184,6 +184,7 @@ modules:
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
+          is-main-source: true
       - type: file
         path: com.xiaoyaocz.simplelive.metainfo.xml
       - type: file
