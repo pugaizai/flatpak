@@ -82,6 +82,7 @@ modules:
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
+          is-main-source: true
       - type: file
         path: io.github.venera_app.venera.metainfo.xml
       - type: file
