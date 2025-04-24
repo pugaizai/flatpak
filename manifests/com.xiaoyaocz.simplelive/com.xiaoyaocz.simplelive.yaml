@@ -179,8 +179,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/xiaoyaocz/dart_simple_live.git
-        tag: v1.7.7
-        commit: e048f049f41a0a943599205c54cea42886256a06
+        tag: v1.8.1
+        commit: 4d6715e58231393b2f3b4b449bcfcdffb01ee358
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
