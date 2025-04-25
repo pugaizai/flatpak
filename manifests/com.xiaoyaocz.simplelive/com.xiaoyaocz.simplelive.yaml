@@ -191,9 +191,6 @@ modules:
         path: com.xiaoyaocz.simplelive.desktop
       - type: git
         url: https://github.com/flutter/flutter.git
-        tag: 3.29.3
-        commit: ea121f8859e4b13e47a8f845e4586164519588bc
+        tag: 3.22.3
+        commit: b0850beeb25f6d5b10426284f506557f66181b36
         dest: flutter
-        x-checker-data:
-          type: git
-          tag-pattern: ^([\d.]+)$
