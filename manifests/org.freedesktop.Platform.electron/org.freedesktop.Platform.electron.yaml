@@ -26,8 +26,8 @@ modules:
       - type: file
         dest-filename: electron.zip
         only-arches: [aarch64]
-        url: https://github.com/electron/electron/releases/download/v36.1.0/electron-v36.1.0-linux-arm64.zip
-        sha256: e09c83143897a2156e070689df80591e62404ed5289e6f6674fe46ccdff6f2f3
+        url: https://github.com/electron/electron/releases/download/v36.2.0/electron-v36.2.0-linux-arm64.zip
+        sha256: 34705bb8645a64e33861cca51693afd02b5f74e9bbb3a9e6be76fec9ffed3328
         x-checker-data:
           type: anitya
           project-id: 17779
@@ -36,8 +36,8 @@ modules:
       - type: file
         dest-filename: electron.zip
         only-arches: [x86_64]
-        url: https://github.com/electron/electron/releases/download/v36.1.0/electron-v36.1.0-linux-x64.zip
-        sha256: 088b95582140e2c9175f01df5c82a80048085acfb416bb27783bf4d0babc7eb4
+        url: https://github.com/electron/electron/releases/download/v36.2.0/electron-v36.2.0-linux-x64.zip
+        sha256: 013dface80733221d4153aaf538e8969b93f50d68798d7de2425d5e758e6956b
         x-checker-data:
           type: anitya
           project-id: 17779
