@@ -50,8 +50,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/jiangtian616/JHenTai.git
-        tag: v8.0.7
-        commit: ef13e0152f48809f6ecaf7aa8e8edb8a1cb0160c
+        tag: v8.0.7+291
+        commit: 1f4dc4e7516fa14e08d93f1dfab59e6ae6017077
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+(?:\+\d+)?)$
