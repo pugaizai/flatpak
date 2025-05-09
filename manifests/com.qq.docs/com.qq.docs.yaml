@@ -55,14 +55,14 @@ modules:
       - type: extra-data
         only-arches: [x86_64]
         filename: docs.deb
-        url: https://desktop.docs.qq.com/Installer/30001/3.9.15/TencentDocs-x64.deb
-        sha256: ee63da825cd6bcd27898c40ec6b408df7f4bf05085370fdf8a57479695f255a7
+        url: https://desktop.docs.qq.com/Installer/30001/3.9.13/TencentDocs-x64.deb
+        sha256: e294e273bd17facf9cc7430f7fe5893b9e9b823a318ff1e3be134c9bc123b781
         x-checker-data:
           type: json
           url: https://docs.qq.com/api/package/update
           version-query: .result.update_info | fromjson | .version
           url-query: '"https://desktop.docs.qq.com/Installer/30001/\($version)/TencentDocs-x64.deb"'
-        size: 177913318
+        size: 166223180
       - type: file
         path: com.qq.docs.metainfo.xml
       - type: file
