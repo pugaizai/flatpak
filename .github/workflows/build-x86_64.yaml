@@ -50,7 +50,6 @@ jobs:
             "manifests/io.github.c0re100.qbittorrent-enhanced-edition/io.github.c0re100.qbittorrent-enhanced-edition.yaml"
             "manifests/io.github.msojocs.bilibili/io.github.msojocs.bilibili.yaml"
             "manifests/org.freedesktop.xorg.xeyes/org.freedesktop.xorg.xeyes.yaml"
-            "manifests/co.anysphere.cursor/co.anysphere.cursor.yaml"
             "manifests/io.github.pbh_btn.peerbanhelper/io.github.pbh_btn.peerbanhelper.yaml"
             "manifests/com.larksuite.lark/com.larksuite.lark.yaml"
             "manifests/cn.feishu.feishu/cn.feishu.feishu.yaml"
