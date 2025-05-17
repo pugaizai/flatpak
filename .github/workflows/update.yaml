@@ -31,7 +31,6 @@ jobs:
           - io.github.msojocs.bilibili
           - io.github.pbh_btn.peerbanhelper
           - org.freedesktop.xorg.xeyes
-          - co.anysphere.cursor
           - com.larksuite.lark
           - com.qq.qq
           - org.freedesktop.Platform.electron
