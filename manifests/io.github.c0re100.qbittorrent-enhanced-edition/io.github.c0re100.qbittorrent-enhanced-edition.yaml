@@ -54,7 +54,7 @@ modules:
     builddir: true
     config-opts:
       - -DBUILD_SHARED_LIBS=OFF
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DCMAKE_BUILD_TYPE=Release
       - -DCMAKE_CXX_STANDARD=20
       - -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON
       - -Ddeprecated-functions=OFF
@@ -66,13 +66,13 @@ modules:
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
+
   - name: qbittorrent
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DCMAKE_BUILD_TYPE=Release
       - -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON
-      - -DQT6=ON
       - -DGUI=ON
     sources:
       - type: git
