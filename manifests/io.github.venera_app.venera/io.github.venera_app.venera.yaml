@@ -2,8 +2,6 @@ app-id: io.github.venera_app.venera
 runtime: org.gnome.Platform
 runtime-version: '48'
 sdk: org.gnome.Sdk
-sdk-extensions:
-  - org.freedesktop.Sdk.Extension.llvm20
 command: venera
 finish-args:
   - --share=ipc
@@ -25,55 +23,41 @@ cleanup:
   - /share/doc
   - /share/gtk-doc
 modules:
-
-  - rustup.json
-
   - name: venera
     buildsystem: simple
-    build-options:
-      build-args:
-        - --share=network
-      arch:
-        x86_64:
-          env:
-            BUNDLE_PATH: build/linux/x64/release/bundle
-        aarch64:
-          env:
-            BUNDLE_PATH: build/linux/arm64/release/bundle
-      append-path: /var/lib/rustup/bin:/usr/lib/sdk/llvm20/bin:/run/build/venera/flutter/bin
-      prepend-ld-library-path: /usr/lib/sdk/llvm20/lib
-      env:
-        RUSTUP_HOME: /var/lib/rustup
-        CARGO_HOME: /run/build/venera/cargo
-        PUB_CACHE: /run/build/venera/.pub-cache
     build-commands:
-      - flutter build linux --release --verbose
-      - mkdir -p ${FLATPAK_DEST}/bin
-      - cp -r ${BUNDLE_PATH}/* ${FLATPAK_DEST}/bin
+      - chmod +x venera.AppImage
+      - ./venera.AppImage --appimage-extract
+      - install -d ${FLATPAK_DEST}/bin
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
-      - install -Dm644 debian/gui/venera.desktop ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
-      - install -Dm644 io.github.venera_app.venera.png -t ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/
-      - desktop-file-edit --set-key="Categories" --set-value="Graphics;Network;" --set-key="Exec"
-        --set-value="venera" --set-key="Icon" --set-value="io.github.venera_app.venera"
-        ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
+      - install -Dm644 squashfs-root/venera.desktop ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
+      - install -Dm644 io.github.venera_app.venera.png -t ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps
+      - desktop-file-edit --set-key="Categories" --set-value="Graphics;Network;" --set-key="Icon" 
+        --set-value="io.github.venera_app.venera" ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
+      - rm squashfs-root/{AppRun,venera.png,venera.desktop}
+      - mv squashfs-root/* ${FLATPAK_DEST}/bin
     sources:
-      - type: git
-        url: https://github.com/venera-app/venera.git
-        tag: v1.4.4
-        commit: 23afafd1d6abeece7552fa816d2d553944938605
+      - type: file
+        only-arches: [x86_64]
+        url: https://github.com/venera-app/venera/releases/download/v1.4.4/Venera-1.4.4+144-x86_64.AppImage
+        sha256: f6c4866808f67e3f9a238d46bfc6643a1b63a753025a2b814c69a1a51fac79b8
+        dest-filename: venera.AppImage
         x-checker-data:
-          type: git
-          tag-pattern: ^v([\d.]+)$
-          is-main-source: true
+          type: json
+          url: https://api.github.com/repos/venera-app/venera/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: .assets[] | select(.name | endswith("x86_64.AppImage")) | .browser_download_url
+      - type: file
+        only-arches: [aarch64]
+        url: https://github.com/venera-app/venera/releases/download/v1.4.4/Venera-1.4.4+144-aarch64.AppImage
+        sha256: 7d90cb279a472f7dfe1f11da1e77e8361eecd329a8eaf569893a36c6a33c78a5
+        dest-filename: venera.AppImage
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/venera-app/venera/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: .assets[] | select(.name | endswith("aarch64.AppImage")) | .browser_download_url
       - type: file
         path: io.github.venera_app.venera.metainfo.xml
       - type: file
         path: io.github.venera_app.venera.png
-      - type: git
-        url: https://github.com/flutter/flutter.git
-        tag: 3.32.0
-        commit: be698c48a6750c8cb8e61c740ca9991bb947aba2
-        dest: flutter
-        x-checker-data:
-          type: git
-          tag-pattern: ^([\d.]+)$
