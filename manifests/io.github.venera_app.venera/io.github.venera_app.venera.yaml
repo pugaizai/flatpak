@@ -32,14 +32,14 @@ modules:
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
       - install -Dm644 squashfs-root/venera.desktop ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
       - install -Dm644 io.github.venera_app.venera.png -t ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps
-      - desktop-file-edit --set-key="Categories" --set-value="Graphics;Network;" --set-key="Icon" 
+      - desktop-file-edit --set-key="Categories" --set-value="Graphics;Network;" --set-key="Icon"
         --set-value="io.github.venera_app.venera" ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
       - rm squashfs-root/{AppRun,venera.png,venera.desktop}
       - mv squashfs-root/* ${FLATPAK_DEST}/bin
     sources:
       - type: file
         only-arches: [x86_64]
-        url: https://github.com/venera-app/venera/releases/download/v1.4.4/Venera-1.4.4+144-x86_64.AppImage
+        url: https://github.com/venera-app/venera/releases/download/v1.4.4/Venera-1.4.4%2B144-x86_64.AppImage
         sha256: f6c4866808f67e3f9a238d46bfc6643a1b63a753025a2b814c69a1a51fac79b8
         dest-filename: venera.AppImage
         x-checker-data:
@@ -49,7 +49,7 @@ modules:
           url-query: .assets[] | select(.name | endswith("x86_64.AppImage")) | .browser_download_url
       - type: file
         only-arches: [aarch64]
-        url: https://github.com/venera-app/venera/releases/download/v1.4.4/Venera-1.4.4+144-aarch64.AppImage
+        url: https://github.com/venera-app/venera/releases/download/v1.4.4/Venera-1.4.4%2B144-aarch64.AppImage
         sha256: 7d90cb279a472f7dfe1f11da1e77e8361eecd329a8eaf569893a36c6a33c78a5
         dest-filename: venera.AppImage
         x-checker-data:
