@@ -73,7 +73,7 @@ modules:
         commands:
           - export TMPDIR=${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}
           - exec zypak-wrapper "/app/extra/docs/tdappdesktop"
-            "--enable-wayland-ime --wayland-text-input-version=3" "$@"
+            "--enable-wayland-ime" "--wayland-text-input-version=3" "$@"
       - type: script
         commands:
           - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -

@@ -98,7 +98,7 @@ modules:
           - export ZYPAK_LD_PRELOAD="/app/etc/preload/rename.so"
           - export TMPDIR="${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}"
           - exec zypak-wrapper "/app/extra/QQ/qq"
-            "--enable-wayland-ime --wayland-text-input-version=3" "$@"
+            "--enable-wayland-ime" "--wayland-text-input-version=3" "$@"
         dest-filename: qq.sh
 
       - type: script
