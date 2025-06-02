@@ -6,8 +6,6 @@ base: org.electronjs.Electron2.BaseApp
 base-version: '24.08'
 command: cherrystudio
 finish-args:
-  - --share=ipc
-  - --socket=fallback-x11
   - --socket=wayland
   - --share=network
   - --device=dri
@@ -80,11 +78,5 @@ modules:
         dest-filename: cherrystudio.sh
         commands:
           - export TMPDIR=${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}
-          - WAYLAND_SOCKET=${WAYLAND_DISPLAY:-"wayland-0"}
-          - |
-            if [[ -e "${XDG_RUNTIME_DIR}/${WAYLAND_SOCKET}" || -e "${WAYLAND_DISPLAY}" ]]
-            then
-                FLAGS="--enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime --wayland-text-input-version=3"
-            fi
           - exec zypak-wrapper "/app/electron/electron" "/app/cherrystudio/app.asar"
-            $FLAGS "$@"
+            "--ozone-platform-hint=auto --enable-wayland-ime --wayland-text-input-version=3" "$@" 

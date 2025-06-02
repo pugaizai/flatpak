@@ -7,9 +7,7 @@ base-version: '24.08'
 command: qqmusic
 
 finish-args:
-  - --share=ipc
   - --socket=wayland
-  - --socket=fallback-x11
   - --socket=pulseaudio
   - --device=dri
   - --share=network
@@ -65,10 +63,5 @@ modules:
         dest-filename: qqmusic.sh
         commands:
           - export TMPDIR=${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}
-          - WAYLAND_SOCKET=${WAYLAND_DISPLAY:-"wayland-0"}
-          - |
-            if [[ -e "${XDG_RUNTIME_DIR}/${WAYLAND_SOCKET}" || -e "${WAYLAND_DISPLAY}" ]]
-            then
-                FLAGS="--enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime --wayland-text-input-version=3"
-            fi
-          - exec zypak-wrapper "/app/electron/electron" "/app/qqmusic/app.asar" $FLAGS "$@"
+          - exec zypak-wrapper "/app/electron/electron" "/app/qqmusic/app.asar"
+            "--ozone-platform-hint=auto --enable-wayland-ime --wayland-text-input-version=3" "$@"

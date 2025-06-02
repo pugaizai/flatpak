@@ -7,8 +7,7 @@ base-version: '24.08'
 command: tdappdesktop
 
 finish-args:
-  - --share=ipc
-  - --socket=x11
+  - --socket=wayland
   - --device=dri
   - --share=network
   - --filesystem=xdg-download
@@ -73,13 +72,8 @@ modules:
         dest-filename: tdappdesktop.sh
         commands:
           - export TMPDIR=${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}
-          - WAYLAND_SOCKET=${WAYLAND_DISPLAY:-"wayland-0"}
-          - |
-            if [[ -e "${XDG_RUNTIME_DIR}/${WAYLAND_SOCKET}" || -e "${WAYLAND_DISPLAY}" ]]
-            then
-                FLAGS="--enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime --wayland-text-input-version=3"
-            fi
-          - exec zypak-wrapper.sh /app/extra/docs/tdappdesktop $FLAGS "$@"
+          - exec zypak-wrapper "/app/extra/docs/tdappdesktop"
+            "--ozone-platform-hint=auto --enable-wayland-ime --wayland-text-input-version=3" "$@"
       - type: script
         commands:
           - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -

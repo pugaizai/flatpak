@@ -7,10 +7,8 @@ base-version: '24.08'
 command: qq
 
 finish-args:
-  - --share=ipc
   - --share=network
   - --socket=wayland
-  - --socket=fallback-x11
   - --socket=pulseaudio
   - --device=dri
   - --filesystem=xdg-download
@@ -99,13 +97,8 @@ modules:
         commands:
           - export ZYPAK_LD_PRELOAD="/app/etc/preload/rename.so"
           - export TMPDIR="${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}"
-          - WAYLAND_SOCKET=${WAYLAND_DISPLAY:-"wayland-0"}
-          - |
-            if [[ -e "${XDG_RUNTIME_DIR}/${WAYLAND_SOCKET}" || -e "${WAYLAND_DISPLAY}" ]]
-            then
-                FLAGS="--enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime --wayland-text-input-version=3"
-            fi
-          - exec zypak-wrapper /app/extra/QQ/qq $FLAGS "$@"
+          - exec zypak-wrapper "/app/extra/QQ/qq"
+            "--ozone-platform-hint=auto --enable-wayland-ime --wayland-text-input-version=3" "$@"
         dest-filename: qq.sh
 
       - type: script
