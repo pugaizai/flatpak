@@ -16,7 +16,7 @@ finish-args:
   - --system-talk-name=org.freedesktop.login1
   # required to fix cursor scaling on wayland
   - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
-
+  - --env=ELECTRON_OZONE_PLATFORM_HINT=auto
 cleanup:
   - '*.a'
   - '*.la'
@@ -98,7 +98,7 @@ modules:
           - export ZYPAK_LD_PRELOAD="/app/etc/preload/rename.so"
           - export TMPDIR="${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}"
           - exec zypak-wrapper "/app/extra/QQ/qq"
-            "--ozone-platform-hint=auto --enable-wayland-ime --wayland-text-input-version=3" "$@"
+            "--enable-wayland-ime --wayland-text-input-version=3" "$@"
         dest-filename: qq.sh
 
       - type: script
