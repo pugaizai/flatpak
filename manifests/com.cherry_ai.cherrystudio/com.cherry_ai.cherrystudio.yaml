@@ -15,6 +15,7 @@ finish-args:
   # required to fix cursor scaling on wayland
   - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
   - --env=ELECTRON_OZONE_PLATFORM_HINT=auto
+
 add-extensions:
   org.freedesktop.Platform.electron:
     version: '24.08'
