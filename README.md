@@ -36,7 +36,7 @@
 
 ### Build
 
-`flatpak run org.flatpak.Builder build-dir manifests/<application-id>/<application-id>.yml --repo=repo --force-clean --install-deps-from=flathub --ccache --user`
+`flatpak run org.flatpak.Builder build-dir manifests/<application-id>/<application-id>.yaml --repo=repo --force-clean --install-deps-from=flathub --ccache --user`
 
 ### Add Repo
 

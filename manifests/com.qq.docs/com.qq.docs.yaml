@@ -48,18 +48,17 @@ modules:
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
       - install -Dm755 tdappdesktop.sh ${FLATPAK_DEST}/bin/tdappdesktop
     sources:
-      - type: files
+      - type: file
         only-arches: [aarch64]
         dest-filename: docs.deb
         url: https://desktop.docs.qq.com/Installer/30001/3.9.15/TencentDocs-arm64.deb
         sha256: 192c7788bbf5bbcedc9fac464d3162c8bb12df282d7fd6c8edb66c07ceeaf9d9
-        size: 172589342
         x-checker-data:
           type: json
           url: https://docs.qq.com/api/package/update
           version-query: .result.update_info | fromjson | .version
           url-query: '"https://desktop.docs.qq.com/Installer/30001/\($version)/TencentDocs-arm64.deb"'
-      - type: files
+      - type: file
         only-arches: [x86_64]
         dest-filename: docs.deb
         url: https://desktop.docs.qq.com/Installer/30001/3.9.15/TencentDocs-x64.deb
@@ -69,7 +68,6 @@ modules:
           url: https://docs.qq.com/api/package/update
           version-query: .result.update_info | fromjson | .version
           url-query: '"https://desktop.docs.qq.com/Installer/30001/\($version)/TencentDocs-x64.deb"'
-        size: 177913318
       - type: file
         path: com.qq.docs.metainfo.xml
       - type: file
