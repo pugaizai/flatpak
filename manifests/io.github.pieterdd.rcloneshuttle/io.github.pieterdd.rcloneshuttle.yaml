@@ -1,10 +1,13 @@
-id: io.github.pieterdd.RcloneShuttle
+id: io.github.pieterdd.rcloneshuttle
 runtime: org.gnome.Platform
 runtime-version: '48'
 sdk: org.gnome.Sdk
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.rust-stable
   - org.freedesktop.Sdk.Extension.golang
+rename-icon: io.github.pieterdd.RcloneShuttle
+rename-desktop-file: io.github.pieterdd.RcloneShuttle.desktop
+rename-appdata-file: io.github.pieterdd.RcloneShuttle.metainfo.xml
 command: rclone-shuttle
 finish-args:
   - --share=ipc
