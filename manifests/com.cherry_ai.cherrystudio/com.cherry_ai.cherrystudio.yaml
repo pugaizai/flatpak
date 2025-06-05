@@ -53,8 +53,8 @@ modules:
     sources:
       - type: file
         only-arches: [x86_64]
-        url: https://github.com/CherryHQ/cherry-studio/releases/download/v1.4.0/Cherry-Studio-1.4.0-x86_64.AppImage
-        sha256: 4738c5d43f077da8aeab0e9a9b9f1a5e955e68c705572e4ffed4354ac69966f7
+        url: https://github.com/CherryHQ/cherry-studio/releases/download/v1.4.1/Cherry-Studio-1.4.1-x86_64.AppImage
+        sha256: 6d024146d40e905d9288440c65ebc722f6a8b043c0445bd18e53757797e9dd1f
         dest-filename: Cherry-Studio.AppImage
         x-checker-data:
           type: json
@@ -63,8 +63,8 @@ modules:
           url-query: .assets[] | select(.name | endswith("x86_64.AppImage")) | .browser_download_url
       - type: file
         only-arches: [aarch64]
-        url: https://github.com/CherryHQ/cherry-studio/releases/download/v1.4.0/Cherry-Studio-1.4.0-arm64.AppImage
-        sha256: 0b671f74ab31846819d847fcd61f48ebd1b318e94957b95c60b5b788caf39739
+        url: https://github.com/CherryHQ/cherry-studio/releases/download/v1.4.1/Cherry-Studio-1.4.1-arm64.AppImage
+        sha256: 4305cb5ecca265f59108c18171b26f6adf3a5f61a74b3560aa7df7d75ce30149
         dest-filename: Cherry-Studio.AppImage
         x-checker-data:
           type: json
@@ -80,4 +80,4 @@ modules:
         commands:
           - export TMPDIR=${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}
           - exec zypak-wrapper "/app/electron/electron" "/app/cherrystudio/app.asar"
-            "--enable-wayland-ime" "--wayland-text-input-version=3" "$@" 
+            "--enable-wayland-ime" "--wayland-text-input-version=3" "$@"
