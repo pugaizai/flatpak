@@ -27,7 +27,8 @@ finish-args:
   - --env=QT_AUTO_SCREEN_SCALE_FACTOR=1
   # Only supports xcb
   - --env=QT_QPA_PLATFORM=xcb
-
+  # Fcitx5 Input Methoe
+  - --env=QT_IM_MODULE=fcitx
 cleanup:
   - '*.a'
   - '*.la'
