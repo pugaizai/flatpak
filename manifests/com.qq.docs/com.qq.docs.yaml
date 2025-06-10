@@ -51,8 +51,8 @@ modules:
       - type: file
         only-arches: [aarch64]
         dest-filename: docs.deb
-        url: https://desktop.docs.qq.com/Installer/30001/3.9.15/TencentDocs-arm64.deb
-        sha256: 192c7788bbf5bbcedc9fac464d3162c8bb12df282d7fd6c8edb66c07ceeaf9d9
+        url: https://desktop.docs.qq.com/Installer/30001/3.9.20/TencentDocs-arm64.deb
+        sha256: 70bf1acabab4e33923c1b6b6fd2a6e28b089c48e43e6f55ee42488174c625973
         x-checker-data:
           type: json
           url: https://docs.qq.com/api/package/update
@@ -61,8 +61,8 @@ modules:
       - type: file
         only-arches: [x86_64]
         dest-filename: docs.deb
-        url: https://desktop.docs.qq.com/Installer/30001/3.9.15/TencentDocs-x64.deb
-        sha256: ee63da825cd6bcd27898c40ec6b408df7f4bf05085370fdf8a57479695f255a7
+        url: https://desktop.docs.qq.com/Installer/30001/3.9.20/TencentDocs-x64.deb
+        sha256: b63c9e8f9a7b65c90569c7a22c1aca66267efe2803676e7f42136098d14bbc19
         x-checker-data:
           type: json
           url: https://docs.qq.com/api/package/update
@@ -78,5 +78,5 @@ modules:
         dest-filename: tdappdesktop.sh
         commands:
           - export TMPDIR=${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}
-          - exec zypak-wrapper "/app/electron/electron" "/app/docs/app.asar"
-            "--enable-wayland-ime" "--wayland-text-input-version=3" "$@"
+          - exec zypak-wrapper "/app/electron/electron" "/app/docs/app.asar" "--enable-wayland-ime"
+            "--wayland-text-input-version=3" "$@"
