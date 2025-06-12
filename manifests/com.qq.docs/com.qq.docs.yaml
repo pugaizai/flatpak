@@ -61,8 +61,8 @@ modules:
       - type: file
         only-arches: [x86_64]
         dest-filename: docs.deb
-        url: https://desktop.docs.qq.com/Installer/30001/3.9.20/TencentDocs-x64.deb
-        sha256: b63c9e8f9a7b65c90569c7a22c1aca66267efe2803676e7f42136098d14bbc19
+        url: https://desktop.docs.qq.com/Installer/30001/3.9.13/TencentDocs-x64.deb
+        sha256: e294e273bd17facf9cc7430f7fe5893b9e9b823a318ff1e3be134c9bc123b781
         x-checker-data:
           type: json
           url: https://docs.qq.com/api/package/update
