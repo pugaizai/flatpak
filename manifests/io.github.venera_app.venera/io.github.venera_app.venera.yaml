@@ -39,8 +39,8 @@ modules:
     sources:
       - type: file
         only-arches: [x86_64]
-        url: https://github.com/venera-app/venera/releases/download/v1.4.4/Venera-1.4.4%2B144-x86_64.AppImage
-        sha256: f6c4866808f67e3f9a238d46bfc6643a1b63a753025a2b814c69a1a51fac79b8
+        url: https://github.com/venera-app/venera/releases/download/v1.4.5/Venera-1.4.5%2B145-x86_64.AppImage
+        sha256: 8abe76433c0aa5c6310a30e5b6be98a691f94f8085a92a08507c4328358e00c1
         dest-filename: venera.AppImage
         x-checker-data:
           type: json
@@ -49,8 +49,8 @@ modules:
           url-query: .assets[] | select(.name | endswith("x86_64.AppImage")) | .browser_download_url
       - type: file
         only-arches: [aarch64]
-        url: https://github.com/venera-app/venera/releases/download/v1.4.4/Venera-1.4.4%2B144-aarch64.AppImage
-        sha256: 7d90cb279a472f7dfe1f11da1e77e8361eecd329a8eaf569893a36c6a33c78a5
+        url: https://github.com/venera-app/venera/releases/download/v1.4.5/Venera-1.4.5%2B145-aarch64.AppImage
+        sha256: 16fdf0ed9c9d293e45c538410a674b2a5014a75a647346accc005d180895908b
         dest-filename: venera.AppImage
         x-checker-data:
           type: json
