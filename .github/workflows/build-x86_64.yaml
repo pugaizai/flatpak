@@ -58,7 +58,8 @@ jobs:
 
           for app in "${apps[@]}"; do
             flatpak-builder build-dir "$app" \
-              --repo=repo \
+              --arch=x86_64 \
+              --repo=x86_64 \
               --default-branch=stable \
               --force-clean \
               --user \
@@ -75,14 +76,14 @@ jobs:
           flatpak build-sign repo --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }}
 
       - name: Upload to R2
-        uses: ryand56/r2-upload-action@latest # 可以是任何版本
+        uses: ryand56/r2-upload-action@latest
         with:
           r2-account-id: ${{ secrets.R2_ACCOUNT_ID }}
           r2-access-key-id: ${{ secrets.R2_ACCESS_KEY_ID }}
           r2-secret-access-key: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           r2-bucket: ${{ secrets.R2_BUCKET }}
-          source-dir: repo
-          destination-dir: repo # 可以是任何实际路径
+          source-dir: x86_64
+          destination-dir: x86_64
           output-file-url: 'true' # 默认为true
           multipart-size: 100 # 如果文件大小大于此处提供的值，则使用分段上传
           max-retries: 5 # 上传分段块的最大重试次数，直到继续下一个部分
