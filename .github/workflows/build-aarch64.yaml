@@ -36,6 +36,7 @@ jobs:
           git config --global protocol.file.allow always
 
           declare -a apps=(
+            "manifests/org.freedesktop.Platform.electron/org.freedesktop.Platform.electron.yaml"
             "manifests/io.github.pieterdd.rcloneshuttle/io.github.pieterdd.rcloneshuttle.yaml"
             "manifests/com.cherry_ai.cherrystudio/com.cherry_ai.cherrystudio.yaml"
             "manifests/io.github.wgh136.pixes/io.github.wgh136.pixes.yaml"
@@ -53,7 +54,6 @@ jobs:
             "manifests/io.github.pbh_btn.peerbanhelper/io.github.pbh_btn.peerbanhelper.yaml"
             "manifests/com.larksuite.lark/com.larksuite.lark.yaml"
             "manifests/cn.feishu.feishu/cn.feishu.feishu.yaml"
-            "manifests/org.freedesktop.Platform.electron/org.freedesktop.Platform.electron.yaml"
           )
 
           for app in "${apps[@]}"; do
