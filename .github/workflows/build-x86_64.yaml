@@ -72,8 +72,8 @@ jobs:
       # 签名仓库
       - name: Sign repo
         run: |
-          flatpak build-update-repo --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --generate-static-deltas --prune repo
-          flatpak build-sign repo --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }}
+          flatpak build-update-repo --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --generate-static-deltas --prune x86_64
+          flatpak build-sign x86_64 --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }}
 
       - name: Upload to R2
         uses: ryand56/r2-upload-action@latest
