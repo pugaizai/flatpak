@@ -6,7 +6,7 @@
 
 ### Add Repo
 
-`flatpak remote-add --if-not-exists pugai https://flatpak.pugai.life/pugai.flatpakrepo --user`
+`flatpak remote-add --if-not-exists pugai https://flatpak.pugai.life/pugai-${ARCH}.flatpakrepo --user`
 
 ### Install Something
 
