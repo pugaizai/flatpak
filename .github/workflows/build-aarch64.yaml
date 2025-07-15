@@ -1,0 +1,91 @@
+name: Build aarch64
+
+on:
+  workflow_dispatch
+
+# 如果前一个工作流仍在运行，当我们再次推送时，将取消前一个工作流
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  Build:
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Install build depends
+        run: |
+          sudo add-apt-repository -y ppa:flatpak/stable
+          sudo apt-get update -q
+          sudo apt-get install -y flatpak flatpak-builder ca-certificates gnupg software-properties-common
+          flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+      # 导入GPG密钥
+      - name: Import GPG key
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+
+      - name: Build
+        run: |
+          git config --global protocol.file.allow always
+
+          declare -a apps=(
+            "manifests/io.github.pieterdd.rcloneshuttle/io.github.pieterdd.rcloneshuttle.yaml"
+            "manifests/com.cherry_ai.cherrystudio/com.cherry_ai.cherrystudio.yaml"
+            "manifests/io.github.wgh136.pixes/io.github.wgh136.pixes.yaml"
+            "manifests/io.github.venera_app.venera/io.github.venera_app.venera.yaml"
+            "manifests/com.xiaoyaocz.simplelive/com.xiaoyaocz.simplelive.yaml"
+            "manifests/top.jtmonster.jhentai/top.jtmonster.jhentai.yaml"
+            "manifests/com.qq.weixin/com.qq.weixin.yaml"
+            "manifests/cn.wps.office/cn.wps.office.yaml"
+            "manifests/com.qq.qq/com.qq.qq.yaml"
+            "manifests/com.qq.docs/com.qq.docs.yaml"
+            "manifests/com.qq.qqmusic/com.qq.qqmusic.yaml"
+            "manifests/io.github.c0re100.qbittorrent-enhanced-edition/io.github.c0re100.qbittorrent-enhanced-edition.yaml"
+            "manifests/io.github.msojocs.bilibili/io.github.msojocs.bilibili.yaml"
+            "manifests/org.freedesktop.xorg.xeyes/org.freedesktop.xorg.xeyes.yaml"
+            "manifests/io.github.pbh_btn.peerbanhelper/io.github.pbh_btn.peerbanhelper.yaml"
+            "manifests/com.larksuite.lark/com.larksuite.lark.yaml"
+            "manifests/cn.feishu.feishu/cn.feishu.feishu.yaml"
+            "manifests/org.freedesktop.Platform.electron/org.freedesktop.Platform.electron.yaml"
+          )
+
+          for app in "${apps[@]}"; do
+            flatpak-builder build-dir "$app" \
+              --arch=aarch64 \
+              --repo=aarch64 \
+              --default-branch=stable \
+              --force-clean \
+              --user \
+              --install-deps-from=flathub \
+              --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} \
+              --ccache \
+              --disable-rofiles-fuse
+          done
+
+      # 签名仓库
+      - name: Sign repo
+        run: |
+          flatpak build-update-repo --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }} --generate-static-deltas --prune aarch64
+          flatpak build-sign aarch64 --gpg-sign=${{ secrets.GPG_KEY_FINGERPRINT }}
+
+      - name: Upload to R2
+        uses: ryand56/r2-upload-action@latest
+        with:
+          r2-account-id: ${{ secrets.R2_ACCOUNT_ID }}
+          r2-access-key-id: ${{ secrets.R2_ACCESS_KEY_ID }}
+          r2-secret-access-key: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          r2-bucket: ${{ secrets.R2_BUCKET }}
+          source-dir: aarch64
+          destination-dir: aarch64
+          output-file-url: 'true' # 默认为true
+          multipart-size: 100 # 如果文件大小大于此处提供的值，则使用分段上传
+          max-retries: 5 # 上传分段块的最大重试次数，直到继续下一个部分
+          multipart-concurrent: true # 是否并发上传分段块
+          keep-file-fresh: 'true' # 默认为false
