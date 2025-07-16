@@ -37,9 +37,7 @@ jobs:
 
           declare -a apps=(
             "manifests/org.freedesktop.Platform.electron/org.freedesktop.Platform.electron.yaml"
-            "manifests/org.freedesktop.Platform.electron34/org.freedesktop.Platform.electron34.yaml"
             "manifests/com.cherry_ai.cherrystudio/com.cherry_ai.cherrystudio.yaml"
-            "manifests/io.github.stark81.vutronmusic/io.github.stark81.vutronmusic.yaml"
             "manifests/io.github.wgh136.pixes/io.github.wgh136.pixes.yaml"
             "manifests/io.github.venera_app.venera/io.github.venera_app.venera.yaml"
             "manifests/com.xiaoyaocz.simplelive/com.xiaoyaocz.simplelive.yaml"
