@@ -87,7 +87,7 @@ modules:
     build-options:
       no-debuginfo: true
     build-commands:
-      - install apply_extra ${FLATPAK_DEST}/bin
+      - install -Dm755 apply_extra.sh ${FLATPAK_DEST}/bin/apply_extra
       - install -Dm755 qq.sh ${FLATPAK_DEST}/bin/qq
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
       - install -Dm644 ${FLATPAK_ID}.png -t ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps
@@ -106,7 +106,7 @@ modules:
           - bsdtar --to-stdout -xf qq.deb data.* | bsdtar -xf -
           - mv opt/QQ .
           - rm -rf qq.deb usr opt data.*
-        dest-filename: apply_extra
+        dest-filename: apply_extra.sh
 
       - type: file
         path: com.qq.qq.metainfo.xml

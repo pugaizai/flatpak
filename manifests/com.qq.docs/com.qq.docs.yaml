@@ -41,28 +41,29 @@ modules:
       no-debuginfo: true
     build-commands:
       - mkdir -p ${FLATPAK_DEST}/electron
-      - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
-      - mv opt/腾讯文档/resources ${FLATPAK_DEST}/docs
       - install -Dm644 ${FLATPAK_ID}.svg -t ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps
       - install -Dm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
       - install -Dm755 tdappdesktop.sh ${FLATPAK_DEST}/bin/tdappdesktop
+      - install -Dm755 apply_extra.sh ${FLATPAK_DEST}/bin/apply_extra
     sources:
-      - type: file
+      - type: extra-data
         only-arches: [aarch64]
-        dest-filename: docs.deb
+        filename: docs.deb
         url: https://desktop.docs.qq.com/Installer/30001/3.9.20/TencentDocs-arm64.deb
         sha256: 70bf1acabab4e33923c1b6b6fd2a6e28b089c48e43e6f55ee42488174c625973
+        size: 173556870
         x-checker-data:
           type: json
           url: https://docs.qq.com/api/package/update
           version-query: .result.update_info | fromjson | .version
           url-query: '"https://desktop.docs.qq.com/Installer/30001/\($version)/TencentDocs-arm64.deb"'
-      - type: file
+      - type: extra-data
         only-arches: [x86_64]
-        dest-filename: docs.deb
+        filename: docs.deb
         url: https://desktop.docs.qq.com/Installer/30001/3.9.20/TencentDocs-x64.deb
         sha256: b63c9e8f9a7b65c90569c7a22c1aca66267efe2803676e7f42136098d14bbc19
+        size: 178808600
         x-checker-data:
           type: json
           url: https://docs.qq.com/api/package/update
@@ -78,5 +79,11 @@ modules:
         dest-filename: tdappdesktop.sh
         commands:
           - export TMPDIR=${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}
-          - exec zypak-wrapper "/app/electron/electron" "/app/docs/app.asar" "--enable-wayland-ime"
+          - exec zypak-wrapper "/app/electron/electron" "/app/extra/docs/app.asar" "--enable-wayland-ime"
             "--wayland-text-input-version=3" "$@"
+      - type: script
+        commands:
+          - bsdtar --to-stdout -xf docs.deb data.* | bsdtar -xf -
+          - mv opt/腾讯文档 ./docs
+          - rm -rf *.deb usr opt data.*
+        dest-filename: apply_extra.sh
