@@ -62,7 +62,7 @@ modules:
       prepend-ld-library-path: /usr/lib/sdk/llvm20/lib
       env:
         RUSTUP_HOME: /var/lib/rustup
-        CARGO_HOME: /run/build/venera/cargo
+        CARGO_HOME: /var/lib/rustup
         PUB_CACHE: /run/build/venera/.pub-cache
     build-commands:
       - flutter build linux --release --verbose
