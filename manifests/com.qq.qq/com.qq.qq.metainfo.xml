@@ -34,24 +34,6 @@
     <release version="3.2.17_250521" date="2025-05-21">
       <description></description>
     </release>
-    <release version="3.2.17_250519" date="2025-05-19">
-      <description/>
-    </release>
-    <release version="3.2.17_250429" date="2025-04-29">
-      <description/>
-    </release>
-    <release version="3.2.16_250401" date="2025-04-01">
-      <description/>
-    </release>
-    <release version="3.2.16_250318" date="2025-03-18">
-      <description/>
-    </release>
-    <release version="3.2.16_250307" date="2025-03-07">
-      <description/>
-    </release>
-    <release version="3.2.15_250110" date="2025-01-10">
-      <description/>
-    </release>
   </releases>
   <content_rating type="oars-1.1">
     <content_attribute id="social-chat">intense</content_attribute>

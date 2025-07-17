@@ -20,15 +20,6 @@
     <release version="7.42.17" date="2025-05-30">
       <description></description>
     </release>
-    <release version="7.36.11" date="2025-03-07">
-      <description/>
-    </release>
-    <release version="7.32.11" date="2025-01-03">
-      <description/>
-    </release>
-    <release version="7.32.11" date="2025-01-03">
-      <description/>
-    </release>
   </releases>
   <content_rating type="oars-1.1"/>
   <launchable type="desktop-id">com.larksuite.lark.desktop</launchable>

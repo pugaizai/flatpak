@@ -29,18 +29,6 @@
     <release version="8.0.8+295" date="2025-06-24">
       <description></description>
     </release>
-    <release version="8.0.7+293" date="2025-05-16">
-      <description/>
-    </release>
-    <release version="8.0.7+292" date="2025-05-15">
-      <description/>
-    </release>
-    <release version="8.0.7+291" date="2025-05-09">
-      <description/>
-    </release>
-    <release version="8.0.6+274" date="2025-01-05">
-      <description/>
-    </release>
   </releases>
   <content_rating type="oars-1.1">
     <content_attribute id="violence-cartoon">intense</content_attribute>

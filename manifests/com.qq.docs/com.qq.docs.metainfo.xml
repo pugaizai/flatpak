@@ -28,21 +28,6 @@
     <release version="3.9.20" date="2025-06-10">
       <description></description>
     </release>
-    <release version="3.9.15" date="2025-04-27">
-      <description/>
-    </release>
-    <release version="3.9.13" date="2025-03-26">
-      <description/>
-    </release>
-    <release version="3.9.10" date="2025-03-12">
-      <description/>
-    </release>
-    <release version="3.9.8" date="2025-02-21">
-      <description/>
-    </release>
-    <release version="3.9.7" date="2025-02-07">
-      <description/>
-    </release>
   </releases>
   <content_rating type="oars-1.1"/>
   <update_contact>i@pugai.life</update_contact>

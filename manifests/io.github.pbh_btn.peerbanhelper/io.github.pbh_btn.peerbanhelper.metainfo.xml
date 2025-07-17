@@ -24,48 +24,6 @@
     <release version="8.0.7" date="2025-07-16">
       <description></description>
     </release>
-    <release version="8.0.5" date="2025-07-13">
-      <description/>
-    </release>
-    <release version="8.0.4" date="2025-07-12">
-      <description/>
-    </release>
-    <release version="8.0.3" date="2025-07-12">
-      <description/>
-    </release>
-    <release version="8.0.1" date="2025-07-11">
-      <description/>
-    </release>
-    <release version="7.4.15" date="2025-05-08">
-      <description/>
-    </release>
-    <release version="7.4.14" date="2025-04-24">
-      <description/>
-    </release>
-    <release version="7.4.13" date="2025-04-22">
-      <description/>
-    </release>
-    <release version="7.4.12" date="2025-04-13">
-      <description/>
-    </release>
-    <release version="7.4.10" date="2025-04-11">
-      <description/>
-    </release>
-    <release version="7.4.8" date="2025-04-10">
-      <description/>
-    </release>
-    <release version="7.4.7" date="2025-04-06">
-      <description/>
-    </release>
-    <release version="7.4.5" date="2025-03-25">
-      <description/>
-    </release>
-    <release version="7.4.4" date="2025-03-07">
-      <description/>
-    </release>
-    <release version="7.4.3" date="2025-02-10">
-      <description/>
-    </release>
   </releases>
   <content_rating type="oars-1.1"/>
   <update_contact>i@pugai.life</update_contact>
