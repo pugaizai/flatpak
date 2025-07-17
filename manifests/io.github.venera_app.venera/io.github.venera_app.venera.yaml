@@ -77,8 +77,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/venera-app/venera.git
-        tag: v1.4.4
-        commit: 23afafd1d6abeece7552fa816d2d553944938605
+        tag: v1.4.5
+        commit: 8eda8adcc8e8b0e1abb4248f6bee5043c8b3273a
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
@@ -89,8 +89,8 @@ modules:
         path: io.github.venera_app.venera.png
       - type: git
         url: https://github.com/flutter/flutter.git
-        tag: 3.32.0
-        commit: be698c48a6750c8cb8e61c740ca9991bb947aba2
+        tag: 3.32.7
+        commit: d7b523b356d15fb81e7d340bbe52b47f93937323
         dest: flutter
         x-checker-data:
           type: git
