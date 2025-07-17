@@ -2,6 +2,8 @@ app-id: io.github.venera_app.venera
 runtime: org.gnome.Platform
 runtime-version: '48'
 sdk: org.gnome.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.llvm20
 command: venera
 finish-args:
   - --share=ipc
@@ -23,41 +25,73 @@ cleanup:
   - /share/doc
   - /share/gtk-doc
 modules:
-  - name: venera
+
+  - name: rustup
     buildsystem: simple
+    build-options:
+      build-args:
+        - --share=network
+      env:
+        CARGO_HOME: /var/lib/rustup
+        RUSTUP_HOME: /var/lib/rustup
     build-commands:
-      - chmod +x venera.AppImage
-      - ./venera.AppImage --appimage-extract
-      - install -d ${FLATPAK_DEST}/bin
-      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
-      - install -Dm644 squashfs-root/venera.desktop ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
-      - install -Dm644 io.github.venera_app.venera.png -t ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps
-      - desktop-file-edit --set-key="Categories" --set-value="Graphics;Network;" --set-key="Icon"
-        --set-value="io.github.venera_app.venera" ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
-      - rm squashfs-root/{AppRun,venera.png,venera.desktop}
-      - mv squashfs-root/* ${FLATPAK_DEST}/bin
+      - chmod +x rustup-init && ./rustup-init -y --profile minimal --no-modify-path
     sources:
       - type: file
         only-arches: [x86_64]
-        url: https://github.com/venera-app/venera/releases/download/v1.4.5/Venera-1.4.5%2B145-x86_64.AppImage
-        sha256: 8abe76433c0aa5c6310a30e5b6be98a691f94f8085a92a08507c4328358e00c1
-        dest-filename: venera.AppImage
-        x-checker-data:
-          type: json
-          url: https://api.github.com/repos/venera-app/venera/releases/latest
-          version-query: .tag_name | sub("^v"; "")
-          url-query: .assets[] | select(.name | endswith("x86_64.AppImage")) | .browser_download_url
+        url: https://static.rust-lang.org/rustup/dist/x86_64-unknown-linux-gnu/rustup-init
+        sha256: 20a06e644b0d9bd2fbdbfd52d42540bdde820ea7df86e92e533c073da0cdd43c
       - type: file
         only-arches: [aarch64]
-        url: https://github.com/venera-app/venera/releases/download/v1.4.5/Venera-1.4.5%2B145-aarch64.AppImage
-        sha256: 16fdf0ed9c9d293e45c538410a674b2a5014a75a647346accc005d180895908b
-        dest-filename: venera.AppImage
+        url: https://static.rust-lang.org/rustup/dist/aarch64-unknown-linux-gnu/rustup-init
+        sha256: e3853c5a252fca15252d07cb23a1bdd9377a8c6f3efa01531109281ae47f841c
+
+  - name: venera
+    buildsystem: simple
+    build-options:
+      build-args:
+        - --share=network
+      arch:
+        x86_64:
+          env:
+            BUNDLE_PATH: build/linux/x64/release/bundle
+        aarch64:
+          env:
+            BUNDLE_PATH: build/linux/arm64/release/bundle
+      append-path: /var/lib/rustup/bin:/usr/lib/sdk/llvm20/bin:/run/build/venera/flutter/bin
+      prepend-ld-library-path: /usr/lib/sdk/llvm20/lib
+      env:
+        RUSTUP_HOME: /var/lib/rustup
+        CARGO_HOME: /run/build/venera/cargo
+        PUB_CACHE: /run/build/venera/.pub-cache
+    build-commands:
+      - flutter build linux --release --verbose
+      - mkdir -p ${FLATPAK_DEST}/bin
+      - cp -r ${BUNDLE_PATH}/* ${FLATPAK_DEST}/bin
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+      - install -Dm644 debian/gui/venera.desktop ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
+      - install -Dm644 io.github.venera_app.venera.png -t ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/
+      - desktop-file-edit --set-key="Categories" --set-value="Graphics;Network;" --set-key="Exec"
+        --set-value="venera" --set-key="Icon" --set-value="io.github.venera_app.venera"
+        ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
+    sources:
+      - type: git
+        url: https://github.com/venera-app/venera.git
+        tag: v1.4.4
+        commit: 23afafd1d6abeece7552fa816d2d553944938605
         x-checker-data:
-          type: json
-          url: https://api.github.com/repos/venera-app/venera/releases/latest
-          version-query: .tag_name | sub("^v"; "")
-          url-query: .assets[] | select(.name | endswith("aarch64.AppImage")) | .browser_download_url
+          type: git
+          tag-pattern: ^v([\d.]+)$
+          is-main-source: true
       - type: file
         path: io.github.venera_app.venera.metainfo.xml
       - type: file
         path: io.github.venera_app.venera.png
+      - type: git
+        url: https://github.com/flutter/flutter.git
+        tag: 3.32.0
+        commit: be698c48a6750c8cb8e61c740ca9991bb947aba2
+        dest: flutter
+        x-checker-data:
+          type: git
+          tag-pattern: ^([\d.]+)$
