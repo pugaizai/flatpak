@@ -26,8 +26,8 @@ modules:
       - type: file
         dest-filename: electron.zip
         only-arches: [aarch64]
-        url: https://github.com/electron/electron/releases/download/v37.2.3/electron-v37.2.3-linux-arm64.zip
-        sha256: 95e5bd64f372598dff73673802f262e6feb4e4a308c3734b9b1e127020e6e36c
+        url: https://github.com/electron/electron/releases/download/v37.2.4/electron-v37.2.4-linux-arm64.zip
+        sha256: 02f6949eed7785a1c11a5f262ad134e670d1f1843094368c47bef63fbca155f0
         x-checker-data:
           type: anitya
           project-id: 17779
@@ -36,8 +36,8 @@ modules:
       - type: file
         dest-filename: electron.zip
         only-arches: [x86_64]
-        url: https://github.com/electron/electron/releases/download/v37.2.3/electron-v37.2.3-linux-x64.zip
-        sha256: 90aa32126cbd9c843fbbb844613f6bb41a8fad212cf7290e9383bfa1ef541022
+        url: https://github.com/electron/electron/releases/download/v37.2.4/electron-v37.2.4-linux-x64.zip
+        sha256: 027d6ebaf5eef805d1f9158feab3fdc10912c7a420a0fe7dcd1c18f4f2b601db
         x-checker-data:
           type: anitya
           project-id: 17779
