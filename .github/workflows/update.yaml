@@ -16,7 +16,6 @@ jobs:
     strategy:
       matrix:
         appid: # 列出所有要检查的 Flatpak 应用 ID
-          - io.github.pieterdd.rcloneshuttle
           - cn.feishu.feishu
           - com.cherry_ai.cherrystudio
           - io.github.venera_app.venera
