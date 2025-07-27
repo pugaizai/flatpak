@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
   <id>org.freedesktop.xorg.xeyes</id>
   <name>xeyes</name>
@@ -22,6 +22,9 @@ natively.</p>
     </screenshot>
   </screenshots>
   <releases>
+    <release version="1.3.1" date="2025-07-27">
+      <description></description>
+    </release>
     <release version="1.3.0" date="2023-07-13" type="stable">
       <description>
         <ul>
