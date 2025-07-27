@@ -31,8 +31,11 @@
     <category>Network</category>
   </categories>
   <releases>
-    <release version="3.2.17_250521" date="2025-05-21">
+    <release version="3.2.18_250626" date="2025-06-26">
       <description></description>
+    </release>
+    <release version="3.2.17_250521" date="2025-05-21">
+      <description/>
     </release>
   </releases>
   <content_rating type="oars-1.1">
