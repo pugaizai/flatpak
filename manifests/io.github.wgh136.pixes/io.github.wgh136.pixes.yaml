@@ -41,7 +41,7 @@ modules:
       env:
         PUB_CACHE: /run/build/pixes/.pub-cache
     build-commands:
-      - flutter build linux --release --verbose
+      - flutter build linux --release
       - mkdir -p ${FLATPAK_DEST}/bin
       - cp -r ${BUNDLE_PATH}/* ${FLATPAK_DEST}/bin
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
