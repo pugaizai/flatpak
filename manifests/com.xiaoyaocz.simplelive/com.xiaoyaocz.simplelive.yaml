@@ -139,7 +139,7 @@ modules:
       env:
         PUB_CACHE: /run/build/simplelive/.pub-cache
     build-commands:
-      - cd simple_live_app && flutter build linux --release --verbose
+      - cd simple_live_app && flutter build linux --release
       - mkdir -p ${FLATPAK_DEST}/bin
       - cp -r ${BUNDLE_PATH}/* ${FLATPAK_DEST}/bin
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
