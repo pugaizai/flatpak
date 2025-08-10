@@ -41,7 +41,7 @@ modules:
       env:
         PUB_CACHE: /run/build/jhentai/.pub-cache
     build-commands:
-      - flutter build linux --release --verbose --target lib/src/main.dart
+      - flutter build linux --release --target lib/src/main.dart
       - mkdir -p ${FLATPAK_DEST}/bin
       - cp -r ${BUNDLE_PATH}/* ${FLATPAK_DEST}/bin
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
