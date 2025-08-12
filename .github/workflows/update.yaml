@@ -34,7 +34,7 @@ jobs:
           - com.qq.qq
           - org.freedesktop.Platform.electron
     steps:
-      - uses: actions/checkout@v4 
+      - uses: actions/checkout@v5 
       - uses: docker://ghcr.io/flathub/flatpak-external-data-checker:latest
         env:
           GIT_AUTHOR_NAME: Flatpak External Data Checker
