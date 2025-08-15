@@ -148,12 +148,13 @@ modules:
     sources:
       - type: git
         url: https://github.com/xiaoyaocz/dart_simple_live.git
-        tag: v1.8.6
         commit: 81572aaec9807f4b47c8bb9c3a610a53fa97918b
         x-checker-data:
-          type: git
-          tag-pattern: ^v([\d.]+)$
-          is-main-source: true
+          type: json
+          url: https://api.github.com/repos/xiaoyaocz/dart_simple_live/commits
+          commit-query: first( .[].sha )
+          version-query: first( .[].sha )
+          timestamp-query: first( .[].commit.author.date )
       - type: file
         path: com.xiaoyaocz.simplelive.metainfo.xml
       - type: file
