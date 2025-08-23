@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
-  <id>com.cherry_ai.cherrystudio.desktop</id>
+  <id>com.cherry_ai.cherrystudio</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LicenseRef-https://github.com/CherryHQ/cherry-studio?tab=License-1-ov-file</project_license>
   <name>Cherry Studio</name>

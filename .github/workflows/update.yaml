@@ -6,8 +6,6 @@ on:
       - .github/workflows/update.yaml
   schedule: # 为了调度正常工作，此文件必须在默认分支中
      - cron: "0 12 * * *" # 每天中午12点运行一次
-       paths:  # 仅当清单文件变更时才触发
-         - 'manifests/**/*.yaml'
   workflow_dispatch:
 
 jobs:
@@ -16,6 +14,7 @@ jobs:
     strategy:
       matrix:
         appid: # 列出所有要检查的 Flatpak 应用 ID
+          - app.reeden.reeden
           - cn.feishu.feishu
           - com.cherry_ai.cherrystudio
           - io.github.venera_app.venera

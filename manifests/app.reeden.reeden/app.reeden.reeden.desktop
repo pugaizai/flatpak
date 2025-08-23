@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Reeden
+GenericName=ReedenReader
+Icon=app.reeden.reeden
+Exec=reeden %U
+Categories=Utility;
+Keywords=Reeden;Application;
+StartupNotify=false

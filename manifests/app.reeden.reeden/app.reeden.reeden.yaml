@@ -1,0 +1,71 @@
+app-id: app.reeden.reeden
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+command: reeden
+
+finish-args:
+  - --share=network
+  - --socket=wayland
+  - --device=dri
+  - --system-talk-name=org.freedesktop.NetworkManager
+
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/doc
+  - /share/gtk-doc
+
+modules:
+  - name: reeden
+    buildsystem: simple
+    build-options:
+      no-debuginfo: true
+    build-commands:
+      - install -Dm755 apply_extra.sh ${FLATPAK_DEST}/bin/apply_extra
+      - install -Dm755 reeden.sh ${FLATPAK_DEST}/bin/reeden
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+      - install -Dm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications
+      - install -Dm644 ${FLATPAK_ID}.png -t ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps
+    sources:
+      - type: script
+        commands:
+          - export TMPDIR="${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}"
+          - exec "/app/extra/reeden/reeden" "$@"
+        dest-filename: reeden.sh
+
+      - type: script
+        commands:
+          - bsdtar --to-stdout -xf reeden.deb data.* | bsdtar -xf -
+          - mv usr/share/reeden .
+          - rm -rf reeden.deb usr data.*
+        dest-filename: apply_extra.sh
+
+      - type: file
+        path: app.reeden.reeden.metainfo.xml
+
+      - type: file
+        path: app.reeden.reeden.desktop
+
+      - type: file
+        path: app.reeden.reeden.png
+
+      - type: extra-data
+        filename: reeden.deb
+        only-arches: [x86_64]
+        url: https://github.com/reeden-org/reeden-app/releases/download/v1.11.4/Reeden-linux-x86_64.deb
+        sha256: 74de4124bc54c00d7a82b38e660e0c3d04a8cd2e71744d783cbc080eb1db738f
+        size: 34158122
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/reeden-org/reeden-app/releases/latest
+          is-main-source: true
+          version-query: .tag_name | sub("^v"; "")
+          url-query: >-
+            .assets[] | select(.name=="Reeden-linux-x86_64.deb") | .browser_download_url

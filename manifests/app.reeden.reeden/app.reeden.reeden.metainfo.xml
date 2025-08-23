@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>app.reeden.reeden</id>
+  <launchable type="desktop-id">app.reeden.reeden.desktop</launchable>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LicenseRef-https://reeden.app/cn/terms-of-service</project_license>
+  <name>Reeden</name>
+  <summary>Modern E-Book Reader</summary>
+  <summary xml:lang="zh_CN">现代电子书阅读器</summary>
+  <description>
+    <p>Reeden is a powerful, pure local e-book reader supporting multiple formats, offering a rich reading experience and personalized settings.</p>
+    <p xml:lang="zh_CN">Reeden 是一款功能强大的纯本地电子书阅读器，支持多种格式，提供丰富的阅读体验和个性化设置。</p>
+  </description>
+
+  <screenshots>
+    <screenshot type="default">
+      <image>https://reeden.app/imgs/home.png</image>
+      <caption>Home</caption>
+      <caption xml:lang="zh_CN">主页</caption>
+    </screenshot>
+  </screenshots>
+
+  <releases>
+    <release version="1.11.4" date="2025-08-19">
+      <description></description>
+    </release>
+  </releases>
+
+  <url type="homepage">https://reeden.app</url>
+  <developer_name>Reeden Team</developer_name>
+</component>
