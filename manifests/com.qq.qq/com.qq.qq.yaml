@@ -42,8 +42,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/krb5/krb5.git
-        tag: krb5-1.22-final
-        commit: 969d2be8e235b85905da5e68f310327c0c5cbf1d
+        tag: krb5-1.22.1-final
+        commit: 4272fb71b130e50185a7711769a6296a4e562a5d
         x-checker-data:
           type: git
           tag-pattern: ^krb5-([\d.]+)-final$
