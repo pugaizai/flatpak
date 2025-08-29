@@ -148,7 +148,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/xiaoyaocz/dart_simple_live.git
-        commit: fd821db19d2155de362e3483c83e6e8858cfb184
+        commit: dbe30713000570f56e95974f77f21e1976cd6719
         x-checker-data:
           type: json
           url: https://api.github.com/repos/xiaoyaocz/dart_simple_live/commits
