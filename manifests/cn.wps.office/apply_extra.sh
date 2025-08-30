@@ -45,7 +45,10 @@ echo "Editing mime .xml icon"
 sed -i "s/generic-icon name=\"wps-office-/icon name=\"${FLATPAK_ID}./g" "export/share/mime/packages/${FLATPAK_ID}".*.xml
 
 # Just use libstdc++.so.6 from the runtime; allows working with runtime 23.08+
-rm -v wps-office/office6/{libstdc++.so.6,libbz2.so}
+rm -v "wps-office/office6/libstdc++.so"*
+rm -v "wps-office/office6/libjpeg.so"*
+rm -v "wps-office/office6/libbz2.so"*
+rm -v "wps-office/office6/libcurl.so"*
 
 rm -rv wps-office.deb deb-package
 
