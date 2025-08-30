@@ -3,18 +3,18 @@ set -e
 shopt -s failglob
 FLATPAK_ID="${FLATPAK_ID:-cn.wps.office}"
 
-mkdir -p deb-package export/share
+mkdir -pv deb-package export/share
 
 bsdtar --to-stdout -xf wps-office.deb data.tar.xz | bsdtar -xf - -C deb-package
 
-mv deb-package/opt/kingsoft/wps-office .
-mv deb-package/usr/bin/{wps,wpp,et,wpspdf} wps-office/
-mv deb-package/usr/share/{icons,applications,mime} export/share/
+mv -v deb-package/opt/kingsoft/wps-office .
+mv -v deb-package/usr/bin/{misc,wps,wpp,et,wpspdf} wps-office/
+mv -v deb-package/usr/share/{icons,applications,mime} export/share/
 
 YEAR_SUFFIX=2023
 
-rename --no-overwrite "wps-office-" "${FLATPAK_ID}." export/share/{icons/hicolor/*/*,applications,mime/packages}/wps-office-*.*
-rename --no-overwrite "wps-office${YEAR_SUFFIX}-" "${FLATPAK_ID}." export/share/icons/hicolor/*/*/wps-office${YEAR_SUFFIX}-*.*
+rename -v --no-overwrite "wps-office-" "${FLATPAK_ID}." export/share/{icons/hicolor/*/*,applications,mime/packages}/wps-office-*.*
+rename -v --no-overwrite "wps-office${YEAR_SUFFIX}-" "${FLATPAK_ID}." export/share/icons/hicolor/*/*/wps-office${YEAR_SUFFIX}-*.*
 
 for a in wps wpp et pdf prometheus; do
     desktop_file="export/share/applications/${FLATPAK_ID}.$a.desktop"
@@ -33,18 +33,21 @@ for a in wps wpp et pdf prometheus; do
             desktop_file=$new_desktop_file
         ;;
     esac
+    echo "Editing .desktop files"
     desktop-file-edit \
         --set-key="Exec" --set-value="$appbin %f" \
         --set-key="Icon" --set-value="$appicon" \
         --set-key="X-Flatpak-RenamedFrom" --set-value="wps-office-$a.desktop;" \
         "$desktop_file"
 done
+
+echo "Editing mime .xml icon"
 sed -i "s/generic-icon name=\"wps-office-/icon name=\"${FLATPAK_ID}./g" "export/share/mime/packages/${FLATPAK_ID}".*.xml
 
 # Just use libstdc++.so.6 from the runtime; allows working with runtime 23.08+
-rm wps-office/office6/libstdc++.so.6
+rm -v wps-office/office6/{libstdc++.so.6,libbz2.so}
 
-rm -r wps-office.deb deb-package
+rm -rv wps-office.deb deb-package
 
-# Remove plugin path so we can override the default path with based on QT_PLUGIN_PATH
+echo "Removing plugin path so we can override the default path with based on QT_PLUGIN_PATH"
 sed -i 's|^Plugins=.*||g' wps-office/office6/qt.conf

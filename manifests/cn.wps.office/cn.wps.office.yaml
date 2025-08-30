@@ -31,8 +31,6 @@ cleanup:
   - /share/doc
   - /share/gtk-doc
 modules:
-  - shared-modules/glu/glu-9.json
-
   - name: wps
     buildsystem: simple
     build-options:
