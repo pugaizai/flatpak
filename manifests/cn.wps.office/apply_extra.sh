@@ -49,7 +49,6 @@ sed -i "s/generic-icon name=\"wps-office-/icon name=\"${FLATPAK_ID}./g" "export/
 rm -v "wps-office/office6/libstdc++.so"*
 rm -v "wps-office/office6/libjpeg.so"*
 rm -v "wps-office/office6/libbz2.so"*
-rm -v "wps-office/office6/libcurl.so"*
 
 rm -rv wps-office.deb deb-package
 
