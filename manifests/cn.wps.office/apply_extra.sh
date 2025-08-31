@@ -13,8 +13,9 @@ mv -v deb-package/usr/share/{icons,applications,mime} export/share/
 
 YEAR_SUFFIX=2023
 
-rename -v --no-overwrite "wps-office-" "${FLATPAK_ID}." export/share/{icons/hicolor/*/*,applications,mime/packages}/wps-office-*.*
+rename -v --no-overwrite "wps-office-" "${FLATPAK_ID}." export/share/{icons/hicolor/*/*,applications}/wps-office-*.*
 rename -v --no-overwrite "wps-office${YEAR_SUFFIX}-" "${FLATPAK_ID}." export/share/icons/hicolor/*/*/wps-office${YEAR_SUFFIX}-*.*
+mv -v export/share/mime/packages/custom-wps-office.xml export/share/mime/packages/${FLATPAK_ID}.xml
 
 for a in wps wpp et pdf prometheus; do
     desktop_file="export/share/applications/${FLATPAK_ID}.$a.desktop"
@@ -42,9 +43,9 @@ for a in wps wpp et pdf prometheus; do
 done
 
 echo "Editing mime .xml icon"
-sed -i "s/generic-icon name=\"wps-office-/icon name=\"${FLATPAK_ID}./g" "export/share/mime/packages/${FLATPAK_ID}".*.xml
+sed -i "s/generic-icon name=\"wps-office-/icon name=\"${FLATPAK_ID}./g" "export/share/mime/packages/${FLATPAK_ID}".xml
 
-# Just use libstdc++.so.6 from the runtime; allows working with runtime 23.08+
+# Just use libstdc++.so.6 from the runtime
 rm -v "wps-office/office6/libstdc++.so"*
 rm -v "wps-office/office6/libjpeg.so"*
 rm -v "wps-office/office6/libbz2.so"*
