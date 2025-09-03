@@ -17,8 +17,11 @@
     <control>keyboard</control>
   </recommends>
   <releases>
-    <release version="7.46.11" date="2025-07-25">
+    <release version="7.46.12" date="2025-08-14">
       <description></description>
+    </release>
+    <release version="7.46.11" date="2025-07-25">
+      <description/>
     </release>
     <release version="7.42.17" date="2025-05-30">
       <description/>
