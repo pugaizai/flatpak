@@ -56,13 +56,13 @@ modules:
         dest-filename: lark
       - type: script
         commands:
-          - bsdtar --to-stdout -xf Lark-linux.deb data.tar.xz | bsdtar -xf -
+          - bsdtar --to-stdout -xf lark-linux.deb data.tar.xz | bsdtar -xf -
           - mv opt/bytedance/lark .
           - sed '/^exec -a/d' lark/bytedance-lark > lark/bytedance-lark.sh
           - rm -rf opt usr *.deb
         dest-filename: apply_extra
       - type: extra-data
-        filename: Lark-linux.deb
+        filename: lark-linux.deb
         url: https://sf16-sg.larksuitecdn.com/obj/lark-artifact-storage/3d9dcd0b/Lark-linux_x64-7.46.12.deb
         sha256: f81f93fd28a7abbbcf0e923479a582afdd63828a022175f5374a007a27192e9c
         size: 410712240
@@ -74,7 +74,7 @@ modules:
             "")
           url-query: .versions.Linux_deb_x64.download_link
       - type: extra-data
-        filename: Lark-linux.deb
+        filename: lark-linux.deb
         url: https://sf16-sg.larksuitecdn.com/obj/lark-artifact-storage/2db0e538/Lark-linux_arm64-7.46.12.deb
         sha256: 8fbd67353a59d8214b228e3e6594c5ac10eeadf808c51c54747be7a3c8b6c0b3
         size: 372604336
