@@ -57,7 +57,7 @@ modules:
           type: json
           url: https://docs.qq.com/api/package/update
           version-query: .result.update_info | fromjson | .version
-          url-query: '"https://desktop.docs.qq.com/Installer/30001/\($version)/TencentDocs-arm64.deb"'
+          url-query: '"https://docs.qq.com/api/package/get?channel_id=30001&version_id=latest&package_name=TencentDocs-arm64.deb"'
       - type: extra-data
         only-arches: [x86_64]
         filename: docs.deb
@@ -68,7 +68,7 @@ modules:
           type: json
           url: https://docs.qq.com/api/package/update
           version-query: .result.update_info | fromjson | .version
-          url-query: '"https://desktop.docs.qq.com/Installer/30001/\($version)/TencentDocs-x64.deb"'
+          url-query: '"https://docs.qq.com/api/package/get?channel_id=30001&version_id=latest&package_name=TencentDocs-x64.deb"'
       - type: file
         path: com.qq.docs.metainfo.xml
       - type: file
