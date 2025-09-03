@@ -77,8 +77,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/venera-app/venera.git
-        tag: v1.4.6
-        commit: 1bc3fef47ba17413c5dd61d49a82d286115a2c85
+        tag: v1.5.0
+        commit: 50c6bec4cda66816ce535d2687df02581a95353b
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
