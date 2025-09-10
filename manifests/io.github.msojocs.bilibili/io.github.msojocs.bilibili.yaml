@@ -1,9 +1,9 @@
 app-id: io.github.msojocs.bilibili
 runtime: org.freedesktop.Platform
-runtime-version: '24.08'
+runtime-version: '25.08'
 sdk: org.freedesktop.Sdk
 base: org.electronjs.Electron2.BaseApp
-base-version: '24.08'
+base-version: '25.08'
 command: bilibili
 
 finish-args:
@@ -20,9 +20,10 @@ finish-args:
   # required to fix cursor scaling on wayland
   - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
   - --env=ELECTRON_OZONE_PLATFORM_HINT=auto
+
 add-extensions:
   org.freedesktop.Platform.electron:
-    version: '24.08'
+    version: '25.08'
     directory: electron
 
 cleanup:

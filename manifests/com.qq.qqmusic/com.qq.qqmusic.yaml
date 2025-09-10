@@ -1,9 +1,9 @@
 app-id: com.qq.qqmusic
 runtime: org.freedesktop.Platform
-runtime-version: '24.08'
+runtime-version: '25.08'
 sdk: org.freedesktop.Sdk
 base: org.electronjs.Electron2.BaseApp
-base-version: '24.08'
+base-version: '25.08'
 command: qqmusic
 
 finish-args:
@@ -20,7 +20,7 @@ finish-args:
   - --env=ELECTRON_OZONE_PLATFORM_HINT=auto
 add-extensions:
   org.freedesktop.Platform.electron:
-    version: '24.08'
+    version: '25.08'
     directory: electron
 
 cleanup:
