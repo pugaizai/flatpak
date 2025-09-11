@@ -41,13 +41,13 @@ modules:
     build-options:
       no-debuginfo: true
     build-commands:
-      - mkdir -p ${FLATPAK_DEST}/qqmusic
-      - mkdir -p ${FLATPAK_DEST}/electron
-      - install -Dm644 app.asar -t ${FLATPAK_DEST}/qqmusic
-      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
-      - install -Dm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications
-      - install -Dm644 ${FLATPAK_ID}.png -t ${FLATPAK_DEST}/share/icons/hicolor/256x256/apps/
-      - install -Dm755 qqmusic.sh ${FLATPAK_DEST}/bin/qqmusic
+      - mkdir -pv ${FLATPAK_DEST}/qqmusic
+      - mkdir -pv ${FLATPAK_DEST}/electron
+      - install -Dvm644 app.asar -t ${FLATPAK_DEST}/qqmusic
+      - install -Dvm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+      - install -Dvm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications
+      - install -Dvm644 ${FLATPAK_ID}.png -t ${FLATPAK_DEST}/share/icons/hicolor/256x256/apps/
+      - install -Dvm755 qqmusic.sh ${FLATPAK_DEST}/bin/qqmusic
     sources:
       - type: file
         path: com.qq.qqmusic.metainfo.xml

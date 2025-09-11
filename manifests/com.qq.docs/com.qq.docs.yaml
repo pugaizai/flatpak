@@ -40,12 +40,12 @@ modules:
     build-options:
       no-debuginfo: true
     build-commands:
-      - mkdir -p ${FLATPAK_DEST}/electron
-      - install -Dm644 ${FLATPAK_ID}.svg -t ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps
-      - install -Dm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications
-      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
-      - install -Dm755 tdappdesktop.sh ${FLATPAK_DEST}/bin/tdappdesktop
-      - install -Dm755 apply_extra.sh ${FLATPAK_DEST}/bin/apply_extra
+      - mkdir -pv ${FLATPAK_DEST}/electron
+      - install -Dvm644 ${FLATPAK_ID}.svg -t ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps
+      - install -Dvm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications
+      - install -Dvm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+      - install -Dvm755 tdappdesktop.sh ${FLATPAK_DEST}/bin/tdappdesktop
+      - install -Dvm755 apply_extra.sh ${FLATPAK_DEST}/bin/apply_extra
     sources:
       - type: extra-data
         only-arches: [aarch64]
@@ -83,7 +83,7 @@ modules:
             "--enable-wayland-ime" "--wayland-text-input-version=3" "$@"
       - type: script
         commands:
-          - bsdtar --to-stdout -xf docs.deb data.* | bsdtar -xf -
-          - mv opt/腾讯文档 ./docs
-          - rm -rf *.deb usr opt data.*
+          - bsdtar --to-stdout -xvf docs.deb data.* | bsdtar -xvf -
+          - mv -v opt/腾讯文档 ./docs
+          - rm -rv *.deb usr opt data.*
         dest-filename: apply_extra.sh

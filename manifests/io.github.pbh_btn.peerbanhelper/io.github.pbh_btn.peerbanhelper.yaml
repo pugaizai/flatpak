@@ -32,11 +32,11 @@ modules:
     build-options:
       no-debuginfo: true
     build-commands:
-      - install -Dm755 peerbanhelper -t ${FLATPAK_DEST}/bin/
-      - install -Dm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications/
-      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo/
-      - install -Dm644 ${FLATPAK_ID}.png -t ${FLATPAK_DEST}/share/icons/hicolor/256x256/apps/
-      - install -Dm755 apply_extra -t ${FLATPAK_DEST}/bin/
+      - install -Dvm755 peerbanhelper -t ${FLATPAK_DEST}/bin/
+      - install -Dvm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications/
+      - install -Dvm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo/
+      - install -Dvm644 ${FLATPAK_ID}.png -t ${FLATPAK_DEST}/share/icons/hicolor/256x256/apps/
+      - install -Dvm755 apply_extra -t ${FLATPAK_DEST}/bin/
     sources:
       - type: extra-data
         url: https://github.com/PBH-BTN/PeerBanHelper/releases/download/v8.0.12/peerbanhelper_8.0.12_all.deb
@@ -72,7 +72,7 @@ modules:
 
       - type: script
         commands:
-          - bsdtar --to-stdout -xf *.deb data.* | bsdtar -xf -
-          - mv usr/lib/peerbanhelper .
-          - rm -rf etc usr
+          - bsdtar --to-stdout -xvf *.deb data.* | bsdtar -xvf -
+          - mv -v usr/lib/peerbanhelper .
+          - rm -rv etc usr
         dest-filename: apply_extra

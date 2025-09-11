@@ -24,6 +24,7 @@ cleanup:
   - /share/doc
   - /share/gtk-doc
 modules:
+  - ../../extra-modules/flutter/flutter-sdk-3.24.5.json
   - name: jhentai
     buildsystem: simple
     build-options:
@@ -36,17 +37,17 @@ modules:
         aarch64:
           env:
             BUNDLE_PATH: build/linux/arm64/release/bundle
-      append-path: /usr/lib/sdk/llvm20/bin:/run/build/jhentai/flutter/bin
+      append-path: /usr/lib/sdk/llvm20/bin:/var/lib/flutter/bin
       prepend-ld-library-path: /usr/lib/sdk/llvm20/lib
       env:
         PUB_CACHE: /run/build/jhentai/.pub-cache
     build-commands:
       - flutter build linux --release --target lib/src/main.dart
-      - mkdir -p ${FLATPAK_DEST}/bin
-      - cp -r ${BUNDLE_PATH}/* ${FLATPAK_DEST}/bin
-      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
-      - install -Dm644 linux/assets/${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications
-      - install -Dm644 assets/icon/JHenTai_512.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
+      - mkdir -pv ${FLATPAK_DEST}/bin
+      - cp -rv ${BUNDLE_PATH}/* ${FLATPAK_DEST}/bin
+      - install -Dvm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+      - install -Dvm644 linux/assets/${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications
+      - install -Dvm644 assets/icon/JHenTai_512.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
     sources:
       - type: git
         url: https://github.com/jiangtian616/JHenTai.git
@@ -58,8 +59,3 @@ modules:
           is-main-source: true
       - type: file
         path: top.jtmonster.jhentai.metainfo.xml
-      - type: git
-        url: https://github.com/flutter/flutter.git
-        tag: 3.24.5
-        commit: dec2ee5c1f98f8e84a7d5380c05eb8a3d0a81668
-        dest: flutter

@@ -36,15 +36,15 @@ modules:
     build-options:
       no-debuginfo: true
     build-commands:
-      - install -Dm755 apply_extra.sh ${FLATPAK_DEST}/bin/apply_extra
-      - install -Dm755 wps.sh ${FLATPAK_DEST}/bin/wps
-      - ln -s wps ${FLATPAK_DEST}/bin/et
-      - ln -s wps ${FLATPAK_DEST}/bin/wpp
-      - ln -s wps ${FLATPAK_DEST}/bin/wpspdf
-      - install -Dm755 /usr/bin/desktop-file-edit -t ${FLATPAK_DEST}/bin/
-      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo/
-      - install -Dm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications/
-      - install -Dm644 ${FLATPAK_ID}.svg -t ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/
+      - install -Dvm755 apply_extra.sh ${FLATPAK_DEST}/bin/apply_extra
+      - install -Dvm755 wps.sh ${FLATPAK_DEST}/bin/wps
+      - ln -sv wps ${FLATPAK_DEST}/bin/et
+      - ln -sv wps ${FLATPAK_DEST}/bin/wpp
+      - ln -sv wps ${FLATPAK_DEST}/bin/wpspdf
+      - install -Dvm755 /usr/bin/desktop-file-edit -t ${FLATPAK_DEST}/bin/
+      - install -Dvm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo/
+      - install -Dvm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications/
+      - install -Dvm644 ${FLATPAK_ID}.svg -t ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/
     sources:
       - type: file
         path: apply_extra.sh

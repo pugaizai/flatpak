@@ -5,7 +5,7 @@ FLATPAK_ID="${FLATPAK_ID:-cn.wps.office}"
 
 mkdir -pv deb-package export/share
 
-bsdtar --to-stdout -xf wps-office.deb data.tar.xz | bsdtar -xf - -C deb-package
+bsdtar --to-stdout -xvf wps-office.deb data.tar.xz | bsdtar -xvf - -C deb-package
 
 mv -v deb-package/opt/kingsoft/wps-office .
 mv -v deb-package/usr/bin/{misc,wps,wpp,et,wpspdf} wps-office/

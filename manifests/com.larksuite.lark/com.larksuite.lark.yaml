@@ -42,11 +42,11 @@ modules:
     build-options:
       no-debuginfo: true
     build-commands:
-      - install -Dm755 lark -t ${FLATPAK_DEST}/bin
-      - install -Dm755 apply_extra -t ${FLATPAK_DEST}/bin
-      - install -Dm644 ${FLATPAK_ID}.svg -t ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps
-      - install -Dm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications
-      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+      - install -Dvm755 lark -t ${FLATPAK_DEST}/bin
+      - install -Dvm755 apply_extra -t ${FLATPAK_DEST}/bin
+      - install -Dvm644 ${FLATPAK_ID}.svg -t ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps
+      - install -Dvm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications
+      - install -Dvm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
     sources:
       - type: script
         commands:
@@ -56,10 +56,10 @@ modules:
         dest-filename: lark
       - type: script
         commands:
-          - bsdtar --to-stdout -xf lark-linux.deb data.tar.xz | bsdtar -xf -
-          - mv opt/bytedance/lark .
+          - bsdtar --to-stdout -xvf lark-linux.deb data.tar.xz | bsdtar -xvf -
+          - mv -v opt/bytedance/lark .
           - sed '/^exec -a/d' lark/bytedance-lark > lark/bytedance-lark.sh
-          - rm -rf opt usr *.deb
+          - rm -rv opt usr *.deb
         dest-filename: apply_extra
       - type: extra-data
         filename: lark-linux.deb

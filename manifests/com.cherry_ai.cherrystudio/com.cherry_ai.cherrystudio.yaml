@@ -39,17 +39,17 @@ modules:
     build-options:
       no-debuginfo: true
     build-commands:
-      - mkdir -p ${FLATPAK_DEST}/electron
-      - chmod +x Cherry-Studio.AppImage
+      - mkdir -pv ${FLATPAK_DEST}/electron
+      - chmod -v +x Cherry-Studio.AppImage
       - ./Cherry-Studio.AppImage --appimage-extract
-      - mv squashfs-root/resources ${FLATPAK_DEST}/cherrystudio
+      - mv -v squashfs-root/resources ${FLATPAK_DEST}/cherrystudio
       - desktop-file-edit --set-key="Icon" --set-value="com.cherry_ai.cherrystudio"
         --set-key="Categories" --set-value="Utility;Network;" --set-key="Exec" --set-value="cherrystudio
         %U" --remove-key="X-AppImage-Version" squashfs-root/cherrystudio.desktop
-      - install -Dm644 squashfs-root/cherrystudio.desktop ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
-      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
-      - install -Dm644 ${FLATPAK_ID}.png -t ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps
-      - install -Dm755 cherrystudio.sh ${FLATPAK_DEST}/bin/cherrystudio
+      - install -Dvm644 squashfs-root/cherrystudio.desktop ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
+      - install -Dvm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+      - install -Dvm644 ${FLATPAK_ID}.png -t ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps
+      - install -Dvm755 cherrystudio.sh ${FLATPAK_DEST}/bin/cherrystudio
     sources:
       - type: file
         only-arches: [x86_64]
