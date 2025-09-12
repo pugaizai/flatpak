@@ -1,8 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Simple Live
-Icon=io.github.slotsun.simplelive
-Exec=simple_live_app %U
-Categories=AudioVideo;Audio;Video;Network;
-Keywords=SimpleLive;
-StartupNotify=true

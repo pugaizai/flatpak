@@ -20,7 +20,6 @@ jobs:
           - io.github.venera_app.venera
           - io.github.wgh136.pixes
           - top.jtmonster.jhentai
-          - io.github.slotsun.simplelive
           - cn.wps.office
           - com.qq.docs
           - com.qq.weixin

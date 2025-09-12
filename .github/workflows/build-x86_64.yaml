@@ -41,7 +41,6 @@ jobs:
             "manifests/com.cherry_ai.cherrystudio/com.cherry_ai.cherrystudio.yaml"
             "manifests/io.github.wgh136.pixes/io.github.wgh136.pixes.yaml"
             "manifests/io.github.venera_app.venera/io.github.venera_app.venera.yaml"
-            "manifests/io.github.slotsun.simplelive/io.github.slotsun.simplelive.yaml"
             "manifests/top.jtmonster.jhentai/top.jtmonster.jhentai.yaml"
             "manifests/com.qq.weixin/com.qq.weixin.yaml"
             "manifests/cn.wps.office/cn.wps.office.yaml"
