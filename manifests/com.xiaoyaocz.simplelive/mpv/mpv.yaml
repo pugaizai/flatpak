@@ -101,6 +101,7 @@ modules:
   - name: uchardet
     buildsystem: cmake-ninja
     config-opts:
+      - -DCMAKE_POLICY_VERSION_MINIMUM=3.5
       - -DCMAKE_BUILD_TYPE=Release
       - -DBUILD_STATIC=0
     sources:
@@ -111,8 +112,6 @@ modules:
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
-      - type: patch
-        path: patches/uchardet-cmake.patch
 
   - name: zimg
     config-opts:

@@ -24,7 +24,6 @@ cleanup:
   - /share/doc
   - /share/gtk-doc
 modules:
-  - ../../extra-modules/flutter/flutter-sdk-3.35.3.json
   - name: pixes
     buildsystem: simple
     build-options:
@@ -37,7 +36,7 @@ modules:
         aarch64:
           env:
             BUNDLE_PATH: build/linux/arm64/release/bundle
-      append-path: /usr/lib/sdk/llvm20/bin:/var/lib/flutter/bin
+      append-path: /usr/lib/sdk/llvm20/bin:/run/build/pixes/flutter/bin
       prepend-ld-library-path: /usr/lib/sdk/llvm20/lib
       env:
         PUB_CACHE: /run/build/pixes/.pub-cache
@@ -62,3 +61,11 @@ modules:
           is-main-source: true
       - type: file
         path: io.github.wgh136.pixes.metainfo.xml
+      - type: git
+        url: https://github.com/flutter/flutter.git
+        tag: 3.35.3
+        commit: a402d9a4376add5bc2d6b1e33e53edaae58c07f8
+        dest: flutter
+        x-checker-data:
+          type: git
+          tag-pattern: ^([\d.]+)$
