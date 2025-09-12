@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=Simple Live
-Icon=com.xiaoyaocz.simplelive
+Icon=io.github.slotsun.simplelive
 Exec=simple_live_app %U
 Categories=AudioVideo;Audio;Video;Network;
 Keywords=SimpleLive;
