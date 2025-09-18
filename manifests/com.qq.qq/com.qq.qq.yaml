@@ -80,30 +80,6 @@ modules:
       - type: file
         path: patch/rename.cpp
 
-  - name: oniguruma
-    buildsystem: autotools
-    sources:
-      - type: archive
-        url: https://github.com/kkos/oniguruma/releases/download/v6.9.10/onig-6.9.10.tar.gz
-        sha256: 2a5cfc5ae259e4e97f86b68dfffc152cdaffe94e2060b770cb827238d769fc05
-        x-checker-data:
-          type: anitya
-          project-id: 11184
-          stable-only: true
-          url-template: https://github.com/kkos/oniguruma/releases/download/v${version}/onig-${version}.tar.gz
-
-  - name: jq
-    buildsystem: autotools
-    sources:
-      - type: archive
-        url: https://github.com/stedolan/jq/releases/download/jq-1.8.1/jq-1.8.1.tar.gz
-        sha256: 2be64e7129cecb11d5906290eba10af694fb9e3e7f9fc208a311dc33ca837eb0
-        x-checker-data:
-          type: anitya
-          project-id: 13252
-          stable-only: true
-          url-template: https://github.com/stedolan/jq/releases/download/jq-${version}/jq-${version}.tar.gz
-
   - name: qq
     buildsystem: simple
     build-options:
@@ -128,8 +104,6 @@ modules:
           - bsdtar --to-stdout -xvf qq.deb data.* | bsdtar -xvf -
           - mv -v opt/QQ .
           - rm -rv qq.deb usr opt
-          - jq '.desktopName |= "com.qq.QQ.desktop"' QQ/resources/app/package.json > tmp.json
-          - mv tmp.json QQ/resources/app/package.json
         dest-filename: apply_extra.sh
 
       - type: file
