@@ -52,6 +52,15 @@ modules:
         tag: v4.4.0
         commit: b6a17e567f143fab49734a9e09e5bafeb6f97354
 
+  # Remove execstack from shared libraries
+  - name: patchelf
+    sources:
+      - type: archive
+        url: https://github.com/NixOS/patchelf/releases/download/0.18.0/patchelf-0.18.0.tar.gz
+        sha256: 64de10e4c6b8b8379db7e87f58030f336ea747c0515f381132e810dbf84a86e7
+    cleanup:
+      - /share
+
   - name: wechat
     buildsystem: simple
     build-options:
@@ -69,6 +78,7 @@ modules:
           - bsdtar -O -xvf wechat.deb data.* | bsdtar --no-same-owner -xvf -
           - mv -v opt/wechat wechat
           - rm -rv wechat.deb usr opt
+          - patchelf --clear-execstack wechat/libandromeda.so wechat/libowl.so wechat/libvoipCodec.so
         dest-filename: apply_extra
 
       - type: script
