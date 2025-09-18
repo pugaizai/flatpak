@@ -44,7 +44,7 @@ modules:
         commands:
           - bsdtar --to-stdout -xvf reeden.deb data.* | bsdtar -xvf -
           - mv -v usr/share/reeden .
-          - rm -rv reeden.deb usr data.*
+          - rm -rv reeden.deb usr
         dest-filename: apply_extra.sh
 
       - type: file

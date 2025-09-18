@@ -85,5 +85,5 @@ modules:
         commands:
           - bsdtar --to-stdout -xvf docs.deb data.* | bsdtar -xvf -
           - mv -v opt/腾讯文档 ./docs
-          - rm -rv *.deb usr opt data.*
+          - rm -rv *.deb usr opt
         dest-filename: apply_extra.sh

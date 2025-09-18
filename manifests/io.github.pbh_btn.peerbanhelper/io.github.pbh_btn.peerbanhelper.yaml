@@ -72,7 +72,7 @@ modules:
 
       - type: script
         commands:
-          - bsdtar --to-stdout -xvf *.deb data.* | bsdtar -xvf -
+          - bsdtar --to-stdout -xvf peerbanhelper.deb data.* | bsdtar -xvf -
           - mv -v usr/lib/peerbanhelper .
           - rm -rv etc usr
         dest-filename: apply_extra
