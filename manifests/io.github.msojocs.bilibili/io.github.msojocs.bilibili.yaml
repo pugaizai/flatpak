@@ -45,8 +45,7 @@ modules:
     build-commands:
       - mkdir -pv ${FLATPAK_DEST}/electron
       - bsdtar -xvf bilibili.tar.gz
-      - install -Dvm644 app/app.asar -t ${FLATPAK_DEST}/bilibili/
-      - mv -v app/extensions ${FLATPAK_DEST}/bilibili/
+      - mv -v app ${FLATPAK_DEST}/bilibili
       - desktop-file-edit --set-key="Icon" --set-value="io.github.msojocs.bilibili"
         ${FLATPAK_ID}.desktop
       - install -Dvm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications/
