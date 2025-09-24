@@ -44,9 +44,7 @@ modules:
       no-debuginfo: true
     build-commands:
       - mkdir -pv ${FLATPAK_DEST}/electron
-      - bsdtar -xvf bilibili.tar.gz
-      - install -Dvm644 app/app.asar -t ${FLATPAK_DEST}/bilibili/
-      - mv -v app/extensions ${FLATPAK_DEST}/bilibili/
+      - install -Dvm755 apply_extra -t ${FLATPAK_DEST}/bin/
       - desktop-file-edit --set-key="Icon" --set-value="io.github.msojocs.bilibili"
         ${FLATPAK_ID}.desktop
       - install -Dvm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications/
@@ -54,10 +52,11 @@ modules:
       - install -Dvm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo/
       - install -Dvm755 bilibili.sh ${FLATPAK_DEST}/bin/bilibili
     sources:
-      - type: file
+      - type: extra-data
         url: https://github.com/msojocs/bilibili-linux/releases/download/v1.17.2-1/bilibili-asar-v1.17.2-1.tar.gz
         sha256: 37167e8dada64f2134486b53ae6f9d87bcbae28ed7a6be47f16ac2bd84febd18
-        dest-filename: bilibili.tar.gz
+        filename: bilibili.tar.gz
+        size: 57403259
         x-checker-data:
           type: json
           url: https://api.github.com/repos/msojocs/bilibili-linux/releases/latest
@@ -81,5 +80,11 @@ modules:
         dest-filename: bilibili.sh
         commands:
           - export TMPDIR=${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}
-          - exec zypak-wrapper "/app/electron/electron" "/app/bilibili/app.asar" "--enable-features=UseOzonePlatform" "--ozone-platform=wayland" "--enable-wayland-ime"
+          - exec zypak-wrapper "/app/electron/electron" "/app/extra/bilibili/app.asar" "--enable-features=UseOzonePlatform" "--ozone-platform=wayland" "--enable-wayland-ime"
             "--wayland-text-input-version=3" "$@"
+      - type: script
+        dest-filename: apply_extra
+        command:
+          - bsdtar -xvf bilibili.tar.gz
+          - mv -v app bilibili
+          - rm -rv bin bilibili.tar.gz
