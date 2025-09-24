@@ -70,7 +70,7 @@ modules:
         path: io.github.msojocs.bilibili.metainfo.xml
       - type: file
         url: https://raw.githubusercontent.com/msojocs/bilibili-linux/refs/heads/master/res/bilibili.desktop
-        sha256: 4dc040a5c0a341a9ca75ce2b1d2fa3a4034c4d0d851f0ff94d257a81cfbba2c0
+        sha256: a268288afe4a5803b850425f4c0796c47e9e95c2c74b57b9ae7b49951f24c011
         dest-filename: io.github.msojocs.bilibili.desktop
       - type: file
         url: https://raw.githubusercontent.com/msojocs/bilibili-linux/refs/heads/master/res/icons/bilibili.svg
