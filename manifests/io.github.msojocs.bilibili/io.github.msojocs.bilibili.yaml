@@ -84,7 +84,7 @@ modules:
             "--wayland-text-input-version=3" "$@"
       - type: script
         dest-filename: apply_extra
-        command:
+        commands:
           - bsdtar -xvf bilibili.tar.gz
           - mv -v app bilibili
           - rm -rv bin bilibili.tar.gz
