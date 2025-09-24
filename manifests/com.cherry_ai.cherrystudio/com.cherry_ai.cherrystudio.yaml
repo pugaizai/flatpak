@@ -14,7 +14,6 @@ finish-args:
   - --system-talk-name=org.chromium.bluetooth.Manager
   # required to fix cursor scaling on wayland
   - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
-  - --env=ELECTRON_OZONE_PLATFORM_HINT=auto
 
 add-extensions:
   org.freedesktop.Platform.electron:
@@ -80,4 +79,4 @@ modules:
         commands:
           - export TMPDIR=${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}
           - exec zypak-wrapper "/app/electron/electron" "/app/cherrystudio/app.asar"
-            "--enable-wayland-ime" "--wayland-text-input-version=3" "$@"
+            "--enable-features=UseOzonePlatform" "--ozone-platform=wayland" "--enable-wayland-ime" "--wayland-text-input-version=3" "$@"
