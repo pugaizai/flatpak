@@ -1,7 +1,10 @@
 name: Build x86_64
 
 on:
-  workflow_dispatch
+  workflow_dispatch:
+  schedule:
+    # 每周日的午夜0点运行（每7天）
+    - cron: '0 0 * * 0'
 
 # 如果前一个工作流仍在运行，当我们再次推送时，将取消前一个工作流
 concurrency:
