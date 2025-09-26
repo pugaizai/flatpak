@@ -10,9 +10,7 @@ copy-icon: true
 finish-args:
   - --device=dri
   - --filesystem=host
-  - --share=ipc
   - --share=network
-  - --socket=fallback-x11
   - --socket=wayland
   - --system-talk-name=org.freedesktop.login1
   - --system-talk-name=org.freedesktop.UPower
@@ -20,6 +18,7 @@ finish-args:
   - --talk-name=org.freedesktop.ScreenSaver
   - --talk-name=org.freedesktop.PowerManagement
   - --talk-name=org.gnome.SessionManager
+  - --talk-name=org.ayatana.indicator.application
   - --talk-name=org.kde.StatusNotifierWatcher
 cleanup:
   - '*.a'
@@ -53,11 +52,8 @@ modules:
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
-      - -DBUILD_SHARED_LIBS=OFF
       - -DCMAKE_BUILD_TYPE=Release
-      - -DCMAKE_CXX_STANDARD=20
       - -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON
-      - -Ddeprecated-functions=OFF
     sources:
       - type: git
         url: https://github.com/arvidn/libtorrent.git
@@ -73,7 +69,6 @@ modules:
     config-opts:
       - -DCMAKE_BUILD_TYPE=Release
       - -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON
-      - -DGUI=ON
     sources:
       - type: git
         url: https://github.com/c0re100/qBittorrent-Enhanced-Edition.git
