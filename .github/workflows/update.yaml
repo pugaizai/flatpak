@@ -15,7 +15,9 @@ jobs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - uses: actions/checkout@v5
-      - name: 生成应用矩阵
+      - name: Installing jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+      - name: Generating app matrix
         id: set-matrix
         run: |
           # 查找所有有效的应用清单
@@ -28,10 +30,12 @@ jobs:
             fi
           done
           
-          # 转换为 JSON 数组格式
-          matrix_json=$(printf '%s\n' "${apps[@]}" | jq -R . | jq -s .)
-          echo "matrix={\"appid\":$matrix_json}" >> $GITHUB_OUTPUT
           echo "找到 ${#apps[@]} 个应用: ${apps[*]}"
+          
+          # 使用 jq 正确生成 JSON
+          matrix_json=$(printf '%s\n' "${apps[@]}" | jq -R -n -c '[inputs] | {appid: .}')
+          echo "生成的矩阵: $matrix_json"
+          echo "matrix=$matrix_json" >> $GITHUB_OUTPUT
 
   check-update:
     needs: generate-matrix
