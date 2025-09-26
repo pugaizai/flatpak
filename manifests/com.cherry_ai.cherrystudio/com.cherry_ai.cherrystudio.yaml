@@ -52,8 +52,8 @@ modules:
     sources:
       - type: file
         only-arches: [x86_64]
-        url: https://github.com/CherryHQ/cherry-studio/releases/download/v1.5.11/Cherry-Studio-1.5.11-x86_64.AppImage
-        sha256: 07df58f037f1cb8091530dee0b91b85d0b2fb13c23cc9608d61935db7b32c25a
+        url: https://github.com/CherryHQ/cherry-studio/releases/download/v1.6.1/Cherry-Studio-1.6.1-x86_64.AppImage
+        sha256: 950613e9713de1cba19d0c9105d16e11efeb1c4a4545e6cf538902c8f885ecb2
         dest-filename: Cherry-Studio.AppImage
         x-checker-data:
           type: json
@@ -62,8 +62,8 @@ modules:
           url-query: .assets[] | select(.name | endswith("x86_64.AppImage")) | .browser_download_url
       - type: file
         only-arches: [aarch64]
-        url: https://github.com/CherryHQ/cherry-studio/releases/download/v1.5.11/Cherry-Studio-1.5.11-arm64.AppImage
-        sha256: b850bdc556a97240ddd47617bf5f046029e0a64690011b77de32343aa668fe68
+        url: https://github.com/CherryHQ/cherry-studio/releases/download/v1.6.1/Cherry-Studio-1.6.1-arm64.AppImage
+        sha256: 1ffd153ee65f94ad87869402934890e56e045eec55b750b9892cf3b775575811
         dest-filename: Cherry-Studio.AppImage
         x-checker-data:
           type: json
@@ -79,4 +79,5 @@ modules:
         commands:
           - export TMPDIR=${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}
           - exec zypak-wrapper "/app/electron/electron" "/app/cherrystudio/app.asar"
-            "--enable-features=UseOzonePlatform" "--ozone-platform=wayland" "--enable-wayland-ime" "--wayland-text-input-version=3" "$@"
+            "--enable-features=UseOzonePlatform" "--ozone-platform=wayland" "--enable-wayland-ime"
+            "--wayland-text-input-version=3" "$@"
