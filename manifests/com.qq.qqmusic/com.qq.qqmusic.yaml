@@ -57,8 +57,8 @@ modules:
         path: com.qq.qqmusic.png
       - type: file
         dest-filename: app.asar
-        url: https://q.askk.cc/qqmusic_1.1.7-1.asar
-        sha256: 08a67db579fd49b4f644573a8c17efde822419791e24c37d84aaf455b30843a0
+        url: https://q.askk.cc/qqmusic_1.1.8-1.asar
+        sha256: 3d675f5dff41b3371d88d5ddbae39d0ad599b04d75a3d7eb50ab0f9b4244f0cd
       - type: script
         dest-filename: qqmusic.sh
         commands:
