@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Cherry Studio
+Exec=cherrystudio %U
+Terminal=false
+Type=Application
+Icon=com.cherry_ai.cherrystudio
+StartupWMClass=CherryStudio
+Comment=A powerful AI assistant for producer.
+MimeType=x-scheme-handler/cherrystudio;x-scheme-handler/cherrystudio;
+Categories=Utility;Network;
+X-Desktop-File-Install-Version=0.28
