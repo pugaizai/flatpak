@@ -63,5 +63,6 @@ modules:
         dest-filename: qqmusic.sh
         commands:
           - export TMPDIR=${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}
-          - exec zypak-wrapper "/app/electron/electron" "/app/qqmusic/app.asar" "--enable-features=UseOzonePlatform" "--ozone-platform=wayland"
-            "--enable-wayland-ime" "--wayland-text-input-version=3" "$@"
+          - exec zypak-wrapper "/app/electron/electron" "/app/qqmusic/app.asar"
+            "--enable-features=UseOzonePlatform" "--ozone-platform=wayland" "--enable-wayland-ime"
+            "--wayland-text-input-version=3" "$@"
