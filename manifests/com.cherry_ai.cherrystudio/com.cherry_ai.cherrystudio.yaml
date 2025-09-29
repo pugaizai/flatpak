@@ -33,6 +33,22 @@ cleanup:
   - /share/gtk-doc
 
 modules:
+  - name: p7zip
+    no-autogen: true
+    make-args:
+      - 7z
+    sources:
+      - type: git
+        url: https://github.com/p7zip-project/p7zip
+        tag: v17.06
+        commit: d9c3d157c62e842897d4447db717f813810e1423
+        x-checker-data:
+          type: git
+          tag-pattern: ^v([\d.]+)$
+      - type: shell
+        commands:
+          - sed -i 's|/usr/local|/app|g' makefile.common
+
   - name: cherrystudio
     buildsystem: simple
     build-options:
@@ -76,10 +92,9 @@ modules:
       - type: script
         dest-filename: apply_extra.sh
         commands:
-          - chmod -v +x ./Cherry-Studio.AppImage
-          - ./Cherry-Studio.AppImage --appimage-extract
-          - mv -v squashfs-root/resources ./cherrystudio
-          - rm -rv squashfs-root Cherry-Studio.AppImage
+          - 7z x ./Cherry-Studio.AppImage -otemp
+          - mv -v temp/resources ./cherrystudio
+          - rm -rv temp Cherry-Studio.AppImage
       - type: script
         dest-filename: cherrystudio.sh
         commands:
