@@ -2,11 +2,10 @@
 Name=WeChat
 Name[zh_CN]=微信
 Exec=wechat %U
+StartupNotify=true
 Terminal=false
-Type=Application
 Icon=com.qq.weixin
-StartupWMClass=WeChat
+Type=Application
 Categories=Network;
 Comment=WeChat Desktop
 Comment[zh_CN]=微信桌面版
-Keywords=wechat;weixin;
