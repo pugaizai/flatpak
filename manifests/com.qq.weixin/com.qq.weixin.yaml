@@ -42,22 +42,31 @@ cleanup:
   - /share/gtk-doc
 
 modules:
-  # Need libtiff.so.5
-  - name: tiff
-    only-arches: [aarch64]
-    buildsystem: cmake-ninja
+  - name: kerberos
+    subdir: src
+    config-opts:
+      - --disable-static
+      - --disable-rpath
     sources:
-      - type: git
-        url: https://gitlab.com/libtiff/libtiff.git
-        tag: v4.4.0
-        commit: b6a17e567f143fab49734a9e09e5bafeb6f97354
+      - type: archive
+        url: https://kerberos.org/dist/krb5/1.22/krb5-1.22.1.tar.gz
+        sha256: 1a8832b8cad923ebbf1394f67e2efcf41e3a49f460285a66e35adec8fa0053af
+        x-checker-data:
+          type: anitya
+          project-id: 13287
+          stable-only: true
+          url-template: https://kerberos.org/dist/krb5/${version0}.${version1}/krb5-${version0}.${version1}.${version2}.tar.gz
 
-  # Remove execstack from shared libraries
   - name: patchelf
     sources:
       - type: archive
         url: https://github.com/NixOS/patchelf/releases/download/0.18.0/patchelf-0.18.0.tar.gz
         sha256: 64de10e4c6b8b8379db7e87f58030f336ea747c0515f381132e810dbf84a86e7
+        x-checker-data:
+          type: anitya
+          project-id: 2598
+          stable-only: true
+          url-template: https://github.com/NixOS/patchelf/releases/download/$version/patchelf-$version.tar.gz
     cleanup:
       - /share
 
