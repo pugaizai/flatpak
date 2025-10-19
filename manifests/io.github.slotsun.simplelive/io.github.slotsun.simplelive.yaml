@@ -1,0 +1,71 @@
+app-id: io.github.slotsun.simplelive
+runtime: org.freedesktop.Platform
+runtime-version: '25.08'
+sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.llvm20
+command: simple_live_app
+finish-args:
+  - --socket=wayland
+  - --socket=pulseaudio
+  - --share=network
+  - --device=dri
+  - --talk-name=org.freedesktop.ScreenSaver
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/doc
+  - /share/gtk-docmodules
+
+modules:
+  - mpv/mpv.yaml
+  - name: simplelive
+    buildsystem: simple
+    build-options:
+      build-args:
+        - --share=network
+      arch:
+        x86_64:
+          env:
+            BUNDLE_PATH: simple_live_app/build/linux/x64/release/bundle
+        aarch64:
+          env:
+            BUNDLE_PATH: simple_live_app/build/linux/arm64/release/bundle
+      append-path: /usr/lib/sdk/llvm20/bin:/run/build/simplelive/flutter/bin
+      prepend-ld-library-path: /usr/lib/sdk/llvm20/lib
+      env:
+        PUB_CACHE: /run/build/simplelive/.pub-cache
+    build-commands:
+      - cd simple_live_app && flutter build linux --release
+      - install -dvm755 ${FLATPAK_DEST}/bin
+      - cp -av ${BUNDLE_PATH}/* ${FLATPAK_DEST}/bin
+      - install -Dvm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+      - install -Dvm644 assets/images/logo.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
+      - install -Dvm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications
+    sources:
+      - type: git
+        url: https://github.com/SlotSun/dart_simple_live
+        tag: v1.7.18
+        commit: 2ede72cffc9d87f38dd249a983ba6a0964d98749
+        x-checker-data:
+          type: git
+          tag-pattern: ^v([\d.]+)$
+          is-main-source: true
+      - type: file
+        path: io.github.slotsun.simplelive.metainfo.xml
+      - type: file
+        path: io.github.slotsun.simplelive.desktop
+      - type: git
+        url: https://github.com/flutter/flutter.git
+        tag: 3.35.6
+        commit: 9f455d2486bcb28cad87b062475f42edc959f636
+        dest: flutter
+        x-checker-data:
+          type: git
+          tag-pattern: ^([\d.]+)$

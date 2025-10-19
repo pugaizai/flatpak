@@ -65,7 +65,7 @@ modules:
       - flutter build linux --release
       - mkdir -pv ${FLATPAK_DEST}/bin
       - mkdir -pv ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps
-      - cp -rv ${BUNDLE_PATH}/* ${FLATPAK_DEST}/bin
+      - cp -av ${BUNDLE_PATH}/* ${FLATPAK_DEST}/bin
       - install -Dvm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
       - ffmpeg -i debian/gui/venera.png -vf "scale=512:512:force_original_aspect_ratio=decrease:flags=lanczos" -compression_level 10 ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
       - install -Dvm644 debian/gui/venera.desktop ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
