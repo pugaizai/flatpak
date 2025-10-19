@@ -7,8 +7,9 @@ command: reeden
 finish-args:
   - --share=network
   - --socket=wayland
+  - --socket=pulseaudio
   - --device=dri
-  - --system-talk-name=org.freedesktop.NetworkManager
+  - --own-name=app.reeden
 
 cleanup:
   - '*.a'
@@ -23,6 +24,21 @@ cleanup:
   - /share/gtk-doc
 
 modules:
+  - name: curl
+    buildsystem: autotools
+    config-opts:
+      - --with-openssl
+      - --enable-versioned-symbols
+    sources:
+      - type: archive
+        url: https://github.com/curl/curl/releases/download/curl-8_16_0/curl-8.16.0.tar.xz
+        sha256: 40c8cddbcb6cc6251c03dea423a472a6cea4037be654ba5cf5dec6eb2d22ff1d
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/curl/curl/releases/latest
+          version-query: .tag_name | sub("^curl-"; "") | gsub("_"; ".")
+          url-query: .assets[] | select(.name=="curl-" + $version + ".tar.xz") | .browser_download_url
+
   - name: reeden
     buildsystem: simple
     build-options:
@@ -36,7 +52,6 @@ modules:
     sources:
       - type: script
         commands:
-          - export TMPDIR="${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}"
           - exec "/app/extra/reeden/reeden" "$@"
         dest-filename: reeden.sh
 
