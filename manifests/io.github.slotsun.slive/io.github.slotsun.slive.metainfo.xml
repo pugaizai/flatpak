@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
-  <id>io.github.slotsun.simplelive</id>
-  <launchable type="desktop-id">io.github.slotsun.simplelive.desktop</launchable>
-  <name>Simple Live</name>
+  <id>io.github.slotsun.slive</id>
+  <launchable type="desktop-id">io.github.slotsun.slive.desktop</launchable>
+  <name>Slive</name>
   <developer id="io.github.slotsun">
     <name>SlotSun</name>
   </developer>
-  <summary>Simply watch live streaming</summary>
-  <summary xml:lang="zh_CN">简简单单的看直播</summary>
+  <summary>Watch live streams simply</summary>
+  <summary xml:lang="zh_CN">简简单单看直播</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0</project_license>
   <url type="homepage">https://github.com/SlotSun/dart_simple_live/</url>
   <url type="bugtracker">https://github.com/SlotSun/dart_simple_live/issues</url>
   <description>
-    <p>Simple Live is a lightweight and user-friendly application for watching live streams across multiple platforms, offering a seamless viewing experience with support for popular streaming services.</p>
-    <p xml:lang="zh_CN">Simple Live 是一款轻量级且用户友好的直播观看应用，支持多个主流直播平台，提供流畅的观看体验。</p>
-    <p>Simple Live support platforms:</p>
+    <p>Slive is a lightweight and user-friendly application for watching live streams across multiple platforms, offering a seamless watching experience with support for popular streaming services.</p>
+    <p xml:lang="zh_CN">Slive 是一款轻量级且用户友好的直播观看应用，支持多个主流直播平台，提供流畅的观看体验。</p>
+    <p>Slive support platforms:</p>
     <p xml:lang="zh_CN">支持直播平台：</p>
     <ul>
         <li>Huya</li>

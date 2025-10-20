@@ -75,51 +75,7 @@ sources:
       tag-pattern: ^v([\d.]+)$
 
 modules:
-  - name: libXpresent
-    buildsystem: autotools
-    sources:
-      - type: git
-        url: https://gitlab.freedesktop.org/xorg/lib/libxpresent.git
-        tag: libXpresent-1.0.2
-        commit: 4d92149372461bf575e8a09b1064a2884c38c3aa
-        x-checker-data:
-          type: git
-          tag-pattern: ^libXpresent-([\d.]+)$
-
-  - name: libass
-    config-opts:
-      - --disable-static
-    sources:
-      - type: git
-        url: https://github.com/libass/libass.git
-        tag: 0.17.4
-        commit: bbb3c7f1570a4a021e52683f3fbdf74fe492ae84
-        x-checker-data:
-          type: git
-          tag-pattern: ^([\d.]+)$
-
-  - name: libdisplay-info
-    buildsystem: meson
-    sources:
-      - type: git
-        url: https://gitlab.freedesktop.org/emersion/libdisplay-info.git
-        tag: 0.3.0
-        commit: 47a5590e9c4eb35d67651b8c05a55f1a48259329
-        x-checker-data:
-          type: git
-          tag-pattern: ^([\d.]+)$
-    modules:
-      - name: hwdata
-        buildsystem: autotools
-        sources:
-          - type: git
-            url: https://github.com/vcrhonek/hwdata.git
-            tag: v0.400
-            commit: f5ce55230206fd647bbcae42012094eb04640740
-            x-checker-data:
-              type: git
-              tag-pattern: ^v([\d.]+)$
-
+  # Hard dependency of mpv
   - name: libplacebo
     buildsystem: meson
     config-opts:
@@ -185,3 +141,51 @@ modules:
             x-checker-data:
               type: git
               tag-pattern: ^vulkan-sdk-([\d.]+)$
+
+  # Hard dependency of mpv
+  - name: libass
+    config-opts:
+      - --disable-static
+    sources:
+      - type: git
+        url: https://github.com/libass/libass.git
+        tag: 0.17.4
+        commit: bbb3c7f1570a4a021e52683f3fbdf74fe492ae84
+        x-checker-data:
+          type: git
+          tag-pattern: ^([\d.]+)$
+
+  # X11
+  - name: libXpresent
+    buildsystem: autotools
+    sources:
+      - type: git
+        url: https://gitlab.freedesktop.org/xorg/lib/libxpresent.git
+        tag: libXpresent-1.0.2
+        commit: 4d92149372461bf575e8a09b1064a2884c38c3aa
+        x-checker-data:
+          type: git
+          tag-pattern: ^libXpresent-([\d.]+)$
+
+  # Hardware acceleration
+  - name: libdisplay-info
+    buildsystem: meson
+    sources:
+      - type: git
+        url: https://gitlab.freedesktop.org/emersion/libdisplay-info.git
+        tag: 0.3.0
+        commit: 47a5590e9c4eb35d67651b8c05a55f1a48259329
+        x-checker-data:
+          type: git
+          tag-pattern: ^([\d.]+)$
+    modules:
+      - name: hwdata
+        buildsystem: autotools
+        sources:
+          - type: git
+            url: https://github.com/vcrhonek/hwdata.git
+            tag: v0.400
+            commit: f5ce55230206fd647bbcae42012094eb04640740
+            x-checker-data:
+              type: git
+              tag-pattern: ^v([\d.]+)$
