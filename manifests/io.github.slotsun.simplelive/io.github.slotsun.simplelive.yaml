@@ -24,6 +24,7 @@ cleanup:
   - /share/gtk-docmodules
 
 modules:
+  - mpv/mpv.yaml
   - name: simplelive
     buildsystem: simple
     build-options:
@@ -50,8 +51,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/SlotSun/dart_simple_live
-        # tag: v1.7.18
-        commit: 3ddf930f9f98be82f776b1964f5cc0ac8bcf879f
+        tag: v1.7.18
+        commit: 2ede72cffc9d87f38dd249a983ba6a0964d98749
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
