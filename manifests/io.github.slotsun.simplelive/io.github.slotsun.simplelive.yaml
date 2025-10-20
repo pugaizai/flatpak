@@ -24,7 +24,6 @@ cleanup:
   - /share/gtk-docmodules
 
 modules:
-  - mpv/mpv.yaml
   - name: simplelive
     buildsystem: simple
     build-options:
@@ -46,13 +45,13 @@ modules:
       - install -dvm755 ${FLATPAK_DEST}/bin
       - cp -av ${BUNDLE_PATH}/* ${FLATPAK_DEST}/bin
       - install -Dvm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
-      - install -Dvm644 assets/images/logo.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
+      - install -Dvm644 simple_live_app/assets/images/logo.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
       - install -Dvm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications
     sources:
       - type: git
         url: https://github.com/SlotSun/dart_simple_live
         # tag: v1.7.18
-        commit: 22f403e539a8e00fe7f1b06aa2d1d4f43ca21023
+        commit: 3ddf930f9f98be82f776b1964f5cc0ac8bcf879f
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
