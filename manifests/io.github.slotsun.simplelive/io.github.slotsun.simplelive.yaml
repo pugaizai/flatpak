@@ -52,11 +52,12 @@ modules:
       - type: git
         url: https://github.com/SlotSun/dart_simple_live
         # tag: v1.7.18
-        commit: 22f403e539a8e00fe7f1b06aa2d1d4f43ca21023
+        commit: 81572aaec9807f4b47c8bb9c3a610a53fa97918b
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
           is-main-source: true
+        tag: v1.8.6
       - type: file
         path: io.github.slotsun.simplelive.metainfo.xml
       - type: file
