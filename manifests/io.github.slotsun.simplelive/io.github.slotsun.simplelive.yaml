@@ -56,6 +56,8 @@ modules:
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
+          versions:
+            < : 1.8.0
           is-main-source: true
       - type: file
         path: io.github.slotsun.simplelive.metainfo.xml
