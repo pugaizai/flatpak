@@ -3,7 +3,7 @@ runtime: org.gnome.Platform
 runtime-version: '49'
 sdk: org.gnome.Sdk
 sdk-extensions:
-  - org.freedesktop.Sdk.Extension.llvm20
+  - org.freedesktop.Sdk.Extension.llvm21
 command: venera
 finish-args:
   - --socket=wayland
@@ -55,8 +55,8 @@ modules:
         aarch64:
           env:
             BUNDLE_PATH: build/linux/arm64/release/bundle
-      append-path: /var/lib/rustup/bin:/usr/lib/sdk/llvm20/bin:/run/build/venera/flutter/bin
-      prepend-ld-library-path: /usr/lib/sdk/llvm20/lib
+      append-path: /var/lib/rustup/bin:/usr/lib/sdk/llvm21/bin:/run/build/venera/flutter/bin
+      prepend-ld-library-path: /usr/lib/sdk/llvm21/lib
       env:
         RUSTUP_HOME: /var/lib/rustup
         CARGO_HOME: /var/lib/rustup
