@@ -53,20 +53,16 @@ modules:
         url: https://github.com/SlotSun/dart_simple_live
         # tag: v1.7.18
         commit: 2bd05e57a772adfd2b4540a783509c0b524c1f3f
-        x-checker-data:
-          type: git
-          tag-pattern: ^v([\d.]+)$
-          versions:
-            < : 1.8.0
-          is-main-source: true
-      - type: file
-        path: io.github.slotsun.slive.metainfo.xml
-      - type: file
-        path: io.github.slotsun.slive.desktop
+        # x-checker-data:
+        #   type: git
+        #   tag-pattern: ^v([\d.]+)$
+        #   versions:
+        #     < : 1.8.0
+        #   is-main-source: true
       - type: git
         url: https://github.com/flutter/flutter.git
-        tag: 3.35.6
-        commit: 9f455d2486bcb28cad87b062475f42edc959f636
+        tag: 3.35.7
+        commit: adc901062556672b4138e18a4dc62a4be8f4b3c2
         dest: flutter
         x-checker-data:
           type: git
