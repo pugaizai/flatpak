@@ -74,9 +74,9 @@ modules:
       - type: extra-data
         filename: reeden.deb
         only-arches: [x86_64]
-        url: https://github.com/reeden-org/reeden-app/releases/download/v1.16.1/Reeden-linux-x86_64.deb
-        sha256: 16ee2342a13642f18f141144619fd15ac915e40327a8a8e7ab79b1df673252de
-        size: 34689540
+        url: https://github.com/reeden-org/reeden-app/releases/download/v1.16.3/Reeden-linux-x86_64.deb
+        sha256: a359dde6c43a6bb42e883a7202f05ee9993751e350280bea159e1c8f52587992
+        size: 34679158
         x-checker-data:
           type: json
           url: https://api.github.com/repos/reeden-org/reeden-app/releases/latest
