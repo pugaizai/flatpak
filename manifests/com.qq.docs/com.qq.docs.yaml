@@ -50,8 +50,8 @@ modules:
         only-arches: [aarch64]
         filename: docs.deb
         url: https://docs.qq.com/api/package/get?channel_id=30001&version_id=latest&package_name=TencentDocs-arm64.deb
-        sha256: df81d50ac880cd57a2dee2a058fc64ac307adcac996fbcbc57d30031dab7bf2b
-        size: 155350176
+        sha256: d9039d9a396210c908ef87e08fcdfd29a9ba8523630dcdfe5821392de9ce05ee
+        size: 151429646
         x-checker-data:
           type: json
           url: https://docs.qq.com/api/package/update
@@ -61,8 +61,8 @@ modules:
         only-arches: [x86_64]
         filename: docs.deb
         url: https://docs.qq.com/api/package/get?channel_id=30001&version_id=latest&package_name=TencentDocs-x64.deb
-        sha256: 6f8488d3a38d689fee32e7cdd2db5aa8409d9b727c2d1057e4179f1c1adf07e3
-        size: 160164774
+        sha256: 96d766a9d9eb6c077d6b76e7c3a80de235af5faf68db8ebfd4a606bdb22e7e82
+        size: 155631872
         x-checker-data:
           type: json
           url: https://docs.qq.com/api/package/update
@@ -78,8 +78,9 @@ modules:
         dest-filename: tdappdesktop.sh
         commands:
           - export TMPDIR=${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}
-          - exec zypak-wrapper "/app/electron/electron" "/app/extra/docs/app.asar" "--enable-features=UseOzonePlatform" "--ozone-platform=wayland"
-            "--enable-wayland-ime" "--wayland-text-input-version=3" "$@"
+          - exec zypak-wrapper "/app/electron/electron" "/app/extra/docs/app.asar"
+            "--enable-features=UseOzonePlatform" "--ozone-platform=wayland" "--enable-wayland-ime"
+            "--wayland-text-input-version=3" "$@"
       - type: script
         commands:
           - bsdtar --to-stdout -xvf docs.deb data.* | bsdtar -xvf -
