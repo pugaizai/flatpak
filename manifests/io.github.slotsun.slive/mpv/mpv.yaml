@@ -112,8 +112,8 @@ modules:
         sources:
           - type: git
             url: https://github.com/google/shaderc.git
-            tag: v2025.4
-            commit: 73743588fe9c39f2f1c780a087d94afac691a189
+            tag: v2025.5
+            commit: c4b0af6c3664cd8b33ffddf452514e02a173b4d6
             x-checker-data:
               type: git
               tag-pattern: ^v(\d{4}\.\d{1,2})$
