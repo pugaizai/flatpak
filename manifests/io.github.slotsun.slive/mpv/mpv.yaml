@@ -184,8 +184,8 @@ modules:
         sources:
           - type: git
             url: https://github.com/vcrhonek/hwdata.git
-            tag: v0.401
-            commit: aa9d811f543d447a1abb97d1b94c10e212f933c1
+            tag: v0.402
+            commit: d263c183dd429bbe1572a91a8cf180e84b8341c6
             x-checker-data:
               type: git
               tag-pattern: ^v([\d.]+)$
