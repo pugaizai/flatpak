@@ -4,7 +4,10 @@ runtime-version: '25.08'
 sdk: org.freedesktop.Sdk
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.llvm21
-command: simple_live_app
+command: Slive
+rename-icon: logo
+rename-desktop-file: io.github.SlotSun.dart_simple_live.desktop
+rename-appdata-file: io.github.SlotSun.dart_simple_live.metainfo.xml
 finish-args:
   - --socket=wayland
   - --socket=pulseaudio
@@ -24,7 +27,6 @@ cleanup:
   - /share/gtk-docmodules
 
 modules:
-  - mpv/mpv.yaml
   - name: slive
     buildsystem: simple
     build-options:
@@ -45,19 +47,17 @@ modules:
       - cd simple_live_app && flutter build linux --release
       - install -dvm755 ${FLATPAK_DEST}/bin
       - cp -av ${BUNDLE_PATH}/* ${FLATPAK_DEST}/bin
-      - install -Dvm644 simple_live_app/assets/${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
-      - install -Dvm644 simple_live_app/assets/images/logo.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
-      - install -Dvm644 simple_live_app/assets/${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications
+      - install -Dvm644 simple_live_app/assets/io.github.SlotSun.dart_simple_live.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+      - install -Dvm644 simple_live_app/assets/images/logo.png -t ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps
+      - install -Dvm644 simple_live_app/assets/io.github.SlotSun.dart_simple_live.desktop -t ${FLATPAK_DEST}/share/applications
     sources:
       - type: git
         url: https://github.com/SlotSun/dart_simple_live
         # tag: v1.7.18
-        commit: 2bd05e57a772adfd2b4540a783509c0b524c1f3f
+        commit: 05c0dd83069e054a63f818f5b6117e832088349f
         # x-checker-data:
         #   type: git
         #   tag-pattern: ^v([\d.]+)$
-        #   versions:
-        #     < : 1.8.0
         #   is-main-source: true
       - type: git
         url: https://github.com/flutter/flutter.git
