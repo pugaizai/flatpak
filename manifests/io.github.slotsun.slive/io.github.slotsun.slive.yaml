@@ -47,14 +47,16 @@ modules:
       - cd simple_live_app && flutter build linux --release
       - install -dvm755 ${FLATPAK_DEST}/bin
       - cp -av ${BUNDLE_PATH}/* ${FLATPAK_DEST}/bin
-      - install -Dvm644 simple_live_app/assets/io.github.SlotSun.dart_simple_live.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+      - install -Dvm644 simple_live_app/assets/io.github.SlotSun.dart_simple_live.metainfo.xml
+        -t ${FLATPAK_DEST}/share/metainfo
       - install -Dvm644 simple_live_app/assets/images/logo.png -t ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps
-      - install -Dvm644 simple_live_app/assets/io.github.SlotSun.dart_simple_live.desktop -t ${FLATPAK_DEST}/share/applications
+      - install -Dvm644 simple_live_app/assets/io.github.SlotSun.dart_simple_live.desktop
+        -t ${FLATPAK_DEST}/share/applications
     sources:
       - type: git
         url: https://github.com/SlotSun/dart_simple_live
-        tag: v1.7.18
-        commit: 11aeba4894407cfe4b2394f1f0eabfb6591d7d50
+        tag: v1.8.3
+        commit: 9d738cab4d8e7cbd26cc33c7e8f3731608f7087c
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
