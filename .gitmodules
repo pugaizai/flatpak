@@ -1,3 +1,6 @@
 [submodule "manifests/cn.wps.office/shared-modules"]
 	path = manifests/cn.wps.office/shared-modules
 	url = https://github.com/flathub/shared-modules.git
+[submodule "manifests/com.qq.qq/org.flatpak.Builder.BaseApp"]
+	path = manifests/com.qq.qq/org.flatpak.Builder.BaseApp
+	url = https://github.com/flathub/org.flatpak.Builder.BaseApp
