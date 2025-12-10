@@ -52,6 +52,7 @@ jobs:
             "manifests/com.larksuite.lark/com.larksuite.lark.yaml"
             "manifests/cn.feishu.feishu/cn.feishu.feishu.yaml"
             "manifests/io.github.venera_app.venera/io.github.venera_app.venera.yaml"
+            "manifests/io.github.slotsun.slive/io.github.slotsun.slive.yaml"
           )
 
           for app in "${apps[@]}"; do
