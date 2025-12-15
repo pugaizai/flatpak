@@ -3,7 +3,7 @@ runtime: org.gnome.Platform
 runtime-version: '49'
 sdk: org.gnome.Sdk
 sdk-extensions:
-  - org.freedesktop.Sdk.Extension.llvm20
+  - org.freedesktop.Sdk.Extension.llvm21
 command: jhentai
 finish-args:
   - --share=ipc
@@ -36,8 +36,8 @@ modules:
         aarch64:
           env:
             BUNDLE_PATH: build/linux/arm64/release/bundle
-      append-path: /usr/lib/sdk/llvm20/bin:/run/build/jhentai/flutter/bin
-      prepend-ld-library-path: /usr/lib/sdk/llvm20/lib
+      append-path: /usr/lib/sdk/llvm21/bin:/run/build/jhentai/flutter/bin
+      prepend-ld-library-path: /usr/lib/sdk/llvm21/lib
       env:
         PUB_CACHE: /run/build/jhentai/.pub-cache
     build-commands:
