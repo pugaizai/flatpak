@@ -1,0 +1,65 @@
+app-id: top.jtmonster.jhentai
+runtime: org.gnome.Platform
+runtime-version: '49'
+sdk: org.gnome.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.llvm20
+command: jhentai
+finish-args:
+  - --share=ipc
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --share=network
+  - --device=dri
+  - --talk-name=org.freedesktop.ScreenSaver
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/debug
+  - /lib/pkgconfig
+  - /man
+  - /share/man
+  - /share/doc
+  - /share/gtk-doc
+modules:
+  - name: jhentai
+    buildsystem: simple
+    build-options:
+      build-args:
+        - --share=network
+      arch:
+        x86_64:
+          env:
+            BUNDLE_PATH: build/linux/x64/release/bundle
+        aarch64:
+          env:
+            BUNDLE_PATH: build/linux/arm64/release/bundle
+      append-path: /usr/lib/sdk/llvm20/bin:/run/build/jhentai/flutter/bin
+      prepend-ld-library-path: /usr/lib/sdk/llvm20/lib
+      env:
+        PUB_CACHE: /run/build/jhentai/.pub-cache
+    build-commands:
+      - flutter build linux --release --target lib/src/main.dart
+      - mkdir -pv ${FLATPAK_DEST}/bin
+      - cp -rv ${BUNDLE_PATH}/* ${FLATPAK_DEST}/bin
+      - install -Dvm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+      - install -Dvm644 linux/assets/${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications
+      - install -Dvm644 assets/icon/JHenTai_512.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
+    sources:
+      - type: git
+        url: https://github.com/jiangtian616/JHenTai.git
+        tag: v8.0.10+302
+        commit: a87a74e07f2d38045caab646cb8831ba15cb53f2
+        x-checker-data:
+          type: git
+          tag-pattern: ^v([\d.]+(?:\+\d+)?)$
+          is-main-source: true
+      - type: file
+        path: top.jtmonster.jhentai.metainfo.xml
+      - type: git
+        url: https://github.com/flutter/flutter.git
+        tag: 3.24.5
+        commit: dec2ee5c1f98f8e84a7d5380c05eb8a3d0a81668
+        dest: flutter
