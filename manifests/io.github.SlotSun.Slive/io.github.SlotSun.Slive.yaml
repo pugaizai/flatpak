@@ -46,7 +46,7 @@ modules:
         url: https://static.rust-lang.org/rustup/dist/aarch64-unknown-linux-gnu/rustup-init
         sha256: e3853c5a252fca15252d07cb23a1bdd9377a8c6f3efa01531109281ae47f841c
 
-  - name: slive
+  - name: Slive
     buildsystem: simple
     build-options:
       build-args:
@@ -58,30 +58,28 @@ modules:
         aarch64:
           env:
             BUNDLE_PATH: simple_live_app/build/linux/arm64/release/bundle
-      append-path: /var/lib/rustup/bin:/usr/lib/sdk/llvm21/bin:/run/build/slive/flutter/bin
+      append-path: /var/lib/rustup/bin:/usr/lib/sdk/llvm21/bin:/run/build/Slive/flutter/bin
       prepend-ld-library-path: /usr/lib/sdk/llvm21/lib
       env:
         RUSTUP_HOME: /var/lib/rustup
         CARGO_HOME: /var/lib/rustup
-        PUB_CACHE: /run/build/slive/.pub-cache
+        PUB_CACHE: /run/build/Slive/.pub-cache
     build-commands:
       - cd simple_live_app && flutter build linux --release
       - install -dvm755 ${FLATPAK_DEST}/bin
       - cp -av ${BUNDLE_PATH}/* ${FLATPAK_DEST}/bin
-      - install -Dvm644 simple_live_app/assets/${FLATPAK_ID}.metainfo.xml
-        -t ${FLATPAK_DEST}/share/metainfo
+      - install -Dvm644 simple_live_app/assets/${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
       - install -Dvm644 simple_live_app/assets/images/logo.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
-      - install -Dvm644 simple_live_app/assets/${FLATPAK_ID}.desktop
-        -t ${FLATPAK_DEST}/share/applications
+      - install -Dvm644 simple_live_app/assets/${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications
     sources:
       - type: git
         url: https://github.com/SlotSun/dart_simple_live
-        tag: v1.8.4
-        commit: ef4bfe10fd531b3c9078ef62bc8b4b4342df2aac
-        x-checker-data:
-          type: git
-          tag-pattern: ^v([\d.]+)$
-          is-main-source: true
+        # tag: v1.8.4
+        commit: 3d4add8fe183608a695b6c1d8900d64c9da8a2fa
+        # x-checker-data:
+        #   type: git
+        #   tag-pattern: ^v([\d.]+)$
+        #   is-main-source: true
       - type: git
         url: https://github.com/flutter/flutter.git
         tag: 3.38.5
