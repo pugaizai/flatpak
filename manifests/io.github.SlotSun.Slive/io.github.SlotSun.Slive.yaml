@@ -1,20 +1,16 @@
-app-id: io.github.slotsun.slive
+app-id: io.github.SlotSun.Slive
 runtime: org.freedesktop.Platform
 runtime-version: '25.08'
 sdk: org.freedesktop.Sdk
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.llvm21
 command: Slive
-rename-icon: logo
-rename-desktop-file: io.github.SlotSun.dart_simple_live.desktop
-rename-appdata-file: io.github.SlotSun.dart_simple_live.metainfo.xml
 finish-args:
   - --socket=wayland
   - --socket=pulseaudio
   - --share=network
   - --device=dri
   - --talk-name=org.freedesktop.ScreenSaver
-  - --own-name=io.github.SlotSun.dart_simple_live
   # user settings synchronization feature requires this D-Bus
   - --system-talk-name=org.freedesktop.NetworkManager.IP4Config
 cleanup:
@@ -72,10 +68,10 @@ modules:
       - cd simple_live_app && flutter build linux --release
       - install -dvm755 ${FLATPAK_DEST}/bin
       - cp -av ${BUNDLE_PATH}/* ${FLATPAK_DEST}/bin
-      - install -Dvm644 simple_live_app/assets/io.github.SlotSun.dart_simple_live.metainfo.xml
+      - install -Dvm644 simple_live_app/assets/${FLATPAK_ID}.metainfo.xml
         -t ${FLATPAK_DEST}/share/metainfo
-      - install -Dvm644 simple_live_app/assets/images/logo.png -t ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps
-      - install -Dvm644 simple_live_app/assets/io.github.SlotSun.dart_simple_live.desktop
+      - install -Dvm644 simple_live_app/assets/images/logo.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
+      - install -Dvm644 simple_live_app/assets/${FLATPAK_ID}.desktop
         -t ${FLATPAK_DEST}/share/applications
     sources:
       - type: git
