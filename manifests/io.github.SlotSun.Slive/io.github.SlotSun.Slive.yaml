@@ -4,7 +4,7 @@ runtime-version: '25.08'
 sdk: org.freedesktop.Sdk
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.llvm21
-command: Slive
+command: io.github.SlotSun.Slive
 finish-args:
   - --socket=wayland
   - --socket=pulseaudio
