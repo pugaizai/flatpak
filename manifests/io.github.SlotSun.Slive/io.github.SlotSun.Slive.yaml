@@ -74,12 +74,12 @@ modules:
     sources:
       - type: git
         url: https://github.com/SlotSun/dart_simple_live
-        # tag: v1.8.4
+        tag: v1.8.5
         commit: 3d4add8fe183608a695b6c1d8900d64c9da8a2fa
-        # x-checker-data:
-        #   type: git
-        #   tag-pattern: ^v([\d.]+)$
-        #   is-main-source: true
+        x-checker-data:
+          type: git
+          tag-pattern: ^v([\d.]+)$
+          is-main-source: true
       - type: git
         url: https://github.com/flutter/flutter.git
         tag: 3.38.5
