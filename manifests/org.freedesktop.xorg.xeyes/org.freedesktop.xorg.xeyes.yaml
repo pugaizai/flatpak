@@ -26,8 +26,8 @@ modules:
     sources:
       - type: git
         url: https://gitlab.freedesktop.org/xorg/lib/libxmu.git
-        tag: libXmu-1.2.1
-        commit: 792f80402ee06ce69bca3a8f2a84295999c3a170
+        tag: libXmu-1.3.0
+        commit: 6c77f37406a9d12be5980f4a9212d722c00c530a
         x-checker-data:
           type: git
           tag-pattern: ^libXmu-([\d.]+)$
