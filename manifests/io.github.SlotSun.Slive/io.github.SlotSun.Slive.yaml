@@ -74,8 +74,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/SlotSun/dart_simple_live
-        tag: v1.8.5
-        commit: aa514dd10cf148fa275a137f05addfbab99388f4
+        tag: v1.8.7
+        commit: 078e536be787e6ba66a966a6c618186a9330a873
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
