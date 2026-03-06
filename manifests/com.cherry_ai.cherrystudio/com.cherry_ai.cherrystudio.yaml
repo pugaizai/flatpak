@@ -63,9 +63,9 @@ modules:
     sources:
       - type: extra-data
         only-arches: [x86_64]
-        url: https://github.com/CherryHQ/cherry-studio/releases/download/v1.7.22/Cherry-Studio-1.7.22-x86_64.AppImage
-        sha256: 5190d71e06f5f939258d905b45f9502a881a0369a6709b7ceffcfbfea86d04a1
-        size: 175543938
+        url: https://github.com/CherryHQ/cherry-studio/releases/download/v1.7.24/Cherry-Studio-1.7.24-x86_64.AppImage
+        sha256: 1cdf67895ad20c714e40ccec5223f89919d88c45485e6b85a1de00c2ffe18544
+        size: 174445359
         filename: Cherry-Studio.AppImage
         x-checker-data:
           type: json
@@ -74,9 +74,9 @@ modules:
           url-query: .assets[] | select(.name | endswith("x86_64.AppImage")) | .browser_download_url
       - type: extra-data
         only-arches: [aarch64]
-        url: https://github.com/CherryHQ/cherry-studio/releases/download/v1.7.22/Cherry-Studio-1.7.22-arm64.AppImage
-        sha256: 75f9d555495794172bdbcc67c353149f3bf79af0104882268fe6c70b3cf5cfac
-        size: 175407005
+        url: https://github.com/CherryHQ/cherry-studio/releases/download/v1.7.24/Cherry-Studio-1.7.24-arm64.AppImage
+        sha256: 637a797a1b3327ab0a7f379a04ec336c0ee5679837ad6a9e403888a731eb9f8c
+        size: 174308499
         filename: Cherry-Studio.AppImage
         x-checker-data:
           type: json
