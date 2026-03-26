@@ -20,8 +20,11 @@
     <name>Feishu Linux Team</name>
   </developer>
   <releases>
-    <release version="7.58.14" date="2026-01-16">
+    <release version="7.62.9" date="2026-03-20">
       <description></description>
+    </release>
+    <release version="7.58.14" date="2026-01-16">
+      <description/>
     </release>
     <release version="7.54.11" date="2025-11-19">
       <description/>
