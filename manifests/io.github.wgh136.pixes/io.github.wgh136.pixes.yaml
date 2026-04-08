@@ -53,8 +53,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/wgh136/pixes.git
-        tag: v1.2.0
-        commit: 558832d188014bff1b388232f453c269b8fdfaf7
+        tag: v1.2.1
+        commit: abf249b941dd5e4e9bd03ac2add8573bd669917b
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
