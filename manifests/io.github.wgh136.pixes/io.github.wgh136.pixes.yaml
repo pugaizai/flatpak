@@ -63,8 +63,8 @@ modules:
         path: io.github.wgh136.pixes.metainfo.xml
       - type: git
         url: https://github.com/flutter/flutter.git
-        tag: 3.41.6
-        commit: db50e20168db8fee486b9abf32fc912de3bc5b6a
+        tag: 3.41.7
+        commit: cc0734ac716fbb8b90f3f9db8020958b1553afa7
         dest: flutter
         x-checker-data:
           type: git
