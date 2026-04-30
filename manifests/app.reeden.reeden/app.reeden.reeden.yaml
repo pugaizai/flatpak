@@ -31,8 +31,8 @@ modules:
       - --enable-versioned-symbols
     sources:
       - type: archive
-        url: https://github.com/curl/curl/releases/download/curl-8_19_0/curl-8.19.0.tar.xz
-        sha256: 4eb41489790d19e190d7ac7e18e82857cdd68af8f4e66b292ced562d333f11df
+        url: https://github.com/curl/curl/releases/download/curl-8_20_0/curl-8.20.0.tar.xz
+        sha256: 63fe2dc148ba0ceae89922ef838f7e5c946272c2e78b7c59fab4b79d3ce2b896
         x-checker-data:
           type: json
           url: https://api.github.com/repos/curl/curl/releases/latest
