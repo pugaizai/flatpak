@@ -87,7 +87,7 @@ modules:
           - bsdtar -O -xvf wechat.deb data.* | bsdtar --no-same-owner -xvf -
           - mv -v opt/wechat wechat
           - rm -rv wechat.deb usr opt
-          - patchelf --clear-execstack wechat/libandromeda.so wechat/libowl.so wechat/libvoipCodec.so
+          - patchelf --clear-execstack wechat/libowl.so wechat/libvoipCodec.so wechat/libWxH264.so
         dest-filename: apply_extra
 
       - type: script
