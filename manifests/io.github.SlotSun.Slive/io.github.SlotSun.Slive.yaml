@@ -82,8 +82,8 @@ modules:
           is-main-source: true
       - type: git
         url: https://github.com/flutter/flutter.git
-        tag: 3.44.5
-        commit: f94f4fc76b4d74543ed9b085bbd75341ef65de22
+        tag: 3.44.6
+        commit: ee80f08bbf97172ec030b8751ceab557177a34a6
         dest: flutter
         x-checker-data:
           type: git
