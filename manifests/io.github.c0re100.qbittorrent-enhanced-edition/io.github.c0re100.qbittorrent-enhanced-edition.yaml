@@ -72,8 +72,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/c0re100/qBittorrent-Enhanced-Edition.git
-        tag: release-5.2.1.10
-        commit: 18cfcc6958d0f5170c29edb68908c2c8365ec749
+        tag: release-5.2.3.10
+        commit: 44ee266a575600d04788623b6939e47443d27ed1
         x-checker-data:
           type: git
           tag-pattern: ^release-([\d.]+)$
