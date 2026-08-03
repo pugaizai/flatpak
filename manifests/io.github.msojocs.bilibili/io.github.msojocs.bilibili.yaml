@@ -53,10 +53,10 @@ modules:
       - install -Dvm755 bilibili.sh ${FLATPAK_DEST}/bin/bilibili
     sources:
       - type: extra-data
-        url: https://github.com/msojocs/bilibili-linux/releases/download/v1.17.9-2/bilibili-asar-v1.17.9-2.tar.gz
-        sha256: 13a18f3d7596e17821f6209616d9b31810f621c6c4b5f9759fd52b0605018b1e
+        url: https://github.com/msojocs/bilibili-linux/releases/download/v1.18.0-1/bilibili-asar-v1.18.0-1.tar.gz
+        sha256: b7497847db68caf7d998a2881ffb59950e61967fc15d1f611fdb61d5c98c25f9
         filename: bilibili.tar.gz
-        size: 61669737
+        size: 61694990
         x-checker-data:
           type: json
           url: https://api.github.com/repos/msojocs/bilibili-linux/releases/latest
