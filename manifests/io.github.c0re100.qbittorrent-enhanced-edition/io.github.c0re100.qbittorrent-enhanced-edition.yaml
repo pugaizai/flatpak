@@ -42,8 +42,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/boostorg/boost.git
-        tag: boost-1.91.0
-        commit: 1a80576db6b70828803819fb6925132193bc5d0e
+        tag: boost-1.92.0
+        commit: afdfa32505af73e3d208144b3f623f0096cb62b6
         x-checker-data:
           type: git
           tag-pattern: ^boost-([\d.]+)$
