@@ -86,8 +86,8 @@ modules:
         path: io.github.venera_app.venera.metainfo.xml
       - type: git
         url: https://github.com/flutter/flutter.git
-        tag: 3.47.0
-        commit: 4cf24164269a5ebf0c16a028a00727d0e77bbb05
+        tag: 3.47.1
+        commit: 6655482ec06e547f90abf8ae7590466f4415978d
         dest: flutter
         x-checker-data:
           type: git
