@@ -74,9 +74,9 @@ modules:
           url-query: .assets[] | select(.name | endswith("x86_64.AppImage")) | .browser_download_url
       - type: extra-data
         only-arches: [aarch64]
-        url: https://github.com/CherryHQ/cherry-studio/releases/download/v2.0.9/Cherry-Studio-2.0.9-arm64.AppImage
-        sha256: bbbb2dfc7e30250bd2adfdd10f922b7713fcb1a71479283a6846a3dd22d1928d
-        size: 396507277
+        url: https://github.com/CherryHQ/cherry-studio/releases/download/v2.0.10/Cherry-Studio-2.0.10-linux-arm64.AppImage
+        sha256: 3adafd4b3e7ca55e1d0c3dacadc62d0015772fbc93a0d807673f1e0e68192151
+        size: 397183835
         filename: Cherry-Studio.AppImage
         x-checker-data:
           type: json
