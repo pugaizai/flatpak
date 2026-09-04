@@ -60,6 +60,9 @@ modules:
         path: top.jtmonster.jhentai.metainfo.xml
       - type: git
         url: https://github.com/flutter/flutter.git
-        tag: 3.24.5
-        commit: dec2ee5c1f98f8e84a7d5380c05eb8a3d0a81668
+        tag: 3.47.2
+        commit: d3b14c876900e553bc736ca19295fc09e3853e8e
         dest: flutter
+        x-checker-data:
+          type: git
+          tag-pattern: ^([\d.]+)$
