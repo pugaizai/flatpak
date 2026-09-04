@@ -39,30 +39,29 @@ modules:
     build-options:
       no-debuginfo: true
     build-commands:
+      - bsdtar --to-stdout -xvf docs.deb data.* | bsdtar -xvf -
+      - mv -v opt/腾讯文档 ${FLATPAK_DEST}/docs
       - mkdir -pv ${FLATPAK_DEST}/electron
-      - install -Dvm644 ${FLATPAK_ID}.svg -t ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps
+      - install -Dvm644 usr\share\icons\hicolor\scalable\apps\tdappdesktop.svg ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
       - install -Dvm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications
       - install -Dvm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
       - install -Dvm755 tdappdesktop.sh ${FLATPAK_DEST}/bin/tdappdesktop
-      - install -Dvm755 apply_extra.sh ${FLATPAK_DEST}/bin/apply_extra
     sources:
-      - type: extra-data
+      - type: file
         only-arches: [aarch64]
-        filename: docs.deb
+        dest-filename: docs.deb
         url: https://docs.qq.com/api/package/get?channel_id=30001&version_id=latest&package_name=TencentDocs-arm64.deb
         sha256: 7035cf40c23a6a96c781cd729b3489d1cff0267772fb7223626c9c5c25abc971
-        size: 155876072
         x-checker-data:
           type: json
           url: https://docs.qq.com/api/package/update
           version-query: .result.update_info | fromjson | .version
           url-query: '"https://docs.qq.com/api/package/get?channel_id=30001&version_id=latest&package_name=TencentDocs-arm64.deb"'
-      - type: extra-data
+      - type: file
         only-arches: [x86_64]
-        filename: docs.deb
+        dest-filename: docs.deb
         url: https://docs.qq.com/api/package/get?channel_id=30001&version_id=latest&package_name=TencentDocs-x64.deb
         sha256: 42b7c00e2dda8e1ef430e9ac7fde81dc6c225862194c42b073ec379da6944683
-        size: 160190248
         x-checker-data:
           type: json
           url: https://docs.qq.com/api/package/update
@@ -78,12 +77,6 @@ modules:
         dest-filename: tdappdesktop.sh
         commands:
           - export TMPDIR=${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}
-          - exec zypak-wrapper "/app/electron/electron" "/app/extra/docs/app.asar"
+          - exec zypak-wrapper "/app/electron/electron" "/app/docs/app.asar"
             "--enable-features=UseOzonePlatform" "--ozone-platform=wayland" "--enable-wayland-ime"
             "--wayland-text-input-version=3" "$@"
-      - type: script
-        commands:
-          - bsdtar --to-stdout -xvf docs.deb data.* | bsdtar -xvf -
-          - mv -v opt/腾讯文档 ./docs
-          - rm -rv *.deb usr opt
-        dest-filename: apply_extra.sh

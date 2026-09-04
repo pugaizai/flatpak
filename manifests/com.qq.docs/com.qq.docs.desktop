@@ -6,5 +6,5 @@ Type=Application
 Icon=com.qq.docs
 StartupWMClass=腾讯文档
 Comment=腾讯文档
-MimeType=application/vnd.openxmlformats-officedocument.presentationml.presentation;application/vnd.openxmlformats-officedocument.wordprocessingml.document;application/msword;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;application/vnd.ms-excel;application/pdf;application/x-xmind;text/csv;
+MimeType=text/markdown;text/x-markdown;application/msword;application/vnd.openxmlformats-officedocument.wordprocessingml.document;application/vnd.ms-excel;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;application/vnd.ms-powerpoint;application/vnd.openxmlformats-officedocument.presentationml.presentation;application/pdf;application/x-xmind;text/csv;text/html;application/xhtml+xml;text/plain;application/json;application/xml;text/xml;application/yaml;application/x-yaml;text/yaml;application/toml;application/sql;text/tab-separated-values;x-scheme-handler/https;x-scheme-handler/http;x-scheme-handler/tdoc;x-scheme-handler/https;x-scheme-handler/http;x-scheme-handler/tdoc;
 Categories=Office;

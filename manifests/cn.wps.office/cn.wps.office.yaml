@@ -64,12 +64,6 @@ modules:
       - type: extra-data
         filename: wps-office.deb
         only-arches: [x86_64]
-        url: https://mirrors.nju.edu.cn/ubuntukylin/pool/partner/wps-office_12.1.2.24722_amd64.deb
-        sha256: 7925f766ed6ad47aead473503df20b2561fb0f7179e6baf716227bf44af9ef1b
-        size: 637109786
-        x-checker-data:
-          type: debian-repo
-          package-name: wps-office
-          root: https://mirrors.nju.edu.cn/ubuntukylin/
-          dist: jammy-partner
-          component: main
+        url: https://mirrors.nju.edu.cn/ubuntukylin/pool/partner/wps-office_12.1.2.28080_amd64.deb
+        sha256: 2fa999f60a71e21093ab49ef6d7f61d7668c844bfebf30907d2c290e460f9be0
+        size: 571917790
