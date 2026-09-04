@@ -40,8 +40,6 @@ jobs:
 
           declare -a apps=(
             "manifests/org.freedesktop.Platform.electron/org.freedesktop.Platform.electron.yaml"
-            "manifests/com.cherry_ai.cherrystudio/com.cherry_ai.cherrystudio.yaml"
-            "manifests/io.github.wgh136.pixes/io.github.wgh136.pixes.yaml"
             "manifests/top.jtmonster.jhentai/top.jtmonster.jhentai.yaml"
             "manifests/com.qq.weixin/com.qq.weixin.yaml"
             "manifests/com.qq.qq/com.qq.qq.yaml"
@@ -53,7 +51,6 @@ jobs:
             "manifests/io.github.pbh_btn.peerbanhelper/io.github.pbh_btn.peerbanhelper.yaml"
             "manifests/com.larksuite.lark/com.larksuite.lark.yaml"
             "manifests/cn.feishu.feishu/cn.feishu.feishu.yaml"
-            "manifests/io.github.venera_app.venera/io.github.venera_app.venera.yaml"
             "manifests/io.github.SlotSun.Slive/io.github.SlotSun.Slive.yaml"
           )
 
