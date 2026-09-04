@@ -51,7 +51,8 @@ modules:
         only-arches: [aarch64]
         dest-filename: docs.deb
         url: https://docs.qq.com/api/package/get?channel_id=30001&version_id=latest&package_name=TencentDocs-arm64.deb
-        sha256: 7035cf40c23a6a96c781cd729b3489d1cff0267772fb7223626c9c5c25abc971
+        sha256: b157355045cc81b588574faf7c6076445115a27152308026ceb0e133d0d11e2a
+        size: 302283212
         x-checker-data:
           type: json
           url: https://docs.qq.com/api/package/update
@@ -61,7 +62,8 @@ modules:
         only-arches: [x86_64]
         dest-filename: docs.deb
         url: https://docs.qq.com/api/package/get?channel_id=30001&version_id=latest&package_name=TencentDocs-x64.deb
-        sha256: 42b7c00e2dda8e1ef430e9ac7fde81dc6c225862194c42b073ec379da6944683
+        sha256: 7093380cd864f8daed31f8708b55018eb4c7b50b08a581d158e706ddf38e3a62
+        size: 314941660
         x-checker-data:
           type: json
           url: https://docs.qq.com/api/package/update
