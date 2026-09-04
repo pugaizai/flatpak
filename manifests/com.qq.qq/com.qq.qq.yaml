@@ -1,9 +1,9 @@
 app-id: com.qq.qq
 runtime: org.freedesktop.Platform
-runtime-version: '25.08'
+runtime-version: '26.08'
 sdk: org.freedesktop.Sdk
 base: org.electronjs.Electron2.BaseApp
-base-version: '25.08'
+base-version: '26.08'
 command: qq
 
 finish-args:
@@ -81,7 +81,7 @@ modules:
         path: rename.cpp
 
   # For Wayland-only compatibility, workarounding clipboard crash issue
-  # https://github.com/flathub/org.flatpak.Builder.BaseApp/blob/branch/25.08/xvfb.json
+  # https://github.com/flathub/org.flatpak.Builder.BaseApp/blob/branch/26.08/xvfb.json
   - org.flatpak.Builder.BaseApp/xvfb.json
 
   - name: qq
