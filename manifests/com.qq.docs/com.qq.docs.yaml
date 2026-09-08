@@ -42,8 +42,10 @@ modules:
       - bsdtar --to-stdout -xvf docs.deb data.* | bsdtar -xvf -
       - mv -v opt/腾讯文档 ${FLATPAK_DEST}/docs
       - mkdir -pv ${FLATPAK_DEST}/electron
-      - install -Dvm644 usr\share\icons\hicolor\scalable\apps\tdappdesktop.svg ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
-      - install -Dvm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications
+      - install -Dvm644 usr/share/icons/hicolor/scalable/apps/tdappdesktop.svg ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
+      - install -Dvm644 usr/share/applications/tdappdesktop.desktop ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.deskstop
+      - desktop-file-edit --set-key="Icon" --set-value="com.qq.docs" ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
+      - desktop-file-edit --set-key="Exec" --set-value="tdappdesktop %U" ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
       - install -Dvm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
       - install -Dvm755 tdappdesktop.sh ${FLATPAK_DEST}/bin/tdappdesktop
     sources:
