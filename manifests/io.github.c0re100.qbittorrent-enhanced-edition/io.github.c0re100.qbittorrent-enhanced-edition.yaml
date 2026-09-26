@@ -57,8 +57,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/arvidn/libtorrent.git
-        tag: v2.1.1
-        commit: 56ae8caba38bf154ffc210403cb23f91d0ecaa49
+        tag: v2.1.2
+        commit: 6da363d2994f17c0b3c0450d124cf73a31a73847
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
