@@ -53,11 +53,10 @@ modules:
       - install -Dvm755 bilibili.sh ${FLATPAK_DEST}/bin/bilibili
     sources:
       - type: extra-data
-        url: 
-          https://github.com/msojocs/bilibili-linux/releases/download/v1.20.0-1/bilibili-asar-v1.20.0-1.tar.gz
-        sha256: e88442933c6f339c141a6aac5833e780aabfcf5621e2d39efa6b168b63e51327
+        url: https://github.com/msojocs/bilibili-linux/releases/download/v1.20.0-2/bilibili-asar-v1.20.0-2.tar.gz
+        sha256: e71e9e14961895e3389ad3765d722ccce70ffaf63b3dd0b94b923295c1351396
         filename: bilibili.tar.gz
-        size: 62750242
+        size: 62745935
         x-checker-data:
           type: json
           url: https://api.github.com/repos/msojocs/bilibili-linux/releases/latest
@@ -70,13 +69,11 @@ modules:
       - type: file
         path: io.github.msojocs.bilibili.metainfo.xml
       - type: file
-        url: 
-          https://raw.githubusercontent.com/msojocs/bilibili-linux/refs/heads/master/res/bilibili.desktop
+        url: https://raw.githubusercontent.com/msojocs/bilibili-linux/refs/heads/master/res/bilibili.desktop
         sha256: a268288afe4a5803b850425f4c0796c47e9e95c2c74b57b9ae7b49951f24c011
         dest-filename: io.github.msojocs.bilibili.desktop
       - type: file
-        url: 
-          https://raw.githubusercontent.com/msojocs/bilibili-linux/refs/heads/master/res/icons/bilibili.svg
+        url: https://raw.githubusercontent.com/msojocs/bilibili-linux/refs/heads/master/res/icons/bilibili.svg
         sha256: 7cf1a17b2a0932927396d5fd6a5c7c5b418222a405cc99322d0a730741f41b89
         dest-filename: io.github.msojocs.bilibili.svg
       - type: script
