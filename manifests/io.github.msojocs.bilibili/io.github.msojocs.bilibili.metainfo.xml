@@ -22,8 +22,12 @@
     </screenshot>
   </screenshots>
   <releases>
-    <release version="1.20.0-1" date="2026-11-01">
+    <release version="1.20.0-2" date="2026-11-05">
+      <url type="details">https://github.com/msojocs/bilibili-linux/releases/tag/v1.20.0-2</url>
       <description></description>
+    </release>
+    <release version="1.20.0-1" date="2026-11-01">
+      <description/>
     </release>
     <release version="1.19.0-3" date="2026-09-29">
       <description/>
