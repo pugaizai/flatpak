@@ -21,8 +21,12 @@
     </screenshot>
   </screenshots>
   <releases>
-    <release version="9.5.4" date="2026-10-31">
+    <release version="9.5.5" date="2026-11-13">
+      <url type="details">https://github.com/PBH-BTN/PeerBanHelper/releases/tag/v9.5.5</url>
       <description></description>
+    </release>
+    <release version="9.5.4" date="2026-10-31">
+      <description/>
     </release>
     <release version="9.5.3" date="2026-10-28">
       <description/>
