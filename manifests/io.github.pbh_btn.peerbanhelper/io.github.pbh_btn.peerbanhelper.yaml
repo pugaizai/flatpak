@@ -40,10 +40,10 @@ modules:
     sources:
       - type: extra-data
         url: 
-          https://github.com/PBH-BTN/PeerBanHelper/releases/download/v9.5.5/peerbanhelper_9.5.5_all.deb
+          https://github.com/PBH-BTN/PeerBanHelper/releases/download/v9.6.0/peerbanhelper_9.6.0_all.deb
         filename: peerbanhelper.deb
-        sha256: 2cc3ef3b5e73d2878e7749e0080a05f134045e18c9cdaa26bbd3a1476d036fca
-        size: 64501654
+        sha256: fd1b43bb559ad8265a45249ec4558f1c5f8cd33b436c98da1029ab84e70f7146
+        size: 63721446
         x-checker-data:
           type: json
           url: https://api.github.com/repos/PBH-BTN/PeerBanHelper/releases/latest
